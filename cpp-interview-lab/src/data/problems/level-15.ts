@@ -1,0 +1,91 @@
+import { Problem } from '../types';
+
+export const level15Problems: Problem[] = [
+    {
+        id: 'prob-15-01',
+        levelId: 'level-15',
+        title: 'Stack Basics (LIFO)',
+        type: 'coding',
+        difficulty: 'beginner',
+        order: 1,
+        description: `A **Stack** is a Last-In-First-Out (LIFO) data structure. Like a stack of plates, you can only add or remove from the top.\n\n**Task:**\nYou are given a sequence of integers. If the integer is non-zero, \`push\` it onto the stack. If it is \`0\`, \`pop\` the top element off the stack (if it's not empty). Finally, print the element currently at the top of the stack (print \`-1\` if empty).`,
+        whyThisMatters: 'Stacks are used for tracking state, parsing expressions, and Depth-First Search (DFS).',
+        concepts: ['stack', 'LIFO'],
+        prerequisites: ['stl'],
+        learningObjectives: ['Use `std::stack`', 'Understand `push()`, `pop()`, `top()`, `empty()`'],
+        constraints: ['N <= 1000'],
+        examples: [{ input: '5\n10 20 0 30 0', output: '10', explanation: 'Push 10, Push 20, Pop (20), Push 30, Pop (30). Top is 10.' }],
+        testCases: [
+            { id: 'tc1', input: '5\n10 20 0 30 0', expectedOutput: '10', hidden: false },
+            { id: 'tc2', input: '3\n5 0 0', expectedOutput: '-1', hidden: false },
+            { id: 'tc3', input: '1\n42', expectedOutput: '42', hidden: true }
+        ],
+        starterCode: `#include <iostream>\n#include <stack>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    stack<int> st;\n    \n    for(int i=0; i<n; i++) {\n        int x; cin >> x;\n        // Implement push and pop logic\n    }\n    \n    // Print top or -1\n    return 0;\n}`,
+        hints: ['Always check `!st.empty()` before calling `st.pop()` or `st.top()`.'],
+        howToThink: [],
+        approach: 'Simulate stack operations',
+        pseudocode: 'for x in input:\n    if x != 0: st.push(x)\n    else if !st.empty(): st.pop()\nif st.empty() print -1\nelse print st.top()',
+        explanation: 'O(1) time per operation.',
+        solution: `#include <iostream>\n#include <stack>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    stack<int> st;\n    for(int i=0; i<n; i++) {\n        int x; cin >> x;\n        if (x != 0) st.push(x);\n        else if (!st.empty()) st.pop();\n    }\n    if(st.empty()) cout << -1;\n    else cout << st.top();\n    return 0;\n}`,
+        commonMistakes: ['Calling `pop()` on an empty stack crashes the program.'],
+        timeComplexity: 'O(N)', spaceComplexity: 'O(N)', interviewRelevance: 'low', tags: ['stack']
+    },
+    {
+        id: 'prob-15-02',
+        levelId: 'level-15',
+        title: 'Valid Parentheses',
+        type: 'coding',
+        difficulty: 'medium',
+        order: 2,
+        description: `**Task:**\nGiven a string containing only the characters \`(\`, \`)\`, \`{\`, \`}\`, \`[\` and \`]\`, determine if the input string is valid.\n\nValid if:\n1. Open brackets must be closed by the same type of brackets.\n2. Open brackets must be closed in the correct order.\n\nPrint \`Valid\` or \`Invalid\`.`,
+        whyThisMatters: 'This is the most famous Stack question. It tests if you can use a stack to resolve nested dependencies.',
+        concepts: ['stack', 'parsing'],
+        prerequisites: ['stack', 'strings'],
+        learningObjectives: ['Use a stack to validate structural nesting'],
+        constraints: ['Length <= 1000'],
+        examples: [{ input: '{[()]}', output: 'Valid' }, { input: '{[(])}', output: 'Invalid' }],
+        testCases: [
+            { id: 'tc1', input: '{[()]}', expectedOutput: 'Valid', hidden: false },
+            { id: 'tc2', input: '{[(])}', expectedOutput: 'Invalid', hidden: false },
+            { id: 'tc3', input: '(', expectedOutput: 'Invalid', hidden: false },
+            { id: 'tc4', input: ']', expectedOutput: 'Invalid', hidden: true }
+        ],
+        starterCode: `#include <iostream>\n#include <string>\n#include <stack>\nusing namespace std;\n\nint main() {\n    string s; cin >> s;\n    stack<char> st;\n    \n    // Loop through characters in s\n    \n    // If valid, stack should be empty at the end\n    return 0;\n}`,
+        hints: ['If it is an opening bracket, push it.', 'If it is a closing bracket, check if the stack is empty. If it is, return Invalid.', 'If not empty, check if `st.top()` is the matching opening bracket. If yes, `pop()`. If no, return Invalid.'],
+        howToThink: ['A closing bracket MUST match the MOST RECENTLY opened, unclosed bracket. A stack keeps the most recent items at the top!'],
+        approach: 'Push open brackets. For close brackets, verify match with top of stack.',
+        pseudocode: 'for c in s:\n    if c is open:\n        st.push(c)\n    else:\n        if st.empty() return Invalid\n        if st.top() matches c:\n            st.pop()\n        else return Invalid\nif st.empty() return Valid else return Invalid',
+        explanation: 'By pushing open brackets and popping them when a matching close bracket appears, we guarantee proper nesting.',
+        solution: `#include <iostream>\n#include <string>\n#include <stack>\nusing namespace std;\n\nbool matches(char open, char close) {\n    return (open == '(' && close == ')') ||\n           (open == '{' && close == '}') ||\n           (open == '[' && close == ']');\n}\n\nint main() {\n    string s; cin >> s;\n    stack<char> st;\n    for(char c : s) {\n        if (c == '(' || c == '{' || c == '[') {\n            st.push(c);\n        } else {\n            if (st.empty() || !matches(st.top(), c)) {\n                cout << "Invalid";\n                return 0;\n            }\n            st.pop();\n        }\n    }\n    if (st.empty()) cout << "Valid";\n    else cout << "Invalid";\n    return 0;\n}`,
+        commonMistakes: ['Forgetting to check if the stack is empty at the end (e.g., string `"((("` is invalid).'],
+        timeComplexity: 'O(N)', spaceComplexity: 'O(N)', interviewRelevance: 'high', tags: ['stack', 'parsing']
+    },
+    {
+        id: 'prob-15-03',
+        levelId: 'level-15',
+        title: 'Queue Basics (FIFO)',
+        type: 'coding',
+        difficulty: 'beginner',
+        order: 3,
+        description: `A **Queue** is a First-In-First-Out (FIFO) data structure. Like a line at a store, the first person to join is the first to leave.\n\n**Task:**\nYou are given a sequence of integers. If the integer is non-zero, \`push\` it into the queue. If it is \`0\`, \`pop\` the front element off (if not empty). Print the element currently at the \`front\` of the queue (or \`-1\` if empty).`,
+        whyThisMatters: 'Queues are used in Breadth-First Search (BFS) and scheduling tasks.',
+        concepts: ['queue', 'FIFO'],
+        prerequisites: ['stl'],
+        learningObjectives: ['Use `std::queue`', 'Understand `push()`, `pop()`, `front()`'],
+        constraints: ['N <= 1000'],
+        examples: [{ input: '5\n10 20 0 30 0', output: '30' }],
+        testCases: [
+            { id: 'tc1', input: '5\n10 20 0 30 0', expectedOutput: '30', hidden: false },
+            { id: 'tc2', input: '2\n0 0', expectedOutput: '-1', hidden: false }
+        ],
+        starterCode: `#include <iostream>\n#include <queue>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    queue<int> q;\n    \n    for(int i=0; i<n; i++) {\n        int x; cin >> x;\n        // Implement queue logic\n    }\n    \n    return 0;\n}`,
+        hints: ['Very similar to Stack, but use `q.front()` instead of `st.top()`.'],
+        howToThink: [],
+        approach: 'Simulate queue operations.',
+        pseudocode: '',
+        explanation: 'O(1) time per operation.',
+        solution: `#include <iostream>\n#include <queue>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    queue<int> q;\n    for(int i=0; i<n; i++) {\n        int x; cin >> x;\n        if (x != 0) q.push(x);\n        else if (!q.empty()) q.pop();\n    }\n    if (q.empty()) cout << -1;\n    else cout << q.front();\n    return 0;\n}`,
+        commonMistakes: [],
+        timeComplexity: 'O(N)', spaceComplexity: 'O(N)', interviewRelevance: 'low', tags: ['queue']
+    }
+];

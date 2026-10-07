@@ -1,0 +1,90 @@
+import { Problem } from '../types';
+
+export const level14Problems: Problem[] = [
+    {
+        id: 'prob-14-01',
+        levelId: 'level-14',
+        title: 'Count Frequencies (Hash Map)',
+        type: 'coding',
+        difficulty: 'easy',
+        order: 1,
+        description: `An \`unordered_map<key_type, value_type>\` allows you to store and look up data in **O(1) average time**.\n\n**Task:**\nYou are given \`N\` integers. Count how many times each integer appears. Then, print the frequency of a given \`target\` integer.\n\n*Pattern:* Hash Map Frequency Counting`,
+        whyThisMatters: 'Frequency counting is the first step in solving ~30% of all easy/medium interview problems.',
+        concepts: ['hash map', 'unordered_map', 'frequency'],
+        prerequisites: ['stl'],
+        learningObjectives: ['Initialize an unordered_map', 'Increment counts: `map[key]++`'],
+        constraints: ['N <= 1000'],
+        examples: [{ input: '5\n1 2 2 3 2\n2', output: '3' }],
+        testCases: [
+            { id: 'tc1', input: '5\n1 2 2 3 2\n2', expectedOutput: '3', hidden: false },
+            { id: 'tc2', input: '4\n10 10 10 10\n10', expectedOutput: '4', hidden: false },
+            { id: 'tc3', input: '3\n1 2 3\n5', expectedOutput: '0', hidden: true }
+        ],
+        starterCode: `#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for(int i=0; i<n; i++) cin >> arr[i];\n    int target; cin >> target;\n    \n    unordered_map<int, int> freq;\n    \n    // Populate the hash map\n    \n    cout << freq[target];\n    return 0;\n}`,
+        hints: ['Use a range-based for loop: `for(int x : arr) { freq[x]++; }`', 'When you access `freq[target]` and it doesn\'t exist, C++ maps safely return 0 by default for integers!'],
+        howToThink: ['A hash map is like an array where the indices can be ANY number, and it automatically handles memory.'],
+        approach: 'Loop through array, incrementing `freq[x]`.',
+        pseudocode: 'for x in arr:\n    freq[x]++\nprint freq[target]',
+        explanation: 'Building the frequency map takes O(N). Looking up the target takes O(1).',
+        solution: `#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    unordered_map<int, int> freq;\n    for(int i=0; i<n; i++) {\n        cin >> arr[i];\n        freq[arr[i]]++;\n    }\n    int target; cin >> target;\n    cout << freq[target];\n    return 0;\n}`,
+        commonMistakes: ['Using `map` instead of `unordered_map`. `map` is O(log N) because it sorts keys. `unordered_map` is O(1) average.'],
+        timeComplexity: 'O(N)', spaceComplexity: 'O(N)', interviewRelevance: 'high', tags: ['hash map']
+    },
+    {
+        id: 'prob-14-02',
+        levelId: 'level-14',
+        title: 'Find the Duplicate',
+        type: 'coding',
+        difficulty: 'easy',
+        order: 2,
+        description: `An \`unordered_set<type>\` is like a map without values. It just remembers if it has "seen" a key before.\n\n**Task:**\nYou are given an array of \`N\` integers where EXACTLY ONE integer is duplicated. Find and print the duplicate.\n\n*Pattern:* Hash Set Membership`,
+        whyThisMatters: 'Detecting if you have seen something before in O(1) time is a massive optimization over checking every previous element in an array O(N^2).',
+        concepts: ['hash set', 'unordered_set', 'membership'],
+        prerequisites: ['stl'],
+        learningObjectives: ['Use `unordered_set`', 'Check membership with `.count()`'],
+        constraints: ['N <= 1000'],
+        examples: [{ input: '5\n1 3 4 3 2', output: '3' }],
+        testCases: [
+            { id: 'tc1', input: '5\n1 3 4 3 2', expectedOutput: '3', hidden: false },
+            { id: 'tc2', input: '3\n10 10 20', expectedOutput: '10', hidden: false }
+        ],
+        starterCode: `#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for(int i=0; i<n; i++) cin >> arr[i];\n    \n    unordered_set<int> seen;\n    \n    for(int x : arr) {\n        // If x is already in seen, we found the duplicate!\n        // Otherwise, insert x into seen.\n    }\n    \n    return 0;\n}`,
+        hints: ['Use `seen.count(x)` to check if `x` is in the set.', 'Use `seen.insert(x)` to add it.'],
+        howToThink: ['I will keep a notebook (set). I look at a number. Is it in the notebook? If yes, I caught the duplicate! If no, I write it in the notebook.'],
+        approach: 'Loop through elements. Check if in set. If yes, print and exit. Else, insert into set.',
+        pseudocode: 'for x in arr:\n    if seen.count(x) > 0:\n        return x\n    seen.insert(x)',
+        explanation: 'Each insertion and lookup takes O(1) average time, making the entire algorithm O(N).',
+        solution: `#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for(int i=0; i<n; i++) cin >> arr[i];\n    unordered_set<int> seen;\n    for(int x : arr) {\n        if (seen.count(x)) {\n            cout << x;\n            return 0;\n        }\n        seen.insert(x);\n    }\n    return 0;\n}`,
+        commonMistakes: [],
+        timeComplexity: 'O(N)', spaceComplexity: 'O(N)', interviewRelevance: 'high', tags: ['hash set']
+    },
+    {
+        id: 'prob-14-03',
+        levelId: 'level-14',
+        title: 'Two Sum (O(N) Optimal)',
+        type: 'coding',
+        difficulty: 'medium',
+        order: 3,
+        description: `**Task:**\nGiven an array of \`N\` integers and a \`target\`.\nFind two numbers that add up to \`target\`. Print them.\n(Assume exactly one valid pair exists. Print them in any order.)\n\n**Restriction:** You MUST use an \`unordered_set\` to solve this in **O(N)** time.\n\n*Pattern:* Complement Lookup`,
+        whyThisMatters: 'This is the most famous interview question of all time (LeetCode #1).',
+        concepts: ['hash set', 'complements'],
+        prerequisites: ['hash set'],
+        learningObjectives: ['Understand the "look for the complement" pattern'],
+        constraints: ['N <= 1000'],
+        examples: [{ input: '4\n2 7 11 15\n9', output: '2 7' }],
+        testCases: [
+            { id: 'tc1', input: '4\n2 7 11 15\n9', expectedOutput: '2 7', hidden: false },
+            { id: 'tc2', input: '3\n3 2 4\n6', expectedOutput: '2 4', hidden: false },
+            { id: 'tc3', input: '2\n3 3\n6', expectedOutput: '3 3', hidden: true }
+        ],
+        starterCode: `#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for(int i=0; i<n; i++) cin >> arr[i];\n    int target; cin >> target;\n    \n    unordered_set<int> seen;\n    \n    for(int x : arr) {\n        int complement = target - x;\n        // If the complement is in 'seen', we found our pair!\n        // Otherwise, add x to 'seen'.\n    }\n    \n    return 0;\n}`,
+        hints: ['If my target is 9, and I am currently looking at 2, I need a 7. I should check if 7 is in my `seen` set.'],
+        howToThink: ['Instead of picking `x` and scanning the rest of the array for `target - x`, I can just check my hash set in O(1) time! If it\'s not there, I\'ll add `x` to the set for future numbers to find.'],
+        approach: 'Loop through array. Calculate complement. Check if complement in set. If yes, print and exit. Else, insert current into set.',
+        pseudocode: 'for x in arr:\n    comp = target - x\n    if seen.count(comp):\n        print comp, x\n        return\n    seen.insert(x)',
+        explanation: 'We only do one pass through the array. For each element, a set lookup takes O(1). Thus, O(N) total time.',
+        solution: `#include <iostream>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for(int i=0; i<n; i++) cin >> arr[i];\n    int target; cin >> target;\n    unordered_set<int> seen;\n    for(int x : arr) {\n        int complement = target - x;\n        if (seen.count(complement)) {\n            cout << complement << " " << x;\n            return 0;\n        }\n        seen.insert(x);\n    }\n    return 0;\n}`,
+        commonMistakes: ['Inserting `x` into the set BEFORE checking for the complement. If target is 6 and x is 3, it would falsely pair with itself.'],
+        timeComplexity: 'O(N)', spaceComplexity: 'O(N)', interviewRelevance: 'high', tags: ['hash set', 'two sum']
+    }
+];
