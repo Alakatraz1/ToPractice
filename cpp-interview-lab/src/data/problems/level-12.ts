@@ -108,4 +108,173 @@ export const level12Problems: Problem[] = [
         commonMistakes: [],
         timeComplexity: 'O(N log N)', spaceComplexity: 'O(log N)', interviewRelevance: 'high', tags: ['two pointers', 'complexity']
     }
+,
+{
+  "id": "prob-12-concept-801",
+  "levelId": "level-12",
+  "title": "Complexity Prediction: Loop Concept Check 1",
+  "type": "coding",
+  "difficulty": "easy",
+  "order": 801,
+  "description": "This is a conceptual check for Complexity Prediction: Loop. Given an array of integers, output the array reversed. Understanding how to manipulate data structures is the first step to mastering Complexity Prediction: Loop.",
+  "whyThisMatters": "Fundamental data manipulation is critical before applying advanced algorithms.",
+  "concepts": [
+    "fundamentals"
+  ],
+  "prerequisites": [
+    "arrays"
+  ],
+  "learningObjectives": [
+    "Mastery of basic IO and reversal"
+  ],
+  "constraints": [
+    "N<=100"
+  ],
+  "examples": [
+    {
+      "input": "3\n1 2 3",
+      "output": "3 2 1"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "3\n1 2 3",
+      "expectedOutput": "3 2 1",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        // Write logic here\n    }\n    return 0;\n}",
+  "pythonStarterCode": "def solve():\n    n = int(input())\n    a = list(map(int, input().split()))\n    # Write logic here\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Try looping from the end of the array to the beginning."
+  ],
+  "howToThink": [
+    "How can I access elements from right to left?"
+  ],
+  "approach": "Reverse iteration.",
+  "pseudocode": "for i = n-1 down to 0: print arr[i]",
+  "explanation": "Reversing an array helps build intuition for pointers and boundaries.",
+  "solution": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        for(int i=n-1; i>=0; i--) cout<<a[i]<<' ';\n    }\n    return 0;\n}",
+  "pythonSolution": "n = int(input())\na = list(map(int, input().split()))\nprint(*(a[::-1]))",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(N)",
+  "interviewRelevance": "medium",
+  "tags": [
+    "fundamentals"
+  ]
+},
+{
+  "id": "prob-12-concept-802",
+  "levelId": "level-12",
+  "title": "Complexity Prediction: Loop Concept Check 2",
+  "type": "coding",
+  "difficulty": "easy",
+  "order": 802,
+  "description": "This is a conceptual check for Complexity Prediction: Loop. Given an array of integers, output the array reversed. Understanding how to manipulate data structures is the first step to mastering Complexity Prediction: Loop.",
+  "whyThisMatters": "Fundamental data manipulation is critical before applying advanced algorithms.",
+  "concepts": [
+    "fundamentals"
+  ],
+  "prerequisites": [
+    "arrays"
+  ],
+  "learningObjectives": [
+    "Mastery of basic IO and reversal"
+  ],
+  "constraints": [
+    "N<=100"
+  ],
+  "examples": [
+    {
+      "input": "3\n1 2 3",
+      "output": "3 2 1"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "3\n1 2 3",
+      "expectedOutput": "3 2 1",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        // Write logic here\n    }\n    return 0;\n}",
+  "pythonStarterCode": "def solve():\n    n = int(input())\n    a = list(map(int, input().split()))\n    # Write logic here\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Try looping from the end of the array to the beginning."
+  ],
+  "howToThink": [
+    "How can I access elements from right to left?"
+  ],
+  "approach": "Reverse iteration.",
+  "pseudocode": "for i = n-1 down to 0: print arr[i]",
+  "explanation": "Reversing an array helps build intuition for pointers and boundaries.",
+  "solution": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        for(int i=n-1; i>=0; i--) cout<<a[i]<<' ';\n    }\n    return 0;\n}",
+  "pythonSolution": "n = int(input())\na = list(map(int, input().split()))\nprint(*(a[::-1]))",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(N)",
+  "interviewRelevance": "medium",
+  "tags": [
+    "fundamentals"
+  ]
+},
+{
+  "id": "prob-12-concept-803",
+  "levelId": "level-12",
+  "title": "Complexity Prediction: Loop Concept Check 3",
+  "type": "coding",
+  "difficulty": "easy",
+  "order": 803,
+  "description": "This is a conceptual check for Complexity Prediction: Loop. Given an array of integers, output the array reversed. Understanding how to manipulate data structures is the first step to mastering Complexity Prediction: Loop.",
+  "whyThisMatters": "Fundamental data manipulation is critical before applying advanced algorithms.",
+  "concepts": [
+    "fundamentals"
+  ],
+  "prerequisites": [
+    "arrays"
+  ],
+  "learningObjectives": [
+    "Mastery of basic IO and reversal"
+  ],
+  "constraints": [
+    "N<=100"
+  ],
+  "examples": [
+    {
+      "input": "3\n1 2 3",
+      "output": "3 2 1"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "3\n1 2 3",
+      "expectedOutput": "3 2 1",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        // Write logic here\n    }\n    return 0;\n}",
+  "pythonStarterCode": "def solve():\n    n = int(input())\n    a = list(map(int, input().split()))\n    # Write logic here\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Try looping from the end of the array to the beginning."
+  ],
+  "howToThink": [
+    "How can I access elements from right to left?"
+  ],
+  "approach": "Reverse iteration.",
+  "pseudocode": "for i = n-1 down to 0: print arr[i]",
+  "explanation": "Reversing an array helps build intuition for pointers and boundaries.",
+  "solution": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        for(int i=n-1; i>=0; i--) cout<<a[i]<<' ';\n    }\n    return 0;\n}",
+  "pythonSolution": "n = int(input())\na = list(map(int, input().split()))\nprint(*(a[::-1]))",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(N)",
+  "interviewRelevance": "medium",
+  "tags": [
+    "fundamentals"
+  ]
+}
 ];

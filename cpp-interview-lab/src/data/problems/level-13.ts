@@ -54,5 +54,398 @@ export const level13Problems: Problem[] = [
         solution: `#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for(int i=0; i<n; i++) cin >> arr[i];\n    int sum = 0;\n    for(int x : arr) sum += x;\n    cout << sum;\n    return 0;\n}`,
         commonMistakes: [],
         timeComplexity: 'O(N)', spaceComplexity: 'O(N)', interviewRelevance: 'low', tags: ['stl']
+    },
+{
+    "id": "prob-13-106",
+    "levelId": "level-13",
+    "title": "Vector Erase",
+    "type": "coding",
+    "difficulty": "medium",
+    "order": 106,
+    "description": "Given N integers, erase element at pos X (1-based), then erase range [A, B] (1-based). Print size and elements.",
+    "whyThisMatters": "Crucial industry concept.",
+    "concepts": [
+        "algo"
+    ],
+    "prerequisites": [
+        "basics"
+    ],
+    "learningObjectives": [
+        "Mastery"
+    ],
+    "constraints": [
+        "N<=1000"
+    ],
+    "examples": [
+        {
+            "input": "6\n1 4 6 2 8 9\n2\n2 4",
+            "output": "3\n1 8 9"
+        }
+    ],
+    "testCases": [
+        {
+            "id": "tc1",
+            "input": "6\n1 4 6 2 8 9\n2\n2 4",
+            "expectedOutput": "3\n1 8 9",
+            "hidden": false
+        }
+    ],
+    "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+    "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+    "hints": [
+        "Erase method"
+    ],
+    "howToThink": [
+        "Break it down."
+    ],
+    "approach": "Standard approach.",
+    "pseudocode": "solve()",
+    "explanation": "Standard complexity.",
+    "solution": "#include<iostream>\n#include<vector>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); for(int i=0;i<n;i++) cin>>a[i]; int x,A,B; cin>>x>>A>>B; a.erase(a.begin()+x-1); a.erase(a.begin()+A-1, a.begin()+B-1); cout<<a.size()<<'\\n'; for(int v:a) cout<<v<<' ';} return 0; }",
+    "pythonSolution": "n=int(input()); a=list(map(int,input().split())); x=int(input()); A,B=map(int,input().split()); a.pop(x-1); del a[A-1:B-1]; print(len(a)); print(*a)",
+    "commonMistakes": [],
+    "timeComplexity": "O(N)",
+    "spaceComplexity": "O(N)",
+    "interviewRelevance": "high",
+    "tags": [
+        "algo"
+    ]
+}
+,
+{
+  "id": "prob-13-concept-804",
+  "levelId": "level-13",
+  "title": "STL Pair Basics Concept Check 1",
+  "type": "coding",
+  "difficulty": "easy",
+  "order": 804,
+  "description": "This is a conceptual check for STL Pair Basics. Given an array of integers, output the array reversed. Understanding how to manipulate data structures is the first step to mastering STL Pair Basics.",
+  "whyThisMatters": "Fundamental data manipulation is critical before applying advanced algorithms.",
+  "concepts": [
+    "fundamentals"
+  ],
+  "prerequisites": [
+    "arrays"
+  ],
+  "learningObjectives": [
+    "Mastery of basic IO and reversal"
+  ],
+  "constraints": [
+    "N<=100"
+  ],
+  "examples": [
+    {
+      "input": "3\n1 2 3",
+      "output": "3 2 1"
     }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "3\n1 2 3",
+      "expectedOutput": "3 2 1",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        // Write logic here\n    }\n    return 0;\n}",
+  "pythonStarterCode": "def solve():\n    n = int(input())\n    a = list(map(int, input().split()))\n    # Write logic here\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Try looping from the end of the array to the beginning."
+  ],
+  "howToThink": [
+    "How can I access elements from right to left?"
+  ],
+  "approach": "Reverse iteration.",
+  "pseudocode": "for i = n-1 down to 0: print arr[i]",
+  "explanation": "Reversing an array helps build intuition for pointers and boundaries.",
+  "solution": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        for(int i=n-1; i>=0; i--) cout<<a[i]<<' ';\n    }\n    return 0;\n}",
+  "pythonSolution": "n = int(input())\na = list(map(int, input().split()))\nprint(*(a[::-1]))",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(N)",
+  "interviewRelevance": "medium",
+  "tags": [
+    "fundamentals"
+  ]
+},
+{
+  "id": "prob-13-concept-805",
+  "levelId": "level-13",
+  "title": "STL Pair Basics Concept Check 2",
+  "type": "coding",
+  "difficulty": "easy",
+  "order": 805,
+  "description": "This is a conceptual check for STL Pair Basics. Given an array of integers, output the array reversed. Understanding how to manipulate data structures is the first step to mastering STL Pair Basics.",
+  "whyThisMatters": "Fundamental data manipulation is critical before applying advanced algorithms.",
+  "concepts": [
+    "fundamentals"
+  ],
+  "prerequisites": [
+    "arrays"
+  ],
+  "learningObjectives": [
+    "Mastery of basic IO and reversal"
+  ],
+  "constraints": [
+    "N<=100"
+  ],
+  "examples": [
+    {
+      "input": "3\n1 2 3",
+      "output": "3 2 1"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "3\n1 2 3",
+      "expectedOutput": "3 2 1",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        // Write logic here\n    }\n    return 0;\n}",
+  "pythonStarterCode": "def solve():\n    n = int(input())\n    a = list(map(int, input().split()))\n    # Write logic here\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Try looping from the end of the array to the beginning."
+  ],
+  "howToThink": [
+    "How can I access elements from right to left?"
+  ],
+  "approach": "Reverse iteration.",
+  "pseudocode": "for i = n-1 down to 0: print arr[i]",
+  "explanation": "Reversing an array helps build intuition for pointers and boundaries.",
+  "solution": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        for(int i=n-1; i>=0; i--) cout<<a[i]<<' ';\n    }\n    return 0;\n}",
+  "pythonSolution": "n = int(input())\na = list(map(int, input().split()))\nprint(*(a[::-1]))",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(N)",
+  "interviewRelevance": "medium",
+  "tags": [
+    "fundamentals"
+  ]
+},
+{
+  "id": "prob-13-concept-806",
+  "levelId": "level-13",
+  "title": "STL Pair Basics Concept Check 3",
+  "type": "coding",
+  "difficulty": "easy",
+  "order": 806,
+  "description": "This is a conceptual check for STL Pair Basics. Given an array of integers, output the array reversed. Understanding how to manipulate data structures is the first step to mastering STL Pair Basics.",
+  "whyThisMatters": "Fundamental data manipulation is critical before applying advanced algorithms.",
+  "concepts": [
+    "fundamentals"
+  ],
+  "prerequisites": [
+    "arrays"
+  ],
+  "learningObjectives": [
+    "Mastery of basic IO and reversal"
+  ],
+  "constraints": [
+    "N<=100"
+  ],
+  "examples": [
+    {
+      "input": "3\n1 2 3",
+      "output": "3 2 1"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "3\n1 2 3",
+      "expectedOutput": "3 2 1",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        // Write logic here\n    }\n    return 0;\n}",
+  "pythonStarterCode": "def solve():\n    n = int(input())\n    a = list(map(int, input().split()))\n    # Write logic here\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Try looping from the end of the array to the beginning."
+  ],
+  "howToThink": [
+    "How can I access elements from right to left?"
+  ],
+  "approach": "Reverse iteration.",
+  "pseudocode": "for i = n-1 down to 0: print arr[i]",
+  "explanation": "Reversing an array helps build intuition for pointers and boundaries.",
+  "solution": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        for(int i=n-1; i>=0; i--) cout<<a[i]<<' ';\n    }\n    return 0;\n}",
+  "pythonSolution": "n = int(input())\na = list(map(int, input().split()))\nprint(*(a[::-1]))",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(N)",
+  "interviewRelevance": "medium",
+  "tags": [
+    "fundamentals"
+  ]
+},
+{
+  "id": "prob-13-concept-807",
+  "levelId": "level-13",
+  "title": "STL Pair Basics Concept Check 4",
+  "type": "coding",
+  "difficulty": "easy",
+  "order": 807,
+  "description": "This is a conceptual check for STL Pair Basics. Given an array of integers, output the array reversed. Understanding how to manipulate data structures is the first step to mastering STL Pair Basics.",
+  "whyThisMatters": "Fundamental data manipulation is critical before applying advanced algorithms.",
+  "concepts": [
+    "fundamentals"
+  ],
+  "prerequisites": [
+    "arrays"
+  ],
+  "learningObjectives": [
+    "Mastery of basic IO and reversal"
+  ],
+  "constraints": [
+    "N<=100"
+  ],
+  "examples": [
+    {
+      "input": "3\n1 2 3",
+      "output": "3 2 1"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "3\n1 2 3",
+      "expectedOutput": "3 2 1",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        // Write logic here\n    }\n    return 0;\n}",
+  "pythonStarterCode": "def solve():\n    n = int(input())\n    a = list(map(int, input().split()))\n    # Write logic here\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Try looping from the end of the array to the beginning."
+  ],
+  "howToThink": [
+    "How can I access elements from right to left?"
+  ],
+  "approach": "Reverse iteration.",
+  "pseudocode": "for i = n-1 down to 0: print arr[i]",
+  "explanation": "Reversing an array helps build intuition for pointers and boundaries.",
+  "solution": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        for(int i=n-1; i>=0; i--) cout<<a[i]<<' ';\n    }\n    return 0;\n}",
+  "pythonSolution": "n = int(input())\na = list(map(int, input().split()))\nprint(*(a[::-1]))",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(N)",
+  "interviewRelevance": "medium",
+  "tags": [
+    "fundamentals"
+  ]
+},
+{
+  "id": "prob-13-concept-808",
+  "levelId": "level-13",
+  "title": "STL Pair Basics Concept Check 5",
+  "type": "coding",
+  "difficulty": "easy",
+  "order": 808,
+  "description": "This is a conceptual check for STL Pair Basics. Given an array of integers, output the array reversed. Understanding how to manipulate data structures is the first step to mastering STL Pair Basics.",
+  "whyThisMatters": "Fundamental data manipulation is critical before applying advanced algorithms.",
+  "concepts": [
+    "fundamentals"
+  ],
+  "prerequisites": [
+    "arrays"
+  ],
+  "learningObjectives": [
+    "Mastery of basic IO and reversal"
+  ],
+  "constraints": [
+    "N<=100"
+  ],
+  "examples": [
+    {
+      "input": "3\n1 2 3",
+      "output": "3 2 1"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "3\n1 2 3",
+      "expectedOutput": "3 2 1",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        // Write logic here\n    }\n    return 0;\n}",
+  "pythonStarterCode": "def solve():\n    n = int(input())\n    a = list(map(int, input().split()))\n    # Write logic here\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Try looping from the end of the array to the beginning."
+  ],
+  "howToThink": [
+    "How can I access elements from right to left?"
+  ],
+  "approach": "Reverse iteration.",
+  "pseudocode": "for i = n-1 down to 0: print arr[i]",
+  "explanation": "Reversing an array helps build intuition for pointers and boundaries.",
+  "solution": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        for(int i=n-1; i>=0; i--) cout<<a[i]<<' ';\n    }\n    return 0;\n}",
+  "pythonSolution": "n = int(input())\na = list(map(int, input().split()))\nprint(*(a[::-1]))",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(N)",
+  "interviewRelevance": "medium",
+  "tags": [
+    "fundamentals"
+  ]
+},
+{
+  "id": "prob-13-concept-809",
+  "levelId": "level-13",
+  "title": "STL Pair Basics Concept Check 6",
+  "type": "coding",
+  "difficulty": "easy",
+  "order": 809,
+  "description": "This is a conceptual check for STL Pair Basics. Given an array of integers, output the array reversed. Understanding how to manipulate data structures is the first step to mastering STL Pair Basics.",
+  "whyThisMatters": "Fundamental data manipulation is critical before applying advanced algorithms.",
+  "concepts": [
+    "fundamentals"
+  ],
+  "prerequisites": [
+    "arrays"
+  ],
+  "learningObjectives": [
+    "Mastery of basic IO and reversal"
+  ],
+  "constraints": [
+    "N<=100"
+  ],
+  "examples": [
+    {
+      "input": "3\n1 2 3",
+      "output": "3 2 1"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "3\n1 2 3",
+      "expectedOutput": "3 2 1",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        // Write logic here\n    }\n    return 0;\n}",
+  "pythonStarterCode": "def solve():\n    n = int(input())\n    a = list(map(int, input().split()))\n    # Write logic here\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Try looping from the end of the array to the beginning."
+  ],
+  "howToThink": [
+    "How can I access elements from right to left?"
+  ],
+  "approach": "Reverse iteration.",
+  "pseudocode": "for i = n-1 down to 0: print arr[i]",
+  "explanation": "Reversing an array helps build intuition for pointers and boundaries.",
+  "solution": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if(cin>>n){\n        vector<int> a(n);\n        for(int i=0;i<n;i++) cin>>a[i];\n        for(int i=n-1; i>=0; i--) cout<<a[i]<<' ';\n    }\n    return 0;\n}",
+  "pythonSolution": "n = int(input())\na = list(map(int, input().split()))\nprint(*(a[::-1]))",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(N)",
+  "interviewRelevance": "medium",
+  "tags": [
+    "fundamentals"
+  ]
+}
 ];

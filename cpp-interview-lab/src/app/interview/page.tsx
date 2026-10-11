@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { getProgress } from '@/lib/progress';
-import { allProblems, levels } from '@/data/levels';
+import { getProgress, getGlobalLanguage } from '@/lib/progress';
+import { getAllProblems, levels } from '@/data/levels';
 import { Clock, ShieldAlert, Code2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
@@ -11,20 +11,18 @@ export default function InterviewLauncher() {
     const router = useRouter();
     const [isClient, setIsClient] = useState(false);
     const [availableProblems, setAvailableProblems] = useState<string[]>([]);
+    const [language, setLanguage] = useState<'cpp' | 'python'>('cpp');
 
     useEffect(() => {
         setIsClient(true);
-        const progress = getProgress();
+        const lang = getGlobalLanguage();
+        setLanguage(lang);
+        const progress = getProgress(lang);
         
-        // Find problems in levels the user has reached
-        // We'll approximate this by finding the max level ID in their completed problems,
-        // or just use all problems if they have unlocked everything.
-        // For simplicity, let's just pick any problem from Level 3 to Level 8 that is medium/hard.
-        
-        const eligible = allProblems.filter(p => 
+        const activeProblems = getAllProblems(lang);
+        const eligible = activeProblems.filter(p => 
             (p.difficulty === 'medium' || p.difficulty === 'hard') && 
-            p.type === 'coding' &&
-            ['level-03', 'level-04', 'level-05', 'level-06', 'level-07', 'level-08'].includes(p.levelId)
+            p.type === 'coding'
         );
         
         setAvailableProblems(eligible.map(p => p.id));

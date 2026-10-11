@@ -5,12 +5,14 @@ import { useRouter } from 'next/navigation';
 import { ArrowLeft, BookOpen, AlertTriangle, ListChecks, Zap, Terminal } from 'lucide-react';
 import Link from 'next/link';
 import { allProblems } from '@/data/levels';
+import { getGlobalLanguage } from '@/lib/progress';
 
 export default function LastMinutePrep() {
     const router = useRouter();
     const [activeTab, setActiveTab] = useState<'revision' | 'cheatsheet' | 'mistakes' | 'bigo' | 'mustsolve'>('revision');
+    const lang = getGlobalLanguage();
 
-    const mustSolveIds = [
+    const baseMustSolveIds = [
         'prob-09-04', 'prob-09-05', 'prob-09-07', // Arrays
         'prob-14-01', 'prob-14-03', // Hash Map
         'prob-10-02', 'prob-20-01', // Binary Search
@@ -22,6 +24,7 @@ export default function LastMinutePrep() {
         'prob-24-01'  // DP
     ];
     
+    const mustSolveIds = baseMustSolveIds.map(id => lang === 'python' ? `py-${id}` : id);
     const mustSolve = allProblems.filter(p => mustSolveIds.includes(p.id));
 
     return (

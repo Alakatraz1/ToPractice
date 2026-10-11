@@ -111,5 +111,517 @@ export const level11Problems: Problem[] = [
         solution: `#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    if (n < 2) return 0;\n    vector<int> arr(n);\n    for(int i=0; i<n; i++) cin >> arr[i];\n    sort(arr.begin(), arr.end());\n    int min_diff = 9999999;\n    for(int i=1; i<n; i++) {\n        int diff = arr[i] - arr[i-1];\n        if (diff < min_diff) min_diff = diff;\n    }\n    cout << min_diff;\n    return 0;\n}`,
         commonMistakes: [],
         timeComplexity: 'O(N log N)', spaceComplexity: 'O(log N)', interviewRelevance: 'high', tags: ['challenge', 'sorting']
+    },
+{
+    "id": "prob-11-04",
+    "levelId": "level-11",
+    "title": "Merge Intervals",
+    "type": "coding",
+    "difficulty": "medium",
+    "order": 4,
+    "description": "Given an array of intervals where intervals[i] = [start_i, end_i], merge all overlapping intervals. First input is N (number of intervals), followed by N pairs of integers.",
+    "whyThisMatters": "Classic interval problem requiring sorting first.",
+    "concepts": [
+        "sorting",
+        "intervals"
+    ],
+    "prerequisites": [
+        "sorting"
+    ],
+    "learningObjectives": [
+        "Sort arrays of pairs"
+    ],
+    "constraints": [
+        "N <= 1000"
+    ],
+    "examples": [
+        {
+            "input": "4\n1 3\n2 6\n8 10\n15 18",
+            "output": "1 6\n8 10\n15 18"
+        }
+    ],
+    "testCases": [
+        {
+            "id": "tc1",
+            "input": "4\n1 3\n2 6\n8 10\n15 18",
+            "expectedOutput": "1 6\n8 10\n15 18",
+            "hidden": false
+        },
+        {
+            "id": "tc2",
+            "input": "2\n1 4\n4 5",
+            "expectedOutput": "1 5",
+            "hidden": true
+        }
+    ],
+    "starterCode": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n; cin >> n; \n    // read intervals and logic\n    return 0;\n}",
+    "hints": [
+        "Sort the intervals by their start time.",
+        "Iterate through the sorted intervals and merge if current interval overlaps with the last merged one."
+    ],
+    "howToThink": [
+        "If they are sorted by start time, overlapping intervals will always be exactly next to each other."
+    ],
+    "approach": "Sort and merge.",
+    "pseudocode": "sort(intervals); ans.push(intervals[0]); for intv in intervals: if intv[0] <= ans.last()[1]: ans.last()[1] = max(ans.last()[1], intv[1]) else ans.push(intv)",
+    "explanation": "O(N log N) time.",
+    "solution": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n; if(!(cin >> n)) return 0;\n    if(n == 0) return 0;\n    vector<pair<int,int>> intervals(n);\n    for(int i=0; i<n; i++) cin >> intervals[i].first >> intervals[i].second;\n    sort(intervals.begin(), intervals.end());\n    vector<pair<int,int>> merged;\n    merged.push_back(intervals[0]);\n    for(int i=1; i<n; i++) {\n        if(intervals[i].first <= merged.back().second) {\n            merged.back().second = max(merged.back().second, intervals[i].second);\n        } else {\n            merged.push_back(intervals[i]);\n        }\n    }\n    for(auto& p : merged) cout << p.first << \" \" << p.second << \"\\n\";\n    return 0;\n}",
+    "commonMistakes": [],
+    "timeComplexity": "O(N log N)",
+    "spaceComplexity": "O(N)",
+    "interviewRelevance": "high",
+    "tags": [
+        "sorting",
+        "intervals"
+    ]
+},
+{
+    "id": "prob-11-104",
+    "levelId": "level-11",
+    "title": "Sort Colors",
+    "type": "coding",
+    "difficulty": "medium",
+    "order": 104,
+    "description": "Given an array with n objects colored red, white, or blue (0, 1, 2), sort them in-place. Print array.",
+    "whyThisMatters": "Crucial industry concept.",
+    "concepts": [
+        "algo"
+    ],
+    "prerequisites": [
+        "basics"
+    ],
+    "learningObjectives": [
+        "Mastery"
+    ],
+    "constraints": [
+        "N<=1000"
+    ],
+    "examples": [
+        {
+            "input": "6\n2 0 2 1 1 0",
+            "output": "0 0 1 1 2 2"
+        }
+    ],
+    "testCases": [
+        {
+            "id": "tc1",
+            "input": "6\n2 0 2 1 1 0",
+            "expectedOutput": "0 0 1 1 2 2",
+            "hidden": false
+        }
+    ],
+    "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+    "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+    "hints": [
+        "Dutch National Flag"
+    ],
+    "howToThink": [
+        "Break it down."
+    ],
+    "approach": "Standard approach.",
+    "pseudocode": "solve()",
+    "explanation": "Standard complexity.",
+    "solution": "#include<iostream>\n#include<vector>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); int c0=0,c1=0,c2=0; for(int i=0;i<n;i++){cin>>a[i]; if(a[i]==0) c0++; else if(a[i]==1) c1++; else c2++;} for(int i=0;i<c0;i++) cout<<0<<' '; for(int i=0;i<c1;i++) cout<<1<<' '; for(int i=0;i<c2;i++) cout<<2<<' ';} return 0; }",
+    "pythonSolution": "n=int(input()); a=list(map(int,input().split())); a.sort(); print(*a)",
+    "commonMistakes": [],
+    "timeComplexity": "O(N)",
+    "spaceComplexity": "O(N)",
+    "interviewRelevance": "high",
+    "tags": [
+        "algo"
+    ]
+},
+{
+    "id": "prob-11-105",
+    "levelId": "level-11",
+    "title": "Kth Largest Element",
+    "type": "coding",
+    "difficulty": "medium",
+    "order": 105,
+    "description": "Given an integer array nums and an integer k, return the kth largest element in the array.",
+    "whyThisMatters": "Crucial industry concept.",
+    "concepts": [
+        "algo"
+    ],
+    "prerequisites": [
+        "basics"
+    ],
+    "learningObjectives": [
+        "Mastery"
+    ],
+    "constraints": [
+        "N<=1000"
+    ],
+    "examples": [
+        {
+            "input": "6\n3 2 1 5 6 4\n2",
+            "output": "5"
+        }
+    ],
+    "testCases": [
+        {
+            "id": "tc1",
+            "input": "6\n3 2 1 5 6 4\n2",
+            "expectedOutput": "5",
+            "hidden": false
+        }
+    ],
+    "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+    "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+    "hints": [
+        "Sort or heap"
+    ],
+    "howToThink": [
+        "Break it down."
+    ],
+    "approach": "Standard approach.",
+    "pseudocode": "solve()",
+    "explanation": "Standard complexity.",
+    "solution": "#include<iostream>\n#include<vector>\n#include<algorithm>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); for(int i=0;i<n;i++) cin>>a[i]; int k; cin>>k; sort(a.begin(), a.end(), greater<int>()); cout<<a[k-1];} return 0; }",
+    "pythonSolution": "n=int(input()); a=list(map(int,input().split())); k=int(input()); a.sort(reverse=True); print(a[k-1])",
+    "commonMistakes": [],
+    "timeComplexity": "O(N)",
+    "spaceComplexity": "O(N)",
+    "interviewRelevance": "high",
+    "tags": [
+        "algo"
+    ]
+},
+{
+  "id": "prob-11-506",
+  "levelId": "level-11",
+  "title": "Merge Intervals",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 506,
+  "description": "Merge overlapping intervals. Print count then intervals.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "4\n1 3\n2 6\n8 10\n15 18",
+      "output": "3\n1 6\n8 10\n15 18"
     }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "4\n1 3\n2 6\n8 10\n15 18",
+      "expectedOutput": "3\n1 6\n8 10\n15 18",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\n#include<algorithm>\nusing namespace std; int main(){ int n; if(cin>>n){vector<pair<int,int>> a(n); for(int i=0;i<n;i++) cin>>a[i].first>>a[i].second; sort(a.begin(),a.end()); vector<pair<int,int>> ans; for(auto p:a){if(ans.empty()||ans.back().second<p.first) ans.push_back(p); else ans.back().second=max(ans.back().second,p.second);} cout<<ans.size()<<'\\n'; for(auto p:ans) cout<<p.first<<' '<<p.second<<'\\n';} return 0; }",
+  "pythonSolution": "n=int(input()); a=[tuple(map(int,input().split())) for _ in range(n)]; a.sort(); ans=[]\nfor x,y in a:\n if not ans or ans[-1][1]<x: ans.append([x,y])\n else: ans[-1][1]=max(ans[-1][1],y)\nprint(len(ans))\nfor x,y in ans: print(f'{x} {y}')",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+},
+{
+  "id": "prob-11-507",
+  "levelId": "level-11",
+  "title": "Largest Number",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 507,
+  "description": "Arrange numbers to form largest string.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "2\n10 2",
+      "output": "210"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "2\n10 2",
+      "expectedOutput": "210",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\n#include<string>\n#include<algorithm>\nusing namespace std; int main(){ int n; if(cin>>n){vector<string> a(n); for(int i=0;i<n;i++) cin>>a[i]; sort(a.begin(),a.end(),[](string x,string y){return x+y>y+x;}); if(a[0]==\"0\") cout<<0; else {for(string s:a) cout<<s;} } return 0; }",
+  "pythonSolution": "import functools; n=int(input()); a=input().split(); a.sort(key=functools.cmp_to_key(lambda x,y: -1 if x+y>y+x else 1)); print('0' if a[0]=='0' else ''.join(a))",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+},
+{
+  "id": "prob-11-508",
+  "levelId": "level-11",
+  "title": "Top K Frequent Elements",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 508,
+  "description": "Return K most frequent elements.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "6\n1 1 1 2 2 3\n2",
+      "output": "1 2"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "6\n1 1 1 2 2 3\n2",
+      "expectedOutput": "1 2",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\n#include<unordered_map>\n#include<algorithm>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); unordered_map<int,int> m; for(int i=0;i<n;i++){cin>>a[i]; m[a[i]]++;} int k; cin>>k; vector<pair<int,int>> v(m.begin(),m.end()); sort(v.begin(),v.end(),[](auto a,auto b){return a.second>b.second;}); for(int i=0;i<k;i++) cout<<v[i].first<<' ';} return 0; }",
+  "pythonSolution": "from collections import Counter; n=int(input()); a=list(map(int,input().split())); k=int(input()); print(*(x for x,c in Counter(a).most_common(k)))",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+}
+,
+{
+  "id": "prob-11-506",
+  "levelId": "level-11",
+  "title": "Merge Intervals",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 506,
+  "description": "Merge overlapping intervals. Print count then intervals.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "4\n1 3\n2 6\n8 10\n15 18",
+      "output": "3\n1 6\n8 10\n15 18"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "4\n1 3\n2 6\n8 10\n15 18",
+      "expectedOutput": "3\n1 6\n8 10\n15 18",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\n#include<algorithm>\nusing namespace std; int main(){ int n; if(cin>>n){vector<pair<int,int>> a(n); for(int i=0;i<n;i++) cin>>a[i].first>>a[i].second; sort(a.begin(),a.end()); vector<pair<int,int>> ans; for(auto p:a){if(ans.empty()||ans.back().second<p.first) ans.push_back(p); else ans.back().second=max(ans.back().second,p.second);} cout<<ans.size()<<'\\n'; for(auto p:ans) cout<<p.first<<' '<<p.second<<'\\n';} return 0; }",
+  "pythonSolution": "n=int(input()); a=[tuple(map(int,input().split())) for _ in range(n)]; a.sort(); ans=[]\nfor x,y in a:\n if not ans or ans[-1][1]<x: ans.append([x,y])\n else: ans[-1][1]=max(ans[-1][1],y)\nprint(len(ans))\nfor x,y in ans: print(f'{x} {y}')",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+},
+{
+  "id": "prob-11-507",
+  "levelId": "level-11",
+  "title": "Largest Number",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 507,
+  "description": "Arrange numbers to form largest string.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "2\n10 2",
+      "output": "210"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "2\n10 2",
+      "expectedOutput": "210",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\n#include<string>\n#include<algorithm>\nusing namespace std; int main(){ int n; if(cin>>n){vector<string> a(n); for(int i=0;i<n;i++) cin>>a[i]; sort(a.begin(),a.end(),[](string x,string y){return x+y>y+x;}); if(a[0]==\"0\") cout<<0; else {for(string s:a) cout<<s;} } return 0; }",
+  "pythonSolution": "import functools; n=int(input()); a=input().split(); a.sort(key=functools.cmp_to_key(lambda x,y: -1 if x+y>y+x else 1)); print('0' if a[0]=='0' else ''.join(a))",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+},
+{
+  "id": "prob-11-508",
+  "levelId": "level-11",
+  "title": "Top K Frequent Elements",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 508,
+  "description": "Return K most frequent elements.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "6\n1 1 1 2 2 3\n2",
+      "output": "1 2"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "6\n1 1 1 2 2 3\n2",
+      "expectedOutput": "1 2",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\n#include<unordered_map>\n#include<algorithm>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); unordered_map<int,int> m; for(int i=0;i<n;i++){cin>>a[i]; m[a[i]]++;} int k; cin>>k; vector<pair<int,int>> v(m.begin(),m.end()); sort(v.begin(),v.end(),[](auto a,auto b){return a.second>b.second;}); for(int i=0;i<k;i++) cout<<v[i].first<<' ';} return 0; }",
+  "pythonSolution": "from collections import Counter; n=int(input()); a=list(map(int,input().split())); k=int(input()); print(*(x for x,c in Counter(a).most_common(k)))",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+}
 ];

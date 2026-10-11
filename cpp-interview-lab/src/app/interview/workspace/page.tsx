@@ -23,7 +23,8 @@ function Workspace() {
 
     useEffect(() => {
         if (problem && code === '') {
-            setCode(problem.starterCode);
+            const isPy = problem.id.startsWith('py-');
+            setCode(isPy ? (problem.pythonStarterCode || problem.starterCode) : problem.starterCode);
         }
     }, [problem]);
 
@@ -68,6 +69,7 @@ function Workspace() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     code,
+                    language: problem.id.startsWith('py-') ? 'python' : 'cpp',
                     testCases: testCasesToRun,
                     timeoutMs: 2000
                 })
@@ -224,6 +226,7 @@ function Workspace() {
                 <div className="w-1/2 relative">
                     <CodeEditor 
                         code={code}
+                        language={problem.id.startsWith('py-') ? 'python' : 'cpp'}
                         onChange={setCode}
                         readOnly={interviewState !== 'in_progress'}
                     />

@@ -28,11 +28,9 @@ export interface CompileAndRunResult {
   results?: TestCaseResult[];
 }
 
-// Ensure unique temp directory
 const tempDir = os.tmpdir();
 
 function normalizeOutput(output: string): string {
-  // Normalize whitespace: trim end, reduce multiple newlines, trim lines
   return output.replace(/\r\n/g, '\n')
                .split('\n')
                .map(line => line.trimEnd())
@@ -40,70 +38,83 @@ function normalizeOutput(output: string): string {
                .trim();
 }
 
-export async function checkCompilerStatus(): Promise<{available: boolean, version: string}> {
-    return new Promise((resolve) => {
-        const proc = spawn('g++', ['--version']);
-        let stdout = '';
-        proc.stdout.on('data', data => stdout += data.toString());
+const pythonCmd = os.platform() === 'win32' ? 'python' : 'python3';
+
+export async function checkCompilerStatus(): Promise<{available: boolean, version: string, pythonAvailable: boolean, pythonVersion: string}> {
+    return new Promise(async (resolve) => {
+        let gccVersion = 'Unknown';
+        let gccAvailable = false;
+        let pyVersion = 'Unknown';
+        let pyAvailable = false;
         
-        proc.on('close', (code) => {
-            if (code === 0) {
-                const versionMatch = stdout.match(/g\+\+\s+\(.*\)\s+([0-9\.]+)/);
-                resolve({
-                    available: true, 
-                    version: versionMatch ? versionMatch[1] : 'Unknown'
-                });
-            } else {
-                resolve({available: false, version: ''});
-            }
-        });
-        proc.on('error', () => {
-            resolve({available: false, version: ''});
+        try {
+            const gcc = spawn('g++', ['--version']);
+            let stdout = '';
+            gcc.stdout.on('data', d => stdout+=d);
+            await new Promise(r => gcc.on('close', r));
+            const m = stdout.match(/g\+\+\s+\(.*\)\s+([0-9\.]+)/);
+            if (m) { gccAvailable = true; gccVersion = m[1]; }
+        } catch(e) {}
+        
+        try {
+            const py = spawn(pythonCmd, ['--version']);
+            let stdout = '';
+            py.stdout.on('data', d => stdout+=d);
+            await new Promise(r => py.on('close', r));
+            const m = stdout.match(/Python\s+([0-9\.]+)/);
+            if (m) { pyAvailable = true; pyVersion = m[1]; }
+        } catch(e) {}
+
+        resolve({
+            available: gccAvailable,
+            version: gccVersion,
+            pythonAvailable: pyAvailable,
+            pythonVersion: pyVersion
         });
     });
 }
 
-export async function compileAndRunCpp(code: string, testCases: TestCase[], timeoutMs: number = 2000): Promise<CompileAndRunResult> {
+export async function compileAndRunCode(code: string, language: string, testCases: TestCase[], timeoutMs: number = 2000): Promise<CompileAndRunResult> {
     const sessionId = crypto.randomUUID();
-    const cppFile = path.join(tempDir, `code_${sessionId}.cpp`);
-    // Need .exe on windows, but we're on Linux
+    const isPython = language === 'python';
+    
+    const sourceFile = path.join(tempDir, `code_${sessionId}.${isPython ? 'py' : 'cpp'}`);
     const exeFile = path.join(tempDir, `exe_${sessionId}`);
     
     try {
-        await fs.writeFile(cppFile, code);
+        await fs.writeFile(sourceFile, code);
         
-        // Compile
-        const compileResult = await new Promise<{code: number | null, stderr: string}>((resolve) => {
-            const proc = spawn('g++', ['-std=c++17', '-O2', cppFile, '-o', exeFile]);
-            let stderr = '';
-            proc.stderr.on('data', (data) => stderr += data.toString());
-            
-            // Protect against hung compiler
-            const timeout = setTimeout(() => {
-                proc.kill();
-                resolve({ code: -1, stderr: 'Compilation timed out' });
-            }, 10000);
-            
-            proc.on('close', (code) => {
-                clearTimeout(timeout);
-                resolve({ code, stderr });
+        if (!isPython) {
+            const compileResult = await new Promise<{code: number | null, stderr: string}>((resolve) => {
+                const proc = spawn('g++', ['-std=c++17', '-O2', sourceFile, '-o', exeFile]);
+                let stderr = '';
+                proc.stderr.on('data', (data) => stderr += data.toString());
+                
+                const timeout = setTimeout(() => {
+                    proc.kill();
+                    resolve({ code: -1, stderr: 'Compilation timed out' });
+                }, 10000);
+                
+                proc.on('close', (code) => {
+                    clearTimeout(timeout);
+                    resolve({ code, stderr });
+                });
             });
-        });
-        
-        if (compileResult.code !== 0) {
-            return {
-                status: 'compile_error',
-                message: 'Compilation failed',
-                compilerOutput: compileResult.stderr
-            };
+            
+            if (compileResult.code !== 0) {
+                return {
+                    status: 'compile_error',
+                    message: 'Compilation failed',
+                    compilerOutput: compileResult.stderr
+                };
+            }
         }
         
-        // Run test cases
         const results: TestCaseResult[] = [];
         
         for (const tc of testCases) {
             const tcResult = await new Promise<TestCaseResult>((resolve) => {
-                const proc = spawn(exeFile);
+                const proc = isPython ? spawn(pythonCmd, [sourceFile]) : spawn(exeFile);
                 let stdout = '';
                 let stderr = '';
                 let isKilled = false;
@@ -121,9 +132,8 @@ export async function compileAndRunCpp(code: string, testCases: TestCase[], time
                     });
                 }, timeoutMs);
                 
-                // Set limits on output to prevent memory issues
                 let outputSize = 0;
-                const MAX_OUTPUT = 1024 * 1024; // 1MB
+                const MAX_OUTPUT = 1024 * 1024;
                 
                 proc.stdout.on('data', (data) => {
                     if (outputSize > MAX_OUTPUT) return;
@@ -194,8 +204,7 @@ export async function compileAndRunCpp(code: string, testCases: TestCase[], time
             message: e.message || 'System error occurred'
         };
     } finally {
-        // Cleanup
-        try { await fs.unlink(cppFile).catch(()=>null); } catch (e) {}
+        try { await fs.unlink(sourceFile).catch(()=>null); } catch (e) {}
         try { await fs.unlink(exeFile).catch(()=>null); } catch (e) {}
     }
 }

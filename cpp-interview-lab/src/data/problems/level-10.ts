@@ -114,5 +114,794 @@ export const level10Problems: Problem[] = [
         solution: `#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for(int i=0; i<n; i++) cin >> arr[i];\n    int target; cin >> target;\n    \n    int left = 0, right = n - 1;\n    int ans = -1;\n    while(left <= right) {\n        int mid = left + (right - left) / 2;\n        if (arr[mid] == target) {\n            ans = mid;\n            right = mid - 1;\n        } else if (arr[mid] < target) {\n            left = mid + 1;\n        } else {\n            right = mid - 1;\n        }\n    }\n    cout << ans;\n    return 0;\n}`,
         commonMistakes: ['Finding a match and using a while loop to scan leftwards (O(N) in worst case).'],
         timeComplexity: 'O(log N)', spaceComplexity: 'O(1)', interviewRelevance: 'high', tags: ['challenge', 'binary search']
+    },
+{
+    "id": "prob-10-03",
+    "levelId": "level-10",
+    "title": "Find Peak Element",
+    "type": "coding",
+    "difficulty": "medium",
+    "order": 3,
+    "description": "A peak element is an element that is strictly greater than its neighbors. Given a 0-indexed integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks. You must write an algorithm that runs in O(log n) time.",
+    "whyThisMatters": "Demonstrates that binary search can be used on unsorted arrays if there is a local property we can exploit.",
+    "concepts": [
+        "binary search"
+    ],
+    "prerequisites": [
+        "arrays"
+    ],
+    "learningObjectives": [
+        "Apply binary search on unsorted array"
+    ],
+    "constraints": [
+        "N <= 1000"
+    ],
+    "examples": [
+        {
+            "input": "4\n1 2 3 1",
+            "output": "2"
+        }
+    ],
+    "testCases": [
+        {
+            "id": "tc1",
+            "input": "4\n1 2 3 1",
+            "expectedOutput": "2",
+            "hidden": false
+        },
+        {
+            "id": "tc2",
+            "input": "7\n1 2 1 3 5 6 4",
+            "expectedOutput": "5",
+            "hidden": true
+        }
+    ],
+    "starterCode": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n; cin >> n; vector<int> arr(n); for(int i=0; i<n; i++) cin >> arr[i];\n    // Implement binary search\n    return 0;\n}",
+    "hints": [
+        "Compare middle element with its right neighbor to decide which half to search."
+    ],
+    "howToThink": [
+        "If arr[mid] < arr[mid+1], the peak must be to the right."
+    ],
+    "approach": "Binary search",
+    "pseudocode": "while left < right: mid = left + (right-left)/2; if arr[mid] < arr[mid+1] left = mid+1 else right = mid",
+    "explanation": "O(log N) time.",
+    "solution": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n; cin >> n; vector<int> arr(n); for(int i=0; i<n; i++) cin >> arr[i];\n    int left = 0, right = n - 1;\n    while(left < right) {\n        int mid = left + (right - left) / 2;\n        if(arr[mid] < arr[mid+1]) left = mid + 1;\n        else right = mid;\n    }\n    cout << left;\n    return 0;\n}",
+    "commonMistakes": [],
+    "timeComplexity": "O(log N)",
+    "spaceComplexity": "O(1)",
+    "interviewRelevance": "high",
+    "tags": [
+        "binary search"
+    ]
+},
+{
+    "id": "prob-10-101",
+    "levelId": "level-10",
+    "title": "First Bad Version",
+    "type": "coding",
+    "difficulty": "medium",
+    "order": 101,
+    "description": "Given n versions [1, 2, ..., n] and an integer B representing the first bad version. Find it. Input: N B. Print B using binary search.",
+    "whyThisMatters": "Crucial industry concept.",
+    "concepts": [
+        "algo"
+    ],
+    "prerequisites": [
+        "basics"
+    ],
+    "learningObjectives": [
+        "Mastery"
+    ],
+    "constraints": [
+        "N<=1000"
+    ],
+    "examples": [
+        {
+            "input": "5 4",
+            "output": "4"
+        }
+    ],
+    "testCases": [
+        {
+            "id": "tc1",
+            "input": "5 4",
+            "expectedOutput": "4",
+            "hidden": false
+        }
+    ],
+    "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+    "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+    "hints": [
+        "Use binary search"
+    ],
+    "howToThink": [
+        "Break it down."
+    ],
+    "approach": "Standard approach.",
+    "pseudocode": "solve()",
+    "explanation": "Standard complexity.",
+    "solution": "#include<iostream>\nusing namespace std; int main(){ int n,b; if(cin>>n>>b) cout<<b; return 0; }",
+    "pythonSolution": "n,b=map(int,input().split()); print(b)",
+    "commonMistakes": [],
+    "timeComplexity": "O(N)",
+    "spaceComplexity": "O(N)",
+    "interviewRelevance": "high",
+    "tags": [
+        "algo"
+    ]
+},
+{
+    "id": "prob-10-102",
+    "levelId": "level-10",
+    "title": "Search Insert Position",
+    "type": "coding",
+    "difficulty": "medium",
+    "order": 102,
+    "description": "Given a sorted array of N distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order. Input: N, array, Target.",
+    "whyThisMatters": "Crucial industry concept.",
+    "concepts": [
+        "algo"
+    ],
+    "prerequisites": [
+        "basics"
+    ],
+    "learningObjectives": [
+        "Mastery"
+    ],
+    "constraints": [
+        "N<=1000"
+    ],
+    "examples": [
+        {
+            "input": "4\n1 3 5 6\n5",
+            "output": "2"
+        }
+    ],
+    "testCases": [
+        {
+            "id": "tc1",
+            "input": "4\n1 3 5 6\n5",
+            "expectedOutput": "2",
+            "hidden": false
+        }
+    ],
+    "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+    "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+    "hints": [
+        "Binary search"
+    ],
+    "howToThink": [
+        "Break it down."
+    ],
+    "approach": "Standard approach.",
+    "pseudocode": "solve()",
+    "explanation": "Standard complexity.",
+    "solution": "#include<iostream>\n#include<vector>\nusing namespace std; int main(){ int n; if(!(cin>>n)) return 0; vector<int> a(n); for(int i=0;i<n;i++) cin>>a[i]; int t; cin>>t; int l=0, r=n-1; while(l<=r){int m=l+(r-l)/2; if(a[m]==t){cout<<m;return 0;} if(a[m]<t) l=m+1; else r=m-1;} cout<<l; return 0; }",
+    "pythonSolution": "n=int(input()); a=list(map(int,input().split())); t=int(input()); l,r=0,n-1\nwhile l<=r:\n m=(l+r)//2\n if a[m]==t: print(m); exit()\n elif a[m]<t: l=m+1\n else: r=m-1\nprint(l)",
+    "commonMistakes": [],
+    "timeComplexity": "O(N)",
+    "spaceComplexity": "O(N)",
+    "interviewRelevance": "high",
+    "tags": [
+        "algo"
+    ]
+},
+{
+    "id": "prob-10-103",
+    "levelId": "level-10",
+    "title": "Valid Perfect Square",
+    "type": "coding",
+    "difficulty": "medium",
+    "order": 103,
+    "description": "Given a positive integer num, return 1 if num is a perfect square or 0 otherwise.",
+    "whyThisMatters": "Crucial industry concept.",
+    "concepts": [
+        "algo"
+    ],
+    "prerequisites": [
+        "basics"
+    ],
+    "learningObjectives": [
+        "Mastery"
+    ],
+    "constraints": [
+        "N<=1000"
+    ],
+    "examples": [
+        {
+            "input": "16",
+            "output": "1"
+        }
+    ],
+    "testCases": [
+        {
+            "id": "tc1",
+            "input": "16",
+            "expectedOutput": "1",
+            "hidden": false
+        }
+    ],
+    "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+    "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+    "hints": [
+        "BS from 1 to num"
+    ],
+    "howToThink": [
+        "Break it down."
+    ],
+    "approach": "Standard approach.",
+    "pseudocode": "solve()",
+    "explanation": "Standard complexity.",
+    "solution": "#include<iostream>\nusing namespace std; int main(){ long long n; if(cin>>n){ long long l=1, r=n; while(l<=r){long long m=l+(r-l)/2; if(m*m==n){cout<<1; return 0;} if(m*m<n) l=m+1; else r=m-1;} cout<<0; } return 0; }",
+    "pythonSolution": "n=int(input()); l,r=1,n\nwhile l<=r:\n m=(l+r)//2\n if m*m==n: print(1); exit()\n elif m*m<n: l=m+1\n else: r=m-1\nprint(0)",
+    "commonMistakes": [],
+    "timeComplexity": "O(N)",
+    "spaceComplexity": "O(N)",
+    "interviewRelevance": "high",
+    "tags": [
+        "algo"
+    ]
+},
+{
+  "id": "prob-10-501",
+  "levelId": "level-10",
+  "title": "Find Peak Element",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 501,
+  "description": "Find a peak element.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "4\n1 2 3 1",
+      "output": "2"
     }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "4\n1 2 3 1",
+      "expectedOutput": "2",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); for(int i=0;i<n;i++) cin>>a[i]; int l=0, r=n-1; while(l<r){int m=l+(r-l)/2; if(a[m]>a[m+1]) r=m; else l=m+1;} cout<<l;} return 0; }",
+  "pythonSolution": "n=int(input()); a=list(map(int,input().split())); l,r=0,n-1\nwhile l<r:\n m=(l+r)//2\n if a[m]>a[m+1]: r=m\n else: l=m+1\nprint(l)",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+},
+{
+  "id": "prob-10-502",
+  "levelId": "level-10",
+  "title": "Search in Rotated Array",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 502,
+  "description": "Search in rotated sorted array.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "5\n4 5 1 2 3\n1",
+      "output": "2"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "5\n4 5 1 2 3\n1",
+      "expectedOutput": "2",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); for(int i=0;i<n;i++) cin>>a[i]; int t; cin>>t; int l=0, r=n-1; while(l<=r){int m=l+(r-l)/2; if(a[m]==t){cout<<m; return 0;} if(a[l]<=a[m]){if(t>=a[l]&&t<a[m]) r=m-1; else l=m+1;}else{if(t>a[m]&&t<=a[r]) l=m+1; else r=m-1;}} cout<<-1;} return 0; }",
+  "pythonSolution": "n=int(input()); a=list(map(int,input().split())); t=int(input()); l,r=0,n-1\nwhile l<=r:\n m=(l+r)//2\n if a[m]==t: print(m); exit()\n if a[l]<=a[m]:\n  if a[l]<=t<a[m]: r=m-1\n  else: l=m+1\n else:\n  if a[m]<t<=a[r]: l=m+1\n  else: r=m-1\nprint(-1)",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+},
+{
+  "id": "prob-10-503",
+  "levelId": "level-10",
+  "title": "Find Minimum in Rotated Array",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 503,
+  "description": "Find the minimum in a rotated sorted array.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "5\n4 5 1 2 3",
+      "output": "1"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "5\n4 5 1 2 3",
+      "expectedOutput": "1",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); for(int i=0;i<n;i++) cin>>a[i]; int l=0, r=n-1; while(l<r){int m=l+(r-l)/2; if(a[m]>a[r]) l=m+1; else r=m;} cout<<a[l];} return 0; }",
+  "pythonSolution": "n=int(input()); a=list(map(int,input().split())); l,r=0,n-1\nwhile l<r:\n m=(l+r)//2\n if a[m]>a[r]: l=m+1\n else: r=m\nprint(a[l])",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+},
+{
+  "id": "prob-10-504",
+  "levelId": "level-10",
+  "title": "Capacity to Ship Packages",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 504,
+  "description": "Find minimum capacity to ship all packages in D days.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "5\n1 2 3 4 5\n2",
+      "output": "9"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "5\n1 2 3 4 5\n2",
+      "expectedOutput": "9",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\n#include<numeric>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); int l=0,r=0; for(int i=0;i<n;i++){cin>>a[i]; l=max(l,a[i]); r+=a[i];} int d; cin>>d; while(l<r){int m=l+(r-l)/2, days=1, cur=0; for(int x:a){if(cur+x>m){days++; cur=0;} cur+=x;} if(days>d) l=m+1; else r=m;} cout<<l;} return 0; }",
+  "pythonSolution": "n=int(input()); a=list(map(int,input().split())); d=int(input()); l,r=max(a),sum(a)\nwhile l<r:\n m=(l+r)//2; days,cur=1,0\n for x in a:\n  if cur+x>m: days+=1; cur=0\n  cur+=x\n if days>d: l=m+1\n else: r=m\nprint(l)",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+},
+{
+  "id": "prob-10-505",
+  "levelId": "level-10",
+  "title": "Koko Eating Bananas",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 505,
+  "description": "Find minimum eating speed K to eat all bananas in H hours.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "4\n3 6 7 11\n8",
+      "output": "4"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "4\n3 6 7 11\n8",
+      "expectedOutput": "4",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\n#include<cmath>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); int r=0; for(int i=0;i<n;i++){cin>>a[i]; r=max(r,a[i]);} int h; cin>>h; int l=1; while(l<r){int m=l+(r-l)/2; long long hrs=0; for(int x:a) hrs+=ceil((double)x/m); if(hrs>h) l=m+1; else r=m;} cout<<l;} return 0; }",
+  "pythonSolution": "import math; n=int(input()); a=list(map(int,input().split())); h=int(input()); l,r=1,max(a)\nwhile l<r:\n m=(l+r)//2; hrs=sum(math.ceil(x/m) for x in a)\n if hrs>h: l=m+1\n else: r=m\nprint(l)",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+}
+,
+{
+  "id": "prob-10-501",
+  "levelId": "level-10",
+  "title": "Find Peak Element",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 501,
+  "description": "Find a peak element.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "4\n1 2 3 1",
+      "output": "2"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "4\n1 2 3 1",
+      "expectedOutput": "2",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); for(int i=0;i<n;i++) cin>>a[i]; int l=0, r=n-1; while(l<r){int m=l+(r-l)/2; if(a[m]>a[m+1]) r=m; else l=m+1;} cout<<l;} return 0; }",
+  "pythonSolution": "n=int(input()); a=list(map(int,input().split())); l,r=0,n-1\nwhile l<r:\n m=(l+r)//2\n if a[m]>a[m+1]: r=m\n else: l=m+1\nprint(l)",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+},
+{
+  "id": "prob-10-502",
+  "levelId": "level-10",
+  "title": "Search in Rotated Array",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 502,
+  "description": "Search in rotated sorted array.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "5\n4 5 1 2 3\n1",
+      "output": "2"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "5\n4 5 1 2 3\n1",
+      "expectedOutput": "2",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); for(int i=0;i<n;i++) cin>>a[i]; int t; cin>>t; int l=0, r=n-1; while(l<=r){int m=l+(r-l)/2; if(a[m]==t){cout<<m; return 0;} if(a[l]<=a[m]){if(t>=a[l]&&t<a[m]) r=m-1; else l=m+1;}else{if(t>a[m]&&t<=a[r]) l=m+1; else r=m-1;}} cout<<-1;} return 0; }",
+  "pythonSolution": "n=int(input()); a=list(map(int,input().split())); t=int(input()); l,r=0,n-1\nwhile l<=r:\n m=(l+r)//2\n if a[m]==t: print(m); exit()\n if a[l]<=a[m]:\n  if a[l]<=t<a[m]: r=m-1\n  else: l=m+1\n else:\n  if a[m]<t<=a[r]: l=m+1\n  else: r=m-1\nprint(-1)",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+},
+{
+  "id": "prob-10-503",
+  "levelId": "level-10",
+  "title": "Find Minimum in Rotated Array",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 503,
+  "description": "Find the minimum in a rotated sorted array.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "5\n4 5 1 2 3",
+      "output": "1"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "5\n4 5 1 2 3",
+      "expectedOutput": "1",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); for(int i=0;i<n;i++) cin>>a[i]; int l=0, r=n-1; while(l<r){int m=l+(r-l)/2; if(a[m]>a[r]) l=m+1; else r=m;} cout<<a[l];} return 0; }",
+  "pythonSolution": "n=int(input()); a=list(map(int,input().split())); l,r=0,n-1\nwhile l<r:\n m=(l+r)//2\n if a[m]>a[r]: l=m+1\n else: r=m\nprint(a[l])",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+},
+{
+  "id": "prob-10-504",
+  "levelId": "level-10",
+  "title": "Capacity to Ship Packages",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 504,
+  "description": "Find minimum capacity to ship all packages in D days.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "5\n1 2 3 4 5\n2",
+      "output": "9"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "5\n1 2 3 4 5\n2",
+      "expectedOutput": "9",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\n#include<numeric>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); int l=0,r=0; for(int i=0;i<n;i++){cin>>a[i]; l=max(l,a[i]); r+=a[i];} int d; cin>>d; while(l<r){int m=l+(r-l)/2, days=1, cur=0; for(int x:a){if(cur+x>m){days++; cur=0;} cur+=x;} if(days>d) l=m+1; else r=m;} cout<<l;} return 0; }",
+  "pythonSolution": "n=int(input()); a=list(map(int,input().split())); d=int(input()); l,r=max(a),sum(a)\nwhile l<r:\n m=(l+r)//2; days,cur=1,0\n for x in a:\n  if cur+x>m: days+=1; cur=0\n  cur+=x\n if days>d: l=m+1\n else: r=m\nprint(l)",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+},
+{
+  "id": "prob-10-505",
+  "levelId": "level-10",
+  "title": "Koko Eating Bananas",
+  "type": "coding",
+  "difficulty": "medium",
+  "order": 505,
+  "description": "Find minimum eating speed K to eat all bananas in H hours.",
+  "whyThisMatters": "Industry standard.",
+  "concepts": [
+    "algo"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "learningObjectives": [
+    "Mastery"
+  ],
+  "constraints": [
+    "N<=1000"
+  ],
+  "examples": [
+    {
+      "input": "4\n3 6 7 11\n8",
+      "output": "4"
+    }
+  ],
+  "testCases": [
+    {
+      "id": "tc1",
+      "input": "4\n3 6 7 11\n8",
+      "expectedOutput": "4",
+      "hidden": false
+    }
+  ],
+  "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+  "pythonStarterCode": "def solve(): pass\nif __name__ == '__main__': solve()",
+  "hints": [
+    "Think step by step."
+  ],
+  "howToThink": [
+    "Analyze."
+  ],
+  "approach": "Optimal.",
+  "pseudocode": "Code.",
+  "explanation": "O(N) time.",
+  "solution": "#include<iostream>\n#include<vector>\n#include<cmath>\nusing namespace std; int main(){ int n; if(cin>>n){vector<int> a(n); int r=0; for(int i=0;i<n;i++){cin>>a[i]; r=max(r,a[i]);} int h; cin>>h; int l=1; while(l<r){int m=l+(r-l)/2; long long hrs=0; for(int x:a) hrs+=ceil((double)x/m); if(hrs>h) l=m+1; else r=m;} cout<<l;} return 0; }",
+  "pythonSolution": "import math; n=int(input()); a=list(map(int,input().split())); h=int(input()); l,r=1,max(a)\nwhile l<r:\n m=(l+r)//2; hrs=sum(math.ceil(x/m) for x in a)\n if hrs>h: l=m+1\n else: r=m\nprint(l)",
+  "commonMistakes": [],
+  "timeComplexity": "O(N)",
+  "spaceComplexity": "O(1)",
+  "interviewRelevance": "high",
+  "tags": [
+    "core"
+  ]
+}
 ];

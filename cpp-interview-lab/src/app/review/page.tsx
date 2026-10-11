@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getWeakConcepts, getProgress } from '@/lib/progress';
-import { allProblems } from '@/data/levels';
+import { getWeakConcepts, getProgress, getGlobalLanguage } from '@/lib/progress';
+import { getAllProblems } from '@/data/levels';
 import { Problem } from '@/data/types';
 import { ArrowLeft, Brain, Code2, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
@@ -15,10 +15,11 @@ export default function ReviewPage() {
 
     useEffect(() => {
         setIsClient(true);
-        const weakConcepts = getWeakConcepts();
-        const progress = getProgress();
+        const lang = getGlobalLanguage();
+        const weakConcepts = getWeakConcepts(lang);
+        const progress = getProgress(lang);
         
-        let pool = [...allProblems];
+        let pool = getAllProblems(lang);
         // 1. Try to find problems that teach weak concepts and are ALREADY completed (so we can review them).
         // If not enough, find uncompleted ones.
         

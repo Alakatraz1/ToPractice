@@ -2,18 +2,21 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { getProblem, getLevelForProblem } from '@/data/levels';
+import { getProblem, getLevelForProblem, getNavigationInfo } from '@/data/levels';
 import { CodeEditor } from '@/components/CodeEditor';
-import { getProgress, saveCode, markProblemComplete, updateProgress, recordAttempt, recordSolutionView, recordHint } from '@/lib/progress';
-import { Play, Check, ChevronLeft, ChevronRight, Lightbulb, CheckCircle2, XCircle, AlertCircle, RotateCcw, BrainCircuit } from 'lucide-react';
+import { getProgress, saveCode, markProblemComplete, updateProgress, recordAttempt, recordSolutionView, recordHint, setGlobalLanguage, getGlobalLanguage } from '@/lib/progress';
+import { Play, Check, ChevronLeft, ChevronRight, Lightbulb, CheckCircle2, XCircle, AlertCircle, RotateCcw, BrainCircuit, ArrowRight, Sparkles } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { CompileAndRunResult } from '@/lib/compiler';
 
 export default function ProblemClient({ problemId }: { problemId: string }) {
     const router = useRouter();
     const problem = getProblem(problemId);
+    const isPyProblem = problemId.startsWith('py-');
+    const [language, setLanguage] = useState<'cpp' | 'python'>(isPyProblem ? 'python' : 'cpp');
     const level = problem ? getLevelForProblem(problemId) : null;
-    
+    const nav = getNavigationInfo(problemId, language);
+
     const [code, setCode] = useState('');
     const [isClient, setIsClient] = useState(false);
     const [isRunning, setIsRunning] = useState(false);
@@ -25,10 +28,22 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
 
     useEffect(() => {
         setIsClient(true);
+        const initialLang = isPyProblem ? 'python' : getGlobalLanguage();
+        setLanguage(initialLang);
+        setGlobalLanguage(initialLang);
+
         if (problem) {
-            const progress = getProgress();
-            setCode(progress.savedCode[problem.id] || problem.starterCode);
-            updateProgress({ currentProblem: problem.id });
+            const progress = getProgress(initialLang);
+            
+            // Check if saved code exists for this problem
+            const stored = progress.savedCode[problem.id];
+            if (stored) {
+                setCode(stored);
+            } else {
+                setCode(initialLang === 'python' ? (problem.pythonStarterCode || problem.starterCode) : problem.starterCode);
+            }
+            
+            updateProgress({ currentProblem: problem.id }, initialLang);
             
             if (progress.solutionsViewed.includes(problem.id)) {
                 setSolutionUnlocked(true);
@@ -37,11 +52,44 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
                 setHintIndex(progress.hintsUsed[problem.id] - 1);
             }
         }
-    }, [problem]);
+    }, [problemId, isPyProblem]);
+
+    const handleLanguageChange = (newLang: 'cpp' | 'python') => {
+        setLanguage(newLang);
+        setGlobalLanguage(newLang);
+        
+        // If there's an equivalent problem in the other language, navigate to it
+        if (newLang === 'python' && problemId.startsWith('prob-')) {
+            const pyId = 'py-' + problemId;
+            if (getProblem(pyId)) {
+                router.push(`/problems/${pyId}`);
+                return;
+            }
+        } else if (newLang === 'cpp' && problemId.startsWith('py-prob-')) {
+            const cppId = problemId.replace('py-', '');
+            if (getProblem(cppId)) {
+                router.push(`/problems/${cppId}`);
+                return;
+            }
+        }
+
+        // Otherwise reload code for the current problem in the new language
+        if (problem) {
+            const progress = getProgress(newLang);
+            const stored = progress.savedCode[problem.id];
+            if (stored) {
+                setCode(stored);
+            } else {
+                setCode(newLang === 'python' ? (problem.pythonStarterCode || problem.starterCode) : problem.starterCode);
+            }
+        }
+    };
 
     const handleCodeChange = (newCode: string) => {
         setCode(newCode);
-        saveCode(problemId, newCode);
+        if (problem) {
+            saveCode(problem.id, newCode, language);
+        }
     };
 
     const handleRun = async (isSubmit: boolean = false) => {
@@ -58,6 +106,7 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     code,
+                    language,
                     testCases: testCasesToRun,
                     timeoutMs: 2000
                 })
@@ -68,9 +117,9 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
             
             if (isSubmit) {
                 const allPassed = data.status === 'success' && data.results?.every(r => r.passed);
-                recordAttempt(problemId, !allPassed);
+                recordAttempt(problemId, !allPassed, language);
                 if (allPassed) {
-                    markProblemComplete(problemId);
+                    markProblemComplete(problemId, language);
                 }
             }
             
@@ -84,18 +133,21 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
 
     const revealHint = (index: number) => {
         setHintIndex(index);
-        recordHint(problemId, index);
+        recordHint(problemId, index, language);
     };
 
     const unlockSolution = () => {
         setSolutionUnlocked(true);
-        recordSolutionView(problemId);
+        recordSolutionView(problemId, language);
     };
 
     const resetCode = () => {
         if (problem && confirm("Reset your code to the starter template?")) {
-            setCode(problem.starterCode);
-            saveCode(problemId, problem.starterCode);
+            const starter = language === 'python' 
+                ? (problem.pythonStarterCode || problem.starterCode) 
+                : problem.starterCode;
+            setCode(starter);
+            saveCode(problem.id, starter, language);
         }
     };
 
@@ -108,39 +160,110 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
         <div className="flex flex-col h-screen bg-gray-950 text-gray-200 overflow-hidden font-sans">
             {/* Header */}
             <header className="h-14 border-b border-gray-800 bg-gray-900 flex items-center justify-between px-4 shrink-0">
-                <div className="flex items-center gap-4">
-                    <button onClick={() => router.push('/')} className="text-gray-400 hover:text-white flex items-center gap-1 text-sm font-medium">
+                <div className="flex items-center gap-3">
+                    <button 
+                        onClick={() => router.push('/')} 
+                        className="text-gray-400 hover:text-white flex items-center gap-1 text-sm font-medium transition-colors"
+                        title="Back to Dashboard"
+                    >
                         <ChevronLeft className="w-4 h-4" /> Dashboard
                     </button>
+                    
                     <div className="h-4 w-px bg-gray-700"></div>
-                    <span className="font-semibold text-gray-200">
-                        <span className="text-gray-500 mr-2">{level?.title} •</span> 
-                        {problem.title}
-                    </span>
+
+                    {/* Question Navigator */}
+                    <div className="flex items-center gap-1.5 bg-gray-950/80 px-2.5 py-1 rounded-lg border border-gray-800 text-xs font-semibold">
+                        <button
+                            onClick={() => nav.prevProblem && router.push(`/problems/${nav.prevProblem.id}`)}
+                            disabled={!nav.prevProblem}
+                            className="p-1 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors rounded"
+                            title={nav.prevProblem ? `Previous: ${nav.prevProblem.title}` : 'No previous problem'}
+                        >
+                            <ChevronLeft className="w-4 h-4" />
+                        </button>
+                        <span className="text-gray-300 px-1 font-mono">
+                            Q {nav.currentIndexInLevel + 1} / {nav.totalInLevel}
+                        </span>
+                        <button
+                            onClick={() => nav.nextProblem && router.push(`/problems/${nav.nextProblem.id}`)}
+                            disabled={!nav.nextProblem}
+                            className="p-1 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors rounded"
+                            title={
+                                nav.nextProblem 
+                                    ? (nav.isLastInLevel ? `Next Section: ${nav.nextProblem.title}` : `Next: ${nav.nextProblem.title}`) 
+                                    : 'No next problem'
+                            }
+                        >
+                            <ChevronRight className="w-4 h-4" />
+                        </button>
+                    </div>
+
+                    <div className="hidden md:flex items-center gap-2">
+                        <span className="text-gray-400 text-sm">
+                            <span className="text-gray-500 mr-1.5">{level?.title} •</span> 
+                            <span className="font-semibold text-gray-200">{problem.title}</span>
+                        </span>
+                    </div>
+
                     <span className={`text-xs px-2 py-0.5 rounded-full uppercase tracking-wider font-bold ${
-                        problem.difficulty === 'beginner' ? 'bg-emerald-500/10 text-emerald-400' :
-                        problem.difficulty === 'easy' ? 'bg-green-500/10 text-green-400' :
-                        problem.difficulty === 'medium' ? 'bg-yellow-500/10 text-yellow-400' :
-                        'bg-red-500/10 text-red-400'
+                        problem.difficulty === 'beginner' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
+                        problem.difficulty === 'easy' ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
+                        problem.difficulty === 'medium' ? 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20' :
+                        'bg-red-500/10 text-red-400 border border-red-500/20'
                     }`}>
                         {problem.difficulty}
                     </span>
+
+                    {nav.isLastInLevel && nav.nextLevel && (
+                        <span className="hidden sm:inline-block text-[11px] px-2 py-0.5 rounded-full bg-blue-900/40 text-blue-300 border border-blue-700/50">
+                            Section Finale
+                        </span>
+                    )}
                 </div>
                 
                 <div className="flex items-center gap-3">
+                    {/* Quick Next Button in Header if not last, or Section Button if last */}
+                    {nav.nextProblem && !nav.isLastInLevel && (
+                        <button
+                            onClick={() => router.push(`/problems/${nav.nextProblem!.id}`)}
+                            className="hidden lg:flex items-center gap-1.5 px-3 py-1 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-md text-xs font-medium transition-colors"
+                            title={`Next: ${nav.nextProblem.title}`}
+                        >
+                            Next Question <ChevronRight className="w-3.5 h-3.5" />
+                        </button>
+                    )}
+                    {nav.isLastInLevel && nav.nextLevel && nav.nextLevelFirstProblem && (
+                        <button
+                            onClick={() => router.push(`/problems/${nav.nextLevelFirstProblem!.id}`)}
+                            className="hidden lg:flex items-center gap-1.5 px-3 py-1 bg-blue-900/40 hover:bg-blue-800/60 text-blue-300 border border-blue-700/50 rounded-md text-xs font-semibold transition-colors"
+                            title={`Next Section: Level ${nav.nextLevel.number} ${nav.nextLevel.title}`}
+                        >
+                            Next Section ({nav.nextLevel.number}) <ChevronRight className="w-3.5 h-3.5" />
+                        </button>
+                    )}
+
+                    <select 
+                        value={language}
+                        onChange={(e) => handleLanguageChange(e.target.value as 'cpp' | 'python')}
+                        className="bg-gray-800 text-gray-200 border border-gray-700 rounded-md px-3 py-1.5 text-xs font-medium outline-none focus:border-blue-500 cursor-pointer"
+                    >
+                        <option value="cpp">C++</option>
+                        <option value="python">Python 3</option>
+                    </select>
+                    
                     <button 
                         onClick={() => handleRun(false)}
                         disabled={isRunning}
-                        className="flex items-center gap-2 px-4 py-1.5 bg-gray-800 hover:bg-gray-700 text-gray-200 rounded-md font-medium text-sm transition-colors disabled:opacity-50"
+                        className="flex items-center gap-1.5 px-3.5 py-1.5 bg-gray-800 hover:bg-gray-700 text-gray-200 rounded-md font-medium text-xs transition-colors disabled:opacity-50"
                     >
-                        <Play className="w-4 h-4" /> {isRunning ? 'Running...' : 'Run Code'}
+                        <Play className="w-3.5 h-3.5" /> {isRunning ? 'Running...' : 'Run Code'}
                     </button>
                     <button 
                         onClick={() => handleRun(true)}
                         disabled={isRunning}
-                        className="flex items-center gap-2 px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-md font-medium text-sm transition-colors disabled:opacity-50"
+                        className="flex items-center gap-1.5 px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-md font-bold text-xs transition-colors disabled:opacity-50 shadow-[0_0_15px_rgba(16,185,129,0.25)]"
                     >
-                        <Check className="w-4 h-4" /> Submit
+                        <Check className="w-3.5 h-3.5" /> Submit
                     </button>
                 </div>
             </header>
@@ -163,7 +286,7 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
                             className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'hints' ? 'border-amber-500 text-amber-400' : 'border-transparent text-gray-400 hover:text-gray-200'}`}
                             onClick={() => setActiveTab('hints')}
                         >
-                            Hints
+                            Hints {problem.hints.length > 0 && `(${problem.hints.length})`}
                         </button>
                         <button 
                             className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === 'solution' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-gray-400 hover:text-gray-200'}`}
@@ -178,11 +301,19 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
                         {activeTab === 'problem' && (
                             <div className="space-y-8">
                                 <div>
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="text-xs uppercase tracking-wider font-semibold text-blue-400">
+                                            Level {level?.number || 1} • {level?.title}
+                                        </div>
+                                        <div className="text-xs text-gray-400 font-mono">
+                                            Question {nav.currentIndexInLevel + 1} of {nav.totalInLevel}
+                                        </div>
+                                    </div>
                                     <h1 className="text-2xl font-bold mb-4">{problem.title}</h1>
                                     
                                     <div className="flex gap-2 mb-6 flex-wrap">
                                         {problem.concepts.map(c => (
-                                            <span key={c} className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded-md">
+                                            <span key={c} className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded-md border border-gray-700/50">
                                                 {c}
                                             </span>
                                         ))}
@@ -231,10 +362,12 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
                                     ))}
                                 </div>
                                 
-                                <div className="bg-blue-900/10 border border-blue-900/30 rounded-lg p-4">
-                                    <h3 className="font-semibold text-blue-400 mb-2 text-sm uppercase tracking-wider">Why this matters</h3>
-                                    <p className="text-gray-300 text-sm leading-relaxed">{problem.whyThisMatters}</p>
-                                </div>
+                                {problem.whyThisMatters && (
+                                    <div className="bg-blue-900/10 border border-blue-900/30 rounded-lg p-4">
+                                        <h3 className="font-semibold text-blue-400 mb-2 text-sm uppercase tracking-wider">Why this matters</h3>
+                                        <p className="text-gray-300 text-sm leading-relaxed">{problem.whyThisMatters}</p>
+                                    </div>
+                                )}
                             </div>
                         )}
 
@@ -243,24 +376,28 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
                                 <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
                                     <Lightbulb className="w-5 h-5 text-amber-400" /> Need Help?
                                 </h2>
-                                {problem.hints.map((hint, i) => (
-                                    <div key={i} className="border border-gray-800 rounded-lg p-4 bg-gray-900/50">
-                                        {i <= hintIndex ? (
-                                            <div>
-                                                <div className="font-semibold text-amber-400 mb-2">Hint {i + 1}</div>
-                                                <div className="text-gray-300 prose prose-invert prose-sm"><ReactMarkdown>{hint}</ReactMarkdown></div>
-                                            </div>
-                                        ) : (
-                                            <button 
-                                                onClick={() => revealHint(i)}
-                                                disabled={i > hintIndex + 1}
-                                                className={`px-4 py-2 rounded-md font-medium text-sm transition-colors ${i === hintIndex + 1 ? 'bg-gray-800 hover:bg-gray-700 text-gray-200' : 'bg-gray-900 text-gray-600 cursor-not-allowed'}`}
-                                            >
-                                                Reveal Hint {i + 1}
-                                            </button>
-                                        )}
-                                    </div>
-                                ))}
+                                {problem.hints.length === 0 ? (
+                                    <div className="text-gray-400 text-sm italic">No hints needed for this problem. Review the examples!</div>
+                                ) : (
+                                    problem.hints.map((hint, i) => (
+                                        <div key={i} className="border border-gray-800 rounded-lg p-4 bg-gray-900/50">
+                                            {i <= hintIndex ? (
+                                                <div>
+                                                    <div className="font-semibold text-amber-400 mb-2">Hint {i + 1}</div>
+                                                    <div className="text-gray-300 prose prose-invert prose-sm"><ReactMarkdown>{hint}</ReactMarkdown></div>
+                                                </div>
+                                            ) : (
+                                                <button 
+                                                    onClick={() => revealHint(i)}
+                                                    disabled={i > hintIndex + 1}
+                                                    className={`px-4 py-2 rounded-md font-medium text-sm transition-colors ${i === hintIndex + 1 ? 'bg-gray-800 hover:bg-gray-700 text-gray-200' : 'bg-gray-900 text-gray-600 cursor-not-allowed'}`}
+                                                >
+                                                    Reveal Hint {i + 1}
+                                                </button>
+                                            )}
+                                        </div>
+                                    ))
+                                )}
                             </div>
                         )}
 
@@ -292,10 +429,12 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
                                     </div>
                                 ) : (
                                     <div className="space-y-8 animate-in fade-in duration-500">
-                                        <div className="bg-emerald-900/10 border border-emerald-900/30 rounded-lg p-6">
-                                            <h3 className="text-lg font-semibold text-emerald-400 mb-3">Approach</h3>
-                                            <div className="text-gray-300 prose prose-invert prose-sm"><ReactMarkdown>{problem.approach}</ReactMarkdown></div>
-                                        </div>
+                                        {problem.approach && (
+                                            <div className="bg-emerald-900/10 border border-emerald-900/30 rounded-lg p-6">
+                                                <h3 className="text-lg font-semibold text-emerald-400 mb-3">Approach</h3>
+                                                <div className="text-gray-300 prose prose-invert prose-sm"><ReactMarkdown>{problem.approach}</ReactMarkdown></div>
+                                            </div>
+                                        )}
                                         
                                         {problem.pseudocode && (
                                             <div>
@@ -307,9 +446,15 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
                                         )}
                                         
                                         <div>
-                                            <h3 className="text-lg font-semibold text-gray-200 mb-3">C++ Solution</h3>
+                                            <h3 className="text-lg font-semibold text-gray-200 mb-3">
+                                                {language === 'python' ? 'Python Solution' : 'C++ Solution'}
+                                            </h3>
                                             <pre className="bg-gray-950 p-4 rounded-lg border border-gray-800 overflow-x-auto text-sm font-mono text-gray-300">
-                                                <code>{problem.solution}</code>
+                                                <code>
+                                                    {language === 'python' 
+                                                        ? (problem.pythonSolution || problem.solution)
+                                                        : problem.solution}
+                                                </code>
                                             </pre>
                                             
                                             <div className="mt-4 flex justify-between items-center bg-gray-900 p-4 rounded-lg border border-gray-800">
@@ -323,21 +468,29 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
                                             </div>
                                         </div>
                                         
-                                        <div>
-                                            <h3 className="text-lg font-semibold text-gray-200 mb-3">Why this works</h3>
-                                            <div className="text-gray-300 prose prose-invert prose-sm"><ReactMarkdown>{problem.explanation}</ReactMarkdown></div>
-                                        </div>
+                                        {problem.explanation && (
+                                            <div>
+                                                <h3 className="text-lg font-semibold text-gray-200 mb-3">Why this works</h3>
+                                                <div className="text-gray-300 prose prose-invert prose-sm"><ReactMarkdown>{problem.explanation}</ReactMarkdown></div>
+                                            </div>
+                                        )}
                                         
-                                        <div className="flex gap-4">
-                                            <div className="flex-1 bg-gray-900 border border-gray-800 p-4 rounded-lg">
-                                                <div className="text-xs uppercase tracking-wider font-bold text-gray-500 mb-1">Time Complexity</div>
-                                                <div className="font-mono text-blue-400">{problem.timeComplexity}</div>
+                                        {(problem.timeComplexity || problem.spaceComplexity) && (
+                                            <div className="flex gap-4">
+                                                {problem.timeComplexity && (
+                                                    <div className="flex-1 bg-gray-900 border border-gray-800 p-4 rounded-lg">
+                                                        <div className="text-xs uppercase tracking-wider font-bold text-gray-500 mb-1">Time Complexity</div>
+                                                        <div className="font-mono text-blue-400">{problem.timeComplexity}</div>
+                                                    </div>
+                                                )}
+                                                {problem.spaceComplexity && (
+                                                    <div className="flex-1 bg-gray-900 border border-gray-800 p-4 rounded-lg">
+                                                        <div className="text-xs uppercase tracking-wider font-bold text-gray-500 mb-1">Space Complexity</div>
+                                                        <div className="font-mono text-purple-400">{problem.spaceComplexity}</div>
+                                                    </div>
+                                                )}
                                             </div>
-                                            <div className="flex-1 bg-gray-900 border border-gray-800 p-4 rounded-lg">
-                                                <div className="text-xs uppercase tracking-wider font-bold text-gray-500 mb-1">Space Complexity</div>
-                                                <div className="font-mono text-purple-400">{problem.spaceComplexity}</div>
-                                            </div>
-                                        </div>
+                                        )}
                                     </div>
                                 )}
                             </div>
@@ -346,24 +499,24 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
 
                     {/* Results Panel */}
                     {runResult && (
-                        <div className="h-[35%] min-h-[250px] border-t border-gray-800 bg-gray-950 flex flex-col shadow-[0_-10px_30px_rgba(0,0,0,0.5)] z-10 shrink-0">
-                            <div className="sticky top-0 bg-gray-900 px-4 py-2 text-sm font-medium border-b border-gray-800 flex justify-between items-center z-20">
+                        <div className="h-[38%] min-h-[260px] border-t border-gray-800 bg-gray-950 flex flex-col shadow-[0_-10px_30px_rgba(0,0,0,0.5)] z-10 shrink-0">
+                            <div className="sticky top-0 bg-gray-900 px-4 py-2.5 text-sm font-medium border-b border-gray-800 flex justify-between items-center z-20">
                                 <span className={
-                                    runResult.status === 'success' && allPassed ? 'text-emerald-400 flex items-center gap-2' :
-                                    runResult.status === 'success' ? 'text-red-400 flex items-center gap-2' :
-                                    'text-yellow-400 flex items-center gap-2'
+                                    runResult.status === 'success' && allPassed ? 'text-emerald-400 flex items-center gap-2 font-bold' :
+                                    runResult.status === 'success' ? 'text-red-400 flex items-center gap-2 font-bold' :
+                                    'text-yellow-400 flex items-center gap-2 font-bold'
                                 }>
-                                    {runResult.status === 'success' && allPassed && <CheckCircle2 className="w-4 h-4" />}
-                                    {runResult.status === 'success' && !allPassed && <XCircle className="w-4 h-4" />}
-                                    {runResult.status !== 'success' && <AlertCircle className="w-4 h-4" />}
+                                    {runResult.status === 'success' && allPassed && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
+                                    {runResult.status === 'success' && !allPassed && <XCircle className="w-4 h-4 text-red-400" />}
+                                    {runResult.status !== 'success' && <AlertCircle className="w-4 h-4 text-yellow-400" />}
                                     
                                     {runResult.status === 'success' && allPassed ? 'Accepted' :
                                      runResult.status === 'success' ? 'Wrong Answer' : 
-                                     runResult.status === 'compile_error' ? 'Compilation Error' : 'System Error'}
+                                     runResult.status === 'compile_error' ? 'Compilation / Syntax Error' : 'System Error'}
                                 </span>
                                 
                                 {runResult.status === 'success' && (
-                                    <span className="text-gray-400">
+                                    <span className="text-gray-300 text-xs font-mono">
                                         {runResult.results?.filter(r => r.passed).length} / {runResult.results?.length} tests passed
                                     </span>
                                 )}
@@ -374,46 +527,79 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
                                     <div>
                                         <div className="bg-red-950/30 border border-red-900/50 p-4 rounded-lg mb-4 font-sans text-red-200">
                                             <h4 className="font-bold flex items-center gap-2 mb-2">
-                                                <AlertCircle className="w-4 h-4" /> Compilation Error
+                                                <AlertCircle className="w-4 h-4" /> Syntax / Execution Error
                                             </h4>
                                             <p className="text-sm opacity-90">
-                                                The C++ compiler could not understand your code. Check for missing semicolons, unmatched brackets, or misspelled keywords.
+                                                {language === 'python'
+                                                    ? 'Python encountered an error executing your script. Check for indentation errors, missing colons, or NameErrors.'
+                                                    : 'The C++ compiler could not compile your code. Check for missing semicolons, unmatched brackets, or misspelled types.'}
                                             </p>
                                         </div>
-                                        <div className="text-gray-400 text-xs mb-1 uppercase tracking-wider font-sans font-bold">Raw Compiler Output</div>
+                                        <div className="text-gray-400 text-xs mb-1 uppercase tracking-wider font-sans font-bold">Compiler / Interpreter Output</div>
                                         <div className="text-red-400 whitespace-pre-wrap bg-gray-900 p-3 rounded">{runResult.compilerOutput}</div>
                                     </div>
                                 )}
+
                                 {runResult.status === 'success' && allPassed && (
                                     <div className="mb-6 bg-emerald-950/20 border border-emerald-900/50 p-5 rounded-xl font-sans">
-                                        <h3 className="text-lg font-bold text-emerald-400 mb-3 flex items-center gap-2">
-                                            <CheckCircle2 className="w-5 h-5" /> What You Learned
-                                        </h3>
-                                        <ul className="space-y-2 mb-4">
-                                            {problem.learningObjectives.map((obj, i) => (
-                                                <li key={i} className="flex items-start gap-2 text-emerald-200/90 text-sm">
-                                                    <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                                                    <span>{obj}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                        
-                                        {problem.howToThink && problem.howToThink.length > 0 && (
-                                            <div className="mt-4 pt-4 border-t border-emerald-900/50">
-                                                <h4 className="text-sm uppercase tracking-wider font-bold text-emerald-500/70 mb-2">Reusable Pattern</h4>
-                                                <p className="text-sm text-emerald-100/70 leading-relaxed italic">
-                                                    "{problem.approach}"
-                                                </p>
-                                            </div>
+                                        <div className="flex items-center justify-between mb-3">
+                                            <h3 className="text-lg font-bold text-emerald-400 flex items-center gap-2">
+                                                <CheckCircle2 className="w-5 h-5 text-emerald-400" /> Great Job! Problem Solved
+                                            </h3>
+                                            <span className="text-xs text-emerald-300 font-mono bg-emerald-900/40 px-2.5 py-1 rounded-full border border-emerald-700/50">
+                                                Question {nav.currentIndexInLevel + 1} of {nav.totalInLevel} complete
+                                            </span>
+                                        </div>
+
+                                        {problem.learningObjectives && problem.learningObjectives.length > 0 && (
+                                            <ul className="space-y-1.5 mb-4">
+                                                {problem.learningObjectives.map((obj, i) => (
+                                                    <li key={i} className="flex items-start gap-2 text-emerald-200/90 text-sm">
+                                                        <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                                                        <span>{obj}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
                                         )}
                                         
-                                        <div className="mt-6 flex justify-end">
+                                        {/* Seamless Next Question & Next Section Action Buttons */}
+                                        <div className="mt-5 pt-4 border-t border-emerald-900/50 flex flex-wrap items-center justify-between gap-3">
                                             <button 
                                                 onClick={() => router.push('/')}
-                                                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg text-sm transition-colors flex items-center gap-2"
+                                                className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold rounded-lg text-sm transition-colors flex items-center gap-1.5"
                                             >
-                                                Return to Dashboard <ChevronRight className="w-4 h-4" />
+                                                <ChevronLeft className="w-4 h-4" /> Dashboard
                                             </button>
+
+                                            <div className="flex items-center gap-3">
+                                                {/* If there's a next problem in the current section */}
+                                                {nav.nextProblem && !nav.isLastInLevel && (
+                                                    <button 
+                                                        onClick={() => router.push(`/problems/${nav.nextProblem!.id}`)}
+                                                        className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg text-sm transition-all shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:shadow-[0_0_25px_rgba(16,185,129,0.55)] flex items-center gap-2"
+                                                    >
+                                                        Next Question <ArrowRight className="w-4 h-4" />
+                                                    </button>
+                                                )}
+
+                                                {/* If this is the last problem in the section, offer direct jump to the next section! */}
+                                                {nav.isLastInLevel && nav.nextLevel && nav.nextLevelFirstProblem && (
+                                                    <button 
+                                                        onClick={() => router.push(`/problems/${nav.nextLevelFirstProblem!.id}`)}
+                                                        className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-500 hover:to-emerald-500 text-white font-bold rounded-lg text-sm transition-all shadow-[0_0_25px_rgba(37,99,235,0.4)] flex items-center gap-2"
+                                                    >
+                                                        <Sparkles className="w-4 h-4" />
+                                                        Section Complete! Start Level {nav.nextLevel.number}: {nav.nextLevel.title} <ArrowRight className="w-4 h-4" />
+                                                    </button>
+                                                )}
+
+                                                {/* If all sections are finished */}
+                                                {nav.isLastInLevel && !nav.nextLevel && (
+                                                    <span className="text-emerald-400 font-bold text-sm">
+                                                        🎉 Congratulations! You have completed the entire course!
+                                                    </span>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 )}
@@ -467,6 +653,7 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
                 <div className="w-1/2 flex flex-col bg-gray-950 relative min-w-[300px]">
                     <CodeEditor 
                         code={code} 
+                        language={language}
                         onChange={handleCodeChange} 
                         onRun={() => handleRun(false)}
                     />

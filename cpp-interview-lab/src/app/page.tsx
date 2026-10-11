@@ -2,42 +2,71 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getProgress, getWeakConcepts, isLevelUnlocked } from '@/lib/progress';
-import { levels, allProblems } from '@/data/levels';
+import { getProgress, getWeakConcepts, isLevelUnlocked, getGlobalLanguage, setGlobalLanguage, resetProgress } from '@/lib/progress';
+import { getLevels, getAllProblems, getProblem } from '@/data/levels';
 import { UserProgress } from '@/data/types';
-import { Code2, Trophy, Brain, Target, Lock, Play, ArrowRight, Activity, BookOpen, AlertCircle, CheckCircle2, ShieldAlert, Zap } from 'lucide-react';
+import { Code2, Trophy, Brain, Target, Lock, Play, ArrowRight, Activity, BookOpen, AlertCircle, CheckCircle2, ShieldAlert, Zap, Terminal } from 'lucide-react';
 
 export default function Home() {
     const router = useRouter();
     const [progress, setProgress] = useState<UserProgress | null>(null);
     const [isClient, setIsClient] = useState(false);
+    const [language, setLanguage] = useState<'cpp' | 'python'>('cpp');
 
     useEffect(() => {
         setIsClient(true);
-        setProgress(getProgress());
+        const currentLang = getGlobalLanguage();
+        setLanguage(currentLang);
+        setProgress(getProgress(currentLang));
+        
+        const handleLangChange = () => {
+            const updatedLang = getGlobalLanguage();
+            setLanguage(updatedLang);
+            setProgress(getProgress(updatedLang));
+        };
+        window.addEventListener('languageChange', handleLangChange);
+        return () => window.removeEventListener('languageChange', handleLangChange);
     }, []);
+
+    const handleLanguageSwitch = (newLang: 'cpp' | 'python') => {
+        setLanguage(newLang);
+        setGlobalLanguage(newLang);
+        setProgress(getProgress(newLang));
+    };
 
     if (!isClient || !progress) {
         return <div className="min-h-screen bg-gray-950 text-white p-8">Loading...</div>;
     }
 
-    const totalProblems = allProblems.length;
-    const completedCount = progress.completedProblems.length;
+    const activeLevels = getLevels(language);
+    const activeProblems = getAllProblems(language);
+
+    const totalProblems = activeProblems.length;
+    // Filter completed problems to only count ones matching current language
+    const currentCompleted = progress.completedProblems.filter(id => 
+        language === 'python' ? id.startsWith('py-') : !id.startsWith('py-')
+    );
+    const completedCount = currentCompleted.length;
     const completionPercentage = totalProblems > 0 ? Math.round((completedCount / totalProblems) * 100) : 0;
     
-    // Find next problem to solve
+    // Find next problem to solve in the active curriculum
     let nextProblemId = progress.currentProblem;
-    // If current is completed, find first uncompleted problem
+    // Verify nextProblemId belongs to current language
+    const isProblemInCurrentLang = activeProblems.some(p => p.id === nextProblemId);
+    if (!isProblemInCurrentLang) {
+        nextProblemId = activeProblems[0]?.id || (language === 'python' ? 'py-prob-01-01' : 'prob-01-01');
+    }
+    // If current is completed, find first uncompleted problem in current curriculum
     if (progress.completedProblems.includes(nextProblemId)) {
-        const next = allProblems.find(p => !progress.completedProblems.includes(p.id));
+        const next = activeProblems.find(p => !progress.completedProblems.includes(p.id));
         if (next) {
             nextProblemId = next.id;
         }
     }
-    const nextProblemObj = allProblems.find(p => p.id === nextProblemId);
-    const nextLevelObj = nextProblemObj ? levels.find(l => l.id === nextProblemObj.levelId) : null;
+    const nextProblemObj = activeProblems.find(p => p.id === nextProblemId) || activeProblems[0];
+    const nextLevelObj = nextProblemObj ? activeLevels.find(l => l.id === nextProblemObj.levelId) : activeLevels[0];
 
-    const weakConcepts = getWeakConcepts().slice(0, 3);
+    const weakConcepts = getWeakConcepts(language).slice(0, 3);
     const allMasteredConcepts = Object.entries(progress.mastery).sort((a, b) => b[1] - a[1]);
 
     return (
@@ -45,28 +74,47 @@ export default function Home() {
             <div className="max-w-6xl mx-auto space-y-12">
                 
                 {/* Header */}
-                <header className="flex justify-between items-end border-b border-gray-800 pb-6">
+                <header className="flex flex-col md:flex-row justify-between md:items-end border-b border-gray-800 pb-6 gap-4">
                     <div>
-                        <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 mb-2">
-                            C++ Interview Lab
+                        <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 mb-2 flex items-center gap-3">
+                            Interview Lab
+                            <span className="text-xs bg-gray-800 text-gray-300 px-3 py-1 rounded-full border border-gray-700 flex items-center gap-2">
+                                <Terminal className="w-3 h-3 text-emerald-400" />
+                                {language === 'cpp' ? 'C++ Curriculum' : 'Python 3 Curriculum'}
+                            </span>
                         </h1>
-                        <p className="text-gray-400">Your progressive learning system for technical interviews.</p>
+                        <p className="text-gray-400">
+                            {language === 'cpp' 
+                                ? 'Dedicated 27-level C++ curriculum covering STL, memory, pointers, and interview algorithms.'
+                                : 'Dedicated 27-level Python curriculum covering idiomatic data structures, collections, and algorithms.'}
+                        </p>
                     </div>
-                    <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-2 text-emerald-400 bg-emerald-950/30 px-4 py-2 rounded-full border border-emerald-900/50">
-                            <Activity className="w-5 h-5" />
-                            <span className="font-semibold">{completedCount} problems solved</span>
+                    <div className="flex flex-wrap items-center gap-3">
+                        <div className="flex items-center gap-2 bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 shadow-sm">
+                            <span className="text-xs uppercase font-bold text-gray-400">Track:</span>
+                            <select 
+                                value={language}
+                                onChange={(e) => handleLanguageSwitch(e.target.value as 'cpp' | 'python')}
+                                className="bg-transparent text-gray-100 text-sm font-semibold outline-none cursor-pointer"
+                            >
+                                <option value="cpp" className="bg-gray-900 text-white">C++ (27 Levels)</option>
+                                <option value="python" className="bg-gray-900 text-white">Python 3 (27 Levels)</option>
+                            </select>
+                        </div>
+                        
+                        <div className="flex items-center gap-2 text-emerald-400 bg-emerald-950/30 px-4 py-2 rounded-lg border border-emerald-900/50">
+                            <Activity className="w-4 h-4" />
+                            <span className="font-semibold text-sm">{completedCount} of {totalProblems} solved</span>
                         </div>
                         <button 
                             onClick={() => {
-                                if (confirm("This will permanently erase your local learning progress.\n\nCancel or Reset Progress?")) {
-                                    localStorage.removeItem('cpp_interview_lab_progress_v2');
-                                    window.location.reload();
+                                if (confirm(`This will permanently reset your ${language === 'cpp' ? 'C++' : 'Python'} progress.\n\nAre you sure you want to proceed?`)) {
+                                    resetProgress(language);
                                 }
                             }}
-                            className="text-xs px-3 py-1 bg-red-950/30 text-red-500 hover:bg-red-900/50 border border-red-900/30 rounded-md transition-colors"
+                            className="text-xs px-3 py-2 bg-red-950/30 text-red-400 hover:bg-red-900/40 border border-red-900/40 rounded-lg transition-colors font-medium"
                         >
-                            Reset Progress
+                            Reset {language === 'cpp' ? 'C++' : 'Python'}
                         </button>
                     </div>
                 </header>
@@ -100,7 +148,7 @@ export default function Home() {
                             
                             <h2 className="text-xl font-bold flex items-center gap-2 mb-6">
                                 <Target className="w-5 h-5 text-blue-400" />
-                                Continue Learning
+                                Continue Learning ({language === 'cpp' ? 'C++' : 'Python'})
                             </h2>
                             
                             {nextProblemObj && nextLevelObj ? (
@@ -110,7 +158,7 @@ export default function Home() {
                                             Level {nextLevelObj.number} • {nextLevelObj.title}
                                         </div>
                                         <div className="text-2xl font-bold text-white mb-2">{nextProblemObj.title}</div>
-                                        <div className="flex gap-2 mb-6">
+                                        <div className="flex gap-2 mb-6 flex-wrap">
                                             {nextProblemObj.concepts.slice(0, 3).map(c => (
                                                 <span key={c} className="text-xs bg-gray-900/80 text-gray-400 px-2 py-1 rounded border border-gray-800">
                                                     {c}
@@ -122,11 +170,11 @@ export default function Home() {
                                         onClick={() => router.push(`/problems/${nextProblemObj.id}`)}
                                         className="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]"
                                     >
-                                        <Play className="w-5 h-5 fill-current" /> Continue
+                                        <Play className="w-5 h-5 fill-current" /> Continue to Problem
                                     </button>
                                 </div>
                             ) : (
-                                <div className="text-emerald-400 font-semibold">You have completed all available problems!</div>
+                                <div className="text-emerald-400 font-semibold">You have completed all available problems in this track!</div>
                             )}
                         </div>
 
@@ -134,11 +182,11 @@ export default function Home() {
                         <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6">
                             <h2 className="text-xl font-bold flex items-center gap-2 mb-6">
                                 <Trophy className="w-5 h-5 text-amber-400" />
-                                Overall Progress
+                                Track Progress ({language === 'cpp' ? 'C++' : 'Python'})
                             </h2>
                             <div className="flex justify-between text-sm mb-2 font-medium">
-                                <span className="text-gray-400">Course Completion</span>
-                                <span className="text-emerald-400">{completionPercentage}%</span>
+                                <span className="text-gray-400">Curriculum Completion</span>
+                                <span className="text-emerald-400">{completionPercentage}% ({completedCount}/{totalProblems})</span>
                             </div>
                             <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
                                 <div 
@@ -156,7 +204,7 @@ export default function Home() {
                             </h2>
                             
                             {allMasteredConcepts.length === 0 ? (
-                                <div className="text-gray-500 text-sm italic">Complete problems to track your mastery.</div>
+                                <div className="text-gray-500 text-sm italic">Solve problems in this track to build your skill profile.</div>
                             ) : (
                                 <div className="space-y-4">
                                     {allMasteredConcepts.slice(0, 5).map(([concept, score]) => (
@@ -214,10 +262,10 @@ export default function Home() {
                             <div>
                                 <h2 className="text-xl font-bold flex items-center gap-2 mb-2 text-red-400">
                                     <ShieldAlert className="w-5 h-5" />
-                                    Mock Interview Mode
+                                    Mock Assessment Mode
                                 </h2>
                                 <p className="text-gray-400 text-sm max-w-lg">
-                                    Ready to test your skills? Try solving a medium/hard problem under a strict 30-minute time limit with no hints or visible hidden tests.
+                                    Solve real technical interview problems under a strict 30-minute timer with hidden test evaluation.
                                 </p>
                             </div>
                             <button 
@@ -229,26 +277,28 @@ export default function Home() {
                         </div>
 
                         <div className="bg-gray-900/30 border border-gray-800 rounded-2xl p-8 h-full">
-                            <h2 className="text-2xl font-bold flex items-center gap-3 mb-8 border-b border-gray-800 pb-4">
-                                <BookOpen className="w-6 h-6 text-blue-400" />
-                                Curriculum Roadmap
-                            </h2>
+                            <div className="flex items-center justify-between mb-8 border-b border-gray-800 pb-4">
+                                <h2 className="text-2xl font-bold flex items-center gap-3">
+                                    <BookOpen className="w-6 h-6 text-blue-400" />
+                                    {language === 'cpp' ? 'C++ Curriculum Roadmap' : 'Python Curriculum Roadmap'}
+                                </h2>
+                                <span className="text-xs px-3 py-1 bg-gray-800 text-gray-300 rounded-full border border-gray-700">
+                                    {activeLevels.length} Levels • {totalProblems} Problems
+                                </span>
+                            </div>
 
                             <div className="space-y-6">
-                                {levels.map((level) => {
+                                {activeLevels.map((level) => {
                                     const unlocked = isLevelUnlocked(level.id);
-                                    const levelProblems = allProblems.filter(p => p.levelId === level.id);
+                                    const levelProblems = activeProblems.filter(p => p.levelId === level.id);
                                     const completedInLevel = levelProblems.filter(p => progress.completedProblems.includes(p.id)).length;
                                     const isCompleted = levelProblems.length > 0 && completedInLevel === levelProblems.length;
-                                    
-                                    // If no problems defined yet in data file, it's pending
-                                    const isPending = levelProblems.length === 0;
 
                                     return (
                                         <div 
                                             key={level.id} 
                                             className={`p-6 rounded-xl border transition-all ${
-                                                !unlocked || isPending ? 'bg-gray-950/50 border-gray-800 opacity-60' : 
+                                                !unlocked ? 'bg-gray-950/50 border-gray-800 opacity-60' : 
                                                 isCompleted ? 'bg-emerald-950/20 border-emerald-900/50 shadow-[0_0_15px_rgba(16,185,129,0.05)]' : 
                                                 'bg-gray-800/40 border-blue-900/50 hover:bg-gray-800/60'
                                             }`}
@@ -267,28 +317,22 @@ export default function Home() {
                                                     </h3>
                                                     <p className="text-gray-400 text-sm mb-4 max-w-2xl">{level.description}</p>
                                                     
-                                                    {unlocked && !isPending && (
+                                                    {unlocked && (
                                                         <div className="flex items-center gap-4 text-sm font-medium">
-                                                            <div className="text-gray-500">
-                                                                <span className={completedInLevel > 0 ? 'text-emerald-400' : ''}>{completedInLevel}</span> / {levelProblems.length} Problems
+                                                            <div className="text-gray-400">
+                                                                <span className={completedInLevel > 0 ? 'text-emerald-400 font-bold' : ''}>{completedInLevel}</span> / {levelProblems.length} Problems
                                                             </div>
                                                             <div className="w-48 bg-gray-900 rounded-full h-2 overflow-hidden border border-gray-800">
                                                                 <div 
-                                                                    className="bg-emerald-500 h-2 rounded-full" 
+                                                                    className="bg-emerald-500 h-2 rounded-full transition-all" 
                                                                     style={{ width: `${(completedInLevel / Math.max(levelProblems.length, 1)) * 100}%` }}
                                                                 ></div>
                                                             </div>
                                                         </div>
                                                     )}
-                                                    
-                                                    {isPending && (
-                                                        <div className="text-sm font-medium text-amber-500/70 italic">
-                                                            Under Construction
-                                                        </div>
-                                                    )}
                                                 </div>
                                                 
-                                                {unlocked && !isPending && (
+                                                {unlocked && (
                                                     <button 
                                                         onClick={() => {
                                                             const firstUncompleted = levelProblems.find(p => !progress.completedProblems.includes(p.id));

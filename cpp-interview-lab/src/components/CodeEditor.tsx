@@ -5,12 +5,13 @@ import Editor, { useMonaco } from '@monaco-editor/react';
 
 interface CodeEditorProps {
     code: string;
+    language?: string;
     onChange: (value: string) => void;
     onRun?: () => void;
     readOnly?: boolean;
 }
 
-export function CodeEditor({ code, onChange, onRun, readOnly = false }: CodeEditorProps) {
+export function CodeEditor({ code, language = 'cpp', onChange, onRun, readOnly = false }: CodeEditorProps) {
     const editorRef = useRef<any>(null);
 
     function handleEditorDidMount(editor: any, monaco: any) {
@@ -28,7 +29,8 @@ export function CodeEditor({ code, onChange, onRun, readOnly = false }: CodeEdit
         <div className="w-full h-full border border-gray-700 rounded-md overflow-hidden">
             <Editor
                 height="100%"
-                defaultLanguage="cpp"
+                language={language}
+                defaultLanguage={language}
                 theme="vs-dark"
                 value={code}
                 onChange={(value) => onChange(value || '')}

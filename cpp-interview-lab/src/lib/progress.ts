@@ -1,54 +1,88 @@
 import { UserProgress } from '@/data/types';
 import { getProblem } from '@/data/levels';
 
-const STORAGE_KEY = 'cpp_interview_lab_progress_v2'; // Bumped version for new schema
+const BASE_STORAGE_KEY = 'cpp_interview_lab_progress_v2';
 
-const DEFAULT_PROGRESS: UserProgress = {
-    currentLevel: 'level-01',
-    currentProblem: 'prob-01-01',
-    completedProblems: [],
-    attempts: {},
-    hintsUsed: {},
-    solutionsViewed: [],
-    savedCode: {},
-    mastery: {},
-    solveQuality: {},
-    lastOpenedAt: new Date().toISOString()
-};
+export function getGlobalLanguage(): 'cpp' | 'python' {
+    if (typeof window === 'undefined') return 'cpp';
+    return (localStorage.getItem('cpp_interview_language') as 'cpp' | 'python') || 'cpp';
+}
 
-export function getProgress(): UserProgress {
-    if (typeof window === 'undefined') return DEFAULT_PROGRESS;
+export function setGlobalLanguage(lang: 'cpp' | 'python'): void {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem('cpp_interview_language', lang);
+    // trigger a custom event so UI can re-render if needed
+    window.dispatchEvent(new Event('languageChange'));
+}
+
+export function getDefaultProgress(lang?: 'cpp' | 'python'): UserProgress {
+    const language = lang || getGlobalLanguage();
+    return {
+        currentLevel: 'level-01',
+        currentProblem: language === 'python' ? 'py-prob-01-01' : 'prob-01-01',
+        completedProblems: [],
+        attempts: {},
+        hintsUsed: {},
+        solutionsViewed: [],
+        savedCode: {},
+        mastery: {},
+        solveQuality: {},
+        lastOpenedAt: new Date().toISOString()
+    };
+}
+
+function getStorageKey(lang?: 'cpp' | 'python'): string {
+    const language = lang || getGlobalLanguage();
+    return `${BASE_STORAGE_KEY}_${language}`;
+}
+
+export function getProgress(lang?: 'cpp' | 'python'): UserProgress {
+    const language = lang || getGlobalLanguage();
+    const defaultProg = getDefaultProgress(language);
+    if (typeof window === 'undefined') return defaultProg;
     
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) return DEFAULT_PROGRESS;
+    const stored = localStorage.getItem(getStorageKey(language));
+    if (!stored) return defaultProg;
     
     try {
         const parsed = JSON.parse(stored);
-        return { ...DEFAULT_PROGRESS, ...parsed, mastery: parsed.mastery || {}, solveQuality: parsed.solveQuality || {} };
+        return {
+            ...defaultProg,
+            ...parsed,
+            mastery: parsed.mastery || {},
+            solveQuality: parsed.solveQuality || {},
+            savedCode: parsed.savedCode || {},
+            attempts: parsed.attempts || {},
+            hintsUsed: parsed.hintsUsed || {},
+            completedProblems: parsed.completedProblems || [],
+            solutionsViewed: parsed.solutionsViewed || [],
+        };
     } catch (e) {
         console.error('Failed to parse progress', e);
-        return DEFAULT_PROGRESS;
+        return defaultProg;
     }
 }
 
-export function saveProgress(progress: UserProgress): void {
+export function saveProgress(progress: UserProgress, lang?: 'cpp' | 'python'): void {
     if (typeof window === 'undefined') return;
-    
+    const language = lang || getGlobalLanguage();
     progress.lastOpenedAt = new Date().toISOString();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    localStorage.setItem(getStorageKey(language), JSON.stringify(progress));
 }
 
-export function updateProgress(updates: Partial<UserProgress>): UserProgress {
-    const current = getProgress();
+export function updateProgress(updates: Partial<UserProgress>, lang?: 'cpp' | 'python'): UserProgress {
+    const language = lang || getGlobalLanguage();
+    const current = getProgress(language);
     const updated = { ...current, ...updates };
-    saveProgress(updated);
+    saveProgress(updated, language);
     return updated;
 }
 
-export function saveCode(problemId: string, code: string): void {
-    const current = getProgress();
+export function saveCode(problemId: string, code: string, lang?: 'cpp' | 'python'): void {
+    const language = lang || (problemId.startsWith('py-') ? 'python' : getGlobalLanguage());
+    const current = getProgress(language);
     current.savedCode[problemId] = code;
-    saveProgress(current);
+    saveProgress(current, language);
 }
 
 export function updateMastery(progress: UserProgress, problemId: string, concepts: string[], quality: 'independent' | 'hint_assisted' | 'solution_assisted') {
@@ -71,8 +105,9 @@ export function updateMastery(progress: UserProgress, problemId: string, concept
     }
 }
 
-export function markProblemComplete(problemId: string): void {
-    const current = getProgress();
+export function markProblemComplete(problemId: string, lang?: 'cpp' | 'python'): void {
+    const language = lang || (problemId.startsWith('py-') ? 'python' : getGlobalLanguage());
+    const current = getProgress(language);
     const problem = getProblem(problemId);
     
     if (!current.completedProblems.includes(problemId)) {
@@ -87,50 +122,51 @@ export function markProblemComplete(problemId: string): void {
         
         current.solveQuality[problemId] = quality;
         
-        if (problem) {
+        if (problem && problem.concepts) {
             updateMastery(current, problemId, problem.concepts, quality);
         }
     }
     
-    saveProgress(current);
+    saveProgress(current, language);
 }
 
-export function recordAttempt(problemId: string, isFailure: boolean): void {
-    const current = getProgress();
+export function recordAttempt(problemId: string, isFailure: boolean, lang?: 'cpp' | 'python'): void {
+    const language = lang || (problemId.startsWith('py-') ? 'python' : getGlobalLanguage());
+    const current = getProgress(language);
     current.attempts[problemId] = (current.attempts[problemId] || 0) + 1;
     
-    // Penalize mastery slightly on repeated failures if we want
     if (isFailure && current.attempts[problemId] > 3) {
         const problem = getProblem(problemId);
-        if (problem) {
+        if (problem && problem.concepts) {
             for (const concept of problem.concepts) {
                 const score = current.mastery[concept] || 0;
-                current.mastery[concept] = Math.max(0, score - 1); // Very small decrease
+                current.mastery[concept] = Math.max(0, score - 1);
             }
         }
     }
     
-    saveProgress(current);
+    saveProgress(current, language);
 }
 
-export function recordHint(problemId: string, hintIndex: number): void {
-    const current = getProgress();
+export function recordHint(problemId: string, hintIndex: number, lang?: 'cpp' | 'python'): void {
+    const language = lang || (problemId.startsWith('py-') ? 'python' : getGlobalLanguage());
+    const current = getProgress(language);
     current.hintsUsed[problemId] = Math.max(current.hintsUsed[problemId] || 0, hintIndex + 1);
-    saveProgress(current);
+    saveProgress(current, language);
 }
 
-export function recordSolutionView(problemId: string): void {
-    const current = getProgress();
+export function recordSolutionView(problemId: string, lang?: 'cpp' | 'python'): void {
+    const language = lang || (problemId.startsWith('py-') ? 'python' : getGlobalLanguage());
+    const current = getProgress(language);
     if (!current.solutionsViewed.includes(problemId)) {
         current.solutionsViewed.push(problemId);
     }
-    saveProgress(current);
+    saveProgress(current, language);
 }
 
-export function getWeakConcepts(): string[] {
-    const current = getProgress();
+export function getWeakConcepts(lang?: 'cpp' | 'python'): string[] {
+    const current = getProgress(lang);
     const concepts = Object.entries(current.mastery);
-    // Sort by lowest mastery first, only return those < 70
     return concepts
         .filter(([_, score]) => score < 70)
         .sort((a, b) => a[1] - b[1])
@@ -138,12 +174,13 @@ export function getWeakConcepts(): string[] {
 }
 
 export function isLevelUnlocked(levelId: string): boolean {
-    const current = getProgress();
-    // Level 1 is always unlocked
     if (levelId === 'level-01') return true;
-    
-    // Simplistic logic: to unlock level N, level N-1 must be complete (e.g. 70% problems solved)
-    // We'll refine this inside the dashboard/curriculum logic using `levels.ts`
-    // Returning true for now to avoid accidental hard-locking during dev.
     return true; 
+}
+
+export function resetProgress(lang?: 'cpp' | 'python'): void {
+    if (typeof window === 'undefined') return;
+    const language = lang || getGlobalLanguage();
+    localStorage.removeItem(getStorageKey(language));
+    window.dispatchEvent(new Event('languageChange'));
 }

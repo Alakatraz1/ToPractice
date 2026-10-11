@@ -35,6 +35,7 @@ export interface Problem {
   testCases: TestCase[];
 
   starterCode: string;
+  pythonStarterCode?: string;
   
   hints: string[];
   
@@ -45,6 +46,7 @@ export interface Problem {
   pseudocode: string;
   explanation: string;
   solution: string;
+  pythonSolution?: string;
   
   commonMistakes: string[];
   timeComplexity: string;
