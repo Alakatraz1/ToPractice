@@ -323,9 +323,13 @@ export function getCombinedDailyActivity(): Record<string, number> {
 export interface CalendarDay {
     date: string;
     dayOfWeek: number;
+    dayOfMonth: number;
+    month: number;
+    year: number;
     count: number;
     level: 0 | 1 | 2 | 3 | 4;
     label: string;
+    isTargetYear: boolean;
     isFuture: boolean;
 }
 
@@ -335,111 +339,148 @@ export interface CalendarWeek {
 
 export interface MonthLabel {
     name: string;
-    weekIndex: number;
+    colIndex: number;
+    month: number;
 }
 
-export interface CalendarData {
+export interface YearCalendarData {
+    year: number | 'last12';
     weeks: CalendarWeek[];
-    months: MonthLabel[];
+    monthLabels: MonthLabel[];
+    totalContributionsInYear: number;
     totalActiveDays: number;
-    totalContributions: number;
     currentStreak: number;
     longestStreak: number;
     todayCount: number;
 }
 
-export function getCalendarData(dailyActivity: Record<string, number>, weeksCount: number = 52): CalendarData {
+export interface CalendarData extends YearCalendarData {
+    months: MonthLabel[];
+    totalContributions: number;
+}
+
+export function getYearCalendarData(yearOrMode: number | 'last12' = 2026, dailyActivity: Record<string, number> = {}): YearCalendarData {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const todayStr = getLocalDateString(today);
     
-    // We want the grid to end on the current week's Saturday
-    const currentDayOfWeek = today.getDay(); // 0 (Sun) - 6 (Sat)
-    const endOfWeek = new Date(today);
-    endOfWeek.setDate(today.getDate() + (6 - currentDayOfWeek));
-    endOfWeek.setHours(0, 0, 0, 0);
+    let startDate: Date;
+    let endDate: Date;
+    let targetYear: number | null;
     
-    // Total days: weeksCount * 7
-    const totalDays = weeksCount * 7;
-    const startDate = new Date(endOfWeek);
-    startDate.setDate(endOfWeek.getDate() - (totalDays - 1));
-    startDate.setHours(0, 0, 0, 0);
-
+    if (yearOrMode === 'last12') {
+        const currentDayOfWeek = today.getDay();
+        endDate = new Date(today);
+        endDate.setDate(today.getDate() + (6 - currentDayOfWeek));
+        startDate = new Date(endDate);
+        startDate.setDate(endDate.getDate() - (52 * 7 - 1));
+        targetYear = null;
+    } else {
+        targetYear = typeof yearOrMode === 'number' ? yearOrMode : parseInt(yearOrMode, 10);
+        startDate = new Date(targetYear, 0, 1);
+        startDate.setDate(startDate.getDate() - startDate.getDay());
+        endDate = new Date(targetYear, 11, 31);
+        endDate.setDate(endDate.getDate() + (6 - endDate.getDay()));
+    }
+    
     const weeks: CalendarWeek[] = [];
-    const months: MonthLabel[] = [];
+    const monthLabels: MonthLabel[] = [];
     let currentWeek: CalendarDay[] = [];
-    let prevMonth = -1;
-
+    let lastLabeledMonth = -1;
+    let totalContributionsInYear = 0;
+    
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    
     const curr = new Date(startDate);
-    for (let i = 0; i < totalDays; i++) {
+    while (curr <= endDate) {
+        const y = curr.getFullYear();
+        const m = curr.getMonth();
+        const d = curr.getDate();
+        const dayOfWeek = curr.getDay();
         const dateStr = getLocalDateString(curr);
+        
+        const isTargetYear = targetYear === null ? true : (y === targetYear);
         const isFuture = curr.getTime() > today.getTime();
-        const count = isFuture ? 0 : (dailyActivity[dateStr] || 0);
+        const count = (isTargetYear && !isFuture) ? (dailyActivity[dateStr] || 0) : 0;
+        
+        if (isTargetYear) {
+            totalContributionsInYear += count;
+        }
         
         let level: 0 | 1 | 2 | 3 | 4 = 0;
         if (count >= 6) level = 4;
         else if (count >= 4) level = 3;
         else if (count >= 2) level = 2;
         else if (count === 1) level = 1;
-
-        const dateFormatted = curr.toLocaleDateString('en-US', {
-            weekday: 'short',
+        
+        const formatted = curr.toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
             month: 'short',
-            day: 'numeric',
-            year: 'numeric'
+            day: 'numeric'
         });
-
-        const label = isFuture 
-            ? 'Upcoming' 
-            : count === 0 
-                ? `No submissions on ${dateFormatted}`
-                : `${count} problem${count === 1 ? '' : 's'} completed on ${dateFormatted}`;
-
+        
+        let label = '';
+        if (isTargetYear) {
+            if (isFuture) {
+                label = `Upcoming (${formatted})`;
+            } else if (count === 0) {
+                label = `No contributions on ${formatted}`;
+            } else {
+                label = `${count} problem${count === 1 ? '' : 's'} solved on ${formatted}`;
+            }
+        }
+        
         currentWeek.push({
             date: dateStr,
-            dayOfWeek: curr.getDay(),
+            dayOfWeek,
+            dayOfMonth: d,
+            month: m,
+            year: y,
             count,
             level,
             label,
+            isTargetYear,
             isFuture
         });
-
+        
         if (currentWeek.length === 7) {
-            const weekIdx = weeks.length;
-            const weekMonth = new Date(currentWeek[0].date + 'T00:00:00').getMonth();
-            const firstOfMonth = currentWeek.find(d => d.date.endsWith('-01'));
-
-            if (firstOfMonth) {
-                const mDate = new Date(firstOfMonth.date + 'T00:00:00');
-                months.push({
-                    name: mDate.toLocaleDateString('en-US', { month: 'short' }),
-                    weekIndex: weekIdx
-                });
-                prevMonth = mDate.getMonth();
-            } else if (weekMonth !== prevMonth && (weeks.length === 0 || weeks.length - (months[months.length - 1]?.weekIndex ?? -10) >= 3)) {
-                months.push({
-                    name: new Date(currentWeek[0].date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short' }),
-                    weekIndex: weekIdx
-                });
-                prevMonth = weekMonth;
+            const colIndex = weeks.length;
+            for (const day of currentWeek) {
+                if (day.isTargetYear && day.dayOfMonth <= 7 && day.month !== lastLabeledMonth) {
+                    monthLabels.push({
+                        name: monthNames[day.month],
+                        colIndex,
+                        month: day.month
+                    });
+                    lastLabeledMonth = day.month;
+                    break;
+                }
             }
-
             weeks.push({ days: currentWeek });
             currentWeek = [];
         }
-
         curr.setDate(curr.getDate() + 1);
     }
-
-    const streakMetrics = calculateStreak(dailyActivity);
-
+    
+    const streak = calculateStreak(dailyActivity);
     return {
+        year: yearOrMode,
         weeks,
-        months,
-        totalActiveDays: streakMetrics.totalActiveDays,
-        totalContributions: streakMetrics.totalContributions,
-        currentStreak: streakMetrics.currentStreak,
-        longestStreak: streakMetrics.longestStreak,
+        monthLabels,
+        totalContributionsInYear,
+        totalActiveDays: streak.totalActiveDays,
+        currentStreak: streak.currentStreak,
+        longestStreak: streak.longestStreak,
         todayCount: dailyActivity[todayStr] || 0
+    };
+}
+
+export function getCalendarData(dailyActivity: Record<string, number>, weeksCount: number = 52): CalendarData {
+    const data = getYearCalendarData('last12', dailyActivity);
+    return {
+        ...data,
+        months: data.monthLabels,
+        totalContributions: data.totalContributionsInYear
     };
 }
