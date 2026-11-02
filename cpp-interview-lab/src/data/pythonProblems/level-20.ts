@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel20Problems: Problem[] = [
     {
         "id": "py-prob-20-01",
-        "levelId": "py-level-20",
+        "levelId": "level-20",
         "title": "Search in Rotated Sorted Array",
         "type": "coding",
         "difficulty": "medium",
@@ -72,7 +72,7 @@ export const pyLevel20Problems: Problem[] = [
     },
     {
         "id": "py-prob-20-02",
-        "levelId": "py-level-20",
+        "levelId": "level-20",
         "title": "Single Element in a Sorted Array",
         "type": "coding",
         "difficulty": "medium",
@@ -141,7 +141,7 @@ export const pyLevel20Problems: Problem[] = [
     },
     {
         "id": "py-prob-20-03",
-        "levelId": "py-level-20",
+        "levelId": "level-20",
         "title": "Capacity To Ship Packages Within D Days",
         "type": "coding",
         "difficulty": "medium",
@@ -210,7 +210,7 @@ export const pyLevel20Problems: Problem[] = [
     },
     {
         "id": "py-prob-20-04",
-        "levelId": "py-level-20",
+        "levelId": "level-20",
         "title": "Koko Eating Bananas",
         "type": "coding",
         "difficulty": "medium",
@@ -279,7 +279,7 @@ export const pyLevel20Problems: Problem[] = [
     },
     {
         "id": "py-prob-20-05",
-        "levelId": "py-level-20",
+        "levelId": "level-20",
         "title": "Search in 2D Matrix II (Top-Right Step)",
         "type": "coding",
         "difficulty": "medium",
@@ -339,7 +339,7 @@ export const pyLevel20Problems: Problem[] = [
     },
     {
         "id": "py-prob-20-06",
-        "levelId": "py-level-20",
+        "levelId": "level-20",
         "title": "Find Peak Element in 2D Grid",
         "type": "coding",
         "difficulty": "hard",
@@ -362,14 +362,14 @@ export const pyLevel20Problems: Problem[] = [
         ],
         "examples": [
             {
-                "input": "2 2\n1 4\n3 2",
+                "input": "2 2\n1 4\n2 3",
                 "output": "0 1"
             }
         ],
         "testCases": [
             {
                 "id": "tc1",
-                "input": "2 2\n1 4\n3 2",
+                "input": "2 2\n1 4\n2 3",
                 "expectedOutput": "0 1",
                 "hidden": false
             }
@@ -398,7 +398,7 @@ export const pyLevel20Problems: Problem[] = [
     },
     {
         "id": "py-prob-20-07",
-        "levelId": "py-level-20",
+        "levelId": "level-20",
         "title": "Split Array Largest Sum",
         "type": "coding",
         "difficulty": "hard",
@@ -467,7 +467,7 @@ export const pyLevel20Problems: Problem[] = [
     },
     {
         "id": "py-prob-20-08",
-        "levelId": "py-level-20",
+        "levelId": "level-20",
         "title": "Find K Closest Elements",
         "type": "coding",
         "difficulty": "medium",
@@ -526,7 +526,7 @@ export const pyLevel20Problems: Problem[] = [
     },
     {
         "id": "py-prob-20-09",
-        "levelId": "py-level-20",
+        "levelId": "level-20",
         "title": "Median of Two Sorted Arrays",
         "type": "coding",
         "difficulty": "hard",
@@ -595,7 +595,7 @@ export const pyLevel20Problems: Problem[] = [
     },
     {
         "id": "py-prob-20-10",
-        "levelId": "py-level-20",
+        "levelId": "level-20",
         "title": "Search in Rotated Sorted Array II (With Duplicates)",
         "type": "coding",
         "difficulty": "medium",

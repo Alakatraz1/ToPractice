@@ -12,7 +12,7 @@ function writeLevel(levelNum, problems) {
 // Level 7: Strings & Text Manipulation
 const level7 = [
     {
-        id: "py-prob-07-01", levelId: "py-level-07", title: "Reverse a String", type: "coding", difficulty: "beginner", order: 1,
+        id: "py-prob-07-01", levelId: "level-07", title: "Reverse a String", type: "coding", difficulty: "beginner", order: 1,
         description: "Given a string `S`, print its reversed version.\n\nIn Python, strings are immutable, so reverse is achieved using slice notation `s[::-1]`.",
         whyThisMatters: "String reversal with `[::-1]` is the quintessential Python string idiom.",
         concepts: ["strings", "slicing", "reversal"], prerequisites: ["strings"], learningObjectives: ["Reverse strings with slice notation"], constraints: ["Non-empty string"],
@@ -29,7 +29,7 @@ const level7 = [
         commonMistakes: ["Attempting s.reverse() which does not exist for strings (only lists)"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "low", tags: ["strings", "slicing"]
     },
     {
-        id: "py-prob-07-02", levelId: "py-level-07", title: "Valid Palindrome String", type: "coding", difficulty: "easy", order: 2,
+        id: "py-prob-07-02", levelId: "level-07", title: "Valid Palindrome String", type: "coding", difficulty: "easy", order: 2,
         description: "A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward.\n\n**Task:**\nRead a string, filter to alphanumeric characters in lowercase, and print `True` if it is a palindrome, else `False`.",
         whyThisMatters: "LeetCode #125 Valid Palindrome is among the most frequently asked string interview questions.",
         concepts: ["palindromes", "isalnum", "two pointers"], prerequisites: ["strings"], learningObjectives: ["Filter strings with isalnum() and test palindrome"], constraints: ["ASCII string"],
@@ -47,7 +47,7 @@ const level7 = [
         commonMistakes: ["Not ignoring case or punctuation"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["strings", "palindromes"]
     },
     {
-        id: "py-prob-07-03", levelId: "py-level-07", title: "Word Counter", type: "coding", difficulty: "beginner", order: 3,
+        id: "py-prob-07-03", levelId: "level-07", title: "Word Counter", type: "coding", difficulty: "beginner", order: 3,
         description: "Given a line of text, count and print the total number of words separated by whitespace.",
         whyThisMatters: "Word splitting using `.split()` handles consecutive spaces and tabs automatically.",
         concepts: ["split", "len", "strings"], prerequisites: ["strings"], learningObjectives: ["Tokenize sentences into words"], constraints: ["String input"],
@@ -64,7 +64,7 @@ const level7 = [
         commonMistakes: ["split(' ') which counts empty strings between consecutive spaces"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "low", tags: ["strings"]
     },
     {
-        id: "py-prob-07-04", levelId: "py-level-07", title: "Title Case Capitalization", type: "coding", difficulty: "beginner", order: 4,
+        id: "py-prob-07-04", levelId: "level-07", title: "Title Case Capitalization", type: "coding", difficulty: "beginner", order: 4,
         description: "Given a sentence, convert each word so that its first letter is capitalized and all subsequent letters are lowercase.\n\nUse Python's `s.title()` method.",
         whyThisMatters: "String transformation methods like `upper()`, `lower()`, `capitalize()`, and `title()` are standard built-ins.",
         concepts: ["title", "case transformation", "strings"], prerequisites: ["strings"], learningObjectives: ["Use string case conversion methods"], constraints: ["String input"],
@@ -81,7 +81,7 @@ const level7 = [
         commonMistakes: ["Using capitalize() which only affects the first word of the entire string"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "low", tags: ["strings"]
     },
     {
-        id: "py-prob-07-05", levelId: "py-level-07", title: "Replace Substring", type: "coding", difficulty: "beginner", order: 5,
+        id: "py-prob-07-05", levelId: "level-07", title: "Replace Substring", type: "coding", difficulty: "beginner", order: 5,
         description: "Given three space-separated tokens:\n`original_string`, `old_sub`, `new_sub`.\nReplace all occurrences of `old_sub` with `new_sub` in `original_string` using `s.replace(old, new)` and print the result.",
         whyThisMatters: "String substitution is fundamental in sanitization, templating, and text parsing.",
         concepts: ["replace", "substrings", "immutability"], prerequisites: ["strings"], learningObjectives: ["Use str.replace()"], constraints: ["Non-empty strings"],
@@ -98,7 +98,7 @@ const level7 = [
         commonMistakes: ["Expecting replace() to mutate in-place"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "low", tags: ["strings"]
     },
     {
-        id: "py-prob-07-06", levelId: "py-level-07", title: "Character Frequency in String", type: "coding", difficulty: "beginner", order: 6,
+        id: "py-prob-07-06", levelId: "level-07", title: "Character Frequency in String", type: "coding", difficulty: "beginner", order: 6,
         description: "Given a target character `C` followed by a string `S`:\nCount how many times `C` appears in `S` using Python's `s.count(C)` method.\nPrint the count.",
         whyThisMatters: "Fast linear scanning with `str.count()` replaces manual character loops.",
         concepts: ["count", "character frequency"], prerequisites: ["strings"], learningObjectives: ["Use str.count() method"], constraints: ["Single character C"],
@@ -115,7 +115,7 @@ const level7 = [
         commonMistakes: ["Reversing order of target char and string"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["strings"]
     },
     {
-        id: "py-prob-07-07", levelId: "py-level-07", title: "Join Words with Separator", type: "coding", difficulty: "beginner", order: 7,
+        id: "py-prob-07-07", levelId: "level-07", title: "Join Words with Separator", type: "coding", difficulty: "beginner", order: 7,
         description: "In Python, joining a list of strings with a delimiter is done using `delimiter.join(list_of_strings)`.\n\n**Task:**\nRead words from input and join them with hyphens `-`.\nPrint the resulting string.",
         whyThisMatters: "In Python, `join` is a method on the delimiter string, not on the list.",
         concepts: ["join", "string concatenation", "delimiter"], prerequisites: ["strings", "lists"], learningObjectives: ["Use delimiter.join(sequence) idiom"], constraints: ["Non-empty word list"],
@@ -132,7 +132,7 @@ const level7 = [
         commonMistakes: ["Trying words.join('-') which causes AttributeError"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "medium", tags: ["strings", "join"]
     },
     {
-        id: "py-prob-07-08", levelId: "py-level-07", title: "Longest Word in Sentence", type: "coding", difficulty: "easy", order: 8,
+        id: "py-prob-07-08", levelId: "level-07", title: "Longest Word in Sentence", type: "coding", difficulty: "easy", order: 8,
         description: "Given a sentence, find and print the longest word.\nIf multiple words have the same maximum length, print the first one that appears.\n\nUse `max(words, key=len)`.",
         whyThisMatters: "Demonstrates key-functions: `max()` with `key=len` finds extrema by custom criteria in O(N).",
         concepts: ["key function", "max", "len"], prerequisites: ["strings"], learningObjectives: ["Use key parameter with max()"], constraints: ["Non-empty sentence"],
@@ -149,7 +149,7 @@ const level7 = [
         commonMistakes: ["Calling max(words) without key=len (which returns alphabetically largest word)"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "medium", tags: ["strings", "key functions"]
     },
     {
-        id: "py-prob-07-09", levelId: "py-level-07", title: "String Slicing Substrings", type: "coding", difficulty: "beginner", order: 9,
+        id: "py-prob-07-09", levelId: "level-07", title: "String Slicing Substrings", type: "coding", difficulty: "beginner", order: 9,
         description: "Given indices `Start` and `End` (0-based) followed by string `S`:\nExtract and print the substring `S[Start:End]` (from index `Start` up to, but not including, index `End`).",
         whyThisMatters: "Python slicing is half-open `[start:stop)`, meaning `stop - start` equals the resulting slice length.",
         concepts: ["slicing", "half-open interval"], prerequisites: ["strings"], learningObjectives: ["Understand half-open slice indexing"], constraints: ["0 <= Start <= End <= len(S)"],
@@ -166,7 +166,7 @@ const level7 = [
         commonMistakes: ["Assuming the end index is included"], timeComplexity: "O(K)", spaceComplexity: "O(K)", interviewRelevance: "low", tags: ["slicing", "strings"]
     },
     {
-        id: "py-prob-07-10", levelId: "py-level-07", title: "Run-Length Encoding Compression", type: "coding", difficulty: "medium", order: 10,
+        id: "py-prob-07-10", levelId: "level-07", title: "Run-Length Encoding Compression", type: "coding", difficulty: "medium", order: 10,
         description: "Given a non-empty string `S`, perform basic Run-Length Encoding:\nReplace consecutive repeated characters with the character followed by its count.\n(e.g. `'aabcccccaaa'` becomes `'a2b1c5a3'`).",
         whyThisMatters: "Run-length encoding is a classic two-pointer / linear-scan string interview challenge.",
         concepts: ["compression", "linear scan", "strings"], prerequisites: ["strings", "loops"], learningObjectives: ["Implement run-length encoding"], constraints: ["Non-empty alphabetic string"],
@@ -187,7 +187,7 @@ const level7 = [
 // Level 8: Tuples & Sets
 const level8 = [
     {
-        id: "py-prob-08-01", levelId: "py-level-08", title: "Tuple Coordinates & Manhattan Distance", type: "coding", difficulty: "beginner", order: 1,
+        id: "py-prob-08-01", levelId: "level-08", title: "Tuple Coordinates & Manhattan Distance", type: "coding", difficulty: "beginner", order: 1,
         description: "Tuples `(x, y)` represent immutable points in 2D space.\n\n**Task:**\nRead four integers `X1 Y1 X2 Y2`. Unpack into tuples `p1 = (x1, y1)` and `p2 = (x2, y2)`.\nCalculate and print the Manhattan distance: `|x1 - x2| + |y1 - y2|`.",
         whyThisMatters: "Tuples are immutable, hashable, and commonly used as coordinate keys in grid graph searches.",
         concepts: ["tuples", "immutability", "manhattan distance"], prerequisites: ["tuples"], learningObjectives: ["Create and unpack coordinate tuples"], constraints: ["Integer coordinates"],
@@ -204,7 +204,7 @@ const level8 = [
         commonMistakes: ["Using Euclidean distance sqrt(dx^2 + dy^2) instead of Manhattan distance"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "medium", tags: ["tuples", "geometry"]
     },
     {
-        id: "py-prob-08-02", levelId: "py-level-08", title: "Count Unique Elements", type: "coding", difficulty: "beginner", order: 2,
+        id: "py-prob-08-02", levelId: "level-08", title: "Count Unique Elements", type: "coding", difficulty: "beginner", order: 2,
         description: "Given a list of integers containing duplicates, count how many distinct unique numbers are present.\n\nIn Python, passing a list to `set(arr)` removes all duplicates in O(N) time.",
         whyThisMatters: "Sets provide instantaneous duplicate removal and O(1) membership checking.",
         concepts: ["sets", "uniqueness", "set()"], prerequisites: ["sets"], learningObjectives: ["Convert list to set to find unique count"], constraints: ["List of integers"],
@@ -221,7 +221,7 @@ const level8 = [
         commonMistakes: ["Manual nested loop checking for duplicates in O(N^2)"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["sets"]
     },
     {
-        id: "py-prob-08-03", levelId: "py-level-08", title: "Set Intersection", type: "coding", difficulty: "easy", order: 3,
+        id: "py-prob-08-03", levelId: "level-08", title: "Set Intersection", type: "coding", difficulty: "easy", order: 3,
         description: "Given two lists of integers on separate lines:\nFind all numbers that appear in both lists (set intersection `&`).\nPrint the common numbers in ascending sorted order space-separated. (If empty, print nothing).",
         whyThisMatters: "Intersection is the foundational set operation used in search engines and matching algorithms.",
         concepts: ["intersection", "set operations", "& operator"], prerequisites: ["sets"], learningObjectives: ["Compute set intersection & and sort results"], constraints: ["Integer lists"],
@@ -238,7 +238,7 @@ const level8 = [
         commonMistakes: ["Forgetting to sort the resulting set (sets are unordered)"], timeComplexity: "O(N log N)", spaceComplexity: "O(N)", interviewRelevance: "medium", tags: ["sets", "intersection"]
     },
     {
-        id: "py-prob-08-04", levelId: "py-level-08", title: "Set Union", type: "coding", difficulty: "easy", order: 4,
+        id: "py-prob-08-04", levelId: "level-08", title: "Set Union", type: "coding", difficulty: "easy", order: 4,
         description: "Given two lists of integers on separate lines:\nFind all distinct numbers present in either list (set union `|`).\nPrint the elements in ascending sorted order space-separated.",
         whyThisMatters: "Union merges disjoint collections while automatically preserving uniqueness.",
         concepts: ["union", "set operations", "| operator"], prerequisites: ["sets"], learningObjectives: ["Compute set union |"], constraints: ["Integer lists"],
@@ -255,7 +255,7 @@ const level8 = [
         commonMistakes: ["Using + on sets (which raises TypeError, union is |)"], timeComplexity: "O(N log N)", spaceComplexity: "O(N)", interviewRelevance: "medium", tags: ["sets", "union"]
     },
     {
-        id: "py-prob-08-05", levelId: "py-level-08", title: "Set Difference", type: "coding", difficulty: "easy", order: 5,
+        id: "py-prob-08-05", levelId: "level-08", title: "Set Difference", type: "coding", difficulty: "easy", order: 5,
         description: "Given two lists of integers on separate lines, `A` and `B`:\nFind all numbers that are in `A` but NOT in `B` (set difference `A - B`).\nPrint the resulting numbers in ascending sorted order space-separated.",
         whyThisMatters: "Set difference instantly answers questions like 'which users did not complete task X?'.",
         concepts: ["set difference", "- operator", "filtering"], prerequisites: ["sets"], learningObjectives: ["Compute set difference A - B"], constraints: ["Integer lists"],
@@ -272,7 +272,7 @@ const level8 = [
         commonMistakes: ["Confusing a - b with b - a"], timeComplexity: "O(N log N)", spaceComplexity: "O(N)", interviewRelevance: "medium", tags: ["sets"]
     },
     {
-        id: "py-prob-08-06", levelId: "py-level-08", title: "Subset Check", type: "coding", difficulty: "easy", order: 6,
+        id: "py-prob-08-06", levelId: "level-08", title: "Subset Check", type: "coding", difficulty: "easy", order: 6,
         description: "Given two lists of integers on separate lines, `A` and `B`:\nCheck if `A` is a subset of `B` (i.e. every element in `A` is also in `B`).\nPrint `True` if `A.issubset(B)` (or `set(A) <= set(B)`), otherwise print `False`.",
         whyThisMatters: "Validating permissions, prerequisites, and containment rules uses subset logic.",
         concepts: ["subset", "<= operator", "issubset"], prerequisites: ["sets"], learningObjectives: ["Use issubset() method and <= operator"], constraints: ["Integer lists"],
@@ -289,7 +289,7 @@ const level8 = [
         commonMistakes: ["Checking b.issubset(a) instead of a.issubset(b)"], timeComplexity: "O(len(A))", spaceComplexity: "O(N)", interviewRelevance: "medium", tags: ["sets", "subsets"]
     },
     {
-        id: "py-prob-08-07", levelId: "py-level-08", title: "Symmetric Difference", type: "coding", difficulty: "easy", order: 7,
+        id: "py-prob-08-07", levelId: "level-08", title: "Symmetric Difference", type: "coding", difficulty: "easy", order: 7,
         description: "Given two lists on separate lines:\nFind all elements that are in either list, but NOT in both (symmetric difference `^`).\nPrint the resulting elements sorted in ascending order.",
         whyThisMatters: "Symmetric difference finds elements unique to one collection or the other (XOR for sets).",
         concepts: ["symmetric difference", "^ operator"], prerequisites: ["sets"], learningObjectives: ["Compute symmetric difference with ^"], constraints: ["Integer lists"],
@@ -306,7 +306,7 @@ const level8 = [
         commonMistakes: ["Confusing symmetric difference with union"], timeComplexity: "O(N log N)", spaceComplexity: "O(N)", interviewRelevance: "medium", tags: ["sets"]
     },
     {
-        id: "py-prob-08-08", levelId: "py-level-08", title: "Find the Missing Number (1 to N)", type: "coding", difficulty: "easy", order: 8,
+        id: "py-prob-08-08", levelId: "level-08", title: "Find the Missing Number (1 to N)", type: "coding", difficulty: "easy", order: 8,
         description: "You are given an integer `N`, followed by `N - 1` distinct numbers from the range `1` to `N`.\nExactly one number from `1` to `N` is missing.\nFind and print the missing number.",
         whyThisMatters: "LeetCode #268 Missing Number. Can be solved with sets or Gaussian expected sum `N*(N+1)//2 - sum(arr)` in O(1) space.",
         concepts: ["missing number", "gauss sum", "sets"], prerequisites: ["sets", "math"], learningObjectives: ["Find missing element using sum formula or sets"], constraints: ["N >= 2"],
@@ -323,7 +323,7 @@ const level8 = [
         commonMistakes: ["Sorting array in O(N log N) when O(N) math is available"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["math", "interviews"]
     },
     {
-        id: "py-prob-08-09", levelId: "py-level-08", title: "First Duplicate Element", type: "coding", difficulty: "easy", order: 9,
+        id: "py-prob-08-09", levelId: "level-08", title: "First Duplicate Element", type: "coding", difficulty: "easy", order: 9,
         description: "Given an array of integers, traverse it from left to right.\nPrint the first number that appears for a second time.\nIf all elements are unique, print `-1`.",
         whyThisMatters: "Using a `seen` set for instant O(1) lookup during linear scan is one of the most common interview patterns.",
         concepts: ["seen set", "hash lookup", "duplicates"], prerequisites: ["sets"], learningObjectives: ["Track visited elements using a hash set"], constraints: ["List of integers"],
@@ -341,7 +341,7 @@ const level8 = [
         commonMistakes: ["Returning the first duplicate by index value instead of first recurrence in traversal order"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["sets", "hash set"]
     },
     {
-        id: "py-prob-08-10", levelId: "py-level-08", title: "Disjoint Sets Check", type: "coding", difficulty: "easy", order: 10,
+        id: "py-prob-08-10", levelId: "level-08", title: "Disjoint Sets Check", type: "coding", difficulty: "easy", order: 10,
         description: "Given two lists on separate lines:\nCheck if they are disjoint (i.e. have NO common elements).\nPrint `True` if `a.isdisjoint(b)`, otherwise print `False`.",
         whyThisMatters: "Fast collision detection and independence testing.",
         concepts: ["isdisjoint", "set predicates"], prerequisites: ["sets"], learningObjectives: ["Use set.isdisjoint()"], constraints: ["Integer lists"],
@@ -362,7 +362,7 @@ const level8 = [
 // Level 9: Dictionaries & Key-Value Pairs
 const level9 = [
     {
-        id: "py-prob-09-01", levelId: "py-level-09", title: "Word Frequency Counter", type: "coding", difficulty: "easy", order: 1,
+        id: "py-prob-09-01", levelId: "level-09", title: "Word Frequency Counter", type: "coding", difficulty: "easy", order: 1,
         description: "Given a sentence, count how many times each word appears.\nPrint each word and its frequency in alphabetical order:\n`<word>: <count>`\non separate lines.",
         whyThisMatters: "Frequency counting using dictionaries is required in ~30% of all interview questions.",
         concepts: ["dictionaries", "frequency map", "key sorting"], prerequisites: ["dictionaries"], learningObjectives: ["Build frequency map using dict and iterate sorted keys"], constraints: ["Words contain letters only"],
@@ -379,7 +379,7 @@ const level9 = [
         commonMistakes: ["KeyError when accessing uninitialized dictionary key"], timeComplexity: "O(N log U)", spaceComplexity: "O(U)", interviewRelevance: "high", tags: ["dictionaries", "frequency"]
     },
     {
-        id: "py-prob-09-02", levelId: "py-level-09", title: "Most Frequent Character", type: "coding", difficulty: "easy", order: 2,
+        id: "py-prob-09-02", levelId: "level-09", title: "Most Frequent Character", type: "coding", difficulty: "easy", order: 2,
         description: "Given a non-empty string, find the character that appears most frequently.\nIf multiple characters have the same maximum frequency, return the one that appears first alphabetically.",
         whyThisMatters: "Combines frequency counting with multi-criterion sorting (count descending, alphabetical ascending).",
         concepts: ["dictionaries", "frequency", "tie-breaking"], prerequisites: ["dictionaries"], learningObjectives: ["Find mode of a collection with tie-breaking"], constraints: ["Non-empty string"],
@@ -396,7 +396,7 @@ const level9 = [
         commonMistakes: ["Failing tie-breaker when multiple characters have the same highest frequency"], timeComplexity: "O(N)", spaceComplexity: "O(U)", interviewRelevance: "high", tags: ["dictionaries"]
     },
     {
-        id: "py-prob-09-03", levelId: "py-level-09", title: "Invert a Dictionary", type: "coding", difficulty: "easy", order: 3,
+        id: "py-prob-09-03", levelId: "level-09", title: "Invert a Dictionary", type: "coding", difficulty: "easy", order: 3,
         description: "Given unique key-value pairs formatted as `key value key value...`:\nInvert the dictionary so that values become keys and keys become values.\nPrint the inverted mapping sorted by new keys:\n`<new_key>: <new_val>`.",
         whyThisMatters: "Dict comprehension `{v: k for k, v in d.items()}` is a core idiom for bidirectional lookups.",
         concepts: ["dict comprehension", "items()", "inversion"], prerequisites: ["dictionaries"], learningObjectives: ["Invert key-value mappings using dict comprehension"], constraints: ["All keys and values are unique"],
@@ -413,7 +413,7 @@ const level9 = [
         commonMistakes: ["Trying to invert non-hashable values (lists cannot be keys)"], timeComplexity: "O(N log N)", spaceComplexity: "O(N)", interviewRelevance: "medium", tags: ["dictionaries", "comprehension"]
     },
     {
-        id: "py-prob-09-04", levelId: "py-level-09", title: "Safe Lookup with .get()", type: "coding", difficulty: "beginner", order: 4,
+        id: "py-prob-09-04", levelId: "level-09", title: "Safe Lookup with .get()", type: "coding", difficulty: "beginner", order: 4,
         description: "Given pairs of `key value` followed by a target query key:\nQuery the dictionary for the target key using `d.get(key, 'Not Found')`.\nPrint the value if found, otherwise print `Not Found`.",
         whyThisMatters: "Accessing `d[key]` raises `KeyError` if key is missing; `d.get(key, default)` gracefully handles missing keys.",
         concepts: ["dict.get", "default value", "KeyError"], prerequisites: ["dictionaries"], learningObjectives: ["Use dict.get() for safe lookups"], constraints: ["String keys and values"],
@@ -430,7 +430,7 @@ const level9 = [
         commonMistakes: ["Using d[query] causing KeyError crash"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["dictionaries"]
     },
     {
-        id: "py-prob-09-05", levelId: "py-level-09", title: "Merge Dictionaries by Summing Values", type: "coding", difficulty: "easy", order: 5,
+        id: "py-prob-09-05", levelId: "level-09", title: "Merge Dictionaries by Summing Values", type: "coding", difficulty: "easy", order: 5,
         description: "You are given two sets of inventory mappings: `item quantity`.\nMerge the two inventories. If an item appears in both, sum their quantities.\nPrint the merged items in alphabetical order:\n`<item>: <total_quantity>`.",
         whyThisMatters: "Data aggregation and grouping are standard database and interview problem patterns.",
         concepts: ["merging", "aggregation", "dictionaries"], prerequisites: ["dictionaries"], learningObjectives: ["Merge mappings by combining values"], constraints: ["Quantities are integers"],
@@ -447,7 +447,7 @@ const level9 = [
         commonMistakes: ["Overwriting values instead of adding them"], timeComplexity: "O(N log N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["dictionaries", "aggregation"]
     },
     {
-        id: "py-prob-09-06", levelId: "py-level-09", title: "Group Words by Length", type: "coding", difficulty: "easy", order: 6,
+        id: "py-prob-09-06", levelId: "level-09", title: "Group Words by Length", type: "coding", difficulty: "easy", order: 6,
         description: "Given a list of words, group them by their length into a dictionary of lists.\nPrint the groups sorted by length ascending in format:\n`<length>: <word1> <word2>...`",
         whyThisMatters: "Grouping by key (`dict[key].append(val)`) is the foundation of bucketing and Hash Table grouping (like Group Anagrams).",
         concepts: ["bucketing", "group by", "dict of lists"], prerequisites: ["dictionaries", "lists"], learningObjectives: ["Group items into dictionary of lists"], constraints: ["List of words"],
@@ -464,7 +464,7 @@ const level9 = [
         commonMistakes: ["Sorting words inside groups when original order is expected"], timeComplexity: "O(N log K)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["dictionaries", "grouping"]
     },
     {
-        id: "py-prob-09-07", levelId: "py-level-09", title: "Two Sum with Hash Map", type: "coding", difficulty: "medium", order: 7,
+        id: "py-prob-09-07", levelId: "level-09", title: "Two Sum with Hash Map", type: "coding", difficulty: "medium", order: 7,
         description: "LeetCode #1 Two Sum.\nGiven a target `T` followed by an array of integers `arr`:\nFind two distinct 0-based indices `i` and `j` (`i < j`) such that `arr[i] + arr[j] == T`.\nPrint `i j`. (Assume exactly one valid pair exists).",
         whyThisMatters: "Two Sum is the single most iconic technical interview problem in history.",
         concepts: ["two sum", "hash map", "complement search"], prerequisites: ["dictionaries"], learningObjectives: ["Solve Two Sum in O(N) using a dictionary"], constraints: ["Exactly one solution exists"],
@@ -481,7 +481,7 @@ const level9 = [
         commonMistakes: ["Using the same index twice (e.g. 3 + 3 = 6 using index 0 twice)"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["two sum", "hash map", "must-know"]
     },
     {
-        id: "py-prob-09-08", levelId: "py-level-09", title: "Sort Dictionary by Values Descending", type: "coding", difficulty: "easy", order: 8,
+        id: "py-prob-09-08", levelId: "level-09", title: "Sort Dictionary by Values Descending", type: "coding", difficulty: "easy", order: 8,
         description: "Given pairs of `name score`:\nPrint the names sorted by their score in descending order (highest score first).\nIf scores are tied, sort names alphabetically ascending.\n`<name>: <score>` on separate lines.",
         whyThisMatters: "Multi-attribute sorting with `key=lambda x: (-x[1], x[0])` is standard for leaderboards.",
         concepts: ["sorting dicts", "key lambdas", "leaderboard"], prerequisites: ["dictionaries", "sorting"], learningObjectives: ["Sort dictionary items by values with tie-breaking"], constraints: ["Scores are integers"],
@@ -498,7 +498,7 @@ const level9 = [
         commonMistakes: ["Sorting scores alphabetically (e.g. '100' < '50') instead of converting to int"], timeComplexity: "O(N log N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["dictionaries", "sorting"]
     },
     {
-        id: "py-prob-09-09", levelId: "py-level-09", title: "Dictionary Comprehension Squares", type: "coding", difficulty: "beginner", order: 9,
+        id: "py-prob-09-09", levelId: "level-09", title: "Dictionary Comprehension Squares", type: "coding", difficulty: "beginner", order: 9,
         description: "Given an integer `N`, construct a dictionary mapping each number `x` from `1` to `N` to its square `x**2` using a dictionary comprehension:\n`{x: x**2 for x in range(1, N + 1)}`\n\nPrint each mapping line-by-line as `<x>: <x**2>`.",
         whyThisMatters: "Dictionary comprehensions are expressive, idiomatic, and fast.",
         concepts: ["dict comprehension", "mapping"], prerequisites: ["dictionaries"], learningObjectives: ["Construct dictionaries using comprehension syntax"], constraints: ["1 <= N <= 20"],
@@ -515,7 +515,7 @@ const level9 = [
         commonMistakes: ["Using parentheses (generator) instead of braces {}"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "low", tags: ["comprehensions"]
     },
     {
-        id: "py-prob-09-10", levelId: "py-level-09", title: "Nested Dictionary User Query", type: "coding", difficulty: "easy", order: 10,
+        id: "py-prob-09-10", levelId: "level-09", title: "Nested Dictionary User Query", type: "coding", difficulty: "easy", order: 10,
         description: "Consider a nested user database:\nGiven query `username field` from input:\nDatabase records:\n- `alice`: `email: alice@example.com`, `role: admin`\n- `bob`: `email: bob@example.com`, `role: user`\n\nPrint the requested field value, or `Unknown` if either the user or field does not exist.",
         whyThisMatters: "Nested dictionary access simulates JSON response traversal common in real-world systems.",
         concepts: ["nested dicts", "safe navigation", "json traversal"], prerequisites: ["dictionaries"], learningObjectives: ["Safely traverse nested dictionaries"], constraints: ["String queries"],

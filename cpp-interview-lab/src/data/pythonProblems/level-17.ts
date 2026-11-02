@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel17Problems: Problem[] = [
     {
         "id": "py-prob-17-01",
-        "levelId": "py-level-17",
+        "levelId": "level-17",
         "title": "Recursive Factorial",
         "type": "coding",
         "difficulty": "beginner",
@@ -71,7 +71,7 @@ export const pyLevel17Problems: Problem[] = [
     },
     {
         "id": "py-prob-17-02",
-        "levelId": "py-level-17",
+        "levelId": "level-17",
         "title": "Recursive Fibonacci with Memoization",
         "type": "coding",
         "difficulty": "easy",
@@ -136,7 +136,7 @@ export const pyLevel17Problems: Problem[] = [
     },
     {
         "id": "py-prob-17-03",
-        "levelId": "py-level-17",
+        "levelId": "level-17",
         "title": "Binary Exponentiation Pow(x, n) in O(log N)",
         "type": "coding",
         "difficulty": "medium",
@@ -205,7 +205,7 @@ export const pyLevel17Problems: Problem[] = [
     },
     {
         "id": "py-prob-17-04",
-        "levelId": "py-level-17",
+        "levelId": "level-17",
         "title": "Reverse String Recursively",
         "type": "coding",
         "difficulty": "easy",
@@ -268,7 +268,7 @@ export const pyLevel17Problems: Problem[] = [
     },
     {
         "id": "py-prob-17-05",
-        "levelId": "py-level-17",
+        "levelId": "level-17",
         "title": "Subsets (Power Set Generation)",
         "type": "coding",
         "difficulty": "medium",
@@ -328,7 +328,7 @@ export const pyLevel17Problems: Problem[] = [
     },
     {
         "id": "py-prob-17-06",
-        "levelId": "py-level-17",
+        "levelId": "level-17",
         "title": "Permutations of a List",
         "type": "coding",
         "difficulty": "medium",
@@ -387,7 +387,7 @@ export const pyLevel17Problems: Problem[] = [
     },
     {
         "id": "py-prob-17-07",
-        "levelId": "py-level-17",
+        "levelId": "level-17",
         "title": "Combinations of Size K",
         "type": "coding",
         "difficulty": "medium",
@@ -446,7 +446,7 @@ export const pyLevel17Problems: Problem[] = [
     },
     {
         "id": "py-prob-17-08",
-        "levelId": "py-level-17",
+        "levelId": "level-17",
         "title": "Generate Valid Parentheses",
         "type": "coding",
         "difficulty": "medium",
@@ -511,7 +511,7 @@ export const pyLevel17Problems: Problem[] = [
     },
     {
         "id": "py-prob-17-09",
-        "levelId": "py-level-17",
+        "levelId": "level-17",
         "title": "Combination Sum",
         "type": "coding",
         "difficulty": "medium",
@@ -570,7 +570,7 @@ export const pyLevel17Problems: Problem[] = [
     },
     {
         "id": "py-prob-17-10",
-        "levelId": "py-level-17",
+        "levelId": "level-17",
         "title": "Word Search in Grid (DFS Backtracking)",
         "type": "coding",
         "difficulty": "medium",

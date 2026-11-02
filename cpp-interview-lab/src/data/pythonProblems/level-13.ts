@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel13Problems: Problem[] = [
     {
         "id": "py-prob-13-01",
-        "levelId": "py-level-13",
+        "levelId": "level-13",
         "title": "Map Function Strings to Integers",
         "type": "coding",
         "difficulty": "beginner",
@@ -68,7 +68,7 @@ export const pyLevel13Problems: Problem[] = [
     },
     {
         "id": "py-prob-13-02",
-        "levelId": "py-level-13",
+        "levelId": "level-13",
         "title": "Filter Function Positive Numbers",
         "type": "coding",
         "difficulty": "beginner",
@@ -133,7 +133,7 @@ export const pyLevel13Problems: Problem[] = [
     },
     {
         "id": "py-prob-13-03",
-        "levelId": "py-level-13",
+        "levelId": "level-13",
         "title": "Zip Parallel Iteration into Dict",
         "type": "coding",
         "difficulty": "easy",
@@ -199,7 +199,7 @@ export const pyLevel13Problems: Problem[] = [
     },
     {
         "id": "py-prob-13-04",
-        "levelId": "py-level-13",
+        "levelId": "level-13",
         "title": "Enumerate with 1-Based Indexing",
         "type": "coding",
         "difficulty": "beginner",
@@ -263,7 +263,7 @@ export const pyLevel13Problems: Problem[] = [
     },
     {
         "id": "py-prob-13-05",
-        "levelId": "py-level-13",
+        "levelId": "level-13",
         "title": "Any and All Predicate Evaluator",
         "type": "coding",
         "difficulty": "easy",
@@ -332,7 +332,7 @@ export const pyLevel13Problems: Problem[] = [
     },
     {
         "id": "py-prob-13-06",
-        "levelId": "py-level-13",
+        "levelId": "level-13",
         "title": "Flatten 2D List with Comprehension",
         "type": "coding",
         "difficulty": "easy",
@@ -397,7 +397,7 @@ export const pyLevel13Problems: Problem[] = [
     },
     {
         "id": "py-prob-13-07",
-        "levelId": "py-level-13",
+        "levelId": "level-13",
         "title": "Matrix Transpose with zip(*matrix)",
         "type": "coding",
         "difficulty": "easy",
@@ -457,7 +457,7 @@ export const pyLevel13Problems: Problem[] = [
     },
     {
         "id": "py-prob-13-08",
-        "levelId": "py-level-13",
+        "levelId": "level-13",
         "title": "Conditional Transformation Comprehension",
         "type": "coding",
         "difficulty": "beginner",
@@ -521,7 +521,7 @@ export const pyLevel13Problems: Problem[] = [
     },
     {
         "id": "py-prob-13-09",
-        "levelId": "py-level-13",
+        "levelId": "level-13",
         "title": "Set Comprehension Unique Vowels",
         "type": "coding",
         "difficulty": "beginner",
@@ -587,7 +587,7 @@ export const pyLevel13Problems: Problem[] = [
     },
     {
         "id": "py-prob-13-10",
-        "levelId": "py-level-13",
+        "levelId": "level-13",
         "title": "Functional Reduce with functools.reduce",
         "type": "coding",
         "difficulty": "easy",

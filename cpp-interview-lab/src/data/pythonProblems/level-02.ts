@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel2Problems: Problem[] = [
     {
         "id": "py-prob-02-01",
-        "levelId": "py-level-02",
+        "levelId": "level-02",
         "title": "Read and Greet",
         "type": "coding",
         "difficulty": "beginner",
@@ -67,7 +67,7 @@ export const pyLevel2Problems: Problem[] = [
     },
     {
         "id": "py-prob-02-02",
-        "levelId": "py-level-02",
+        "levelId": "level-02",
         "title": "Sum Two Integers",
         "type": "coding",
         "difficulty": "beginner",
@@ -132,7 +132,7 @@ export const pyLevel2Problems: Problem[] = [
     },
     {
         "id": "py-prob-02-03",
-        "levelId": "py-level-02",
+        "levelId": "level-02",
         "title": "Floor and True Division",
         "type": "coding",
         "difficulty": "beginner",
@@ -197,7 +197,7 @@ export const pyLevel2Problems: Problem[] = [
     },
     {
         "id": "py-prob-02-04",
-        "levelId": "py-level-02",
+        "levelId": "level-02",
         "title": "Modulo and Remainder",
         "type": "coding",
         "difficulty": "beginner",
@@ -261,7 +261,7 @@ export const pyLevel2Problems: Problem[] = [
     },
     {
         "id": "py-prob-02-05",
-        "levelId": "py-level-02",
+        "levelId": "level-02",
         "title": "Pythonic Variable Swap",
         "type": "coding",
         "difficulty": "beginner",
@@ -326,7 +326,7 @@ export const pyLevel2Problems: Problem[] = [
     },
     {
         "id": "py-prob-02-06",
-        "levelId": "py-level-02",
+        "levelId": "level-02",
         "title": "Type Conversion & Rounding",
         "type": "coding",
         "difficulty": "beginner",
@@ -392,7 +392,7 @@ export const pyLevel2Problems: Problem[] = [
     },
     {
         "id": "py-prob-02-07",
-        "levelId": "py-level-02",
+        "levelId": "level-02",
         "title": "Circle Area Calculator",
         "type": "coding",
         "difficulty": "easy",
@@ -458,7 +458,7 @@ export const pyLevel2Problems: Problem[] = [
     },
     {
         "id": "py-prob-02-08",
-        "levelId": "py-level-02",
+        "levelId": "level-02",
         "title": "Count Space-Separated Tokens",
         "type": "coding",
         "difficulty": "beginner",
@@ -523,7 +523,7 @@ export const pyLevel2Problems: Problem[] = [
     },
     {
         "id": "py-prob-02-09",
-        "levelId": "py-level-02",
+        "levelId": "level-02",
         "title": "Boolean Evaluation",
         "type": "coding",
         "difficulty": "beginner",
@@ -593,7 +593,7 @@ export const pyLevel2Problems: Problem[] = [
     },
     {
         "id": "py-prob-02-10",
-        "levelId": "py-level-02",
+        "levelId": "level-02",
         "title": "Celsius to Fahrenheit Converter",
         "type": "coding",
         "difficulty": "easy",

@@ -6,6 +6,7 @@ import { getProgress, getWeakConcepts, isLevelUnlocked, getGlobalLanguage, setGl
 import { getLevels, getAllProblems, getProblem } from '@/data/levels';
 import { UserProgress } from '@/data/types';
 import { Code2, Trophy, Brain, Target, Lock, Play, ArrowRight, Activity, BookOpen, AlertCircle, CheckCircle2, ShieldAlert, Zap, Terminal } from 'lucide-react';
+import { ActivityHeatmap } from '@/components/ActivityHeatmap';
 
 export default function Home() {
     const router = useRouter();
@@ -118,6 +119,9 @@ export default function Home() {
                         </button>
                     </div>
                 </header>
+
+                {/* GitHub-style Green Dot Activity Heatmap */}
+                <ActivityHeatmap currentLanguage={language} />
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     

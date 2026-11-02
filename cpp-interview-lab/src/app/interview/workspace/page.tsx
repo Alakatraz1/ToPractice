@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getProblem } from '@/data/levels';
+import { markProblemComplete } from '@/lib/progress';
 import { CodeEditor } from '@/components/CodeEditor';
 import { CompileAndRunResult } from '@/lib/compiler';
 import { Clock, ShieldAlert, Play, Check, XCircle, ArrowLeft } from 'lucide-react';
@@ -81,6 +82,7 @@ function Workspace() {
                 const allPassed = data.status === 'success' && data.results?.every(r => r.passed);
                 if (allPassed) {
                     setInterviewState('passed');
+                    markProblemComplete(problem.id, problem.id.startsWith('py-') ? 'python' : 'cpp');
                 } else {
                     // MASK THE RESULTS! Strict mode.
                     if (data.results) {

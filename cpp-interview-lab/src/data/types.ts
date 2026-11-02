@@ -86,5 +86,15 @@ export interface UserProgress {
   // Tracks how a problem was solved: 'independent', 'hint_assisted', 'solution_assisted'
   solveQuality: Record<string, 'independent' | 'hint_assisted' | 'solution_assisted'>;
   
+  // Daily activity heatmap: 'YYYY-MM-DD' -> count of solved problems
+  dailyActivity?: Record<string, number>;
+
+  // Streak metrics
+  streak?: {
+    currentStreak: number;
+    longestStreak: number;
+    lastActiveDate: string;
+  };
+  
   lastOpenedAt: string;
 }

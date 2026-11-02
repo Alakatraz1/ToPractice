@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel6Problems: Problem[] = [
     {
         "id": "py-prob-06-01",
-        "levelId": "py-level-06",
+        "levelId": "level-06",
         "title": "List Sum and Average",
         "type": "coding",
         "difficulty": "beginner",
@@ -69,7 +69,7 @@ export const pyLevel6Problems: Problem[] = [
     },
     {
         "id": "py-prob-06-02",
-        "levelId": "py-level-06",
+        "levelId": "level-06",
         "title": "Find Maximum and Minimum",
         "type": "coding",
         "difficulty": "beginner",
@@ -133,7 +133,7 @@ export const pyLevel6Problems: Problem[] = [
     },
     {
         "id": "py-prob-06-03",
-        "levelId": "py-level-06",
+        "levelId": "level-06",
         "title": "Reverse a List",
         "type": "coding",
         "difficulty": "beginner",
@@ -198,7 +198,7 @@ export const pyLevel6Problems: Problem[] = [
     },
     {
         "id": "py-prob-06-04",
-        "levelId": "py-level-06",
+        "levelId": "level-06",
         "title": "Count Occurrences",
         "type": "coding",
         "difficulty": "beginner",
@@ -261,7 +261,7 @@ export const pyLevel6Problems: Problem[] = [
     },
     {
         "id": "py-prob-06-05",
-        "levelId": "py-level-06",
+        "levelId": "level-06",
         "title": "Remove All Occurrences",
         "type": "coding",
         "difficulty": "easy",
@@ -325,7 +325,7 @@ export const pyLevel6Problems: Problem[] = [
     },
     {
         "id": "py-prob-06-06",
-        "levelId": "py-level-06",
+        "levelId": "level-06",
         "title": "Second Largest Element",
         "type": "coding",
         "difficulty": "medium",
@@ -400,7 +400,7 @@ export const pyLevel6Problems: Problem[] = [
     },
     {
         "id": "py-prob-06-07",
-        "levelId": "py-level-06",
+        "levelId": "level-06",
         "title": "Rotate List Right by K Steps",
         "type": "coding",
         "difficulty": "medium",
@@ -466,7 +466,7 @@ export const pyLevel6Problems: Problem[] = [
     },
     {
         "id": "py-prob-06-08",
-        "levelId": "py-level-06",
+        "levelId": "level-06",
         "title": "Merge Two Sorted Lists",
         "type": "coding",
         "difficulty": "easy",
@@ -531,7 +531,7 @@ export const pyLevel6Problems: Problem[] = [
     },
     {
         "id": "py-prob-06-09",
-        "levelId": "py-level-06",
+        "levelId": "level-06",
         "title": "Filter Evens with List Comprehension",
         "type": "coding",
         "difficulty": "beginner",
@@ -595,7 +595,7 @@ export const pyLevel6Problems: Problem[] = [
     },
     {
         "id": "py-prob-06-10",
-        "levelId": "py-level-06",
+        "levelId": "level-06",
         "title": "Matrix Diagonal Sum",
         "type": "coding",
         "difficulty": "easy",

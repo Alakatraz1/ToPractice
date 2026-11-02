@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel12Problems: Problem[] = [
     {
         "id": "py-prob-12-01",
-        "levelId": "py-level-12",
+        "levelId": "level-12",
         "title": "List in vs Set in (O(N) vs O(1))",
         "type": "coding",
         "difficulty": "easy",
@@ -68,7 +68,7 @@ export const pyLevel12Problems: Problem[] = [
     },
     {
         "id": "py-prob-12-02",
-        "levelId": "py-level-12",
+        "levelId": "level-12",
         "title": "Prefix Sum Array for O(1) Range Queries",
         "type": "coding",
         "difficulty": "medium",
@@ -134,7 +134,7 @@ export const pyLevel12Problems: Problem[] = [
     },
     {
         "id": "py-prob-12-03",
-        "levelId": "py-level-12",
+        "levelId": "level-12",
         "title": "Space-Optimized Fibonacci",
         "type": "coding",
         "difficulty": "easy",
@@ -199,7 +199,7 @@ export const pyLevel12Problems: Problem[] = [
     },
     {
         "id": "py-prob-12-04",
-        "levelId": "py-level-12",
+        "levelId": "level-12",
         "title": "Majority Element (Boyer-Moore Voting)",
         "type": "coding",
         "difficulty": "medium",
@@ -268,7 +268,7 @@ export const pyLevel12Problems: Problem[] = [
     },
     {
         "id": "py-prob-12-05",
-        "levelId": "py-level-12",
+        "levelId": "level-12",
         "title": "Maximum Subarray (Kadane's Algorithm)",
         "type": "coding",
         "difficulty": "medium",
@@ -343,7 +343,7 @@ export const pyLevel12Problems: Problem[] = [
     },
     {
         "id": "py-prob-12-06",
-        "levelId": "py-level-12",
+        "levelId": "level-12",
         "title": "Two Pointer In-Place Array Reversal",
         "type": "coding",
         "difficulty": "easy",
@@ -409,7 +409,7 @@ export const pyLevel12Problems: Problem[] = [
     },
     {
         "id": "py-prob-12-07",
-        "levelId": "py-level-12",
+        "levelId": "level-12",
         "title": "Move Zeroes in O(N) Time and O(1) Space",
         "type": "coding",
         "difficulty": "easy",
@@ -484,7 +484,7 @@ export const pyLevel12Problems: Problem[] = [
     },
     {
         "id": "py-prob-12-08",
-        "levelId": "py-level-12",
+        "levelId": "level-12",
         "title": "Product of Array Except Self (Concept)",
         "type": "coding",
         "difficulty": "medium",
@@ -549,7 +549,7 @@ export const pyLevel12Problems: Problem[] = [
     },
     {
         "id": "py-prob-12-09",
-        "levelId": "py-level-12",
+        "levelId": "level-12",
         "title": "Find Duplicate in 1 to N-1 (Floyd's Cycle)",
         "type": "coding",
         "difficulty": "medium",
@@ -618,7 +618,7 @@ export const pyLevel12Problems: Problem[] = [
     },
     {
         "id": "py-prob-12-10",
-        "levelId": "py-level-12",
+        "levelId": "level-12",
         "title": "Time Complexity Identifier Challenge",
         "type": "coding",
         "difficulty": "easy",

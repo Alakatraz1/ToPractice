@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel16Problems: Problem[] = [
     {
         "id": "py-prob-16-01",
-        "levelId": "py-level-16",
+        "levelId": "level-16",
         "title": "ListNode Creation and Traversal",
         "type": "coding",
         "difficulty": "easy",
@@ -68,7 +68,7 @@ export const pyLevel16Problems: Problem[] = [
     },
     {
         "id": "py-prob-16-02",
-        "levelId": "py-level-16",
+        "levelId": "level-16",
         "title": "Reverse Linked List In-Place",
         "type": "coding",
         "difficulty": "easy",
@@ -133,7 +133,7 @@ export const pyLevel16Problems: Problem[] = [
     },
     {
         "id": "py-prob-16-03",
-        "levelId": "py-level-16",
+        "levelId": "level-16",
         "title": "Middle of the Linked List",
         "type": "coding",
         "difficulty": "easy",
@@ -200,7 +200,7 @@ export const pyLevel16Problems: Problem[] = [
     },
     {
         "id": "py-prob-16-04",
-        "levelId": "py-level-16",
+        "levelId": "level-16",
         "title": "Linked List Cycle Detection",
         "type": "coding",
         "difficulty": "easy",
@@ -268,7 +268,7 @@ export const pyLevel16Problems: Problem[] = [
     },
     {
         "id": "py-prob-16-05",
-        "levelId": "py-level-16",
+        "levelId": "level-16",
         "title": "Merge Two Sorted Linked Lists",
         "type": "coding",
         "difficulty": "easy",
@@ -333,7 +333,7 @@ export const pyLevel16Problems: Problem[] = [
     },
     {
         "id": "py-prob-16-06",
-        "levelId": "py-level-16",
+        "levelId": "level-16",
         "title": "Remove N-th Node From End of List",
         "type": "coding",
         "difficulty": "medium",
@@ -402,7 +402,7 @@ export const pyLevel16Problems: Problem[] = [
     },
     {
         "id": "py-prob-16-07",
-        "levelId": "py-level-16",
+        "levelId": "level-16",
         "title": "Palindrome Linked List",
         "type": "coding",
         "difficulty": "easy",
@@ -472,7 +472,7 @@ export const pyLevel16Problems: Problem[] = [
     },
     {
         "id": "py-prob-16-08",
-        "levelId": "py-level-16",
+        "levelId": "level-16",
         "title": "Delete Node without Head Pointer",
         "type": "coding",
         "difficulty": "easy",
@@ -529,7 +529,7 @@ export const pyLevel16Problems: Problem[] = [
     },
     {
         "id": "py-prob-16-09",
-        "levelId": "py-level-16",
+        "levelId": "level-16",
         "title": "Intersection of Two Linked Lists",
         "type": "coding",
         "difficulty": "medium",
@@ -586,7 +586,7 @@ export const pyLevel16Problems: Problem[] = [
     },
     {
         "id": "py-prob-16-10",
-        "levelId": "py-level-16",
+        "levelId": "level-16",
         "title": "Add Two Numbers Represented by Linked Lists",
         "type": "coding",
         "difficulty": "medium",

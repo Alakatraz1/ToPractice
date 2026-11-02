@@ -12,7 +12,7 @@ function writeLevel(levelNum, problems) {
 // Level 1: Python Basics & Syntax
 const level1 = [
     {
-        id: "py-prob-01-01", levelId: "py-level-01", title: "Hello Python", type: "coding", difficulty: "beginner", order: 1,
+        id: "py-prob-01-01", levelId: "level-01", title: "Hello Python", type: "coding", difficulty: "beginner", order: 1,
         description: "Welcome to Python Interview Lab! Let's start with Python's most fundamental function: `print()`.\n\nIn Python, you do not need boilerplate functions or headers. Printing output is as simple as calling `print('your text')`.\n\n**Task:**\nWrite a program that prints exactly `Hello Python` to the standard output.",
         whyThisMatters: "Every journey begins with output. Python's simplicity lets you focus directly on logic without syntax clutter.",
         concepts: ["print", "strings", "python syntax"], prerequisites: [], learningObjectives: ["Learn how to output text in Python", "Understand string literals"], constraints: ["Exact match required"],
@@ -26,7 +26,7 @@ const level1 = [
         commonMistakes: ["Misspelling Python or omitting quotes around string"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["basics", "output"]
     },
     {
-        id: "py-prob-01-02", levelId: "py-level-01", title: "Print Three Lines", type: "coding", difficulty: "beginner", order: 2,
+        id: "py-prob-01-02", levelId: "level-01", title: "Print Three Lines", type: "coding", difficulty: "beginner", order: 2,
         description: "In Python, each `print()` call automatically outputs a newline character `\\n` at the end.\n\n**Task:**\nPrint the following three lines:\nOne\nTwo\nThree",
         whyThisMatters: "Understanding how Python formats multiline output is critical for all standard I/O interview problems.",
         concepts: ["print", "newlines", "multiline"], prerequisites: ["print"], learningObjectives: ["Print multiple lines of text"], constraints: ["Three distinct lines"],
@@ -40,7 +40,7 @@ const level1 = [
         commonMistakes: ["Putting everything on one line without newlines"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["basics", "output"]
     },
     {
-        id: "py-prob-01-03", levelId: "py-level-01", title: "Print with Custom Separator", type: "coding", difficulty: "beginner", order: 3,
+        id: "py-prob-01-03", levelId: "level-01", title: "Print with Custom Separator", type: "coding", difficulty: "beginner", order: 3,
         description: "The `print()` function accepts a `sep` keyword argument that specifies what string separates multiple printed arguments.\n\n**Task:**\nRead two space-separated words from input and print them joined by a hyphen `-` using `sep='-'`.",
         whyThisMatters: "Python's keyword arguments like `sep` and `end` give you clean, powerful control over text output.",
         concepts: ["print sep parameter", "formatting"], prerequisites: ["print"], learningObjectives: ["Use the sep parameter in print()"], constraints: ["Words contain letters only"],
@@ -57,7 +57,7 @@ const level1 = [
         commonMistakes: ["Printing with space instead of hyphen"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["basics", "print"]
     },
     {
-        id: "py-prob-01-04", levelId: "py-level-01", title: "Print on Same Line with End Parameter", type: "coding", difficulty: "beginner", order: 4,
+        id: "py-prob-01-04", levelId: "level-01", title: "Print on Same Line with End Parameter", type: "coding", difficulty: "beginner", order: 4,
         description: "By default, `print()` ends with a newline (`end='\\n'`). You can change this using `end=' '` to print values on the same line separated by spaces.\n\n**Task:**\nPrint numbers `1`, `2`, `3` separated by spaces on a single line.",
         whyThisMatters: "Controlling line endings is essential when printing loop outputs or progress logs.",
         concepts: ["print end parameter", "inline output"], prerequisites: ["print"], learningObjectives: ["Learn how to suppress newlines with end parameter"], constraints: ["Single line output"],
@@ -71,7 +71,7 @@ const level1 = [
         commonMistakes: ["Leaving trailing extra space or printing on separate lines"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["basics"]
     },
     {
-        id: "py-prob-01-05", levelId: "py-level-01", title: "Integer and Float Output", type: "coding", difficulty: "beginner", order: 5,
+        id: "py-prob-01-05", levelId: "level-01", title: "Integer and Float Output", type: "coding", difficulty: "beginner", order: 5,
         description: "Python handles numbers seamlessly. Print integer `42` on the first line, and float `3.14159` on the second line.",
         whyThisMatters: "Python dynamically distinguishes between integers and floating-point numbers without type declarations.",
         concepts: ["integers", "floats", "numeric types"], prerequisites: ["print"], learningObjectives: ["Output numerical constants"], constraints: ["Exact values"],
@@ -85,7 +85,7 @@ const level1 = [
         commonMistakes: ["Rounding the float prematurely"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["basics", "numbers"]
     },
     {
-        id: "py-prob-01-06", levelId: "py-level-01", title: "String Multiplication", type: "coding", difficulty: "beginner", order: 6,
+        id: "py-prob-01-06", levelId: "level-01", title: "String Multiplication", type: "coding", difficulty: "beginner", order: 6,
         description: "In Python, multiplying a string by an integer `n` repeats the string `n` times!\nFor example: `'abc' * 3` evaluates to `'abcabcabc'`.\n\n**Task:**\nPrint a line of exactly 10 asterisks (`*`) using Python's string multiplication operator.",
         whyThisMatters: "String multiplication is a unique, powerful Python feature frequently used for banners, padding, and grid generation.",
         concepts: ["string multiplication", "repetition operator"], prerequisites: ["strings"], learningObjectives: ["Use the * operator on strings"], constraints: ["Exactly 10 asterisks"],
@@ -99,7 +99,7 @@ const level1 = [
         commonMistakes: ["Writing 10 separate print statements"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["basics", "strings"]
     },
     {
-        id: "py-prob-01-07", levelId: "py-level-01", title: "Formatted Strings (f-strings)", type: "coding", difficulty: "beginner", order: 7,
+        id: "py-prob-01-07", levelId: "level-01", title: "Formatted Strings (f-strings)", type: "coding", difficulty: "beginner", order: 7,
         description: "Python 3.6 introduced f-strings (`f'...'`), the modern, elegant way to interpolate variables into text.\n\n**Task:**\nRead a name and an age from standard input (space-separated) and print:\n`User <name> is <age> years old.`",
         whyThisMatters: "f-strings are universally used in modern Python codebases and interview problem solutions.",
         concepts: ["f-strings", "string interpolation"], prerequisites: ["input", "strings"], learningObjectives: ["Use f-strings for variable interpolation"], constraints: ["Name is a single word, age is integer"],
@@ -116,7 +116,7 @@ const level1 = [
         commonMistakes: ["Forgetting the 'f' prefix before the string"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "medium", tags: ["f-strings", "formatting"]
     },
     {
-        id: "py-prob-01-08", levelId: "py-level-01", title: "Quotes & Escape Characters", type: "coding", difficulty: "beginner", order: 8,
+        id: "py-prob-01-08", levelId: "level-01", title: "Quotes & Escape Characters", type: "coding", difficulty: "beginner", order: 8,
         description: "In Python, you can enclose strings in single quotes `'` or double quotes `\"`.\nIf your string contains double quotes, you can enclose the string in single quotes without escaping!\n\n**Task:**\nPrint exactly:\n`He said, \"Python is great!\"`",
         whyThisMatters: "Handling nested quotes and escape characters correctly prevents syntax errors in parsing problems.",
         concepts: ["quotes", "escape characters", "string syntax"], prerequisites: ["strings"], learningObjectives: ["Handle double quotes inside single-quoted strings"], constraints: ["Exact punctuation"],
@@ -130,7 +130,7 @@ const level1 = [
         commonMistakes: ["Using double quotes for the outer string without escaping the inner double quotes"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["strings", "basics"]
     },
     {
-        id: "py-prob-01-09", levelId: "py-level-01", title: "ASCII Art Box Pattern", type: "coding", difficulty: "beginner", order: 9,
+        id: "py-prob-01-09", levelId: "level-01", title: "ASCII Art Box Pattern", type: "coding", difficulty: "beginner", order: 9,
         description: "Print a 3x3 hollow box using asterisks and spaces:\n```\n***\n* *\n***\n```",
         whyThisMatters: "Pattern printing develops row-by-row and line-by-line mental modeling.",
         concepts: ["patterns", "multiline output"], prerequisites: ["print"], learningObjectives: ["Construct patterned ASCII outputs"], constraints: ["Exact 3x3 box"],
@@ -144,7 +144,7 @@ const level1 = [
         commonMistakes: ["Extra trailing spaces"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["patterns"]
     },
     {
-        id: "py-prob-01-10", levelId: "py-level-01", title: "Formatted Price Receipt", type: "coding", difficulty: "easy", order: 10,
+        id: "py-prob-01-10", levelId: "level-01", title: "Formatted Price Receipt", type: "coding", difficulty: "easy", order: 10,
         description: "Format numeric outputs with precision.\nGiven an item name and float price from input, print:\n`Item: <name> | Price: $<price:.2f>`\n\nWhere price is formatted to exactly 2 decimal places.",
         whyThisMatters: "Financial and reporting interview tasks require strict two-decimal-place rounding and aligned formatting.",
         concepts: ["float formatting", "f-string precision"], prerequisites: ["f-strings", "floats"], learningObjectives: ["Format float with .2f in f-strings"], constraints: ["Price > 0"],
@@ -165,7 +165,7 @@ const level1 = [
 // Level 2: Variables, Types & Input
 const level2 = [
     {
-        id: "py-prob-02-01", levelId: "py-level-02", title: "Read and Greet", type: "coding", difficulty: "beginner", order: 1,
+        id: "py-prob-02-01", levelId: "level-02", title: "Read and Greet", type: "coding", difficulty: "beginner", order: 1,
         description: "Read a user's name from standard input and print:\n`Welcome, <name>!`",
         whyThisMatters: "Standard input parsing is how every algorithm receives its test data.",
         concepts: ["input", "strings"], prerequisites: ["print"], learningObjectives: ["Read string input from user"], constraints: ["Name is non-empty"],
@@ -182,7 +182,7 @@ const level2 = [
         commonMistakes: ["Leaving extra whitespace in name"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["input", "strings"]
     },
     {
-        id: "py-prob-02-02", levelId: "py-level-02", title: "Sum Two Integers", type: "coding", difficulty: "beginner", order: 2,
+        id: "py-prob-02-02", levelId: "level-02", title: "Sum Two Integers", type: "coding", difficulty: "beginner", order: 2,
         description: "Read two space-separated integers `A` and `B` and print their sum.",
         whyThisMatters: "Python automatically handles arbitrarily large integers without integer overflow issues.",
         concepts: ["integers", "arithmetic", "addition"], prerequisites: ["input"], learningObjectives: ["Convert string inputs to integers and perform arithmetic"], constraints: ["-10^9 <= A, B <= 10^9"],
@@ -199,7 +199,7 @@ const level2 = [
         commonMistakes: ["Adding as strings instead of converting to int"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["arithmetic", "integers"]
     },
     {
-        id: "py-prob-02-03", levelId: "py-level-02", title: "Floor and True Division", type: "coding", difficulty: "beginner", order: 3,
+        id: "py-prob-02-03", levelId: "level-02", title: "Floor and True Division", type: "coding", difficulty: "beginner", order: 3,
         description: "Python provides two division operators:\n- True division `/` returns a float.\n- Floor division `//` truncates the fractional part and returns an integer.\n\n**Task:**\nGiven two integers `A` and `B`, print `A // B` on the first line, and `A / B` (formatted to 2 decimal places) on the second line.",
         whyThisMatters: "Distinguishing `//` from `/` is crucial; bugs from accidental float division are common in index computations.",
         concepts: ["floor division", "float division", "operators"], prerequisites: ["arithmetic"], learningObjectives: ["Understand // vs / in Python"], constraints: ["B != 0"],
@@ -216,7 +216,7 @@ const level2 = [
         commonMistakes: ["Using / for both calculations"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["operators", "math"]
     },
     {
-        id: "py-prob-02-04", levelId: "py-level-02", title: "Modulo and Remainder", type: "coding", difficulty: "beginner", order: 4,
+        id: "py-prob-02-04", levelId: "level-02", title: "Modulo and Remainder", type: "coding", difficulty: "beginner", order: 4,
         description: "The modulo operator `%` calculates the remainder of division.\n\n**Task:**\nRead two integers `A` and `B` and print `A % B`.",
         whyThisMatters: "Modulo is ubiquitous in cyclic data structures, hash functions, and clock arithmetic.",
         concepts: ["modulo", "remainder"], prerequisites: ["arithmetic"], learningObjectives: ["Use the % operator"], constraints: ["B > 0"],
@@ -233,7 +233,7 @@ const level2 = [
         commonMistakes: ["Dividing by zero"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["math", "modulo"]
     },
     {
-        id: "py-prob-02-05", levelId: "py-level-02", title: "Pythonic Variable Swap", type: "coding", difficulty: "beginner", order: 5,
+        id: "py-prob-02-05", levelId: "level-02", title: "Pythonic Variable Swap", type: "coding", difficulty: "beginner", order: 5,
         description: "In C++, swapping two variables requires a temporary variable or `std::swap`.\nIn Python, you can swap variables in a single elegant line:\n`a, b = b, a`\n\n**Task:**\nRead two space-separated words `A` and `B`. Swap them using `a, b = b, a` and print them space-separated.",
         whyThisMatters: "Tuple unpacking makes Python code readable, concise, and eliminates entire classes of pointer and temporary variable bugs.",
         concepts: ["tuple unpacking", "variable swap", "pythonic syntax"], prerequisites: ["variables"], learningObjectives: ["Swap variables using tuple unpacking"], constraints: ["Non-empty words"],
@@ -250,7 +250,7 @@ const level2 = [
         commonMistakes: ["Creating an unnecessary temp variable"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "medium", tags: ["idioms", "variables"]
     },
     {
-        id: "py-prob-02-06", levelId: "py-level-02", title: "Type Conversion & Rounding", type: "coding", difficulty: "beginner", order: 6,
+        id: "py-prob-02-06", levelId: "level-02", title: "Type Conversion & Rounding", type: "coding", difficulty: "beginner", order: 6,
         description: "Given a floating-point number as input:\nPrint its truncated integer part (`int(x)`) on the first line, and its rounded integer (`round(x)`) on the second line.",
         whyThisMatters: "Truncation vs rounding differences often cause off-by-one errors in binary search and indexing algorithms.",
         concepts: ["type casting", "int()", "round()"], prerequisites: ["floats", "integers"], learningObjectives: ["Learn difference between int truncation and round()"], constraints: ["Float input"],
@@ -267,7 +267,7 @@ const level2 = [
         commonMistakes: ["Confusing truncation with floor"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["casting", "math"]
     },
     {
-        id: "py-prob-02-07", levelId: "py-level-02", title: "Circle Area Calculator", type: "coding", difficulty: "easy", order: 7,
+        id: "py-prob-02-07", levelId: "level-02", title: "Circle Area Calculator", type: "coding", difficulty: "easy", order: 7,
         description: "Given the radius `R` of a circle as a float, compute its area using formula:\n`Area = 3.14159 * R * R`\nPrint the area formatted to 2 decimal places.",
         whyThisMatters: "Tests combining variable math, exponentiation operator `**`, and precision formatting.",
         concepts: ["math", "exponentiation", "precision"], prerequisites: ["floats", "f-strings"], learningObjectives: ["Use the ** exponent operator and format output"], constraints: ["R > 0"],
@@ -284,7 +284,7 @@ const level2 = [
         commonMistakes: ["Using ^ instead of ** for power"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["math", "geometry"]
     },
     {
-        id: "py-prob-02-08", levelId: "py-level-02", title: "Count Space-Separated Tokens", type: "coding", difficulty: "beginner", order: 8,
+        id: "py-prob-02-08", levelId: "level-02", title: "Count Space-Separated Tokens", type: "coding", difficulty: "beginner", order: 8,
         description: "Read a line of text containing an arbitrary number of space-separated words, and print the total number of words read.",
         whyThisMatters: "`sys.stdin.read().split()` splits text on arbitrary whitespace (spaces, tabs, newlines), perfectly normalizing interview input.",
         concepts: ["split", "len", "tokenization"], prerequisites: ["input"], learningObjectives: ["Count tokens in standard input"], constraints: ["Line contains words"],
@@ -301,7 +301,7 @@ const level2 = [
         commonMistakes: ["Calling split(' ') which fails on multiple consecutive spaces"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "medium", tags: ["input", "lists"]
     },
     {
-        id: "py-prob-02-09", levelId: "py-level-02", title: "Boolean Evaluation", type: "coding", difficulty: "beginner", order: 9,
+        id: "py-prob-02-09", levelId: "level-02", title: "Boolean Evaluation", type: "coding", difficulty: "beginner", order: 9,
         description: "In Python, boolean literals are capitalized: `True` and `False`.\n\n**Task:**\nRead an integer `N`. Print `True` if `N > 0`, otherwise print `False`.",
         whyThisMatters: "Python boolean values are distinct capitalized keywords unlike C++ lowercase `true`/`false`.",
         concepts: ["booleans", "comparisons", "truth values"], prerequisites: ["comparisons"], learningObjectives: ["Evaluate boolean expressions directly"], constraints: ["Integer input"],
@@ -319,7 +319,7 @@ const level2 = [
         commonMistakes: ["Writing complex if/else when print(n > 0) suffices"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["booleans"]
     },
     {
-        id: "py-prob-02-10", levelId: "py-level-02", title: "Celsius to Fahrenheit Converter", type: "coding", difficulty: "easy", order: 10,
+        id: "py-prob-02-10", levelId: "level-02", title: "Celsius to Fahrenheit Converter", type: "coding", difficulty: "easy", order: 10,
         description: "Given a temperature in Celsius `C` as a float, convert it to Fahrenheit using formula:\n`F = (C * 9/5) + 32`\nPrint the Fahrenheit temperature rounded to 1 decimal place.",
         whyThisMatters: "Formula translation and precision output are ubiquitous in entry-level coding screens.",
         concepts: ["arithmetic", "formula translation", "precision"], prerequisites: ["floats", "arithmetic"], learningObjectives: ["Convert units with standard arithmetic"], constraints: ["-100 <= C <= 200"],
@@ -341,7 +341,7 @@ const level2 = [
 // Level 3: Conditionals & Boolean Logic
 const level3 = [
     {
-        id: "py-prob-03-01", levelId: "py-level-03", title: "Even or Odd", type: "coding", difficulty: "beginner", order: 1,
+        id: "py-prob-03-01", levelId: "level-03", title: "Even or Odd", type: "coding", difficulty: "beginner", order: 1,
         description: "Given an integer `N`, determine if it is even or odd.\nPrint `Even` if `N % 2 == 0`, otherwise print `Odd`.",
         whyThisMatters: "Parity checking with modulo is the quintessential first conditional problem.",
         concepts: ["if-else", "modulo", "parity"], prerequisites: ["conditions"], learningObjectives: ["Write basic if-else branching"], constraints: ["-10^9 <= N <= 10^9"],
@@ -359,7 +359,7 @@ const level3 = [
         commonMistakes: ["Handling negative numbers incorrectly (though n % 2 == 0 works in Python)"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["conditionals"]
     },
     {
-        id: "py-prob-03-02", levelId: "py-level-03", title: "Maximum of Two Numbers", type: "coding", difficulty: "beginner", order: 2,
+        id: "py-prob-03-02", levelId: "level-03", title: "Maximum of Two Numbers", type: "coding", difficulty: "beginner", order: 2,
         description: "Read two integers `A` and `B` and print the larger value.",
         whyThisMatters: "Comparing values and finding extreme elements is the foundation of greedy algorithms and search.",
         concepts: ["if-else", "max", "comparison"], prerequisites: ["conditionals"], learningObjectives: ["Compare two numbers using relational operators"], constraints: ["Integers A and B"],
@@ -376,7 +376,7 @@ const level3 = [
         commonMistakes: ["Failing when numbers are equal"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["conditionals", "max"]
     },
     {
-        id: "py-prob-03-03", levelId: "py-level-03", title: "Maximum of Three Numbers", type: "coding", difficulty: "beginner", order: 3,
+        id: "py-prob-03-03", levelId: "level-03", title: "Maximum of Three Numbers", type: "coding", difficulty: "beginner", order: 3,
         description: "Read three integers `A`, `B`, and `C` and print the largest among them.",
         whyThisMatters: "Chaining conditions with `elif` or `and` teaches clean logical branching.",
         concepts: ["elif", "logical and", "multi-way branching"], prerequisites: ["conditionals"], learningObjectives: ["Chain conditions with elif or use max()"], constraints: ["Three integers"],
@@ -393,7 +393,7 @@ const level3 = [
         commonMistakes: ["Writing deeply nested if statements unnecessarily"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["conditionals"]
     },
     {
-        id: "py-prob-03-04", levelId: "py-level-03", title: "Leap Year Checker", type: "coding", difficulty: "easy", order: 4,
+        id: "py-prob-03-04", levelId: "level-03", title: "Leap Year Checker", type: "coding", difficulty: "easy", order: 4,
         description: "A year is a leap year if:\n1. It is divisible by 4 AND not divisible by 100, OR\n2. It is divisible by 400.\n\n**Task:**\nGiven an integer `year`, print `Leap Year` if it is a leap year, otherwise print `Not Leap Year`.",
         whyThisMatters: "Leap year logic is a classic test of compound boolean expressions with `and` and `or` precedence.",
         concepts: ["boolean logic", "and", "or", "precedence"], prerequisites: ["conditions"], learningObjectives: ["Combine and / or logical operators correctly"], constraints: ["Year > 0"],
@@ -411,7 +411,7 @@ const level3 = [
         commonMistakes: ["Assuming every year divisible by 4 is a leap year (1900 is not)"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "medium", tags: ["logic", "calendar"]
     },
     {
-        id: "py-prob-03-05", levelId: "py-level-03", title: "Letter Grade Calculator", type: "coding", difficulty: "easy", order: 5,
+        id: "py-prob-03-05", levelId: "level-03", title: "Letter Grade Calculator", type: "coding", difficulty: "easy", order: 5,
         description: "Given an integer exam score (0 to 100), print the corresponding letter grade:\n- `90 <= score <= 100`: `A`\n- `80 <= score < 90`: `B`\n- `70 <= score < 80`: `C`\n- `60 <= score < 70`: `D`\n- `score < 60`: `F`",
         whyThisMatters: "Python allows chained comparisons like `90 <= score <= 100`, making range checks cleaner than any other language.",
         concepts: ["chained comparisons", "elif", "range logic"], prerequisites: ["conditions"], learningObjectives: ["Use Python chained comparisons (e.g. 80 <= score < 90)"], constraints: ["0 <= score <= 100"],
@@ -429,7 +429,7 @@ const level3 = [
         commonMistakes: ["Checking ascending order without compound bounds"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["branching"]
     },
     {
-        id: "py-prob-03-06", levelId: "py-level-03", title: "Triangle Inequality Theorem", type: "coding", difficulty: "easy", order: 6,
+        id: "py-prob-03-06", levelId: "level-03", title: "Triangle Inequality Theorem", type: "coding", difficulty: "easy", order: 6,
         description: "Given three positive integer side lengths `A`, `B`, and `C`:\nDetermine if they can form a non-degenerate triangle.\nA triangle is valid if the sum of any two sides is strictly greater than the third side:\n`A + B > C and A + C > B and B + C > A`.\nPrint `Valid` or `Invalid`.",
         whyThisMatters: "Tests geometric boundary validation frequently tested in computational geometry interviews.",
         concepts: ["triangle inequality", "boolean and", "geometry"], prerequisites: ["conditions"], learningObjectives: ["Apply triangle inequality theorem"], constraints: ["A, B, C > 0"],
@@ -446,7 +446,7 @@ const level3 = [
         commonMistakes: ["Using >= instead of strict >"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "medium", tags: ["geometry", "math"]
     },
     {
-        id: "py-prob-03-07", levelId: "py-level-03", title: "Vowel or Consonant", type: "coding", difficulty: "beginner", order: 7,
+        id: "py-prob-03-07", levelId: "level-03", title: "Vowel or Consonant", type: "coding", difficulty: "beginner", order: 7,
         description: "Read a single lowercase English letter. Print `Vowel` if it is one of `a, e, i, o, u`, otherwise print `Consonant`.",
         whyThisMatters: "Demonstrates Python's intuitive `in` membership operator: `char in 'aeiou'`.",
         concepts: ["membership operator", "in keyword"], prerequisites: ["strings", "conditions"], learningObjectives: ["Use the in operator for set/collection membership"], constraints: ["Single lowercase letter"],
@@ -463,7 +463,7 @@ const level3 = [
         commonMistakes: ["Writing five separate == conditions when 'in' is idiomatic"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["strings", "membership"]
     },
     {
-        id: "py-prob-03-08", levelId: "py-level-03", title: "Sign of a Number", type: "coding", difficulty: "beginner", order: 8,
+        id: "py-prob-03-08", levelId: "level-03", title: "Sign of a Number", type: "coding", difficulty: "beginner", order: 8,
         description: "Given an integer `N`, determine its sign:\n- If `N > 0`, print `Positive`\n- If `N < 0`, print `Negative`\n- If `N == 0`, print `Zero`",
         whyThisMatters: "Three-way branching with `if / elif / else` is standard control flow.",
         concepts: ["elif", "sign function", "branching"], prerequisites: ["conditions"], learningObjectives: ["Handle three distinct states with if/elif/else"], constraints: ["Integer input"],
@@ -481,7 +481,7 @@ const level3 = [
         commonMistakes: ["Missing the zero case"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["conditionals"]
     },
     {
-        id: "py-prob-03-09", levelId: "py-level-03", title: "Check Range Membership", type: "coding", difficulty: "beginner", order: 9,
+        id: "py-prob-03-09", levelId: "level-03", title: "Check Range Membership", type: "coding", difficulty: "beginner", order: 9,
         description: "Given three integers `X`, `Low`, and `High` (where `Low <= High`):\nCheck if `X` is within the inclusive range `[Low, High]`.\nPrint `In Range` if `Low <= X <= High`, otherwise print `Out of Range`.",
         whyThisMatters: "Chained comparisons `low <= x <= high` are uniquely Pythonic and avoid redundant variable repetition.",
         concepts: ["chained comparisons", "range checking"], prerequisites: ["conditions"], learningObjectives: ["Write chained range conditions in Python"], constraints: ["Low <= High"],
@@ -498,7 +498,7 @@ const level3 = [
         commonMistakes: ["Using strict inequality instead of inclusive <="], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["conditionals"]
     },
     {
-        id: "py-prob-03-10", levelId: "py-level-03", title: "FizzBuzz Single Step", type: "coding", difficulty: "easy", order: 10,
+        id: "py-prob-03-10", levelId: "level-03", title: "FizzBuzz Single Step", type: "coding", difficulty: "easy", order: 10,
         description: "Given a single positive integer `N`:\n- If `N` is divisible by both 3 and 5 (i.e. by 15), print `FizzBuzz`\n- If `N` is divisible by 3 only, print `Fizz`\n- If `N` is divisible by 5 only, print `Buzz`\n- Otherwise, print `N` itself.",
         whyThisMatters: "FizzBuzz is the most famous interview test of rule precedence ordering.",
         concepts: ["modulo", "branching order", "precedence"], prerequisites: ["conditions", "modulo"], learningObjectives: ["Order conditionals so more specific cases precede general cases"], constraints: ["1 <= N <= 10^5"],

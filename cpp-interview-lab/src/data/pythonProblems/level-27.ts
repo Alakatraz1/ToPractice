@@ -686,7 +686,7 @@ export const pyLevel27Problems: Problem[] = [
       },
       {
         "id": "py-prob-27-10-tc-3",
-        "input": "2\nz\nx\nz",
+        "input": "3\nz\nx\nz",
         "expectedOutput": "",
         "hidden": true
       }

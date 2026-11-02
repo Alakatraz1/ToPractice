@@ -15,6 +15,101 @@ export function setGlobalLanguage(lang: 'cpp' | 'python'): void {
     window.dispatchEvent(new Event('languageChange'));
 }
 
+export function getLocalDateString(date: Date = new Date()): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+export function calculateStreak(dailyActivity: Record<string, number>): {
+    currentStreak: number;
+    longestStreak: number;
+    totalActiveDays: number;
+    totalContributions: number;
+    lastActiveDate: string;
+} {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayStr = getLocalDateString(today);
+    
+    const activeDates = Object.entries(dailyActivity || {})
+        .filter(([_, count]) => count > 0)
+        .map(([date, _]) => date)
+        .sort();
+
+    const totalActiveDays = activeDates.length;
+    const totalContributions = Object.values(dailyActivity || {}).reduce((acc, c) => acc + (c > 0 ? c : 0), 0);
+    const lastActiveDate = activeDates.length > 0 ? activeDates[activeDates.length - 1] : '';
+
+    if (activeDates.length === 0) {
+        return { currentStreak: 0, longestStreak: 0, totalActiveDays: 0, totalContributions: 0, lastActiveDate: '' };
+    }
+
+    // Longest streak calculation
+    let longestStreak = 0;
+    let tempStreak = 0;
+    let prevDate: Date | null = null;
+
+    for (const dateStr of activeDates) {
+        const currDate = new Date(dateStr + 'T00:00:00');
+        if (!prevDate) {
+            tempStreak = 1;
+        } else {
+            const diffDays = Math.round((currDate.getTime() - prevDate.getTime()) / (1000 * 60 * 60 * 24));
+            if (diffDays === 1) {
+                tempStreak++;
+            } else if (diffDays > 1) {
+                tempStreak = 1;
+            }
+        }
+        if (tempStreak > longestStreak) {
+            longestStreak = tempStreak;
+        }
+        prevDate = currDate;
+    }
+
+    // Current streak calculation
+    let currentStreak = 0;
+    const checkDate = new Date(today);
+    
+    // If today has activity, start from today
+    if ((dailyActivity[todayStr] || 0) > 0) {
+        currentStreak = 1;
+        checkDate.setDate(checkDate.getDate() - 1);
+    } else {
+        // If today has no activity, check yesterday
+        checkDate.setDate(checkDate.getDate() - 1);
+        const yestStr = getLocalDateString(checkDate);
+        if ((dailyActivity[yestStr] || 0) > 0) {
+            currentStreak = 1;
+            checkDate.setDate(checkDate.getDate() - 1);
+        } else {
+            currentStreak = 0;
+        }
+    }
+
+    if (currentStreak > 0) {
+        while (true) {
+            const dStr = getLocalDateString(checkDate);
+            if ((dailyActivity[dStr] || 0) > 0) {
+                currentStreak++;
+                checkDate.setDate(checkDate.getDate() - 1);
+            } else {
+                break;
+            }
+        }
+    }
+
+    return {
+        currentStreak,
+        longestStreak: Math.max(longestStreak, currentStreak),
+        totalActiveDays,
+        totalContributions,
+        lastActiveDate
+    };
+}
+
 export function getDefaultProgress(lang?: 'cpp' | 'python'): UserProgress {
     const language = lang || getGlobalLanguage();
     return {
@@ -27,6 +122,12 @@ export function getDefaultProgress(lang?: 'cpp' | 'python'): UserProgress {
         savedCode: {},
         mastery: {},
         solveQuality: {},
+        dailyActivity: {},
+        streak: {
+            currentStreak: 0,
+            longestStreak: 0,
+            lastActiveDate: ''
+        },
         lastOpenedAt: new Date().toISOString()
     };
 }
@@ -46,6 +147,17 @@ export function getProgress(lang?: 'cpp' | 'python'): UserProgress {
     
     try {
         const parsed = JSON.parse(stored);
+        const completed = parsed.completedProblems || [];
+        const dailyAct = parsed.dailyActivity || {};
+        
+        // Auto-seed today's activity if completedProblems exists but dailyActivity was empty
+        if (completed.length > 0 && Object.keys(dailyAct).length === 0) {
+            const todayStr = getLocalDateString();
+            dailyAct[todayStr] = completed.length;
+        }
+
+        const streak = parsed.streak || calculateStreak(dailyAct);
+
         return {
             ...defaultProg,
             ...parsed,
@@ -54,8 +166,10 @@ export function getProgress(lang?: 'cpp' | 'python'): UserProgress {
             savedCode: parsed.savedCode || {},
             attempts: parsed.attempts || {},
             hintsUsed: parsed.hintsUsed || {},
-            completedProblems: parsed.completedProblems || [],
+            completedProblems: completed,
             solutionsViewed: parsed.solutionsViewed || [],
+            dailyActivity: dailyAct,
+            streak
         };
     } catch (e) {
         console.error('Failed to parse progress', e);
@@ -125,9 +239,18 @@ export function markProblemComplete(problemId: string, lang?: 'cpp' | 'python'):
         if (problem && problem.concepts) {
             updateMastery(current, problemId, problem.concepts, quality);
         }
+
+        // Record Daily Activity for GitHub-style green dot system
+        const todayStr = getLocalDateString();
+        current.dailyActivity = current.dailyActivity || {};
+        current.dailyActivity[todayStr] = (current.dailyActivity[todayStr] || 0) + 1;
+        current.streak = calculateStreak(current.dailyActivity);
     }
     
     saveProgress(current, language);
+    if (typeof window !== 'undefined') {
+        window.dispatchEvent(new Event('progressUpdated'));
+    }
 }
 
 export function recordAttempt(problemId: string, isFailure: boolean, lang?: 'cpp' | 'python'): void {
@@ -183,4 +306,140 @@ export function resetProgress(lang?: 'cpp' | 'python'): void {
     const language = lang || getGlobalLanguage();
     localStorage.removeItem(getStorageKey(language));
     window.dispatchEvent(new Event('languageChange'));
+    window.dispatchEvent(new Event('progressUpdated'));
+}
+
+export function getCombinedDailyActivity(): Record<string, number> {
+    if (typeof window === 'undefined') return {};
+    const cppProg = getProgress('cpp');
+    const pyProg = getProgress('python');
+    const merged: Record<string, number> = { ...(cppProg.dailyActivity || {}) };
+    for (const [date, count] of Object.entries(pyProg.dailyActivity || {})) {
+        merged[date] = (merged[date] || 0) + count;
+    }
+    return merged;
+}
+
+export interface CalendarDay {
+    date: string;
+    dayOfWeek: number;
+    count: number;
+    level: 0 | 1 | 2 | 3 | 4;
+    label: string;
+    isFuture: boolean;
+}
+
+export interface CalendarWeek {
+    days: CalendarDay[];
+}
+
+export interface MonthLabel {
+    name: string;
+    weekIndex: number;
+}
+
+export interface CalendarData {
+    weeks: CalendarWeek[];
+    months: MonthLabel[];
+    totalActiveDays: number;
+    totalContributions: number;
+    currentStreak: number;
+    longestStreak: number;
+    todayCount: number;
+}
+
+export function getCalendarData(dailyActivity: Record<string, number>, weeksCount: number = 52): CalendarData {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayStr = getLocalDateString(today);
+    
+    // We want the grid to end on the current week's Saturday
+    const currentDayOfWeek = today.getDay(); // 0 (Sun) - 6 (Sat)
+    const endOfWeek = new Date(today);
+    endOfWeek.setDate(today.getDate() + (6 - currentDayOfWeek));
+    endOfWeek.setHours(0, 0, 0, 0);
+    
+    // Total days: weeksCount * 7
+    const totalDays = weeksCount * 7;
+    const startDate = new Date(endOfWeek);
+    startDate.setDate(endOfWeek.getDate() - (totalDays - 1));
+    startDate.setHours(0, 0, 0, 0);
+
+    const weeks: CalendarWeek[] = [];
+    const months: MonthLabel[] = [];
+    let currentWeek: CalendarDay[] = [];
+    let prevMonth = -1;
+
+    const curr = new Date(startDate);
+    for (let i = 0; i < totalDays; i++) {
+        const dateStr = getLocalDateString(curr);
+        const isFuture = curr.getTime() > today.getTime();
+        const count = isFuture ? 0 : (dailyActivity[dateStr] || 0);
+        
+        let level: 0 | 1 | 2 | 3 | 4 = 0;
+        if (count >= 6) level = 4;
+        else if (count >= 4) level = 3;
+        else if (count >= 2) level = 2;
+        else if (count === 1) level = 1;
+
+        const dateFormatted = curr.toLocaleDateString('en-US', {
+            weekday: 'short',
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        });
+
+        const label = isFuture 
+            ? 'Upcoming' 
+            : count === 0 
+                ? `No submissions on ${dateFormatted}`
+                : `${count} problem${count === 1 ? '' : 's'} completed on ${dateFormatted}`;
+
+        currentWeek.push({
+            date: dateStr,
+            dayOfWeek: curr.getDay(),
+            count,
+            level,
+            label,
+            isFuture
+        });
+
+        if (currentWeek.length === 7) {
+            const weekIdx = weeks.length;
+            const weekMonth = new Date(currentWeek[0].date + 'T00:00:00').getMonth();
+            const firstOfMonth = currentWeek.find(d => d.date.endsWith('-01'));
+
+            if (firstOfMonth) {
+                const mDate = new Date(firstOfMonth.date + 'T00:00:00');
+                months.push({
+                    name: mDate.toLocaleDateString('en-US', { month: 'short' }),
+                    weekIndex: weekIdx
+                });
+                prevMonth = mDate.getMonth();
+            } else if (weekMonth !== prevMonth && (weeks.length === 0 || weeks.length - (months[months.length - 1]?.weekIndex ?? -10) >= 3)) {
+                months.push({
+                    name: new Date(currentWeek[0].date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short' }),
+                    weekIndex: weekIdx
+                });
+                prevMonth = weekMonth;
+            }
+
+            weeks.push({ days: currentWeek });
+            currentWeek = [];
+        }
+
+        curr.setDate(curr.getDate() + 1);
+    }
+
+    const streakMetrics = calculateStreak(dailyActivity);
+
+    return {
+        weeks,
+        months,
+        totalActiveDays: streakMetrics.totalActiveDays,
+        totalContributions: streakMetrics.totalContributions,
+        currentStreak: streakMetrics.currentStreak,
+        longestStreak: streakMetrics.longestStreak,
+        todayCount: dailyActivity[todayStr] || 0
+    };
 }

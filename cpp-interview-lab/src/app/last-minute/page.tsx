@@ -1,16 +1,27 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, BookOpen, AlertTriangle, ListChecks, Zap, Terminal } from 'lucide-react';
 import Link from 'next/link';
 import { allProblems } from '@/data/levels';
-import { getGlobalLanguage } from '@/lib/progress';
+import { getGlobalLanguage, setGlobalLanguage } from '@/lib/progress';
 
 export default function LastMinutePrep() {
     const router = useRouter();
     const [activeTab, setActiveTab] = useState<'revision' | 'cheatsheet' | 'mistakes' | 'bigo' | 'mustsolve'>('revision');
-    const lang = getGlobalLanguage();
+    const [lang, setLang] = useState<'cpp' | 'python'>('cpp');
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+        setLang(getGlobalLanguage());
+    }, []);
+
+    const handleLanguageSwitch = (newLang: 'cpp' | 'python') => {
+        setLang(newLang);
+        setGlobalLanguage(newLang);
+    };
 
     const baseMustSolveIds = [
         'prob-09-04', 'prob-09-05', 'prob-09-07', // Arrays
@@ -27,23 +38,40 @@ export default function LastMinutePrep() {
     const mustSolveIds = baseMustSolveIds.map(id => lang === 'python' ? `py-${id}` : id);
     const mustSolve = allProblems.filter(p => mustSolveIds.includes(p.id));
 
+    if (!isClient) return <div className="min-h-screen bg-gray-950 p-8 text-white">Loading prep...</div>;
+
     return (
         <div className="min-h-screen bg-gray-950 text-gray-200 p-8 font-sans">
             <div className="max-w-5xl mx-auto space-y-8">
                 
-                <header className="flex items-center gap-4 border-b border-gray-800 pb-6">
-                    <button 
-                        onClick={() => router.push('/')}
-                        className="text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-gray-900"
-                    >
-                        <ArrowLeft className="w-6 h-6" />
-                    </button>
-                    <div>
-                        <h1 className="text-3xl font-extrabold text-white flex items-center gap-3">
-                            <Zap className="w-8 h-8 text-yellow-400" />
-                            Last-Minute Interview Prep
-                        </h1>
-                        <p className="text-gray-400">High-yield revision for your technical interview tomorrow.</p>
+                <header className="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-800 pb-6 gap-4">
+                    <div className="flex items-center gap-4">
+                        <button 
+                            onClick={() => router.push('/')}
+                            className="text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-gray-900"
+                            title="Back to Dashboard"
+                        >
+                            <ArrowLeft className="w-6 h-6" />
+                        </button>
+                        <div>
+                            <h1 className="text-3xl font-extrabold text-white flex items-center gap-3">
+                                <Zap className="w-8 h-8 text-yellow-400" />
+                                Last-Minute Interview Prep
+                            </h1>
+                            <p className="text-gray-400">High-yield revision for your technical interview tomorrow.</p>
+                        </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 self-start md:self-auto">
+                        <span className="text-xs uppercase font-bold text-gray-400">Track:</span>
+                        <select 
+                            value={lang}
+                            onChange={(e) => handleLanguageSwitch(e.target.value as 'cpp' | 'python')}
+                            className="bg-transparent text-gray-100 text-sm font-semibold outline-none cursor-pointer"
+                        >
+                            <option value="cpp" className="bg-gray-900 text-white">C++</option>
+                            <option value="python" className="bg-gray-900 text-white">Python 3</option>
+                        </select>
                     </div>
                 </header>
 
@@ -52,7 +80,7 @@ export default function LastMinutePrep() {
                         Quick Revision
                     </button>
                     <button onClick={() => setActiveTab('cheatsheet')} className={`px-4 py-2 rounded-lg font-bold text-sm transition-colors ${activeTab === 'cheatsheet' ? 'bg-blue-600 text-white' : 'bg-gray-900 text-gray-400 hover:bg-gray-800'}`}>
-                        C++ Cheat Sheet
+                        {lang === 'python' ? 'Python Cheat Sheet' : 'C++ Cheat Sheet'}
                     </button>
                     <button onClick={() => setActiveTab('mistakes')} className={`px-4 py-2 rounded-lg font-bold text-sm transition-colors ${activeTab === 'mistakes' ? 'bg-blue-600 text-white' : 'bg-gray-900 text-gray-400 hover:bg-gray-800'}`}>
                         Common Mistakes
@@ -69,73 +97,154 @@ export default function LastMinutePrep() {
                     
                     {activeTab === 'revision' && (
                         <div className="prose prose-invert max-w-none space-y-6">
-                            <h2 className="text-2xl font-bold text-white border-b border-gray-800 pb-2">C++ Essentials</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div>
-                                    <h3 className="text-blue-400 font-bold">1. Vectors over Arrays</h3>
-                                    <p className="text-sm text-gray-400">Always use `std::vector{"<int>"}` instead of `int arr[n]`. Vectors track their own size, can be returned from functions, and dynamically resize.</p>
+                            <h2 className="text-2xl font-bold text-white border-b border-gray-800 pb-2">
+                                {lang === 'python' ? 'Python 3 Essentials' : 'C++ Essentials'}
+                            </h2>
+                            {lang === 'python' ? (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div>
+                                        <h3 className="text-blue-400 font-bold">1. List Slicing & Comprehensions</h3>
+                                        <p className="text-sm text-gray-400">Use slicing `nums[::-1]` for fast reversal and `nums[start:end:step]` for sublists. List comprehensions like `[x for x in nums if x % 2 == 0]` run faster than append loops.</p>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-blue-400 font-bold">2. Dict & Set O(1) Lookups</h3>
+                                        <p className="text-sm text-gray-400">Dictionaries and sets use high-performance open addressing hash tables. Use `d.get(key, default)` to avoid `KeyError` when counting occurrences.</p>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-blue-400 font-bold">3. Python Standard Library Superpowers</h3>
+                                        <p className="text-sm text-gray-400">Never manually write frequency counters or queue shift logic. Use `collections.Counter`, `collections.defaultdict(list)`, `collections.deque` for O(1) popleft, and `heapq` for priority queues.</p>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-blue-400 font-bold">4. Mutability & Object References</h3>
+                                        <p className="text-sm text-gray-400">Python variables are names bound to objects. Passing lists to recursive helper functions modifies the original list. Use `arr.copy()` or backtrack `arr.pop()` to restore state.</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 className="text-blue-400 font-bold">2. Pass by Reference</h3>
-                                    <p className="text-sm text-gray-400">When passing large vectors or strings to helper functions, use `const vector{"<int>"}& nums` to avoid O(N) copying on every call!</p>
+                            ) : (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div>
+                                        <h3 className="text-blue-400 font-bold">1. Vectors over Arrays</h3>
+                                        <p className="text-sm text-gray-400">Always use `std::vector{"<int>"}` instead of `int arr[n]`. Vectors track their own size, can be returned from functions, and dynamically resize.</p>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-blue-400 font-bold">2. Pass by Reference</h3>
+                                        <p className="text-sm text-gray-400">When passing large vectors or strings to helper functions, use `const vector{"<int>"}& nums` to avoid O(N) copying on every call!</p>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-blue-400 font-bold">3. Hash Maps vs Sets</h3>
+                                        <p className="text-sm text-gray-400">Use `unordered_set` if you only need to know &quot;Does X exist?&quot;. Use `unordered_map` if you need to know &quot;How many times did X appear?&quot; or &quot;What index was X at?&quot;.</p>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-blue-400 font-bold">4. String Traversal</h3>
+                                        <p className="text-sm text-gray-400">To scan characters: `for(char c : s)`. To modify characters: `for(char& c : s)` or `for(int i=0; i{"<"}s.length(); i++)`.</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 className="text-blue-400 font-bold">3. Hash Maps vs Sets</h3>
-                                    <p className="text-sm text-gray-400">Use `unordered_set` if you only need to know "Does X exist?". Use `unordered_map` if you need to know "How many times did X appear?" or "What index was X at?".</p>
-                                </div>
-                                <div>
-                                    <h3 className="text-blue-400 font-bold">4. String Traversal</h3>
-                                    <p className="text-sm text-gray-400">To scan characters: `for(char c : s)`. To modify characters: `for(char& c : s)` or `for(int i=0; i{"<"}s.length(); i++)`.</p>
-                                </div>
-                            </div>
+                            )}
                         </div>
                     )}
 
                     {activeTab === 'cheatsheet' && (
                         <div className="space-y-6">
-                            <h2 className="text-2xl font-bold text-white border-b border-gray-800 pb-2 flex items-center gap-2"><Terminal className="w-5 h-5"/> C++ Snippets</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
-                                    <h3 className="text-sm font-bold text-gray-400 mb-2">Sorting</h3>
-                                    <pre className="text-emerald-400 text-sm overflow-x-auto">sort(v.begin(), v.end());{"\n"}sort(v.begin(), v.end(), greater{"<int>"}());</pre>
+                            <h2 className="text-2xl font-bold text-white border-b border-gray-800 pb-2 flex items-center gap-2">
+                                <Terminal className="w-5 h-5"/> {lang === 'python' ? 'Python 3 Snippets' : 'C++ Snippets'}
+                            </h2>
+                            {lang === 'python' ? (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                                        <h3 className="text-sm font-bold text-gray-400 mb-2">Sorting (Custom & Multi-key)</h3>
+                                        <pre className="text-emerald-400 text-sm overflow-x-auto">nums.sort()  # in-place{"\n"}sorted_pairs = sorted(pairs, key=lambda x: (x[0], -x[1]))</pre>
+                                    </div>
+                                    <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                                        <h3 className="text-sm font-bold text-gray-400 mb-2">Frequency Map & Defaultdict</h3>
+                                        <pre className="text-emerald-400 text-sm overflow-x-auto">from collections import Counter, defaultdict{"\n"}freq = Counter(nums){"\n"}adj = defaultdict(list)</pre>
+                                    </div>
+                                    <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                                        <h3 className="text-sm font-bold text-gray-400 mb-2">Priority Queue (Min/Max Heap)</h3>
+                                        <pre className="text-emerald-400 text-sm overflow-x-auto">import heapq{"\n"}heapq.heapify(h){"\n"}heapq.heappush(h, val){"\n"}smallest = heapq.heappop(h)</pre>
+                                    </div>
+                                    <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                                        <h3 className="text-sm font-bold text-gray-400 mb-2">FIFO Queue (BFS)</h3>
+                                        <pre className="text-emerald-400 text-sm overflow-x-auto">from collections import deque{"\n"}q = deque([start_node]){"\n"}curr = q.popleft()  # O(1) pop</pre>
+                                    </div>
+                                    <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                                        <h3 className="text-sm font-bold text-gray-400 mb-2">Binary Search (Bisect)</h3>
+                                        <pre className="text-emerald-400 text-sm overflow-x-auto">import bisect{"\n"}idx = bisect.bisect_left(arr, target) # lower bound{"\n"}idx_r = bisect.bisect_right(arr, target) # upper</pre>
+                                    </div>
+                                    <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                                        <h3 className="text-sm font-bold text-gray-400 mb-2">Fast Standard Input</h3>
+                                        <pre className="text-emerald-400 text-sm overflow-x-auto">import sys{"\n"}tokens = sys.stdin.read().split(){"\n"}n, m = int(tokens[0]), int(tokens[1])</pre>
+                                    </div>
                                 </div>
-                                <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
-                                    <h3 className="text-sm font-bold text-gray-400 mb-2">Hash Map (Frequency)</h3>
-                                    <pre className="text-emerald-400 text-sm overflow-x-auto">unordered_map{"<int, int>"} freq;{"\n"}freq[x]++;</pre>
+                            ) : (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                                        <h3 className="text-sm font-bold text-gray-400 mb-2">Sorting</h3>
+                                        <pre className="text-emerald-400 text-sm overflow-x-auto">sort(v.begin(), v.end());{"\n"}sort(v.begin(), v.end(), greater{"<int>"}());</pre>
+                                    </div>
+                                    <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                                        <h3 className="text-sm font-bold text-gray-400 mb-2">Hash Map (Frequency)</h3>
+                                        <pre className="text-emerald-400 text-sm overflow-x-auto">unordered_map{"<int, int>"} freq;{"\n"}freq[x]++;</pre>
+                                    </div>
+                                    <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                                        <h3 className="text-sm font-bold text-gray-400 mb-2">Binary Search Template</h3>
+                                        <pre className="text-emerald-400 text-sm overflow-x-auto">int left = 0, right = n - 1;{"\n"}while(left {"<="} right) {"{"}{"\n"}  int mid = left + (right - left) / 2;{"\n"}  // ...{"\n"}{"}"}</pre>
+                                    </div>
+                                    <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                                        <h3 className="text-sm font-bold text-gray-400 mb-2">String Input (Spaces)</h3>
+                                        <pre className="text-emerald-400 text-sm overflow-x-auto">string s;{"\n"}getline(cin, s);</pre>
+                                    </div>
                                 </div>
-                                <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
-                                    <h3 className="text-sm font-bold text-gray-400 mb-2">Binary Search Template</h3>
-                                    <pre className="text-emerald-400 text-sm overflow-x-auto">int left = 0, right = n - 1;{"\n"}while(left {"<="} right) {"{"}{"\n"}  int mid = left + (right - left) / 2;{"\n"}  // ...{"\n"}{"}"}</pre>
-                                </div>
-                                <div className="bg-gray-950 p-4 rounded-xl border border-gray-800">
-                                    <h3 className="text-sm font-bold text-gray-400 mb-2">String Input (Spaces)</h3>
-                                    <pre className="text-emerald-400 text-sm overflow-x-auto">string s;{"\n"}getline(cin, s);</pre>
-                                </div>
-                            </div>
+                            )}
                         </div>
                     )}
 
                     {activeTab === 'mistakes' && (
                         <div className="space-y-4">
-                            <h2 className="text-2xl font-bold text-red-400 border-b border-red-900/30 pb-2 flex items-center gap-2"><AlertTriangle className="w-5 h-5"/> Common Interview Fatal Errors</h2>
-                            <ul className="space-y-4 mt-4">
-                                <li className="bg-red-950/20 p-4 rounded-lg border border-red-900/30">
-                                    <strong className="text-red-300">= vs ==</strong>
-                                    <p className="text-sm text-gray-400 mt-1">Typing `if (x = 5)` instead of `if (x == 5)`. The first one ASSIGNS 5 to x and is always true!</p>
-                                </li>
-                                <li className="bg-red-950/20 p-4 rounded-lg border border-red-900/30">
-                                    <strong className="text-red-300">Uninitialized Variables</strong>
-                                    <p className="text-sm text-gray-400 mt-1">`int max_val;` in C++ does NOT default to 0. It holds garbage memory. ALWAYS do `int max_val = 0;`.</p>
-                                </li>
-                                <li className="bg-red-950/20 p-4 rounded-lg border border-red-900/30">
-                                    <strong className="text-red-300">Empty Stack/Queue Access</strong>
-                                    <p className="text-sm text-gray-400 mt-1">Calling `st.top()` or `st.pop()` on an empty stack will instantly crash your program (Segfault). Always check `!st.empty()`.</p>
-                                </li>
-                                <li className="bg-red-950/20 p-4 rounded-lg border border-red-900/30">
-                                    <strong className="text-red-300">Integer Division</strong>
-                                    <p className="text-sm text-gray-400 mt-1">`5 / 2` is `2`, not `2.5`. If you need a decimal, cast to double: `(double)5 / 2`.</p>
-                                </li>
-                            </ul>
+                            <h2 className="text-2xl font-bold text-red-400 border-b border-red-900/30 pb-2 flex items-center gap-2">
+                                <AlertTriangle className="w-5 h-5"/> Common Interview Fatal Errors ({lang === 'python' ? 'Python' : 'C++'})
+                            </h2>
+                            {lang === 'python' ? (
+                                <ul className="space-y-4 mt-4">
+                                    <li className="bg-red-950/20 p-4 rounded-lg border border-red-900/30">
+                                        <strong className="text-red-300">Mutable Default Arguments</strong>
+                                        <p className="text-sm text-gray-400 mt-1">`def solve(path=[])` reuses the exact same list across multiple calls! Always use `def solve(path=None): if path is None: path = []`.</p>
+                                    </li>
+                                    <li className="bg-red-950/20 p-4 rounded-lg border border-red-900/30">
+                                        <strong className="text-red-300">Shallow 2D Matrix Duplication</strong>
+                                        <p className="text-sm text-gray-400 mt-1">Writing `grid = [[0] * n] * m` duplicates pointers to the SAME inner list. Modifying `grid[0][0] = 1` updates every single row! Always do `grid = [[0] * n for _ in range(m)]`.</p>
+                                    </li>
+                                    <li className="bg-red-950/20 p-4 rounded-lg border border-red-900/30">
+                                        <strong className="text-red-300">Modifying a List While Iterating</strong>
+                                        <p className="text-sm text-gray-400 mt-1">`for x in nums: nums.remove(x)` changes indices dynamically and skips items. Iterate over a slice copy `nums[:]` or use a list comprehension.</p>
+                                    </li>
+                                    <li className="bg-red-950/20 p-4 rounded-lg border border-red-900/30">
+                                        <strong className="text-red-300">Integer vs Float Division</strong>
+                                        <p className="text-sm text-gray-400 mt-1">`5 / 2` evaluates to float `2.5`. For integer array indices or binary search midpoints, always use `5 // 2` to yield integer `2`.</p>
+                                    </li>
+                                    <li className="bg-red-950/20 p-4 rounded-lg border border-red-900/30">
+                                        <strong className="text-red-300">Queue Operations with list.pop(0)</strong>
+                                        <p className="text-sm text-gray-400 mt-1">Calling `arr.pop(0)` on a standard Python list takes O(N) time because all elements must shift! In BFS, this degrades O(V + E) to O(V^2). Always use `collections.deque` with `popleft()` for O(1).</p>
+                                    </li>
+                                </ul>
+                            ) : (
+                                <ul className="space-y-4 mt-4">
+                                    <li className="bg-red-950/20 p-4 rounded-lg border border-red-900/30">
+                                        <strong className="text-red-300">= vs ==</strong>
+                                        <p className="text-sm text-gray-400 mt-1">Typing `if (x = 5)` instead of `if (x == 5)`. The first one ASSIGNS 5 to x and is always true!</p>
+                                    </li>
+                                    <li className="bg-red-950/20 p-4 rounded-lg border border-red-900/30">
+                                        <strong className="text-red-300">Uninitialized Variables</strong>
+                                        <p className="text-sm text-gray-400 mt-1">`int max_val;` in C++ does NOT default to 0. It holds garbage memory. ALWAYS do `int max_val = 0;`.</p>
+                                    </li>
+                                    <li className="bg-red-950/20 p-4 rounded-lg border border-red-900/30">
+                                        <strong className="text-red-300">Empty Stack/Queue Access</strong>
+                                        <p className="text-sm text-gray-400 mt-1">Calling `st.top()` or `st.pop()` on an empty stack will instantly crash your program (Segfault). Always check `!st.empty()`.</p>
+                                    </li>
+                                    <li className="bg-red-950/20 p-4 rounded-lg border border-red-900/30">
+                                        <strong className="text-red-300">Integer Division</strong>
+                                        <p className="text-sm text-gray-400 mt-1">`5 / 2` is `2`, not `2.5`. If you need a decimal, cast to double: `(double)5 / 2`.</p>
+                                    </li>
+                                </ul>
+                            )}
                         </div>
                     )}
 
@@ -155,27 +264,27 @@ export default function LastMinutePrep() {
                                         <tr className="border-b border-gray-800/50">
                                             <td className="py-3 font-mono text-blue-400">O(1)</td>
                                             <td className="py-3">Instant / Constant</td>
-                                            <td className="py-3">Hash map lookup, array index</td>
+                                            <td className="py-3">{lang === 'python' ? 'dict / set lookup, deque.popleft(), list indexing' : 'Hash map lookup, array index'}</td>
                                         </tr>
                                         <tr className="border-b border-gray-800/50">
                                             <td className="py-3 font-mono text-blue-400">O(log n)</td>
                                             <td className="py-3">Divide in half</td>
-                                            <td className="py-3">Binary search</td>
+                                            <td className="py-3">{lang === 'python' ? 'bisect.bisect_left, heapq.heappop' : 'Binary search, std::map lookup'}</td>
                                         </tr>
                                         <tr className="border-b border-gray-800/50">
                                             <td className="py-3 font-mono text-amber-400">O(n)</td>
                                             <td className="py-3">Scan everything once</td>
-                                            <td className="py-3">Single loop, two pointers</td>
+                                            <td className="py-3">Single loop, two pointers, frequency counting</td>
                                         </tr>
                                         <tr className="border-b border-gray-800/50">
                                             <td className="py-3 font-mono text-amber-400">O(n log n)</td>
                                             <td className="py-3">Scan and split</td>
-                                            <td className="py-3">Sorting (`std::sort`)</td>
+                                            <td className="py-3">{lang === 'python' ? 'Timsort (sorted() or .sort())' : 'Sorting (`std::sort`)'}</td>
                                         </tr>
                                         <tr className="border-b border-gray-800/50">
                                             <td className="py-3 font-mono text-red-400">O(n^2)</td>
                                             <td className="py-3">Check every pair</td>
-                                            <td className="py-3">Nested loops</td>
+                                            <td className="py-3">Nested loops, pairwise distance matrix</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -184,12 +293,12 @@ export default function LastMinutePrep() {
                             <div>
                                 <h2 className="text-2xl font-bold text-white border-b border-gray-800 pb-2 mt-8">Pattern Recognition</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                                    <div className="bg-gray-950 p-4 rounded-xl"><div className="text-gray-500 text-sm">Need to count frequencies?</div><div className="font-bold text-blue-400">→ Hash Map</div></div>
-                                    <div className="bg-gray-950 p-4 rounded-xl"><div className="text-gray-500 text-sm">Need fast lookup / uniqueness?</div><div className="font-bold text-blue-400">→ Hash Set</div></div>
-                                    <div className="bg-gray-950 p-4 rounded-xl"><div className="text-gray-500 text-sm">Sorted array + searching?</div><div className="font-bold text-blue-400">→ Binary Search</div></div>
+                                    <div className="bg-gray-950 p-4 rounded-xl"><div className="text-gray-500 text-sm">Need to count frequencies?</div><div className="font-bold text-blue-400">→ {lang === 'python' ? 'collections.Counter' : 'unordered_map'}</div></div>
+                                    <div className="bg-gray-950 p-4 rounded-xl"><div className="text-gray-500 text-sm">Need fast lookup / uniqueness?</div><div className="font-bold text-blue-400">→ {lang === 'python' ? 'set()' : 'unordered_set'}</div></div>
+                                    <div className="bg-gray-950 p-4 rounded-xl"><div className="text-gray-500 text-sm">Sorted array + searching?</div><div className="font-bold text-blue-400">→ Binary Search (bisect)</div></div>
                                     <div className="bg-gray-950 p-4 rounded-xl"><div className="text-gray-500 text-sm">Sorted array + finding pairs?</div><div className="font-bold text-blue-400">→ Two Pointers</div></div>
                                     <div className="bg-gray-950 p-4 rounded-xl"><div className="text-gray-500 text-sm">Contiguous subarray condition?</div><div className="font-bold text-blue-400">→ Sliding Window</div></div>
-                                    <div className="bg-gray-950 p-4 rounded-xl"><div className="text-gray-500 text-sm">Matching brackets / nesting?</div><div className="font-bold text-blue-400">→ Stack</div></div>
+                                    <div className="bg-gray-950 p-4 rounded-xl"><div className="text-gray-500 text-sm">Matching brackets / monotonic stack?</div><div className="font-bold text-blue-400">→ Stack (list.append/pop)</div></div>
                                 </div>
                             </div>
                         </div>
@@ -197,7 +306,9 @@ export default function LastMinutePrep() {
 
                     {activeTab === 'mustsolve' && (
                         <div className="space-y-4">
-                            <h2 className="text-2xl font-bold text-amber-400 border-b border-amber-900/30 pb-2 flex items-center gap-2"><ListChecks className="w-6 h-6"/> Must Solve Before Interview</h2>
+                            <h2 className="text-2xl font-bold text-amber-400 border-b border-amber-900/30 pb-2 flex items-center gap-2">
+                                <ListChecks className="w-6 h-6"/> Must Solve Before Interview ({lang === 'python' ? 'Python 3' : 'C++'})
+                            </h2>
                             <p className="text-gray-400 text-sm mb-6">If you only have time to solve a few problems, do these. They cover the most common patterns asked in technical interviews.</p>
                             
                             <div className="grid grid-cols-1 gap-3">
@@ -212,7 +323,7 @@ export default function LastMinutePrep() {
                                             <div className="text-xs text-gray-500 mt-1 capitalize">{p.tags?.[0] || 'algorithm'} • {p.difficulty}</div>
                                         </div>
                                         <div className="bg-gray-800 text-gray-400 px-3 py-1 rounded-md text-sm group-hover:bg-amber-900/30 group-hover:text-amber-400 transition-colors">
-                                            Solve
+                                            Solve ({lang === 'python' ? 'Python' : 'C++'})
                                         </div>
                                     </Link>
                                 ))}

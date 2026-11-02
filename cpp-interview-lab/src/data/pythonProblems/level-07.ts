@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel7Problems: Problem[] = [
     {
         "id": "py-prob-07-01",
-        "levelId": "py-level-07",
+        "levelId": "level-07",
         "title": "Reverse a String",
         "type": "coding",
         "difficulty": "beginner",
@@ -68,7 +68,7 @@ export const pyLevel7Problems: Problem[] = [
     },
     {
         "id": "py-prob-07-02",
-        "levelId": "py-level-07",
+        "levelId": "level-07",
         "title": "Valid Palindrome String",
         "type": "coding",
         "difficulty": "easy",
@@ -143,7 +143,7 @@ export const pyLevel7Problems: Problem[] = [
     },
     {
         "id": "py-prob-07-03",
-        "levelId": "py-level-07",
+        "levelId": "level-07",
         "title": "Word Counter",
         "type": "coding",
         "difficulty": "beginner",
@@ -207,7 +207,7 @@ export const pyLevel7Problems: Problem[] = [
     },
     {
         "id": "py-prob-07-04",
-        "levelId": "py-level-07",
+        "levelId": "level-07",
         "title": "Title Case Capitalization",
         "type": "coding",
         "difficulty": "beginner",
@@ -271,7 +271,7 @@ export const pyLevel7Problems: Problem[] = [
     },
     {
         "id": "py-prob-07-05",
-        "levelId": "py-level-07",
+        "levelId": "level-07",
         "title": "Replace Substring",
         "type": "coding",
         "difficulty": "beginner",
@@ -335,7 +335,7 @@ export const pyLevel7Problems: Problem[] = [
     },
     {
         "id": "py-prob-07-06",
-        "levelId": "py-level-07",
+        "levelId": "level-07",
         "title": "Character Frequency in String",
         "type": "coding",
         "difficulty": "beginner",
@@ -398,7 +398,7 @@ export const pyLevel7Problems: Problem[] = [
     },
     {
         "id": "py-prob-07-07",
-        "levelId": "py-level-07",
+        "levelId": "level-07",
         "title": "Join Words with Separator",
         "type": "coding",
         "difficulty": "beginner",
@@ -464,7 +464,7 @@ export const pyLevel7Problems: Problem[] = [
     },
     {
         "id": "py-prob-07-08",
-        "levelId": "py-level-07",
+        "levelId": "level-07",
         "title": "Longest Word in Sentence",
         "type": "coding",
         "difficulty": "easy",
@@ -529,7 +529,7 @@ export const pyLevel7Problems: Problem[] = [
     },
     {
         "id": "py-prob-07-09",
-        "levelId": "py-level-07",
+        "levelId": "level-07",
         "title": "String Slicing Substrings",
         "type": "coding",
         "difficulty": "beginner",
@@ -593,7 +593,7 @@ export const pyLevel7Problems: Problem[] = [
     },
     {
         "id": "py-prob-07-10",
-        "levelId": "py-level-07",
+        "levelId": "level-07",
         "title": "Run-Length Encoding Compression",
         "type": "coding",
         "difficulty": "medium",
