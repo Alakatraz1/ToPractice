@@ -1,0 +1,17 @@
+# dependencies and build
+node_modules/
+.next/
+/cpp-interview-lab/node_modules/
+/cpp-interview-lab/.next/
+
+# progress backups
+.user_progress_backup.json
+user_progress_backup.json
+progress_backups/
+.progress_backups/
+/cpp-interview-lab/.user_progress_backup.json
+/cpp-interview-lab/user_progress_backup.json
+
+# misc
+.DS_Store
+*.log

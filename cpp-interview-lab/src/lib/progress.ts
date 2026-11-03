@@ -177,11 +177,56 @@ export function getProgress(lang?: 'cpp' | 'python'): UserProgress {
     }
 }
 
+let syncTimer: any = null;
+
+export function triggerServerBackup(): void {
+    if (typeof window === 'undefined') return;
+    if (syncTimer) clearTimeout(syncTimer);
+    syncTimer = setTimeout(async () => {
+        try {
+            const cpp = getProgress('cpp');
+            const python = getProgress('python');
+            const language = getGlobalLanguage();
+            await fetch('/api/progress-sync', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cpp, python, language })
+            });
+        } catch {}
+    }, 1000);
+}
+
+export async function restoreProgressFromServer(): Promise<boolean> {
+    if (typeof window === 'undefined') return false;
+    try {
+        const res = await fetch('/api/progress-sync');
+        if (!res.ok) return false;
+        const json = await res.json();
+        if (json.success && json.data) {
+            const { cpp, python, language } = json.data;
+            if (cpp) {
+                localStorage.setItem(getStorageKey('cpp'), JSON.stringify(cpp));
+            }
+            if (python) {
+                localStorage.setItem(getStorageKey('python'), JSON.stringify(python));
+            }
+            if (language) {
+                localStorage.setItem('cpp_interview_language', language);
+            }
+            window.dispatchEvent(new Event('progressUpdated'));
+            window.dispatchEvent(new Event('languageChange'));
+            return true;
+        }
+    } catch {}
+    return false;
+}
+
 export function saveProgress(progress: UserProgress, lang?: 'cpp' | 'python'): void {
     if (typeof window === 'undefined') return;
     const language = lang || getGlobalLanguage();
     progress.lastOpenedAt = new Date().toISOString();
     localStorage.setItem(getStorageKey(language), JSON.stringify(progress));
+    triggerServerBackup();
 }
 
 export function updateProgress(updates: Partial<UserProgress>, lang?: 'cpp' | 'python'): UserProgress {
