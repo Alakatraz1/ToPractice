@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel19Problems: Problem[] = [
     {
         "id": "py-prob-19-01",
-        "levelId": "py-level-19",
+        "levelId": "level-19",
         "title": "Maximum Sum Subarray of Size K",
         "type": "coding",
         "difficulty": "easy",
@@ -71,7 +71,7 @@ export const pyLevel19Problems: Problem[] = [
     },
     {
         "id": "py-prob-19-02",
-        "levelId": "py-level-19",
+        "levelId": "level-19",
         "title": "Minimum Size Subarray Sum",
         "type": "coding",
         "difficulty": "medium",
@@ -150,7 +150,7 @@ export const pyLevel19Problems: Problem[] = [
     },
     {
         "id": "py-prob-19-03",
-        "levelId": "py-level-19",
+        "levelId": "level-19",
         "title": "Longest Substring Without Repeating Characters",
         "type": "coding",
         "difficulty": "medium",
@@ -230,7 +230,7 @@ export const pyLevel19Problems: Problem[] = [
     },
     {
         "id": "py-prob-19-04",
-        "levelId": "py-level-19",
+        "levelId": "level-19",
         "title": "Fruit Into Baskets (At Most 2 Distinct)",
         "type": "coding",
         "difficulty": "medium",
@@ -309,7 +309,7 @@ export const pyLevel19Problems: Problem[] = [
     },
     {
         "id": "py-prob-19-05",
-        "levelId": "py-level-19",
+        "levelId": "level-19",
         "title": "Permutation in String",
         "type": "coding",
         "difficulty": "medium",
@@ -379,7 +379,7 @@ export const pyLevel19Problems: Problem[] = [
     },
     {
         "id": "py-prob-19-06",
-        "levelId": "py-level-19",
+        "levelId": "level-19",
         "title": "Find All Anagrams in a String",
         "type": "coding",
         "difficulty": "medium",
@@ -437,7 +437,7 @@ export const pyLevel19Problems: Problem[] = [
     },
     {
         "id": "py-prob-19-07",
-        "levelId": "py-level-19",
+        "levelId": "level-19",
         "title": "Subarray Product Less Than K",
         "type": "coding",
         "difficulty": "medium",
@@ -505,7 +505,7 @@ export const pyLevel19Problems: Problem[] = [
     },
     {
         "id": "py-prob-19-08",
-        "levelId": "py-level-19",
+        "levelId": "level-19",
         "title": "Max Consecutive Ones III (Flip at Most K Zeros)",
         "type": "coding",
         "difficulty": "medium",
@@ -563,7 +563,7 @@ export const pyLevel19Problems: Problem[] = [
     },
     {
         "id": "py-prob-19-09",
-        "levelId": "py-level-19",
+        "levelId": "level-19",
         "title": "Longest Repeating Character Replacement",
         "type": "coding",
         "difficulty": "medium",
@@ -632,7 +632,7 @@ export const pyLevel19Problems: Problem[] = [
     },
     {
         "id": "py-prob-19-10",
-        "levelId": "py-level-19",
+        "levelId": "level-19",
         "title": "Minimum Window Substring",
         "type": "coding",
         "difficulty": "hard",

@@ -123,6 +123,35 @@ The startup script will automatically:
 3. Launch the Next.js Turbopack dev server.
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+### 🔄 Safe One-Click Updates (Preserves Student Progress)
+
+When new challenges or updates are added to the repository, update your local setup safely without losing your completed problems, code, or streak history:
+
+#### macOS
+```bash
+chmod +x update-mac.sh
+./update-mac.sh
+```
+
+#### Linux
+```bash
+chmod +x update-linux.sh
+./update-linux.sh
+```
+
+#### Windows
+Double-click `update-windows.bat` or run:
+```cmd
+update-windows.bat
+```
+
+The updater will automatically:
+1. Create a timestamped backup of your progress in `progress_backups/`.
+2. Stash any uncommitted local work and edits into a patch file.
+3. Pull the latest commits from GitHub (`git pull origin main`).
+4. Restore your progress and personal modifications.
+5. Update dependencies and verify integrity.
+
 ---
 
 ## 🗺️ Curriculum Breakdown (27 Levels Each)

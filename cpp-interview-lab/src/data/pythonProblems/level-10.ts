@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel10Problems: Problem[] = [
     {
         "id": "py-prob-10-01",
-        "levelId": "py-level-10",
+        "levelId": "level-10",
         "title": "Linear Search Baseline",
         "type": "coding",
         "difficulty": "beginner",
@@ -71,7 +71,7 @@ export const pyLevel10Problems: Problem[] = [
     },
     {
         "id": "py-prob-10-02",
-        "levelId": "py-level-10",
+        "levelId": "level-10",
         "title": "Binary Search Implementation",
         "type": "coding",
         "difficulty": "easy",
@@ -147,7 +147,7 @@ export const pyLevel10Problems: Problem[] = [
     },
     {
         "id": "py-prob-10-03",
-        "levelId": "py-level-10",
+        "levelId": "level-10",
         "title": "First Occurrence in Sorted Array",
         "type": "coding",
         "difficulty": "medium",
@@ -211,7 +211,7 @@ export const pyLevel10Problems: Problem[] = [
     },
     {
         "id": "py-prob-10-04",
-        "levelId": "py-level-10",
+        "levelId": "level-10",
         "title": "Last Occurrence in Sorted Array",
         "type": "coding",
         "difficulty": "medium",
@@ -275,7 +275,7 @@ export const pyLevel10Problems: Problem[] = [
     },
     {
         "id": "py-prob-10-05",
-        "levelId": "py-level-10",
+        "levelId": "level-10",
         "title": "Count Occurrences in O(log N)",
         "type": "coding",
         "difficulty": "medium",
@@ -344,7 +344,7 @@ export const pyLevel10Problems: Problem[] = [
     },
     {
         "id": "py-prob-10-06",
-        "levelId": "py-level-10",
+        "levelId": "level-10",
         "title": "Search Insert Position",
         "type": "coding",
         "difficulty": "easy",
@@ -423,7 +423,7 @@ export const pyLevel10Problems: Problem[] = [
     },
     {
         "id": "py-prob-10-07",
-        "levelId": "py-level-10",
+        "levelId": "level-10",
         "title": "Integer Square Root with Binary Search",
         "type": "coding",
         "difficulty": "easy",
@@ -502,7 +502,7 @@ export const pyLevel10Problems: Problem[] = [
     },
     {
         "id": "py-prob-10-08",
-        "levelId": "py-level-10",
+        "levelId": "level-10",
         "title": "Find Peak Element",
         "type": "coding",
         "difficulty": "medium",
@@ -567,7 +567,7 @@ export const pyLevel10Problems: Problem[] = [
     },
     {
         "id": "py-prob-10-09",
-        "levelId": "py-level-10",
+        "levelId": "level-10",
         "title": "Minimum in Rotated Sorted Array",
         "type": "coding",
         "difficulty": "medium",
@@ -642,7 +642,7 @@ export const pyLevel10Problems: Problem[] = [
     },
     {
         "id": "py-prob-10-10",
-        "levelId": "py-level-10",
+        "levelId": "level-10",
         "title": "Search a 2D Matrix",
         "type": "coding",
         "difficulty": "medium",

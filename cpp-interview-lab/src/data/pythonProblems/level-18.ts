@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel18Problems: Problem[] = [
     {
         "id": "py-prob-18-01",
-        "levelId": "py-level-18",
+        "levelId": "level-18",
         "title": "Two Sum II - Input Array Is Sorted",
         "type": "coding",
         "difficulty": "easy",
@@ -72,7 +72,7 @@ export const pyLevel18Problems: Problem[] = [
     },
     {
         "id": "py-prob-18-02",
-        "levelId": "py-level-18",
+        "levelId": "level-18",
         "title": "Valid Palindrome II (One Deletion Allowed)",
         "type": "coding",
         "difficulty": "easy",
@@ -151,7 +151,7 @@ export const pyLevel18Problems: Problem[] = [
     },
     {
         "id": "py-prob-18-03",
-        "levelId": "py-level-18",
+        "levelId": "level-18",
         "title": "Remove Duplicates from Sorted Array",
         "type": "coding",
         "difficulty": "easy",
@@ -220,7 +220,7 @@ export const pyLevel18Problems: Problem[] = [
     },
     {
         "id": "py-prob-18-04",
-        "levelId": "py-level-18",
+        "levelId": "level-18",
         "title": "Squares of a Sorted Array",
         "type": "coding",
         "difficulty": "easy",
@@ -289,7 +289,7 @@ export const pyLevel18Problems: Problem[] = [
     },
     {
         "id": "py-prob-18-05",
-        "levelId": "py-level-18",
+        "levelId": "level-18",
         "title": "Container With Most Water",
         "type": "coding",
         "difficulty": "medium",
@@ -358,7 +358,7 @@ export const pyLevel18Problems: Problem[] = [
     },
     {
         "id": "py-prob-18-06",
-        "levelId": "py-level-18",
+        "levelId": "level-18",
         "title": "3Sum Unique Triplets",
         "type": "coding",
         "difficulty": "medium",
@@ -417,7 +417,7 @@ export const pyLevel18Problems: Problem[] = [
     },
     {
         "id": "py-prob-18-07",
-        "levelId": "py-level-18",
+        "levelId": "level-18",
         "title": "3Sum Closest",
         "type": "coding",
         "difficulty": "medium",
@@ -485,7 +485,7 @@ export const pyLevel18Problems: Problem[] = [
     },
     {
         "id": "py-prob-18-08",
-        "levelId": "py-level-18",
+        "levelId": "level-18",
         "title": "Trapping Rain Water (Two Pointers O(1) Space)",
         "type": "coding",
         "difficulty": "hard",
@@ -554,7 +554,7 @@ export const pyLevel18Problems: Problem[] = [
     },
     {
         "id": "py-prob-18-09",
-        "levelId": "py-level-18",
+        "levelId": "level-18",
         "title": "Backspace String Compare (O(1) Space)",
         "type": "coding",
         "difficulty": "easy",
@@ -633,7 +633,7 @@ export const pyLevel18Problems: Problem[] = [
     },
     {
         "id": "py-prob-18-10",
-        "levelId": "py-level-18",
+        "levelId": "level-18",
         "title": "Sort Array by Parity (Evens First)",
         "type": "coding",
         "difficulty": "easy",

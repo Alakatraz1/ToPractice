@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel11Problems: Problem[] = [
     {
         "id": "py-prob-11-01",
-        "levelId": "py-level-11",
+        "levelId": "level-11",
         "title": "Sort Integers Ascending & Descending",
         "type": "coding",
         "difficulty": "beginner",
@@ -67,7 +67,7 @@ export const pyLevel11Problems: Problem[] = [
     },
     {
         "id": "py-prob-11-02",
-        "levelId": "py-level-11",
+        "levelId": "level-11",
         "title": "Sort by Absolute Value",
         "type": "coding",
         "difficulty": "easy",
@@ -132,7 +132,7 @@ export const pyLevel11Problems: Problem[] = [
     },
     {
         "id": "py-prob-11-03",
-        "levelId": "py-level-11",
+        "levelId": "level-11",
         "title": "Sort Strings by Length",
         "type": "coding",
         "difficulty": "easy",
@@ -198,7 +198,7 @@ export const pyLevel11Problems: Problem[] = [
     },
     {
         "id": "py-prob-11-04",
-        "levelId": "py-level-11",
+        "levelId": "level-11",
         "title": "Sort Pairs by Second Element",
         "type": "coding",
         "difficulty": "easy",
@@ -262,7 +262,7 @@ export const pyLevel11Problems: Problem[] = [
     },
     {
         "id": "py-prob-11-05",
-        "levelId": "py-level-11",
+        "levelId": "level-11",
         "title": "Kth Largest Element",
         "type": "coding",
         "difficulty": "medium",
@@ -331,7 +331,7 @@ export const pyLevel11Problems: Problem[] = [
     },
     {
         "id": "py-prob-11-06",
-        "levelId": "py-level-11",
+        "levelId": "level-11",
         "title": "Sort Characters by Frequency",
         "type": "coding",
         "difficulty": "medium",
@@ -401,7 +401,7 @@ export const pyLevel11Problems: Problem[] = [
     },
     {
         "id": "py-prob-11-07",
-        "levelId": "py-level-11",
+        "levelId": "level-11",
         "title": "Sort Colors (Dutch National Flag)",
         "type": "coding",
         "difficulty": "medium",
@@ -467,7 +467,7 @@ export const pyLevel11Problems: Problem[] = [
     },
     {
         "id": "py-prob-11-08",
-        "levelId": "py-level-11",
+        "levelId": "level-11",
         "title": "Merge Overlapping Intervals",
         "type": "coding",
         "difficulty": "medium",
@@ -532,7 +532,7 @@ export const pyLevel11Problems: Problem[] = [
     },
     {
         "id": "py-prob-11-09",
-        "levelId": "py-level-11",
+        "levelId": "level-11",
         "title": "Custom Student Roster Sort",
         "type": "coding",
         "difficulty": "easy",
@@ -596,7 +596,7 @@ export const pyLevel11Problems: Problem[] = [
     },
     {
         "id": "py-prob-11-10",
-        "levelId": "py-level-11",
+        "levelId": "level-11",
         "title": "Relative Sort Order",
         "type": "coding",
         "difficulty": "medium",

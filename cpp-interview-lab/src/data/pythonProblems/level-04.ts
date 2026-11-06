@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel4Problems: Problem[] = [
     {
         "id": "py-prob-04-01",
-        "levelId": "py-level-04",
+        "levelId": "level-04",
         "title": "Print 1 to N",
         "type": "coding",
         "difficulty": "beginner",
@@ -68,7 +68,7 @@ export const pyLevel4Problems: Problem[] = [
     },
     {
         "id": "py-prob-04-02",
-        "levelId": "py-level-04",
+        "levelId": "level-04",
         "title": "Sum from 1 to N",
         "type": "coding",
         "difficulty": "beginner",
@@ -139,7 +139,7 @@ export const pyLevel4Problems: Problem[] = [
     },
     {
         "id": "py-prob-04-03",
-        "levelId": "py-level-04",
+        "levelId": "level-04",
         "title": "Multiplication Table",
         "type": "coding",
         "difficulty": "beginner",
@@ -205,7 +205,7 @@ export const pyLevel4Problems: Problem[] = [
     },
     {
         "id": "py-prob-04-04",
-        "levelId": "py-level-04",
+        "levelId": "level-04",
         "title": "Factorial of N",
         "type": "coding",
         "difficulty": "easy",
@@ -280,7 +280,7 @@ export const pyLevel4Problems: Problem[] = [
     },
     {
         "id": "py-prob-04-05",
-        "levelId": "py-level-04",
+        "levelId": "level-04",
         "title": "Reverse Countdown",
         "type": "coding",
         "difficulty": "beginner",
@@ -345,7 +345,7 @@ export const pyLevel4Problems: Problem[] = [
     },
     {
         "id": "py-prob-04-06",
-        "levelId": "py-level-04",
+        "levelId": "level-04",
         "title": "Count Digits",
         "type": "coding",
         "difficulty": "easy",
@@ -419,7 +419,7 @@ export const pyLevel4Problems: Problem[] = [
     },
     {
         "id": "py-prob-04-07",
-        "levelId": "py-level-04",
+        "levelId": "level-04",
         "title": "Sum of Digits",
         "type": "coding",
         "difficulty": "easy",
@@ -494,7 +494,7 @@ export const pyLevel4Problems: Problem[] = [
     },
     {
         "id": "py-prob-04-08",
-        "levelId": "py-level-04",
+        "levelId": "level-04",
         "title": "Prime Number Test",
         "type": "coding",
         "difficulty": "medium",
@@ -581,7 +581,7 @@ export const pyLevel4Problems: Problem[] = [
     },
     {
         "id": "py-prob-04-09",
-        "levelId": "py-level-04",
+        "levelId": "level-04",
         "title": "N-th Fibonacci Number",
         "type": "coding",
         "difficulty": "easy",
@@ -656,7 +656,7 @@ export const pyLevel4Problems: Problem[] = [
     },
     {
         "id": "py-prob-04-10",
-        "levelId": "py-level-04",
+        "levelId": "level-04",
         "title": "Right-Angled Star Triangle",
         "type": "coding",
         "difficulty": "easy",

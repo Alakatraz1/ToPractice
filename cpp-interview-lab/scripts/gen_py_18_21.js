@@ -12,7 +12,7 @@ function writeLevel(levelNum, problems) {
 // Level 18: Two Pointers Pattern in Python
 const level18 = [
     {
-        id: "py-prob-18-01", levelId: "py-level-18", title: "Two Sum II - Input Array Is Sorted", type: "coding", difficulty: "easy", order: 1,
+        id: "py-prob-18-01", levelId: "level-18", title: "Two Sum II - Input Array Is Sorted", type: "coding", difficulty: "easy", order: 1,
         description: "LeetCode #167.\nGiven a 1-indexed array of integers `numbers` that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number.\nReturn the 1-based indices `[index1, index2]` separated by spaces.\nYou must use `O(1)` additional space.",
         whyThisMatters: "Sorted array enables two pointers from opposite ends in O(N) time and O(1) space.",
         concepts: ["two pointers", "sorted array", "o(1) space"], prerequisites: ["two pointers"], learningObjectives: ["Use converging two pointers to find target sum"], constraints: ["Sorted ascending, exactly one solution"],
@@ -29,7 +29,7 @@ const level18 = [
         commonMistakes: ["1-based vs 0-based indices"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["two pointers", "essential"]
     },
     {
-        id: "py-prob-18-02", levelId: "py-level-18", title: "Valid Palindrome II (One Deletion Allowed)", type: "coding", difficulty: "easy", order: 2,
+        id: "py-prob-18-02", levelId: "level-18", title: "Valid Palindrome II (One Deletion Allowed)", type: "coding", difficulty: "easy", order: 2,
         description: "LeetCode #680 Valid Palindrome II.\nGiven a string `s`, return `True` if the string can be a palindrome after deleting at most one character from it.\nPrint `True` or `False`.",
         whyThisMatters: "Tests when to branch two pointers upon the first mismatch.",
         concepts: ["two pointers", "palindrome", "branching"], prerequisites: ["two pointers"], learningObjectives: ["Branch two pointers on mismatch"], constraints: ["String input"],
@@ -47,7 +47,7 @@ const level18 = [
         commonMistakes: ["Allowing more than 1 deletion"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["two pointers", "strings"]
     },
     {
-        id: "py-prob-18-03", levelId: "py-level-18", title: "Remove Duplicates from Sorted Array", type: "coding", difficulty: "easy", order: 3,
+        id: "py-prob-18-03", levelId: "level-18", title: "Remove Duplicates from Sorted Array", type: "coding", difficulty: "easy", order: 3,
         description: "LeetCode #26.\nGiven an integer array `nums` sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once.\nPrint the unique elements space-separated.",
         whyThisMatters: "Fast & slow pointer array compaction pattern.",
         concepts: ["two pointers", "in-place", "deduplication"], prerequisites: ["two pointers"], learningObjectives: ["Compact unique elements in-place with slow/fast pointers"], constraints: ["Sorted ascending"],
@@ -64,7 +64,7 @@ const level18 = [
         commonMistakes: ["Using O(N) extra space with set() when in-place modification is required"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["two pointers", "must-know"]
     },
     {
-        id: "py-prob-18-04", levelId: "py-level-18", title: "Squares of a Sorted Array", type: "coding", difficulty: "easy", order: 4,
+        id: "py-prob-18-04", levelId: "level-18", title: "Squares of a Sorted Array", type: "coding", difficulty: "easy", order: 4,
         description: "LeetCode #977 Squares of a Sorted Array.\nGiven an integer array `nums` sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.\nYou must write an algorithm in `O(N)` time using two pointers (from both ends).",
         whyThisMatters: "Negative numbers become large when squared, meaning the largest squares are at either the far left or far right ends.",
         concepts: ["two pointers", "squares", "o(n) sort"], prerequisites: ["two pointers"], learningObjectives: ["Fill result array backwards using two pointers on squares"], constraints: ["Sorted input with negative and positive values"],
@@ -81,7 +81,7 @@ const level18 = [
         commonMistakes: ["Squaring then sorting in O(N log N)"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["two pointers", "must-know"]
     },
     {
-        id: "py-prob-18-05", levelId: "py-level-18", title: "Container With Most Water", type: "coding", difficulty: "medium", order: 5,
+        id: "py-prob-18-05", levelId: "level-18", title: "Container With Most Water", type: "coding", difficulty: "medium", order: 5,
         description: "LeetCode #11 Container With Most Water.\nYou are given an integer array `height` of length `N`.\nFind two lines that together with the x-axis form a container, such that the container contains the most water.\nArea = `min(height[l], height[r]) * (r - l)`.\nPrint the maximum amount of water a container can store.\nYou must solve this in `O(N)` time.",
         whyThisMatters: "Greedy two-pointer shrinking rule: always move the shorter vertical line inward.",
         concepts: ["two pointers", "container water", "area maximization"], prerequisites: ["two pointers"], learningObjectives: ["Prove and implement two-pointer contraction rule for max area"], constraints: ["N >= 2"],
@@ -98,7 +98,7 @@ const level18 = [
         commonMistakes: ["Nested loop O(N^2) timing out"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["two pointers", "must-know"]
     },
     {
-        id: "py-prob-18-06", levelId: "py-level-18", title: "3Sum Unique Triplets", type: "coding", difficulty: "medium", order: 6,
+        id: "py-prob-18-06", levelId: "level-18", title: "3Sum Unique Triplets", type: "coding", difficulty: "medium", order: 6,
         description: "LeetCode #15 3Sum.\nGiven an integer array `nums`, return all the unique triplets `[nums[i], nums[j], nums[k]]` such that `i != j != k` and `nums[i] + nums[j] + nums[k] == 0`.\nNotice that the solution set must not contain duplicate triplets.\nPrint each unique triplet sorted space-separated on separate lines, sorted lexicographically.",
         whyThisMatters: "Reduces 3D problem into 2D Two Sum II by fixing one element and using two pointers.",
         concepts: ["3sum", "two pointers", "deduplication"], prerequisites: ["two pointers"], learningObjectives: ["Reduce 3Sum to Two Sum II with sorting and pointer skipping"], constraints: ["N <= 3000"],
@@ -114,7 +114,7 @@ const level18 = [
         commonMistakes: ["Duplicate triplets in output from not skipping identical adjacent values"], timeComplexity: "O(N^2)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["3sum", "must-know"]
     },
     {
-        id: "py-prob-18-07", levelId: "py-level-18", title: "3Sum Closest", type: "coding", difficulty: "medium", order: 7,
+        id: "py-prob-18-07", levelId: "level-18", title: "3Sum Closest", type: "coding", difficulty: "medium", order: 7,
         description: "LeetCode #16 3Sum Closest.\nGiven target integer `T` on line 1, and array `nums` of `N` integers on line 2:\nFind three integers in `nums` such that the sum is closest to `T`.\nReturn the sum of the three integers.\nPrint the closest sum.",
         whyThisMatters: "Tracking minimum absolute distance `abs(sum - target)` in Two Pointers.",
         concepts: ["3sum closest", "two pointers"], prerequisites: ["3sum"], learningObjectives: ["Track closest sum in O(N^2) using two pointers"], constraints: ["N >= 3"],
@@ -131,7 +131,7 @@ const level18 = [
         commonMistakes: ["Failing to return immediately when exact match s == target is found"], timeComplexity: "O(N^2)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["3sum", "two pointers"]
     },
     {
-        id: "py-prob-18-08", levelId: "py-level-18", title: "Trapping Rain Water (Two Pointers O(1) Space)", type: "coding", difficulty: "hard", order: 8,
+        id: "py-prob-18-08", levelId: "level-18", title: "Trapping Rain Water (Two Pointers O(1) Space)", type: "coding", difficulty: "hard", order: 8,
         description: "LeetCode #42 Trapping Rain Water.\nGiven `N` non-negative integers representing an elevation map where the width of each bar is 1:\nCompute how much water it can trap after raining.\nPrint total water trapped.\nSolve this in `O(N)` time and `O(1)` space using Two Pointers.",
         whyThisMatters: "Regarded as the quintessential Two Pointer benchmark problem across top tech companies.",
         concepts: ["trapping rain water", "two pointers", "o(1) space"], prerequisites: ["two pointers"], learningObjectives: ["Solve Trapping Rain Water in O(1) space using two pointers"], constraints: ["N <= 10^5"],
@@ -148,7 +148,7 @@ const level18 = [
         commonMistakes: ["Using DP arrays (O(N) space) when O(1) space is achievable"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["two pointers", "must-know"]
     },
     {
-        id: "py-prob-18-09", levelId: "py-level-18", title: "Backspace String Compare (O(1) Space)", type: "coding", difficulty: "easy", order: 9,
+        id: "py-prob-18-09", levelId: "level-18", title: "Backspace String Compare (O(1) Space)", type: "coding", difficulty: "easy", order: 9,
         description: "LeetCode #844.\nGiven two strings `S` and `T` containing `#` (which represents a backspace character):\nReturn `True` if they are equal when both are typed into empty text editors.\nPrint `True` or `False`.\nCan you solve it in `O(N)` time and `O(1)` space by scanning backwards with two pointers?",
         whyThisMatters: "Backward pointer traversal naturally tracks consecutive `#` skips without needing a stack.",
         concepts: ["backspace compare", "backward pointers", "o(1) space"], prerequisites: ["two pointers"], learningObjectives: ["Scan backwards to simulate text editing in O(1) space"], constraints: ["Strings contain lowercase letters and '#'"],
@@ -166,7 +166,7 @@ const level18 = [
         commonMistakes: ["Popping on empty string when leading '#' appears"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["strings", "two pointers"]
     },
     {
-        id: "py-prob-18-10", levelId: "py-level-18", title: "Sort Array by Parity (Evens First)", type: "coding", difficulty: "easy", order: 10,
+        id: "py-prob-18-10", levelId: "level-18", title: "Sort Array by Parity (Evens First)", type: "coding", difficulty: "easy", order: 10,
         description: "LeetCode #905 Sort Array By Parity.\nGiven an integer array `nums`, move all the even integers at the beginning of the array followed by all the odd integers.\nReturn any array that satisfies this condition.\nPrint the array space-separated.",
         whyThisMatters: "Two-pointer partition (identical to QuickSort partition step).",
         concepts: ["parity partition", "two pointers", "in-place"], prerequisites: ["two pointers"], learningObjectives: ["Partition array in-place based on boolean parity"], constraints: ["N >= 1"],
@@ -187,7 +187,7 @@ const level18 = [
 // Level 19: Sliding Window Pattern in Python
 const level19 = [
     {
-        id: "py-prob-19-01", levelId: "py-level-19", title: "Maximum Sum Subarray of Size K", type: "coding", difficulty: "easy", order: 1,
+        id: "py-prob-19-01", levelId: "level-19", title: "Maximum Sum Subarray of Size K", type: "coding", difficulty: "easy", order: 1,
         description: "Given a fixed window size `K` on line 1, and an array of integers on line 2:\nFind and print the maximum sum of any contiguous subarray of size `K`.\nSolve in `O(N)` time using a fixed sliding window.",
         whyThisMatters: "Fixed-size sliding window baseline: subtract exiting element, add entering element.",
         concepts: ["fixed sliding window", "running sum"], prerequisites: ["sliding window"], learningObjectives: ["Maintain fixed-size sliding window sum in O(1) per step"], constraints: ["1 <= K <= N"],
@@ -204,7 +204,7 @@ const level19 = [
         commonMistakes: ["Re-evaluating sum(nums[i:i+k]) which costs O(N*K)"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["sliding window", "essential"]
     },
     {
-        id: "py-prob-19-02", levelId: "py-level-19", title: "Minimum Size Subarray Sum", type: "coding", difficulty: "medium", order: 2,
+        id: "py-prob-19-02", levelId: "level-19", title: "Minimum Size Subarray Sum", type: "coding", difficulty: "medium", order: 2,
         description: "LeetCode #209 Minimum Size Subarray Sum.\nGiven target integer `target` on line 1, and an array of positive integers on line 2:\nFind the minimal length of a contiguous subarray of which the sum is `>= target`.\nIf there is no such subarray, return `0`.",
         whyThisMatters: "Dynamic-size sliding window: expand right until valid, shrink left to minimize window.",
         concepts: ["dynamic sliding window", "two pointers", "min window"], prerequisites: ["sliding window"], learningObjectives: ["Shrink sliding window from left to minimize length"], constraints: ["Positive integers"],
@@ -222,7 +222,7 @@ const level19 = [
         commonMistakes: ["Failing to return 0 when total array sum < target"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["sliding window", "must-know"]
     },
     {
-        id: "py-prob-19-03", levelId: "py-level-19", title: "Longest Substring Without Repeating Characters", type: "coding", difficulty: "medium", order: 3,
+        id: "py-prob-19-03", levelId: "level-19", title: "Longest Substring Without Repeating Characters", type: "coding", difficulty: "medium", order: 3,
         description: "LeetCode #3 Longest Substring Without Repeating Characters.\nGiven a string `s`, find the length of the longest substring without repeating characters.\nPrint the maximum length.\n\nUse a sliding window with a dictionary storing the most recent index of each character to skip left pointer directly.",
         whyThisMatters: "The single most asked sliding window interview problem in history.",
         concepts: ["sliding window", "hash map", "longest substring"], prerequisites: ["sliding window", "dictionaries"], learningObjectives: ["Fast-forward left window pointer using last-seen hash map"], constraints: ["ASCII string"],
@@ -240,7 +240,7 @@ const level19 = [
         commonMistakes: ["Not checking last[c] >= l, pulling left pointer backwards to an older duplicate outside current window"], timeComplexity: "O(N)", spaceComplexity: "O(min(N, U))", interviewRelevance: "high", tags: ["sliding window", "must-know"]
     },
     {
-        id: "py-prob-19-04", levelId: "py-level-19", title: "Fruit Into Baskets (At Most 2 Distinct)", type: "coding", difficulty: "medium", order: 4,
+        id: "py-prob-19-04", levelId: "level-19", title: "Fruit Into Baskets (At Most 2 Distinct)", type: "coding", difficulty: "medium", order: 4,
         description: "LeetCode #904 Fruit Into Baskets.\nYou have two baskets, and each basket can only hold a single type of fruit.\nGiven an array of integers representing fruit types in a row of trees:\nFind the length of the longest contiguous subarray containing at most `2` distinct integers.\nPrint the maximum length.",
         whyThisMatters: "Generalizable to 'Longest Substring with At Most K Distinct Characters'.",
         concepts: ["at most k distinct", "sliding window", "frequency counter"], prerequisites: ["sliding window"], learningObjectives: ["Maintain at most 2 distinct keys in window hash map"], constraints: ["N >= 1"],
@@ -258,7 +258,7 @@ const level19 = [
         commonMistakes: ["Leaving zero-count keys in dict causing len(counts) to stay > 2"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["sliding window", "frequency"]
     },
     {
-        id: "py-prob-19-05", levelId: "py-level-19", title: "Permutation in String", type: "coding", difficulty: "medium", order: 5,
+        id: "py-prob-19-05", levelId: "level-19", title: "Permutation in String", type: "coding", difficulty: "medium", order: 5,
         description: "LeetCode #567 Permutation in String.\nGiven two strings `s1` and `s2` on separate lines:\nReturn `True` if `s2` contains a permutation of `s1`, or `False` otherwise.\nIn other words, return `True` if one of `s1`'s permutations is the substring of `s2`.",
         whyThisMatters: "Fixed sliding window of size `len(s1)` with frequency equality check.",
         concepts: ["permutation substring", "fixed window", "counter"], prerequisites: ["sliding window", "counter"], learningObjectives: ["Slide fixed window comparing frequency matches"], constraints: ["Lowercase letters"],
@@ -275,7 +275,7 @@ const level19 = [
         commonMistakes: ["Generating all permutations of s1 (factorial explosion) instead of frequency matching"], timeComplexity: "O(26 * N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["sliding window", "anagrams"]
     },
     {
-        id: "py-prob-19-06", levelId: "py-level-19", title: "Find All Anagrams in a String", type: "coding", difficulty: "medium", order: 6,
+        id: "py-prob-19-06", levelId: "level-19", title: "Find All Anagrams in a String", type: "coding", difficulty: "medium", order: 6,
         description: "LeetCode #438.\nGiven two strings `s` and `p` on separate lines:\nFind all the start indices of `p`'s anagrams in `s`.\nPrint the 0-based start indices space-separated in ascending order.",
         whyThisMatters: "Extension of Permutation in String returning all starting positions.",
         concepts: ["anagram indices", "sliding window"], prerequisites: ["sliding window"], learningObjectives: ["Output all sliding window matches"], constraints: ["Lowercase letters"],
@@ -291,7 +291,7 @@ const level19 = [
         commonMistakes: ["Failing when len(s) < len(p)"], timeComplexity: "O(26 * N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["sliding window", "anagrams"]
     },
     {
-        id: "py-prob-19-07", levelId: "py-level-19", title: "Subarray Product Less Than K", type: "coding", difficulty: "medium", order: 7,
+        id: "py-prob-19-07", levelId: "level-19", title: "Subarray Product Less Than K", type: "coding", difficulty: "medium", order: 7,
         description: "LeetCode #713 Subarray Product Less Than K.\nGiven integer `K` on line 1, and an array of positive integers on line 2:\nFind the number of contiguous subarrays where the product of all elements in the subarray is strictly less than `K`.",
         whyThisMatters: "Number of valid subarrays ending at right pointer is `r - l + 1`.",
         concepts: ["sliding window count", "subarray product"], prerequisites: ["sliding window"], learningObjectives: ["Count matching subarrays ending at each position using r - l + 1"], constraints: ["Positive integers"],
@@ -308,7 +308,7 @@ const level19 = [
         commonMistakes: ["K <= 1 edge case: all positive products are >= 1, so count must be 0"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["sliding window", "counting"]
     },
     {
-        id: "py-prob-19-08", levelId: "py-level-19", title: "Max Consecutive Ones III (Flip at Most K Zeros)", type: "coding", difficulty: "medium", order: 8,
+        id: "py-prob-19-08", levelId: "level-19", title: "Max Consecutive Ones III (Flip at Most K Zeros)", type: "coding", difficulty: "medium", order: 8,
         description: "LeetCode #1004 Max Consecutive Ones III.\nGiven integer `K` on line 1, and binary array `nums` of `0`s and `1`s on line 2:\nReturn the maximum number of consecutive `1`s in the array if you can flip at most `K` `0`s to `1`s.",
         whyThisMatters: "Equivalent to finding the longest subarray containing at most K zeros.",
         concepts: ["longest with at most k zeros", "sliding window"], prerequisites: ["sliding window"], learningObjectives: ["Track zero budget in sliding window"], constraints: ["Binary array"],
@@ -324,7 +324,7 @@ const level19 = [
         commonMistakes: ["Incrementing zeros on nums[l] == 0 instead of decrementing during left shrink"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["sliding window", "binary array"]
     },
     {
-        id: "py-prob-19-09", levelId: "py-level-19", title: "Longest Repeating Character Replacement", type: "coding", difficulty: "medium", order: 9,
+        id: "py-prob-19-09", levelId: "level-19", title: "Longest Repeating Character Replacement", type: "coding", difficulty: "medium", order: 9,
         description: "LeetCode #424.\nYou are given a string `s` and an integer `k` on separate lines.\nYou can choose any character of the string and change it to any other uppercase English character at most `k` times.\nReturn the length of the longest substring containing the same letter you can get after performing the above operations.",
         whyThisMatters: "Window condition: `(window_length - max_char_frequency) <= k`.",
         concepts: ["character replacement", "max frequency window", "sliding window"], prerequisites: ["sliding window"], learningObjectives: ["Track max frequency character within dynamic window"], constraints: ["Uppercase English letters"],
@@ -341,7 +341,7 @@ const level19 = [
         commonMistakes: ["Recalculating max_f across all 26 letters on every step"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["sliding window", "strings"]
     },
     {
-        id: "py-prob-19-10", levelId: "py-level-19", title: "Minimum Window Substring", type: "coding", difficulty: "hard", order: 10,
+        id: "py-prob-19-10", levelId: "level-19", title: "Minimum Window Substring", type: "coding", difficulty: "hard", order: 10,
         description: "LeetCode #76 Minimum Window Substring.\nGiven two strings `s` and `t` on separate lines:\nReturn the minimum window substring of `s` such that every character in `t` (including duplicates) is included in the window.\nIf there is no such substring, return an empty string `\"\"`.\nPrint the minimum window substring.",
         whyThisMatters: "Universal gold standard for advanced sliding window questions.",
         concepts: ["minimum window substring", "sliding window hard", "counter validation"], prerequisites: ["sliding window"], learningObjectives: ["Implement O(N) minimum window substring with need/have counters"], constraints: ["ASCII strings"],
@@ -363,7 +363,7 @@ const level19 = [
 // Level 20: Binary Search Patterns in Python
 const level20 = [
     {
-        id: "py-prob-20-01", levelId: "py-level-20", title: "Search in Rotated Sorted Array", type: "coding", difficulty: "medium", order: 1,
+        id: "py-prob-20-01", levelId: "level-20", title: "Search in Rotated Sorted Array", type: "coding", difficulty: "medium", order: 1,
         description: "LeetCode #33 Search in Rotated Sorted Array.\nGiven target `T` on line 1, and rotated sorted array `nums` of distinct integers on line 2:\nReturn the 0-based index of `T` if it is in `nums`, or `-1` if it is not in `nums`.\nYou must write an algorithm with `O(log n)` runtime complexity.",
         whyThisMatters: "At least one half `[left, mid]` or `[mid, right]` is always normally sorted.",
         concepts: ["rotated sorted array", "binary search", "logarithmic search"], prerequisites: ["binary search"], learningObjectives: ["Identify sorted half and direct binary search accordingly"], constraints: ["Distinct values, O(log N) required"],
@@ -380,7 +380,7 @@ const level20 = [
         commonMistakes: ["Using < instead of <= for left half sorted check"], timeComplexity: "O(log N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["binary search", "must-know"]
     },
     {
-        id: "py-prob-20-02", levelId: "py-level-20", title: "Single Element in a Sorted Array", type: "coding", difficulty: "medium", order: 2,
+        id: "py-prob-20-02", levelId: "level-20", title: "Single Element in a Sorted Array", type: "coding", difficulty: "medium", order: 2,
         description: "LeetCode #540 Single Element in a Sorted Array.\nYou are given a sorted array consisting of only integers where every element appears exactly twice, except for one element which appears exactly once.\nFind this single element that appears only once in `O(log n)` time and `O(1)` space.",
         whyThisMatters: "Index parity analysis in binary search: before the single element, pairs start at even indices.",
         concepts: ["binary search parity", "single element", "logarithmic search"], prerequisites: ["binary search"], learningObjectives: ["Use index parity in binary search"], constraints: ["O(log N) time, O(1) space"],
@@ -397,7 +397,7 @@ const level20 = [
         commonMistakes: ["Using XOR in O(N) linear time when O(log N) is required"], timeComplexity: "O(log N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["binary search", "clever"]
     },
     {
-        id: "py-prob-20-03", levelId: "py-level-20", title: "Capacity To Ship Packages Within D Days", type: "coding", difficulty: "medium", order: 3,
+        id: "py-prob-20-03", levelId: "level-20", title: "Capacity To Ship Packages Within D Days", type: "coding", difficulty: "medium", order: 3,
         description: "LeetCode #1011.\nA conveyor belt has packages that must be shipped within `days` days.\nThe `i-th` package on the conveyor belt has a weight of `weights[i]`.\nFind the least weight capacity of the ship that will result in all the packages on the conveyor belt being shipped within `days` days.\nPrint the minimum capacity.",
         whyThisMatters: "Binary Search on Answer template: search range is `[max(weights), sum(weights)]`.",
         concepts: ["binary search on answer", "capacity allocation", "predicate verification"], prerequisites: ["binary search"], learningObjectives: ["Formulate monotonic verification predicate for binary search on answer"], constraints: ["Weights >= 1"],
@@ -414,7 +414,7 @@ const level20 = [
         commonMistakes: ["Setting left bound to 0 instead of max(weights)"], timeComplexity: "O(N log(sum(W)))", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["binary search", "must-know"]
     },
     {
-        id: "py-prob-20-04", levelId: "py-level-20", title: "Koko Eating Bananas", type: "coding", difficulty: "medium", order: 4,
+        id: "py-prob-20-04", levelId: "level-20", title: "Koko Eating Bananas", type: "coding", difficulty: "medium", order: 4,
         description: "LeetCode #875 Koko Eating Bananas.\nKoko loves to eat bananas. There are `n` piles of bananas, the `i-th` pile has `piles[i]` bananas.\nKoko can decide her bananas-per-hour eating speed of `k`.\nEach hour, she chooses some pile and eats `k` bananas from it. If the pile has less than `k` bananas, she eats all of them and will not eat any more bananas during this hour.\nReturn the minimum integer `k` such that she can eat all the bananas within `h` hours.",
         whyThisMatters: "Standard math ceiling division: `(pile + k - 1) // k` hours per pile.",
         concepts: ["koko bananas", "binary search on answer", "ceiling division"], prerequisites: ["binary search on answer"], learningObjectives: ["Use integer ceiling division in binary search predicate"], constraints: ["piles[i] >= 1"],
@@ -431,7 +431,7 @@ const level20 = [
         commonMistakes: ["Float math ceiling errors with math.ceil(p / mid) for large integers"], timeComplexity: "O(N log(max(P)))", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["binary search", "must-know"]
     },
     {
-        id: "py-prob-20-05", levelId: "py-level-20", title: "Search in 2D Matrix II (Top-Right Step)", type: "coding", difficulty: "medium", order: 5,
+        id: "py-prob-20-05", levelId: "level-20", title: "Search in 2D Matrix II (Top-Right Step)", type: "coding", difficulty: "medium", order: 5,
         description: "LeetCode #240 Search a 2D Matrix II.\nWrite an efficient algorithm that searches for a value `target` in an `M x N` integer matrix.\nThis matrix has the following properties:\n- Integers in each row are sorted in ascending from left to right.\n- Integers in each column are sorted in ascending from top to bottom.\n\nInput format: Target on line 1, M and N on line 2, followed by rows.\nPrint `True` if found, else `False` in `O(M + N)` time.",
         whyThisMatters: "Top-right pointer elimination: if element > target move left, if element < target move down.",
         concepts: ["matrix search", "top-right pointer", "o(m+n) search"], prerequisites: ["binary search", "matrices"], learningObjectives: ["Search row/col sorted matrix in O(M + N) time"], constraints: ["Sorted rows and cols"],
@@ -447,7 +447,7 @@ const level20 = [
         commonMistakes: ["Starting from (0, 0) where both right and down are larger (ambiguous)"], timeComplexity: "O(M + N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["matrix", "two pointers"]
     },
     {
-        id: "py-prob-20-06", levelId: "py-level-20", title: "Find Peak Element in 2D Grid", type: "coding", difficulty: "hard", order: 6,
+        id: "py-prob-20-06", levelId: "level-20", title: "Find Peak Element in 2D Grid", type: "coding", difficulty: "hard", order: 6,
         description: "LeetCode #1901 Find a Peak Element II.\nA peak element in a 2D grid is an element that is strictly greater than all of its adjacent neighbors (top, bottom, left, right).\nGiven an `M x N` matrix where no two adjacent cells are equal:\nFind any peak element and print its coordinates `<row> <col>` in `O(M log N)` time.",
         whyThisMatters: "Binary search on column midpoints combined with maximum row search.",
         concepts: ["2d peak", "binary search mid-col"], prerequisites: ["binary search", "matrices"], learningObjectives: ["Find peak in 2D grid in O(M log N)"], constraints: ["M, N <= 500"],
@@ -463,7 +463,7 @@ const level20 = [
         commonMistakes: ["Checking local max of entire grid in O(M*N) instead of O(M log N) bisection"], timeComplexity: "O(M log N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["matrix", "binary search"]
     },
     {
-        id: "py-prob-20-07", levelId: "py-level-20", title: "Split Array Largest Sum", type: "coding", difficulty: "hard", order: 7,
+        id: "py-prob-20-07", levelId: "level-20", title: "Split Array Largest Sum", type: "coding", difficulty: "hard", order: 7,
         description: "LeetCode #410 Split Array Largest Sum.\nGiven integer `K` on line 1, and array `nums` of non-negative integers on line 2:\nSplit `nums` into `K` non-empty subarrays such that the largest sum among these `K` subarrays is minimized.\nPrint the minimized largest sum.",
         whyThisMatters: "Direct sibling of 'Capacity To Ship Packages Within D Days'.",
         concepts: ["split array", "binary search on answer", "min-max optimization"], prerequisites: ["binary search on answer"], learningObjectives: ["Minimize the maximum subarray sum using binary search"], constraints: ["1 <= K <= N"],
@@ -480,7 +480,7 @@ const level20 = [
         commonMistakes: ["DP O(N^2 * K) timing out when binary search is O(N log S)"], timeComplexity: "O(N log(sum))", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["binary search", "optimization"]
     },
     {
-        id: "py-prob-20-08", levelId: "py-level-20", title: "Find K Closest Elements", type: "coding", difficulty: "medium", order: 8,
+        id: "py-prob-20-08", levelId: "level-20", title: "Find K Closest Elements", type: "coding", difficulty: "medium", order: 8,
         description: "LeetCode #658 Find K Closest Elements.\nGiven a sorted integer array `arr`, two integers `K` and `X`:\nFind the `K` closest integers to `X` in the array.\nAn integer `a` is closer to `X` than an integer `b` if `|a - X| < |b - X|`, or `|a - X| == |b - X|` and `a < b`.\nPrint the result sorted in ascending order.",
         whyThisMatters: "Binary search for starting window index `l` of size `K`.",
         concepts: ["k closest elements", "binary search window", "bisect"], prerequisites: ["binary search"], learningObjectives: ["Find starting index of optimal size-K window with binary search"], constraints: ["Arr sorted ascending"],
@@ -496,7 +496,7 @@ const level20 = [
         commonMistakes: ["Returning elements in distance order instead of sorted value order"], timeComplexity: "O(N log N)", spaceComplexity: "O(K)", interviewRelevance: "high", tags: ["sorting", "binary search"]
     },
     {
-        id: "py-prob-20-09", levelId: "py-level-20", title: "Median of Two Sorted Arrays", type: "coding", difficulty: "hard", order: 9,
+        id: "py-prob-20-09", levelId: "level-20", title: "Median of Two Sorted Arrays", type: "coding", difficulty: "hard", order: 9,
         description: "LeetCode #4 Median of Two Sorted Arrays.\nGiven two sorted arrays `nums1` and `nums2` on separate lines:\nFind the median of the two sorted arrays.\nPrint the median rounded to 1 decimal place (e.g. `2.0` or `2.5`).",
         whyThisMatters: "The most famous LeetCode Hard binary search problem in existence.",
         concepts: ["median of two sorted arrays", "binary search partition"], prerequisites: ["binary search"], learningObjectives: ["Compute combined median in O(log(min(M, N)))"], constraints: ["Sorted arrays"],
@@ -513,7 +513,7 @@ const level20 = [
         commonMistakes: ["Failing on even total length requiring average of two middle elements"], timeComplexity: "O(log(min(M, N)))", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["binary search", "hard", "classic"]
     },
     {
-        id: "py-prob-20-10", levelId: "py-level-20", title: "Search in Rotated Sorted Array II (With Duplicates)", type: "coding", difficulty: "medium", order: 10,
+        id: "py-prob-20-10", levelId: "level-20", title: "Search in Rotated Sorted Array II (With Duplicates)", type: "coding", difficulty: "medium", order: 10,
         description: "LeetCode #81.\nGiven a target `T` on line 1, and a rotated sorted array `nums` containing duplicates on line 2:\nReturn `True` if `T` is in `nums`, or `False` if it is not in `nums`.\nWhen `nums[l] == nums[mid] == nums[r]`, shrink boundaries `l += 1, r -= 1`.",
         whyThisMatters: "Duplicates destroy strictly monotonic half determination, reducing worst-case from O(log N) to O(N).",
         concepts: ["rotated duplicates", "boundary shrinking"], prerequisites: ["rotated sorted array"], learningObjectives: ["Handle duplicates in rotated binary search by shrinking bounds"], constraints: ["Duplicates allowed"],
@@ -534,7 +534,7 @@ const level20 = [
 // Level 21: Binary Trees in Python
 const level21 = [
     {
-        id: "py-prob-21-01", levelId: "py-level-21", title: "Binary Tree Inorder Traversal", type: "coding", difficulty: "easy", order: 1,
+        id: "py-prob-21-01", levelId: "level-21", title: "Binary Tree Inorder Traversal", type: "coding", difficulty: "easy", order: 1,
         description: "LeetCode #94 Binary Tree Inorder Traversal.\nGiven the root of a binary tree, return the inorder traversal of its nodes' values.\nInorder traversal visits `Left Subtree -> Root -> Right Subtree`.\n\nInput format: Given level-order representation of tree on one line (`null` represents missing child):\nPrint inorder node values space-separated.",
         whyThisMatters: "Inorder traversal of a Binary Search Tree (BST) visits nodes in strictly sorted ascending order.",
         concepts: ["binary tree", "inorder traversal", "dfs"], prerequisites: ["trees"], learningObjectives: ["Implement recursive/iterative inorder traversal"], constraints: ["Nodes <= 1000"],
@@ -550,7 +550,7 @@ const level21 = [
         commonMistakes: ["Visiting root before left child"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["trees", "inorder"]
     },
     {
-        id: "py-prob-21-02", levelId: "py-level-21", title: "Preorder & Postorder Traversals", type: "coding", difficulty: "easy", order: 2,
+        id: "py-prob-21-02", levelId: "level-21", title: "Preorder & Postorder Traversals", type: "coding", difficulty: "easy", order: 2,
         description: "Given a binary tree:\n1. Print its Preorder traversal (`Root -> Left -> Right`) on line 1.\n2. Print its Postorder traversal (`Left -> Right -> Root`) on line 2.",
         whyThisMatters: "Preorder is used to serialize/clone trees; Postorder is used for bottom-up calculation (like height).",
         concepts: ["preorder", "postorder", "dfs"], prerequisites: ["trees"], learningObjectives: ["Distinguish root placement in preorder vs postorder"], constraints: ["Level order input"],
@@ -566,7 +566,7 @@ const level21 = [
         commonMistakes: ["Swapping left and right child order"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["trees", "dfs"]
     },
     {
-        id: "py-prob-21-03", levelId: "py-level-21", title: "Maximum Depth of Binary Tree", type: "coding", difficulty: "easy", order: 3,
+        id: "py-prob-21-03", levelId: "level-21", title: "Maximum Depth of Binary Tree", type: "coding", difficulty: "easy", order: 3,
         description: "LeetCode #104 Maximum Depth of Binary Tree.\nGiven the root of a binary tree, return its maximum depth.\nA binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.\n```python\ndef max_depth(root):\n    if not root: return 0\n    return 1 + max(max_depth(root.left), max_depth(root.right))\n```\nPrint the maximum depth integer.",
         whyThisMatters: "The canonical postorder height computation.",
         concepts: ["max depth", "tree height", "postorder"], prerequisites: ["trees"], learningObjectives: ["Compute tree depth using bottom-up recursion"], constraints: ["Nodes <= 10^4"],
@@ -583,7 +583,7 @@ const level21 = [
         commonMistakes: ["Returning 0 for single root node (should be 1)"], timeComplexity: "O(N)", spaceComplexity: "O(H)", interviewRelevance: "high", tags: ["trees", "must-know"]
     },
     {
-        id: "py-prob-21-04", levelId: "py-level-21", title: "Invert Binary Tree", type: "coding", difficulty: "easy", order: 4,
+        id: "py-prob-21-04", levelId: "level-21", title: "Invert Binary Tree", type: "coding", difficulty: "easy", order: 4,
         description: "LeetCode #226 Invert Binary Tree.\nGiven the root of a binary tree, invert the tree (swap left and right children recursively), and return its root.\nPrint the level-order traversal of the inverted tree space-separated.",
         whyThisMatters: "Max Howell's famous tweet about Google: 'Google: 90% of our engineers use the software you wrote (Homebrew), but you can't invert a binary tree on a whiteboard so fuck off.'",
         concepts: ["invert tree", "mirror binary tree", "tree manipulation"], prerequisites: ["trees"], learningObjectives: ["Swap child pointers recursively"], constraints: ["Nodes <= 100"],
@@ -599,7 +599,7 @@ const level21 = [
         commonMistakes: ["Overwriting r.left before inverting r.right"], timeComplexity: "O(N)", spaceComplexity: "O(H)", interviewRelevance: "high", tags: ["trees", "classic"]
     },
     {
-        id: "py-prob-21-05", levelId: "py-level-21", title: "Symmetric Tree (Mirror Reflection)", type: "coding", difficulty: "easy", order: 5,
+        id: "py-prob-21-05", levelId: "level-21", title: "Symmetric Tree (Mirror Reflection)", type: "coding", difficulty: "easy", order: 5,
         description: "LeetCode #101 Symmetric Tree.\nGiven the root of a binary tree, check whether it is a mirror of itself (i.e. symmetric around its center).\nPrint `True` if symmetric, else `False`.",
         whyThisMatters: "Dual recursive traversal comparing `t1.left` with `t2.right` and `t1.right` with `t2.left`.",
         concepts: ["symmetric tree", "dual dfs", "mirror check"], prerequisites: ["trees"], learningObjectives: ["Compare two subtrees as mirror reflections"], constraints: ["Nodes <= 1000"],
@@ -616,7 +616,7 @@ const level21 = [
         commonMistakes: ["Comparing t1.left with t2.left (which tests identical tree, not mirror)"], timeComplexity: "O(N)", spaceComplexity: "O(H)", interviewRelevance: "high", tags: ["trees", "recursion"]
     },
     {
-        id: "py-prob-21-06", levelId: "py-level-21", title: "Binary Tree Level Order Traversal (BFS)", type: "coding", difficulty: "medium", order: 6,
+        id: "py-prob-21-06", levelId: "level-21", title: "Binary Tree Level Order Traversal (BFS)", type: "coding", difficulty: "medium", order: 6,
         description: "LeetCode #102 Binary Tree Level Order Traversal.\nGiven the root of a binary tree, return the level order traversal of its nodes' values (i.e., from left to right, level by level).\nPrint each level on a separate line, node values space-separated.\n\nUse `collections.deque` for a BFS queue.",
         whyThisMatters: "Level order BFS is the prototype for all breadth-first graph algorithms.",
         concepts: ["level order traversal", "bfs", "queue"], prerequisites: ["trees", "queues"], learningObjectives: ["Implement level-by-level BFS traversal using collections.deque"], constraints: ["Nodes <= 2000"],
@@ -632,7 +632,7 @@ const level21 = [
         commonMistakes: ["Not capturing len(q) upfront, mixing nodes from different levels"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["trees", "bfs", "must-know"]
     },
     {
-        id: "py-prob-21-07", levelId: "py-level-21", title: "Validate Binary Search Tree (BST)", type: "coding", difficulty: "medium", order: 7,
+        id: "py-prob-21-07", levelId: "level-21", title: "Validate Binary Search Tree (BST)", type: "coding", difficulty: "medium", order: 7,
         description: "LeetCode #98 Validate Binary Search Tree.\nGiven the root of a binary tree, determine if it is a valid binary search tree (BST).\nA valid BST is defined as follows:\n- The left subtree of a node contains only nodes with keys strictly less than the node's key.\n- The right subtree of a node contains only nodes with keys strictly greater than the node's key.\n- Both the left and right subtrees must also be binary search trees.\nPrint `True` if valid, else `False`.",
         whyThisMatters: "Validating that all descendants (not just direct children) satisfy the BST invariant via range propagation `[low, high]`.",
         concepts: ["validate bst", "range propagation", "bst invariant"], prerequisites: ["trees"], learningObjectives: ["Propagate valid min and max boundaries down tree recursion"], constraints: ["Nodes <= 10^4"],
@@ -649,7 +649,7 @@ const level21 = [
         commonMistakes: ["Only checking node.left.val < node.val and node.right.val > node.val (fails when indirect descendant violates property)"], timeComplexity: "O(N)", spaceComplexity: "O(H)", interviewRelevance: "high", tags: ["bst", "must-know"]
     },
     {
-        id: "py-prob-21-08", levelId: "py-level-21", title: "Lowest Common Ancestor in BST", type: "coding", difficulty: "easy", order: 8,
+        id: "py-prob-21-08", levelId: "level-21", title: "Lowest Common Ancestor in BST", type: "coding", difficulty: "easy", order: 8,
         description: "LeetCode #235 Lowest Common Ancestor of a Binary Search Tree.\nGiven a binary search tree (BST) and two node values `P` and `Q`:\nFind the lowest common ancestor (LCA) node value.\nThe LCA is defined between two nodes `p` and `q` as the lowest node in `T` that has both `p` and `q` as descendants.\n\nInput: Values `P Q` on line 1, BST on line 2.\nPrint the LCA value.",
         whyThisMatters: "Exploits BST ordering: if both P and Q are smaller, go left; if both larger, go right; otherwise current node is LCA!",
         concepts: ["lca in bst", "bst properties", "search path"], prerequisites: ["bst"], learningObjectives: ["Find LCA in BST in O(H) time"], constraints: ["P and Q exist in BST"],
@@ -666,7 +666,7 @@ const level21 = [
         commonMistakes: ["Using general tree LCA recursion instead of O(H) BST direction checks"], timeComplexity: "O(H)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["bst", "lca"]
     },
     {
-        id: "py-prob-21-09", levelId: "py-level-21", title: "Diameter of Binary Tree", type: "coding", difficulty: "easy", order: 9,
+        id: "py-prob-21-09", levelId: "level-21", title: "Diameter of Binary Tree", type: "coding", difficulty: "easy", order: 9,
         description: "LeetCode #543 Diameter of Binary Tree.\nGiven the root of a binary tree, return the length of the diameter of the tree.\nThe diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.\nThe length of a path between two nodes is represented by the number of edges between them.\nPrint the diameter integer.",
         whyThisMatters: "Bottom-up DFS calculating global variable `diameter = max(diameter, left_height + right_height)`.",
         concepts: ["diameter", "bottom-up dfs", "tree diameter"], prerequisites: ["trees"], learningObjectives: ["Calculate longest path across subtrees using postorder DFS"], constraints: ["Nodes <= 10^4"],
@@ -683,7 +683,7 @@ const level21 = [
         commonMistakes: ["Counting nodes instead of edges (edges = nodes - 1)"], timeComplexity: "O(N)", spaceComplexity: "O(H)", interviewRelevance: "high", tags: ["trees", "dfs", "must-know"]
     },
     {
-        id: "py-prob-21-10", levelId: "py-level-21", title: "Path Sum (Root to Leaf)", type: "coding", difficulty: "easy", order: 10,
+        id: "py-prob-21-10", levelId: "level-21", title: "Path Sum (Root to Leaf)", type: "coding", difficulty: "easy", order: 10,
         description: "LeetCode #112 Path Sum.\nGiven target sum `targetSum` on line 1, and binary tree on line 2:\nReturn `True` if the tree has a root-to-leaf path such that adding up all the values along the path equals `targetSum`.\nA leaf is a node with no children.\nPrint `True` or `False`.",
         whyThisMatters: "Verifying root-to-leaf paths by subtracting current node value as you descend.",
         concepts: ["path sum", "root to leaf", "dfs"], prerequisites: ["trees"], learningObjectives: ["Track path sum accumulation to leaf nodes"], constraints: ["Nodes <= 5000"],

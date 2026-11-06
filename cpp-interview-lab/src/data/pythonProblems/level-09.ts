@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel9Problems: Problem[] = [
     {
         "id": "py-prob-09-01",
-        "levelId": "py-level-09",
+        "levelId": "level-09",
         "title": "Word Frequency Counter",
         "type": "coding",
         "difficulty": "easy",
@@ -68,7 +68,7 @@ export const pyLevel9Problems: Problem[] = [
     },
     {
         "id": "py-prob-09-02",
-        "levelId": "py-level-09",
+        "levelId": "level-09",
         "title": "Most Frequent Character",
         "type": "coding",
         "difficulty": "easy",
@@ -132,7 +132,7 @@ export const pyLevel9Problems: Problem[] = [
     },
     {
         "id": "py-prob-09-03",
-        "levelId": "py-level-09",
+        "levelId": "level-09",
         "title": "Invert a Dictionary",
         "type": "coding",
         "difficulty": "easy",
@@ -197,7 +197,7 @@ export const pyLevel9Problems: Problem[] = [
     },
     {
         "id": "py-prob-09-04",
-        "levelId": "py-level-09",
+        "levelId": "level-09",
         "title": "Safe Lookup with .get()",
         "type": "coding",
         "difficulty": "beginner",
@@ -265,7 +265,7 @@ export const pyLevel9Problems: Problem[] = [
     },
     {
         "id": "py-prob-09-05",
-        "levelId": "py-level-09",
+        "levelId": "level-09",
         "title": "Merge Dictionaries by Summing Values",
         "type": "coding",
         "difficulty": "easy",
@@ -330,7 +330,7 @@ export const pyLevel9Problems: Problem[] = [
     },
     {
         "id": "py-prob-09-06",
-        "levelId": "py-level-09",
+        "levelId": "level-09",
         "title": "Group Words by Length",
         "type": "coding",
         "difficulty": "easy",
@@ -396,7 +396,7 @@ export const pyLevel9Problems: Problem[] = [
     },
     {
         "id": "py-prob-09-07",
-        "levelId": "py-level-09",
+        "levelId": "level-09",
         "title": "Two Sum with Hash Map",
         "type": "coding",
         "difficulty": "medium",
@@ -466,7 +466,7 @@ export const pyLevel9Problems: Problem[] = [
     },
     {
         "id": "py-prob-09-08",
-        "levelId": "py-level-09",
+        "levelId": "level-09",
         "title": "Sort Dictionary by Values Descending",
         "type": "coding",
         "difficulty": "easy",
@@ -532,7 +532,7 @@ export const pyLevel9Problems: Problem[] = [
     },
     {
         "id": "py-prob-09-09",
-        "levelId": "py-level-09",
+        "levelId": "level-09",
         "title": "Dictionary Comprehension Squares",
         "type": "coding",
         "difficulty": "beginner",
@@ -595,7 +595,7 @@ export const pyLevel9Problems: Problem[] = [
     },
     {
         "id": "py-prob-09-10",
-        "levelId": "py-level-09",
+        "levelId": "level-09",
         "title": "Nested Dictionary User Query",
         "type": "coding",
         "difficulty": "easy",

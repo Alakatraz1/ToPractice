@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel5Problems: Problem[] = [
     {
         "id": "py-prob-05-01",
-        "levelId": "py-level-05",
+        "levelId": "level-05",
         "title": "Square Function",
         "type": "coding",
         "difficulty": "beginner",
@@ -67,7 +67,7 @@ export const pyLevel5Problems: Problem[] = [
     },
     {
         "id": "py-prob-05-02",
-        "levelId": "py-level-05",
+        "levelId": "level-05",
         "title": "Greatest Common Divisor (Euclidean GCD)",
         "type": "coding",
         "difficulty": "easy",
@@ -137,7 +137,7 @@ export const pyLevel5Problems: Problem[] = [
     },
     {
         "id": "py-prob-05-03",
-        "levelId": "py-level-05",
+        "levelId": "level-05",
         "title": "Palindrome Number Predicate",
         "type": "coding",
         "difficulty": "easy",
@@ -216,7 +216,7 @@ export const pyLevel5Problems: Problem[] = [
     },
     {
         "id": "py-prob-05-04",
-        "levelId": "py-level-05",
+        "levelId": "level-05",
         "title": "Custom Power Function",
         "type": "coding",
         "difficulty": "easy",
@@ -285,7 +285,7 @@ export const pyLevel5Problems: Problem[] = [
     },
     {
         "id": "py-prob-05-05",
-        "levelId": "py-level-05",
+        "levelId": "level-05",
         "title": "Multiple Return Values (Min & Max)",
         "type": "coding",
         "difficulty": "easy",
@@ -350,7 +350,7 @@ export const pyLevel5Problems: Problem[] = [
     },
     {
         "id": "py-prob-05-06",
-        "levelId": "py-level-05",
+        "levelId": "level-05",
         "title": "Variable Arguments (*args)",
         "type": "coding",
         "difficulty": "easy",
@@ -415,7 +415,7 @@ export const pyLevel5Problems: Problem[] = [
     },
     {
         "id": "py-prob-05-07",
-        "levelId": "py-level-05",
+        "levelId": "level-05",
         "title": "Default Parameter Values",
         "type": "coding",
         "difficulty": "beginner",
@@ -482,7 +482,7 @@ export const pyLevel5Problems: Problem[] = [
     },
     {
         "id": "py-prob-05-08",
-        "levelId": "py-level-05",
+        "levelId": "level-05",
         "title": "Count Vowels in String Function",
         "type": "coding",
         "difficulty": "easy",
@@ -548,7 +548,7 @@ export const pyLevel5Problems: Problem[] = [
     },
     {
         "id": "py-prob-05-09",
-        "levelId": "py-level-05",
+        "levelId": "level-05",
         "title": "Perfect Number Checker",
         "type": "coding",
         "difficulty": "easy",
@@ -626,7 +626,7 @@ export const pyLevel5Problems: Problem[] = [
     },
     {
         "id": "py-prob-05-10",
-        "levelId": "py-level-05",
+        "levelId": "level-05",
         "title": "Higher-Order Function Application",
         "type": "coding",
         "difficulty": "easy",

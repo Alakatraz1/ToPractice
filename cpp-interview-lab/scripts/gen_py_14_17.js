@@ -12,7 +12,7 @@ function writeLevel(levelNum, problems) {
 // Level 14: Hash Tables for Interview Problems
 const level14 = [
     {
-        id: "py-prob-14-01", levelId: "py-level-14", title: "Valid Anagram", type: "coding", difficulty: "easy", order: 1,
+        id: "py-prob-14-01", levelId: "level-14", title: "Valid Anagram", type: "coding", difficulty: "easy", order: 1,
         description: "LeetCode #242 Valid Anagram.\nGiven two strings `S` and `T` on separate lines, return `True` if `T` is an anagram of `S`, and `False` otherwise.\nAn Anagram is a word formed by rearranging the letters of another word, using all original letters exactly once.",
         whyThisMatters: "Frequency map comparison using `collections.Counter(s) == collections.Counter(t)` is a benchmark interview question.",
         concepts: ["anagram", "counter", "hash map"], prerequisites: ["dictionaries"], learningObjectives: ["Compare character frequency distributions"], constraints: ["Lowercase letters"],
@@ -29,7 +29,7 @@ const level14 = [
         commonMistakes: ["Sorting strings (O(N log N)) when Counter achieves O(N)"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["anagram", "hash map"]
     },
     {
-        id: "py-prob-14-02", levelId: "py-level-14", title: "Group Anagrams", type: "coding", difficulty: "medium", order: 2,
+        id: "py-prob-14-02", levelId: "level-14", title: "Group Anagrams", type: "coding", difficulty: "medium", order: 2,
         description: "LeetCode #49 Group Anagrams.\nGiven an array of strings, group the anagrams together into a dictionary where the key is the sorted string `''.join(sorted(w))`.\nPrint each group of anagrams sorted alphabetically on separate lines.",
         whyThisMatters: "Canonical interview problem demonstrating canonical hash keys for bucketing.",
         concepts: ["group anagrams", "canonical key", "bucketing"], prerequisites: ["dictionaries", "anagram"], learningObjectives: ["Bucket strings using sorted signatures as hash keys"], constraints: ["Strings contain lowercase English letters"],
@@ -45,7 +45,7 @@ const level14 = [
         commonMistakes: ["Using non-hashable lists as dict keys instead of strings or tuples"], timeComplexity: "O(N * K log K)", spaceComplexity: "O(N * K)", interviewRelevance: "high", tags: ["anagrams", "must-know"]
     },
     {
-        id: "py-prob-14-03", levelId: "py-level-14", title: "Longest Consecutive Sequence in O(N)", type: "coding", difficulty: "medium", order: 3,
+        id: "py-prob-14-03", levelId: "level-14", title: "Longest Consecutive Sequence in O(N)", type: "coding", difficulty: "medium", order: 3,
         description: "LeetCode #128 Longest Consecutive Sequence.\nGiven an unsorted array of integers `nums`, find the length of the longest consecutive elements sequence.\nYou must write an algorithm that runs in `O(N)` time.\n(For example, for `[100, 4, 200, 1, 3, 2]`, sequence is `[1, 2, 3, 4]`, length is `4`).",
         whyThisMatters: "Only start counting when `x - 1 not in num_set`; this simple check ensures each element is visited at most twice.",
         concepts: ["longest consecutive", "set lookup", "o(n) sequence"], prerequisites: ["sets"], learningObjectives: ["Identify sequence starting points with set lookups"], constraints: ["N <= 10^5"],
@@ -62,7 +62,7 @@ const level14 = [
         commonMistakes: ["Sorting array in O(N log N) which violates strict O(N) constraint"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["sets", "must-know"]
     },
     {
-        id: "py-prob-14-04", levelId: "py-level-14", title: "Subarray Sum Equals K", type: "coding", difficulty: "medium", order: 4,
+        id: "py-prob-14-04", levelId: "level-14", title: "Subarray Sum Equals K", type: "coding", difficulty: "medium", order: 4,
         description: "LeetCode #560 Subarray Sum Equals K.\nGiven target integer `K` on line 1, and an array of integers on line 2:\nFind the total number of continuous subarrays whose sum equals `K`.\n\nUse a prefix sum hash map `prefix_counts` initialized with `{0: 1}` to achieve `O(N)` time.",
         whyThisMatters: "Prefix sum hash map is the cornerstone of counting contiguous subarray properties.",
         concepts: ["prefix sums", "hash map", "subarray count"], prerequisites: ["prefix sums", "dictionaries"], learningObjectives: ["Count matching subarray sums in O(N) with prefix hash map"], constraints: ["N <= 10^5"],
@@ -79,7 +79,7 @@ const level14 = [
         commonMistakes: ["Forgetting to initialize counts with {0: 1} to handle subarrays starting at index 0"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["prefix sums", "hash map", "must-know"]
     },
     {
-        id: "py-prob-14-05", levelId: "py-level-14", title: "Intersection of Two Arrays II", type: "coding", difficulty: "easy", order: 5,
+        id: "py-prob-14-05", levelId: "level-14", title: "Intersection of Two Arrays II", type: "coding", difficulty: "easy", order: 5,
         description: "LeetCode #350.\nGiven two integer arrays on separate lines, return an array of their intersection.\nEach element in the result must appear as many times as it shows in both arrays (accounting for multiplicity).\nPrint the result sorted in ascending order.",
         whyThisMatters: "Contrasts set intersection (unique) with multiset intersection (frequency minimum).",
         concepts: ["counter", "multiset intersection", "frequency min"], prerequisites: ["dictionaries"], learningObjectives: ["Intersect multisets accounting for multiplicity"], constraints: ["Integer arrays"],
@@ -96,7 +96,7 @@ const level14 = [
         commonMistakes: ["Using sets which drops duplicate elements"], timeComplexity: "O(N log N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["counter", "frequency"]
     },
     {
-        id: "py-prob-14-06", levelId: "py-level-14", title: "Find All Duplicates in an Array", type: "coding", difficulty: "medium", order: 6,
+        id: "py-prob-14-06", levelId: "level-14", title: "Find All Duplicates in an Array", type: "coding", difficulty: "medium", order: 6,
         description: "LeetCode #442.\nGiven an integer array `nums` of length `N` where all integers are in the range `[1, N]` and each integer appears once or twice:\nFind all integers that appear twice.\nPrint them sorted in ascending order.",
         whyThisMatters: "Index negation trick allows finding duplicates in O(N) time and O(1) extra space.",
         concepts: ["index negation", "duplicates", "in-place hash"], prerequisites: ["dictionaries", "arrays"], learningObjectives: ["Detect duplicate elements using index mapping"], constraints: ["1 <= nums[i] <= N"],
@@ -113,7 +113,7 @@ const level14 = [
         commonMistakes: ["Forgetting abs(x) when computing index on already-negated values"], timeComplexity: "O(N log N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["arrays", "clever-hashing"]
     },
     {
-        id: "py-prob-14-07", levelId: "py-level-14", title: "Top K Frequent Elements", type: "coding", difficulty: "medium", order: 7,
+        id: "py-prob-14-07", levelId: "level-14", title: "Top K Frequent Elements", type: "coding", difficulty: "medium", order: 7,
         description: "LeetCode #347 Top K Frequent Elements.\nGiven integer `K` on line 1, and an array of integers on line 2:\nReturn the `K` most frequent elements.\nPrint the result sorted in ascending order.",
         whyThisMatters: "Ranked among the top 10 most frequently asked questions across all FAANG interviews.",
         concepts: ["top k", "counter", "frequency"], prerequisites: ["dictionaries"], learningObjectives: ["Find top K items using frequency map and sorting"], constraints: ["1 <= K <= number of unique elements"],
@@ -130,7 +130,7 @@ const level14 = [
         commonMistakes: ["Sorting entire array instead of unique elements"], timeComplexity: "O(N log K)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["top-k", "counter", "must-know"]
     },
     {
-        id: "py-prob-14-08", levelId: "py-level-14", title: "Contains Duplicate II (Within Window K)", type: "coding", difficulty: "easy", order: 8,
+        id: "py-prob-14-08", levelId: "level-14", title: "Contains Duplicate II (Within Window K)", type: "coding", difficulty: "easy", order: 8,
         description: "LeetCode #219.\nGiven integer `K` on line 1, and an array of integers on line 2:\nReturn `True` if there are two distinct indices `i` and `j` in the array such that `nums[i] == nums[j]` and `abs(i - j) <= K`.\nOtherwise return `False`.",
         whyThisMatters: "Combines hash maps with sliding window constraint.",
         concepts: ["sliding window hash", "duplicate within distance"], prerequisites: ["dictionaries"], learningObjectives: ["Track most recent index in hash map to verify distance bound"], constraints: ["K >= 0"],
@@ -147,7 +147,7 @@ const level14 = [
         commonMistakes: ["O(N*K) sliding window when hash map gives O(N) directly"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["hash map", "sliding window"]
     },
     {
-        id: "py-prob-14-09", levelId: "py-level-14", title: "Isomorphic Strings", type: "coding", difficulty: "easy", order: 9,
+        id: "py-prob-14-09", levelId: "level-14", title: "Isomorphic Strings", type: "coding", difficulty: "easy", order: 9,
         description: "LeetCode #205 Isomorphic Strings.\nTwo strings `S` and `T` are isomorphic if the characters in `S` can be replaced to get `T`.\nAll occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.\nPrint `True` if isomorphic, else `False`.",
         whyThisMatters: "Bijective mapping (one-to-one and onto) between two sequences.",
         concepts: ["isomorphic", "bijective mapping", "hash map"], prerequisites: ["dictionaries"], learningObjectives: ["Validate 1-to-1 character mappings between strings"], constraints: ["Equal length strings"],
@@ -164,7 +164,7 @@ const level14 = [
         commonMistakes: ["Checking only one direction (e.g. 'badc' and 'baba')"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["strings", "hash map"]
     },
     {
-        id: "py-prob-14-10", levelId: "py-level-14", title: "Word Pattern", type: "coding", difficulty: "easy", order: 10,
+        id: "py-prob-14-10", levelId: "level-14", title: "Word Pattern", type: "coding", difficulty: "easy", order: 10,
         description: "LeetCode #290 Word Pattern.\nGiven a pattern string `pattern` and a string `s` of words on separate lines:\nFind if `s` follows the same pattern.\nHere follow means a full match, such that there is a bijection between a letter in `pattern` and a non-empty word in `s`.\nPrint `True` or `False`.",
         whyThisMatters: "Direct extension of Isomorphic Strings from characters to words.",
         concepts: ["bijection", "word pattern", "hash map"], prerequisites: ["isomorphic"], learningObjectives: ["Map characters to words bijectively"], constraints: ["Pattern and words"],
@@ -185,7 +185,7 @@ const level14 = [
 // Level 15: Stacks & Queues in Python
 const level15 = [
     {
-        id: "py-prob-15-01", levelId: "py-level-15", title: "Valid Parentheses", type: "coding", difficulty: "easy", order: 1,
+        id: "py-prob-15-01", levelId: "level-15", title: "Valid Parentheses", type: "coding", difficulty: "easy", order: 1,
         description: "LeetCode #20 Valid Parentheses.\nGiven a string `S` containing just the characters `'('`, `')'`, `'{'`, `'}'`, `'['` and `']'`:\nDetermine if the input string is valid.\nAn input string is valid if open brackets are closed by the same type of brackets in the correct order.\nPrint `True` if valid, else `False`.",
         whyThisMatters: "Valid Parentheses using a stack is universally the #1 asked stack interview question.",
         concepts: ["stack", "parentheses matching", "lifo"], prerequisites: ["stacks"], learningObjectives: ["Use a stack to validate matching pairs"], constraints: ["Brackets string"],
@@ -204,7 +204,7 @@ const level15 = [
         commonMistakes: ["Forgetting to check if stack is empty at the end (e.g. unclosed '(')"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["stack", "essential"]
     },
     {
-        id: "py-prob-15-02", levelId: "py-level-15", title: "Min Stack Design", type: "coding", difficulty: "medium", order: 2,
+        id: "py-prob-15-02", levelId: "level-15", title: "Min Stack Design", type: "coding", difficulty: "medium", order: 2,
         description: "LeetCode #155 Min Stack.\nDesign a stack that supports push, pop, top, and retrieving the minimum element in `O(1)` time.\n\nInput format: Sequence of commands:\n- `push X`\n- `pop`\n- `getMin` (prints the current minimum on a new line)\nProcess all commands and output the getMin results.",
         whyThisMatters: "Pairing a data stack with a min-tracker stack in O(1) time.",
         concepts: ["min stack", "o(1) minimum", "stack design"], prerequisites: ["stacks"], learningObjectives: ["Design a stack with O(1) getMin using companion stack"], constraints: ["Commands valid"],
@@ -220,7 +220,7 @@ const level15 = [
         commonMistakes: ["Recalculating min with min(stack) which takes O(N) instead of O(1)"], timeComplexity: "O(1) per op", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["stack", "system design"]
     },
     {
-        id: "py-prob-15-03", levelId: "py-level-15", title: "Evaluate Reverse Polish Notation", type: "coding", difficulty: "medium", order: 3,
+        id: "py-prob-15-03", levelId: "level-15", title: "Evaluate Reverse Polish Notation", type: "coding", difficulty: "medium", order: 3,
         description: "LeetCode #150 Evaluate Reverse Polish Notation.\nEvaluate the value of an arithmetic expression in Reverse Polish Notation (postfix notation).\nValid operators are `+`, `-`, `*`, `/`. Each operand may be an integer or another expression.\nDivision between integers should truncate toward zero (`int(a / b)` in Python).\nPrint the evaluated integer.",
         whyThisMatters: "Compiler expression evaluators and HP calculators use postfix stacks.",
         concepts: ["rpn", "postfix evaluation", "stack"], prerequisites: ["stacks"], learningObjectives: ["Evaluate postfix expressions using an operand stack"], constraints: ["Valid RPN expression"],
@@ -237,7 +237,7 @@ const level15 = [
         commonMistakes: ["Popping order inverted: first pop is b (right operand), second pop is a (left operand)"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["stack", "expressions"]
     },
     {
-        id: "py-prob-15-04", levelId: "py-level-15", title: "Daily Temperatures (Monotonic Stack)", type: "coding", difficulty: "medium", order: 4,
+        id: "py-prob-15-04", levelId: "level-15", title: "Daily Temperatures (Monotonic Stack)", type: "coding", difficulty: "medium", order: 4,
         description: "LeetCode #739 Daily Temperatures.\nGiven an array of integers `temperatures` representing daily temperatures:\nReturn an array `answer` such that `answer[i]` is the number of days you have to wait after the `i-th` day to get a warmer temperature.\nIf there is no future day for which this is possible, keep `answer[i] == 0`.\nPrint `answer` space-separated.",
         whyThisMatters: "Monotonic Stack is the single most tested advanced stack pattern in technical assessments.",
         concepts: ["monotonic stack", "daily temperatures", "next greater element"], prerequisites: ["stacks"], learningObjectives: ["Implement monotonic decreasing stack for next greater element"], constraints: ["N <= 10^5"],
@@ -254,7 +254,7 @@ const level15 = [
         commonMistakes: ["Quadratic O(N^2) double loop causing TLE"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["monotonic stack", "must-know"]
     },
     {
-        id: "py-prob-15-05", levelId: "py-level-15", title: "Next Greater Element I", type: "coding", difficulty: "medium", order: 5,
+        id: "py-prob-15-05", levelId: "level-15", title: "Next Greater Element I", type: "coding", difficulty: "medium", order: 5,
         description: "LeetCode #496 Next Greater Element I.\nGiven array `nums` of distinct integers:\nFor each element, find the first greater element to its right. If none exists, output `-1` for that element.\nPrint the next greater values space-separated.",
         whyThisMatters: "Direct monotonic stack mapping stored in a dictionary.",
         concepts: ["next greater element", "monotonic stack"], prerequisites: ["monotonic stack"], learningObjectives: ["Map next greater elements in O(N)"], constraints: ["Distinct integers"],
@@ -271,7 +271,7 @@ const level15 = [
         commonMistakes: ["Leaving remaining stack elements without -1 mapping"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["monotonic stack"]
     },
     {
-        id: "py-prob-15-06", levelId: "py-level-15", title: "FIFO Queue with collections.deque", type: "coding", difficulty: "easy", order: 6,
+        id: "py-prob-15-06", levelId: "level-15", title: "FIFO Queue with collections.deque", type: "coding", difficulty: "easy", order: 6,
         description: "In Python, using `list.pop(0)` takes `O(N)` linear time because all remaining elements must shift left!\nFor an efficient FIFO queue, use `collections.deque` where `append()` and `popleft()` are strictly `O(1)`.\n\n**Task:**\nProcess commands on separate lines:\n- `enqueue X`: add X to queue\n- `dequeue`: remove and print the front element\nIf dequeue on empty queue, print `EMPTY`.",
         whyThisMatters: "Using `list.pop(0)` in BFS is one of the most common beginner performance blunders; `collections.deque` is the professional standard.",
         concepts: ["deque", "fifo queue", "collections.deque"], prerequisites: ["queues"], learningObjectives: ["Use collections.deque for O(1) queue operations"], constraints: ["Commands valid"],
@@ -287,7 +287,7 @@ const level15 = [
         commonMistakes: ["Using list.pop(0) in performance-sensitive contexts"], timeComplexity: "O(1) per op", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["queue", "deque", "must-know"]
     },
     {
-        id: "py-prob-15-07", levelId: "py-level-15", title: "Implement Queue using Two Stacks", type: "coding", difficulty: "medium", order: 7,
+        id: "py-prob-15-07", levelId: "level-15", title: "Implement Queue using Two Stacks", type: "coding", difficulty: "medium", order: 7,
         description: "LeetCode #232 Implement Queue using Stacks.\nImplement a FIFO queue using only two LIFO stacks (`in_stack` and `out_stack`).\n\nCommands on separate lines:\n- `push X`\n- `pop` (prints the popped element)\nProcess commands and print outputs.",
         whyThisMatters: "Amortized analysis classic: elements are transferred to out_stack only when out_stack is empty, yielding O(1) amortized time.",
         concepts: ["two stacks", "amortized analysis", "queue"], prerequisites: ["stacks", "queues"], learningObjectives: ["Simulate queue with two stacks in O(1) amortized time"], constraints: ["Commands valid"],
@@ -303,7 +303,7 @@ const level15 = [
         commonMistakes: ["Transferring back and forth on every push/pop, degrading to O(N)"], timeComplexity: "O(1) amortized", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["queue", "stacks"]
     },
     {
-        id: "py-prob-15-08", levelId: "py-level-15", title: "Remove All Adjacent Duplicates in String", type: "coding", difficulty: "easy", order: 8,
+        id: "py-prob-15-08", levelId: "level-15", title: "Remove All Adjacent Duplicates in String", type: "coding", difficulty: "easy", order: 8,
         description: "LeetCode #1047.\nYou are given a string `S` consisting of lowercase English letters.\nA duplicate removal consists of choosing two adjacent and equal letters and removing them.\nWe repeatedly make duplicate removals on `S` until we no longer can.\nPrint the final string.",
         whyThisMatters: "Stack eliminates nested loop string deletions.",
         concepts: ["stack", "string cancellation"], prerequisites: ["stacks"], learningObjectives: ["Cancel adjacent duplicates using stack"], constraints: ["Lowercase letters"],
@@ -320,7 +320,7 @@ const level15 = [
         commonMistakes: ["Repeated string slicing in a while loop costing O(N^2)"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["stack", "strings"]
     },
     {
-        id: "py-prob-15-09", levelId: "py-level-15", title: "Asteroid Collision", type: "coding", difficulty: "medium", order: 9,
+        id: "py-prob-15-09", levelId: "level-15", title: "Asteroid Collision", type: "coding", difficulty: "medium", order: 9,
         description: "LeetCode #735 Asteroid Collision.\nWe are given an array `asteroids` of integers representing asteroids in a row.\nFor each asteroid, absolute value represents size, and sign represents direction (`+` right, `-` left).\nFind out the state of the asteroids after all collisions.\n- If two asteroids meet, the smaller one explodes.\n- If both are the same size, both explode.\n- Two asteroids moving in the same direction never meet.\nPrint remaining asteroids space-separated.",
         whyThisMatters: "Simulates physical collision physics using stack state.",
         concepts: ["asteroid collision", "stack", "simulation"], prerequisites: ["stacks"], learningObjectives: ["Simulate collision cancellation conditions with stack"], constraints: ["Non-zero integers"],
@@ -338,7 +338,7 @@ const level15 = [
         commonMistakes: ["Colliding when top < 0 and current > 0 (they move away from each other)"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["stack", "simulation"]
     },
     {
-        id: "py-prob-15-10", levelId: "py-level-15", title: "Simplify Unix Path", type: "coding", difficulty: "medium", order: 10,
+        id: "py-prob-15-10", levelId: "level-15", title: "Simplify Unix Path", type: "coding", difficulty: "medium", order: 10,
         description: "LeetCode #71 Simplify Path.\nGiven an absolute Unix-style file path `path`:\nTransform it into the simplified canonical path.\nRules:\n- Single period `.` refers to current directory (ignore).\n- Double period `..` moves up one directory (pop from stack).\n- Multiple consecutive slashes `//` treated as single slash `/`.\nPrint the canonical path.",
         whyThisMatters: "Real-world operating system file path normalization.",
         concepts: ["simplify path", "stack", "string parsing"], prerequisites: ["stacks", "strings"], learningObjectives: ["Normalize hierarchical paths with a directory stack"], constraints: ["Valid path string"],
@@ -360,7 +360,7 @@ const level15 = [
 // Level 16: Linked Lists in Python
 const level16 = [
     {
-        id: "py-prob-16-01", levelId: "py-level-16", title: "ListNode Creation and Traversal", type: "coding", difficulty: "easy", order: 1,
+        id: "py-prob-16-01", levelId: "level-16", title: "ListNode Creation and Traversal", type: "coding", difficulty: "easy", order: 1,
         description: "In Python, a linked list node is defined as:\n```python\nclass ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n```\nGiven an array of integers, construct a singly linked list from left to right.\nTraverse the linked list and print the node values separated by ` -> `.\n(e.g. `1 -> 2 -> 3`).",
         whyThisMatters: "Building linked list chains from scratch is required in all custom data structure implementations.",
         concepts: ["listnode", "singly linked list", "pointers"], prerequisites: ["classes"], learningObjectives: ["Define ListNode class and traverse sequential chain"], constraints: ["N >= 1"],
@@ -377,7 +377,7 @@ const level16 = [
         commonMistakes: ["Losing reference to head of the linked list during traversal"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["linked list", "nodes"]
     },
     {
-        id: "py-prob-16-02", levelId: "py-level-16", title: "Reverse Linked List In-Place", type: "coding", difficulty: "easy", order: 2,
+        id: "py-prob-16-02", levelId: "level-16", title: "Reverse Linked List In-Place", type: "coding", difficulty: "easy", order: 2,
         description: "LeetCode #206 Reverse Linked List.\nGiven the head of a singly linked list, reverse the list in-place by updating pointer references (`prev, curr, next_node`), and print the reversed values separated by ` -> `.",
         whyThisMatters: "Pointer redirection in linked lists is one of the top 3 most frequently tested interview patterns.",
         concepts: ["reverse linked list", "in-place reversal", "pointers"], prerequisites: ["linked list"], learningObjectives: ["Reverse linked list pointers in O(N) time and O(1) space"], constraints: ["N >= 1"],
@@ -394,7 +394,7 @@ const level16 = [
         commonMistakes: ["Overwriting curr.next before saving nxt, losing the rest of the list"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["linked list", "must-know"]
     },
     {
-        id: "py-prob-16-03", levelId: "py-level-16", title: "Middle of the Linked List", type: "coding", difficulty: "easy", order: 3,
+        id: "py-prob-16-03", levelId: "level-16", title: "Middle of the Linked List", type: "coding", difficulty: "easy", order: 3,
         description: "LeetCode #876.\nGiven the head of a singly linked list, return the middle node of the linked list.\nIf there are two middle nodes, return the second middle node.\nPrint the value of the middle node.",
         whyThisMatters: "Fast and Slow pointer technique (Hare & Tortoise) finds the center in one pass.",
         concepts: ["fast and slow pointers", "middle node"], prerequisites: ["linked list"], learningObjectives: ["Find list midpoint in one pass with fast & slow pointers"], constraints: ["N >= 1"],
@@ -411,7 +411,7 @@ const level16 = [
         commonMistakes: ["Crashing on fast.next.next when fast.next is None"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["fast slow pointers"]
     },
     {
-        id: "py-prob-16-04", levelId: "py-level-16", title: "Linked List Cycle Detection", type: "coding", difficulty: "easy", order: 4,
+        id: "py-prob-16-04", levelId: "level-16", title: "Linked List Cycle Detection", type: "coding", difficulty: "easy", order: 4,
         description: "LeetCode #141 Linked List Cycle.\nGiven a singly linked list, determine if it contains a cycle.\nUse Floyd's Cycle Detection Algorithm:\nMaintain `slow` moving 1 step and `fast` moving 2 steps.\nIf they ever meet, a cycle exists!\n\nInput format: Given an array on line 1, and `pos` (0-based index where tail connects) on line 2 (`-1` means no cycle).\nPrint `True` if cycle detected, else `False`.",
         whyThisMatters: "Floyd's Cycle-Finding Algorithm is ubiquitous across graph and list questions.",
         concepts: ["cycle detection", "floyds algorithm", "two pointers"], prerequisites: ["linked list"], learningObjectives: ["Detect cycles with fast and slow pointers"], constraints: ["Nodes <= 10^4"],
@@ -428,7 +428,7 @@ const level16 = [
         commonMistakes: ["Infinite loop if not checking for fast reaching None"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["cycle detection"]
     },
     {
-        id: "py-prob-16-05", levelId: "py-level-16", title: "Merge Two Sorted Linked Lists", type: "coding", difficulty: "easy", order: 5,
+        id: "py-prob-16-05", levelId: "level-16", title: "Merge Two Sorted Linked Lists", type: "coding", difficulty: "easy", order: 5,
         description: "LeetCode #21 Merge Two Sorted Lists.\nYou are given the heads of two sorted linked lists `list1` and `list2` on separate lines.\nMerge the two lists into one sorted list by splicing together the nodes.\nPrint the merged list values separated by ` -> `.",
         whyThisMatters: "Dummy head pattern makes merging pointer chains clean and bug-free.",
         concepts: ["merge lists", "dummy head", "linked list"], prerequisites: ["linked list"], learningObjectives: ["Merge two sorted linked lists using a dummy head"], constraints: ["Sorted inputs"],
@@ -445,7 +445,7 @@ const level16 = [
         commonMistakes: ["Forgetting to attach the non-exhausted list tail"], timeComplexity: "O(N + M)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["linked list", "must-know"]
     },
     {
-        id: "py-prob-16-06", levelId: "py-level-16", title: "Remove N-th Node From End of List", type: "coding", difficulty: "medium", order: 6,
+        id: "py-prob-16-06", levelId: "level-16", title: "Remove N-th Node From End of List", type: "coding", difficulty: "medium", order: 6,
         description: "LeetCode #19.\nGiven an integer `K` on line 1, followed by a list on line 2:\nRemove the `K`-th node from the end of the list and return its head.\nPrint the resulting list values separated by ` -> `.\n\nSolve this in one pass using two pointers separated by `K` steps.",
         whyThisMatters: "Lead-lag two-pointer technique on linked lists.",
         concepts: ["two pointers", "remove from end", "lead-lag"], prerequisites: ["linked list"], learningObjectives: ["Remove node from end in a single pass"], constraints: ["1 <= K <= list length"],
@@ -462,7 +462,7 @@ const level16 = [
         commonMistakes: ["Special case when removing the head node (solved by dummy node)"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["linked list", "two pointers"]
     },
     {
-        id: "py-prob-16-07", levelId: "py-level-16", title: "Palindrome Linked List", type: "coding", difficulty: "easy", order: 7,
+        id: "py-prob-16-07", levelId: "level-16", title: "Palindrome Linked List", type: "coding", difficulty: "easy", order: 7,
         description: "LeetCode #234 Palindrome Linked List.\nGiven a singly linked list, return `True` if it is a palindrome, or `False` otherwise.\n(Can you do this in `O(N)` time and `O(1)` space by finding the middle and reversing the second half?)",
         whyThisMatters: "Combines three core techniques: fast/slow pointer middle finding, in-place list reversal, and two-pointer comparison.",
         concepts: ["palindrome list", "reverse half", "fast slow"], prerequisites: ["linked list", "palindromes"], learningObjectives: ["Combine midpoint search and reversal to check palindrome in O(1) space"], constraints: ["N >= 1"],
@@ -479,7 +479,7 @@ const level16 = [
         commonMistakes: ["Failing odd-length palindrome lists"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["linked list", "palindromes"]
     },
     {
-        id: "py-prob-16-08", levelId: "py-level-16", title: "Delete Node without Head Pointer", type: "coding", difficulty: "easy", order: 8,
+        id: "py-prob-16-08", levelId: "level-16", title: "Delete Node without Head Pointer", type: "coding", difficulty: "easy", order: 8,
         description: "LeetCode #237 Delete Node in a Linked List.\nYou are given a node to delete, but you do NOT have access to the head of the list!\nHow to delete node `node`?\nCopy the value of `node.next` into `node`, and skip `node.next`: `node.val = node.next.val; node.next = node.next.next`.\n\nInput: Target value to delete on line 1, linked list on line 2.\nPrint the list with that value removed separated by ` -> `.",
         whyThisMatters: "Tests non-traditional pointer thinking: you don't delete the node, you copy the next node over and delete the next node!",
         concepts: ["node deletion", "value copying"], prerequisites: ["linked list"], learningObjectives: ["Delete node by copying successor value"], constraints: ["Target is not tail node"],
@@ -495,7 +495,7 @@ const level16 = [
         commonMistakes: ["Trying to access predecessor pointer in a singly linked list"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "medium", tags: ["linked list"]
     },
     {
-        id: "py-prob-16-09", levelId: "py-level-16", title: "Intersection of Two Linked Lists", type: "coding", difficulty: "medium", order: 9,
+        id: "py-prob-16-09", levelId: "level-16", title: "Intersection of Two Linked Lists", type: "coding", difficulty: "medium", order: 9,
         description: "LeetCode #160 Intersection of Two Linked Lists.\nGiven two singly linked lists that merge at a common node:\nFind the value of the intersection node.\nTwo pointers `pA` and `pB` traverse list A then switch to list B upon reaching end.\nThey will meet at the intersection node in `O(N + M)` time!\n\nInput format: Given common tail on line 1, list A prefix on line 2, list B prefix on line 3.\nPrint the intersection node value, or `None` if they do not intersect.",
         whyThisMatters: "Two-pointer list concatenation technique equalizes traversal distances.",
         concepts: ["linked list intersection", "two pointers"], prerequisites: ["linked list"], learningObjectives: ["Find merge node of two lists in O(1) space"], constraints: ["Non-empty lists"],
@@ -511,7 +511,7 @@ const level16 = [
         commonMistakes: ["Using hash set which costs O(N) memory instead of O(1) two pointers"], timeComplexity: "O(N + M)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["linked list"]
     },
     {
-        id: "py-prob-16-10", levelId: "py-level-16", title: "Add Two Numbers Represented by Linked Lists", type: "coding", difficulty: "medium", order: 10,
+        id: "py-prob-16-10", levelId: "level-16", title: "Add Two Numbers Represented by Linked Lists", type: "coding", difficulty: "medium", order: 10,
         description: "LeetCode #2 Add Two Numbers.\nYou are given two non-empty linked lists representing two non-negative integers.\nThe digits are stored in REVERSE order, and each of their nodes contains a single digit.\nAdd the two numbers and print the sum digits in reverse order separated by ` -> `.\n(e.g. `2 -> 4 -> 3` (342) + `5 -> 6 -> 4` (465) = `7 -> 0 -> 8` (807)).",
         whyThisMatters: "Simulating elementary school digit addition with carry propagation.",
         concepts: ["add two numbers", "carry propagation", "linked list"], prerequisites: ["linked list"], learningObjectives: ["Simulate big integer addition across node chains with carry"], constraints: ["Digits 0-9"],
@@ -532,7 +532,7 @@ const level16 = [
 // Level 17: Recursion & Backtracking in Python
 const level17 = [
     {
-        id: "py-prob-17-01", levelId: "py-level-17", title: "Recursive Factorial", type: "coding", difficulty: "beginner", order: 1,
+        id: "py-prob-17-01", levelId: "level-17", title: "Recursive Factorial", type: "coding", difficulty: "beginner", order: 1,
         description: "Compute the factorial of `N` (`N!`) using a recursive function:\n```python\ndef fact(n):\n    if n <= 1: return 1\n    return n * fact(n - 1)\n```\nPrint `N!`.",
         whyThisMatters: "Factorial is the canonical introduction to base cases and recursive stack unwinding.",
         concepts: ["recursion", "base case", "factorial"], prerequisites: ["recursion"], learningObjectives: ["Write a recursive function with terminating base case"], constraints: ["0 <= N <= 15"],
@@ -549,7 +549,7 @@ const level17 = [
         commonMistakes: ["Omitting base case causing RecursionError"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "low", tags: ["recursion"]
     },
     {
-        id: "py-prob-17-02", levelId: "py-level-17", title: "Recursive Fibonacci with Memoization", type: "coding", difficulty: "easy", order: 2,
+        id: "py-prob-17-02", levelId: "level-17", title: "Recursive Fibonacci with Memoization", type: "coding", difficulty: "easy", order: 2,
         description: "Compute the N-th Fibonacci number recursively using `@functools.lru_cache` to eliminate redundant recalculation.\nPrint the result.",
         whyThisMatters: "Shows how Python's `@lru_cache` decorator turns O(2^N) naive recursion into O(N) dynamic programming with one line.",
         concepts: ["memoization", "lru_cache", "fibonacci"], prerequisites: ["recursion"], learningObjectives: ["Use @functools.lru_cache to memoize recursive functions"], constraints: ["1 <= N <= 50"],
@@ -566,7 +566,7 @@ const level17 = [
         commonMistakes: ["Naive recursion without memoization timing out"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["recursion", "memoization"]
     },
     {
-        id: "py-prob-17-03", levelId: "py-level-17", title: "Binary Exponentiation Pow(x, n) in O(log N)", type: "coding", difficulty: "medium", order: 3,
+        id: "py-prob-17-03", levelId: "level-17", title: "Binary Exponentiation Pow(x, n) in O(log N)", type: "coding", difficulty: "medium", order: 3,
         description: "LeetCode #50 Pow(x, n).\nCalculate `x ** n` in `O(log n)` time using divide and conquer:\n- If `n == 0`, return 1\n- If `n` is even: `pow(x * x, n // 2)`\n- If `n` is odd: `x * pow(x, n - 1)`\n\nGiven integer `base` and non-negative integer `exp`, print `base ** exp`.",
         whyThisMatters: "Binary exponentiation is the fundamental logarithmic exponentiation algorithm in cryptography (RSA).",
         concepts: ["binary exponentiation", "divide and conquer", "logarithmic recursion"], prerequisites: ["recursion"], learningObjectives: ["Implement O(log N) fast power"], constraints: ["exp >= 0"],
@@ -583,7 +583,7 @@ const level17 = [
         commonMistakes: ["Calling my_pow(x, n // 2) twice instead of caching half"], timeComplexity: "O(log N)", spaceComplexity: "O(log N)", interviewRelevance: "high", tags: ["divide and conquer", "math"]
     },
     {
-        id: "py-prob-17-04", levelId: "py-level-17", title: "Reverse String Recursively", type: "coding", difficulty: "easy", order: 4,
+        id: "py-prob-17-04", levelId: "level-17", title: "Reverse String Recursively", type: "coding", difficulty: "easy", order: 4,
         description: "Given a string `S`, reverse it using a pure recursive function without using `[::-1]` or loops:\n`rev(s) = rev(s[1:]) + s[0]` (base case: `len(s) <= 1`).\nPrint the reversed string.",
         whyThisMatters: "Deconstructs problem into smaller subproblem `s[1:]` plus boundary element.",
         concepts: ["recursion", "string reversal"], prerequisites: ["recursion"], learningObjectives: ["Implement recursive string reversal"], constraints: ["String input"],
@@ -600,7 +600,7 @@ const level17 = [
         commonMistakes: ["Incorrect base case check"], timeComplexity: "O(N^2)", spaceComplexity: "O(N)", interviewRelevance: "low", tags: ["recursion"]
     },
     {
-        id: "py-prob-17-05", levelId: "py-level-17", title: "Subsets (Power Set Generation)", type: "coding", difficulty: "medium", order: 5,
+        id: "py-prob-17-05", levelId: "level-17", title: "Subsets (Power Set Generation)", type: "coding", difficulty: "medium", order: 5,
         description: "LeetCode #78 Subsets.\nGiven an integer array `nums` of unique elements:\nGenerate all possible subsets (the power set).\nA solution set must not contain duplicate subsets.\nPrint each subset sorted on a separate line (empty subset printed as empty line), sorted lexicographically.",
         whyThisMatters: "Classic binary inclusion-exclusion decision tree (take vs skip element).",
         concepts: ["subsets", "power set", "backtracking"], prerequisites: ["recursion"], learningObjectives: ["Generate 2^N power set using backtracking"], constraints: ["Elements unique, N <= 10"],
@@ -616,7 +616,7 @@ const level17 = [
         commonMistakes: ["Mutating subset in-place without copying in backtracking"], timeComplexity: "O(N * 2^N)", spaceComplexity: "O(N * 2^N)", interviewRelevance: "high", tags: ["backtracking", "subsets", "must-know"]
     },
     {
-        id: "py-prob-17-06", levelId: "py-level-17", title: "Permutations of a List", type: "coding", difficulty: "medium", order: 6,
+        id: "py-prob-17-06", levelId: "level-17", title: "Permutations of a List", type: "coding", difficulty: "medium", order: 6,
         description: "LeetCode #46 Permutations.\nGiven an array `nums` of distinct integers, generate all possible permutations (orderings of elements).\nPrint each permutation space-separated on a separate line, in lexicographical order.",
         whyThisMatters: "`N!` permutations generated via swap backtracking or `itertools.permutations`.",
         concepts: ["permutations", "backtracking", "itertools"], prerequisites: ["recursion"], learningObjectives: ["Generate all N! permutations of an array"], constraints: ["Distinct integers, N <= 6"],
@@ -632,7 +632,7 @@ const level17 = [
         commonMistakes: ["Not sorting input before generating permutations"], timeComplexity: "O(N * N!)", spaceComplexity: "O(N * N!)", interviewRelevance: "high", tags: ["permutations", "backtracking"]
     },
     {
-        id: "py-prob-17-07", levelId: "py-level-17", title: "Combinations of Size K", type: "coding", difficulty: "medium", order: 7,
+        id: "py-prob-17-07", levelId: "level-17", title: "Combinations of Size K", type: "coding", difficulty: "medium", order: 7,
         description: "LeetCode #77 Combinations.\nGiven two integers `N` and `K` on one line:\nReturn all possible combinations of `K` numbers chosen from the range `1` to `N`.\nPrint each combination space-separated on a separate line in lexicographical order.",
         whyThisMatters: "Binomial coefficient C(N, K) choice problems.",
         concepts: ["combinations", "itertools", "backtracking"], prerequisites: ["recursion"], learningObjectives: ["Generate combinations of size K"], constraints: ["1 <= K <= N <= 10"],
@@ -648,7 +648,7 @@ const level17 = [
         commonMistakes: ["Generating permutations instead of combinations (where order does not matter)"], timeComplexity: "O(K * C(N, K))", spaceComplexity: "O(C(N, K))", interviewRelevance: "high", tags: ["combinations", "backtracking"]
     },
     {
-        id: "py-prob-17-08", levelId: "py-level-17", title: "Generate Valid Parentheses", type: "coding", difficulty: "medium", order: 8,
+        id: "py-prob-17-08", levelId: "level-17", title: "Generate Valid Parentheses", type: "coding", difficulty: "medium", order: 8,
         description: "LeetCode #22 Generate Parentheses.\nGiven `N` pairs of parentheses, write a function to generate all combinations of well-formed parentheses.\nPrint each valid combination on a separate line in lexicographical order.",
         whyThisMatters: "Catalan number C(N) constrained backtracking: only add ')' if close_count < open_count.",
         concepts: ["generate parentheses", "catalan numbers", "backtracking pruning"], prerequisites: ["recursion"], learningObjectives: ["Prune invalid search paths in recursive backtracking"], constraints: ["1 <= N <= 8"],
@@ -665,7 +665,7 @@ const level17 = [
         commonMistakes: ["Adding ')' when close >= open, causing invalid prefix"], timeComplexity: "O(4^N / sqrt(N))", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["backtracking", "must-know"]
     },
     {
-        id: "py-prob-17-09", levelId: "py-level-17", title: "Combination Sum", type: "coding", difficulty: "medium", order: 9,
+        id: "py-prob-17-09", levelId: "level-17", title: "Combination Sum", type: "coding", difficulty: "medium", order: 9,
         description: "LeetCode #39 Combination Sum.\nGiven an array of distinct integers `candidates` on line 1, and target `T` on line 2:\nFind all unique combinations in `candidates` where the candidate numbers sum to `T`.\nThe same number may be chosen from `candidates` an unlimited number of times.\nPrint each combination sorted space-separated on a separate line.",
         whyThisMatters: "Unbounded knapsack backtracking decision tree (reuse candidate or advance index).",
         concepts: ["combination sum", "unbounded knapsack", "backtracking"], prerequisites: ["recursion"], learningObjectives: ["Implement unbounded candidate reuse in backtracking"], constraints: ["T <= 30"],
@@ -681,7 +681,7 @@ const level17 = [
         commonMistakes: ["Advancing index to i + 1 (disallowing valid reuse)"], timeComplexity: "O(2^T)", spaceComplexity: "O(T)", interviewRelevance: "high", tags: ["backtracking", "must-know"]
     },
     {
-        id: "py-prob-17-10", levelId: "py-level-17", title: "Word Search in Grid (DFS Backtracking)", type: "coding", difficulty: "medium", order: 10,
+        id: "py-prob-17-10", levelId: "level-17", title: "Word Search in Grid (DFS Backtracking)", type: "coding", difficulty: "medium", order: 10,
         description: "LeetCode #79 Word Search.\nGiven an `M x N` grid of characters and a word `W`:\nCheck if `W` exists in the grid.\nThe word can be constructed from letters of sequentially adjacent cells (horizontally or vertically neighboring).\nThe same letter cell may not be used more than once.\nPrint `True` if found, else `False`.",
         whyThisMatters: "2D grid DFS with visited marking and restoration (`backtracking mark & unmark`).",
         concepts: ["word search", "2D grid dfs", "backtracking"], prerequisites: ["recursion", "2D lists"], learningObjectives: ["Implement DFS backtracking on 2D grid with in-place visited marking"], constraints: ["M, N <= 6"],

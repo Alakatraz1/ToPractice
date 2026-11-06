@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel8Problems: Problem[] = [
     {
         "id": "py-prob-08-01",
-        "levelId": "py-level-08",
+        "levelId": "level-08",
         "title": "Tuple Coordinates & Manhattan Distance",
         "type": "coding",
         "difficulty": "beginner",
@@ -68,7 +68,7 @@ export const pyLevel8Problems: Problem[] = [
     },
     {
         "id": "py-prob-08-02",
-        "levelId": "py-level-08",
+        "levelId": "level-08",
         "title": "Count Unique Elements",
         "type": "coding",
         "difficulty": "beginner",
@@ -132,7 +132,7 @@ export const pyLevel8Problems: Problem[] = [
     },
     {
         "id": "py-prob-08-03",
-        "levelId": "py-level-08",
+        "levelId": "level-08",
         "title": "Set Intersection",
         "type": "coding",
         "difficulty": "easy",
@@ -197,7 +197,7 @@ export const pyLevel8Problems: Problem[] = [
     },
     {
         "id": "py-prob-08-04",
-        "levelId": "py-level-08",
+        "levelId": "level-08",
         "title": "Set Union",
         "type": "coding",
         "difficulty": "easy",
@@ -262,7 +262,7 @@ export const pyLevel8Problems: Problem[] = [
     },
     {
         "id": "py-prob-08-05",
-        "levelId": "py-level-08",
+        "levelId": "level-08",
         "title": "Set Difference",
         "type": "coding",
         "difficulty": "easy",
@@ -326,7 +326,7 @@ export const pyLevel8Problems: Problem[] = [
     },
     {
         "id": "py-prob-08-06",
-        "levelId": "py-level-08",
+        "levelId": "level-08",
         "title": "Subset Check",
         "type": "coding",
         "difficulty": "easy",
@@ -395,7 +395,7 @@ export const pyLevel8Problems: Problem[] = [
     },
     {
         "id": "py-prob-08-07",
-        "levelId": "py-level-08",
+        "levelId": "level-08",
         "title": "Symmetric Difference",
         "type": "coding",
         "difficulty": "easy",
@@ -458,7 +458,7 @@ export const pyLevel8Problems: Problem[] = [
     },
     {
         "id": "py-prob-08-08",
-        "levelId": "py-level-08",
+        "levelId": "level-08",
         "title": "Find the Missing Number (1 to N)",
         "type": "coding",
         "difficulty": "easy",
@@ -524,7 +524,7 @@ export const pyLevel8Problems: Problem[] = [
     },
     {
         "id": "py-prob-08-09",
-        "levelId": "py-level-08",
+        "levelId": "level-08",
         "title": "First Duplicate Element",
         "type": "coding",
         "difficulty": "easy",
@@ -599,7 +599,7 @@ export const pyLevel8Problems: Problem[] = [
     },
     {
         "id": "py-prob-08-10",
-        "levelId": "py-level-08",
+        "levelId": "level-08",
         "title": "Disjoint Sets Check",
         "type": "coding",
         "difficulty": "easy",

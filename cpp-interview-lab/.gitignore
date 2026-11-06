@@ -33,6 +33,12 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# progress backups
+.user_progress_backup.json
+user_progress_backup.json
+/progress_backups/
+/.progress_backups/
+
 # vercel
 .vercel
 

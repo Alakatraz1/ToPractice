@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel14Problems: Problem[] = [
     {
         "id": "py-prob-14-01",
-        "levelId": "py-level-14",
+        "levelId": "level-14",
         "title": "Valid Anagram",
         "type": "coding",
         "difficulty": "easy",
@@ -72,7 +72,7 @@ export const pyLevel14Problems: Problem[] = [
     },
     {
         "id": "py-prob-14-02",
-        "levelId": "py-level-14",
+        "levelId": "level-14",
         "title": "Group Anagrams",
         "type": "coding",
         "difficulty": "medium",
@@ -132,7 +132,7 @@ export const pyLevel14Problems: Problem[] = [
     },
     {
         "id": "py-prob-14-03",
-        "levelId": "py-level-14",
+        "levelId": "level-14",
         "title": "Longest Consecutive Sequence in O(N)",
         "type": "coding",
         "difficulty": "medium",
@@ -201,7 +201,7 @@ export const pyLevel14Problems: Problem[] = [
     },
     {
         "id": "py-prob-14-04",
-        "levelId": "py-level-14",
+        "levelId": "level-14",
         "title": "Subarray Sum Equals K",
         "type": "coding",
         "difficulty": "medium",
@@ -272,7 +272,7 @@ export const pyLevel14Problems: Problem[] = [
     },
     {
         "id": "py-prob-14-05",
-        "levelId": "py-level-14",
+        "levelId": "level-14",
         "title": "Intersection of Two Arrays II",
         "type": "coding",
         "difficulty": "easy",
@@ -341,7 +341,7 @@ export const pyLevel14Problems: Problem[] = [
     },
     {
         "id": "py-prob-14-06",
-        "levelId": "py-level-14",
+        "levelId": "level-14",
         "title": "Find All Duplicates in an Array",
         "type": "coding",
         "difficulty": "medium",
@@ -407,7 +407,7 @@ export const pyLevel14Problems: Problem[] = [
     },
     {
         "id": "py-prob-14-07",
-        "levelId": "py-level-14",
+        "levelId": "level-14",
         "title": "Top K Frequent Elements",
         "type": "coding",
         "difficulty": "medium",
@@ -477,7 +477,7 @@ export const pyLevel14Problems: Problem[] = [
     },
     {
         "id": "py-prob-14-08",
-        "levelId": "py-level-14",
+        "levelId": "level-14",
         "title": "Contains Duplicate II (Within Window K)",
         "type": "coding",
         "difficulty": "easy",
@@ -545,7 +545,7 @@ export const pyLevel14Problems: Problem[] = [
     },
     {
         "id": "py-prob-14-09",
-        "levelId": "py-level-14",
+        "levelId": "level-14",
         "title": "Isomorphic Strings",
         "type": "coding",
         "difficulty": "easy",
@@ -614,7 +614,7 @@ export const pyLevel14Problems: Problem[] = [
     },
     {
         "id": "py-prob-14-10",
-        "levelId": "py-level-14",
+        "levelId": "level-14",
         "title": "Word Pattern",
         "type": "coding",
         "difficulty": "easy",

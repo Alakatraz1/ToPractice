@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel1Problems: Problem[] = [
     {
         "id": "py-prob-01-01",
-        "levelId": "py-level-01",
+        "levelId": "level-01",
         "title": "Hello Python",
         "type": "coding",
         "difficulty": "beginner",
@@ -63,7 +63,7 @@ export const pyLevel1Problems: Problem[] = [
     },
     {
         "id": "py-prob-01-02",
-        "levelId": "py-level-01",
+        "levelId": "level-01",
         "title": "Print Three Lines",
         "type": "coding",
         "difficulty": "beginner",
@@ -122,7 +122,7 @@ export const pyLevel1Problems: Problem[] = [
     },
     {
         "id": "py-prob-01-03",
-        "levelId": "py-level-01",
+        "levelId": "level-01",
         "title": "Print with Custom Separator",
         "type": "coding",
         "difficulty": "beginner",
@@ -186,7 +186,7 @@ export const pyLevel1Problems: Problem[] = [
     },
     {
         "id": "py-prob-01-04",
-        "levelId": "py-level-01",
+        "levelId": "level-01",
         "title": "Print on Same Line with End Parameter",
         "type": "coding",
         "difficulty": "beginner",
@@ -243,7 +243,7 @@ export const pyLevel1Problems: Problem[] = [
     },
     {
         "id": "py-prob-01-05",
-        "levelId": "py-level-01",
+        "levelId": "level-01",
         "title": "Integer and Float Output",
         "type": "coding",
         "difficulty": "beginner",
@@ -302,7 +302,7 @@ export const pyLevel1Problems: Problem[] = [
     },
     {
         "id": "py-prob-01-06",
-        "levelId": "py-level-01",
+        "levelId": "level-01",
         "title": "String Multiplication",
         "type": "coding",
         "difficulty": "beginner",
@@ -360,7 +360,7 @@ export const pyLevel1Problems: Problem[] = [
     },
     {
         "id": "py-prob-01-07",
-        "levelId": "py-level-01",
+        "levelId": "level-01",
         "title": "Formatted Strings (f-strings)",
         "type": "coding",
         "difficulty": "beginner",
@@ -425,7 +425,7 @@ export const pyLevel1Problems: Problem[] = [
     },
     {
         "id": "py-prob-01-08",
-        "levelId": "py-level-01",
+        "levelId": "level-01",
         "title": "Quotes & Escape Characters",
         "type": "coding",
         "difficulty": "beginner",
@@ -484,7 +484,7 @@ export const pyLevel1Problems: Problem[] = [
     },
     {
         "id": "py-prob-01-09",
-        "levelId": "py-level-01",
+        "levelId": "level-01",
         "title": "ASCII Art Box Pattern",
         "type": "coding",
         "difficulty": "beginner",
@@ -541,7 +541,7 @@ export const pyLevel1Problems: Problem[] = [
     },
     {
         "id": "py-prob-01-10",
-        "levelId": "py-level-01",
+        "levelId": "level-01",
         "title": "Formatted Price Receipt",
         "type": "coding",
         "difficulty": "easy",

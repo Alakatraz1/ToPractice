@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getProgress, getWeakConcepts, isLevelUnlocked, getGlobalLanguage, setGlobalLanguage, resetProgress } from '@/lib/progress';
+import { getProgress, getWeakConcepts, isLevelUnlocked, getGlobalLanguage, setGlobalLanguage, resetProgress, restoreProgressFromServer } from '@/lib/progress';
 import { getLevels, getAllProblems, getProblem } from '@/data/levels';
 import { UserProgress } from '@/data/types';
 import { Code2, Trophy, Brain, Target, Lock, Play, ArrowRight, Activity, BookOpen, AlertCircle, CheckCircle2, ShieldAlert, Zap, Terminal } from 'lucide-react';
+import { ActivityHeatmap } from '@/components/ActivityHeatmap';
 
 export default function Home() {
     const router = useRouter();
@@ -17,7 +18,17 @@ export default function Home() {
         setIsClient(true);
         const currentLang = getGlobalLanguage();
         setLanguage(currentLang);
-        setProgress(getProgress(currentLang));
+        const initialProg = getProgress(currentLang);
+        setProgress(initialProg);
+
+        if (initialProg.completedProblems.length === 0) {
+            restoreProgressFromServer().then(restored => {
+                if (restored) {
+                    const updated = getProgress(getGlobalLanguage());
+                    setProgress(updated);
+                }
+            });
+        }
         
         const handleLangChange = () => {
             const updatedLang = getGlobalLanguage();
@@ -118,6 +129,9 @@ export default function Home() {
                         </button>
                     </div>
                 </header>
+
+                {/* GitHub-style Green Dot Activity Heatmap */}
+                <ActivityHeatmap currentLanguage={language} />
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     

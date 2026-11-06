@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel21Problems: Problem[] = [
     {
         "id": "py-prob-21-01",
-        "levelId": "py-level-21",
+        "levelId": "level-21",
         "title": "Binary Tree Inorder Traversal",
         "type": "coding",
         "difficulty": "easy",
@@ -62,7 +62,7 @@ export const pyLevel21Problems: Problem[] = [
     },
     {
         "id": "py-prob-21-02",
-        "levelId": "py-level-21",
+        "levelId": "level-21",
         "title": "Preorder & Postorder Traversals",
         "type": "coding",
         "difficulty": "easy",
@@ -121,7 +121,7 @@ export const pyLevel21Problems: Problem[] = [
     },
     {
         "id": "py-prob-21-03",
-        "levelId": "py-level-21",
+        "levelId": "level-21",
         "title": "Maximum Depth of Binary Tree",
         "type": "coding",
         "difficulty": "easy",
@@ -190,7 +190,7 @@ export const pyLevel21Problems: Problem[] = [
     },
     {
         "id": "py-prob-21-04",
-        "levelId": "py-level-21",
+        "levelId": "level-21",
         "title": "Invert Binary Tree",
         "type": "coding",
         "difficulty": "easy",
@@ -249,7 +249,7 @@ export const pyLevel21Problems: Problem[] = [
     },
     {
         "id": "py-prob-21-05",
-        "levelId": "py-level-21",
+        "levelId": "level-21",
         "title": "Symmetric Tree (Mirror Reflection)",
         "type": "coding",
         "difficulty": "easy",
@@ -318,7 +318,7 @@ export const pyLevel21Problems: Problem[] = [
     },
     {
         "id": "py-prob-21-06",
-        "levelId": "py-level-21",
+        "levelId": "level-21",
         "title": "Binary Tree Level Order Traversal (BFS)",
         "type": "coding",
         "difficulty": "medium",
@@ -379,7 +379,7 @@ export const pyLevel21Problems: Problem[] = [
     },
     {
         "id": "py-prob-21-07",
-        "levelId": "py-level-21",
+        "levelId": "level-21",
         "title": "Validate Binary Search Tree (BST)",
         "type": "coding",
         "difficulty": "medium",
@@ -448,7 +448,7 @@ export const pyLevel21Problems: Problem[] = [
     },
     {
         "id": "py-prob-21-08",
-        "levelId": "py-level-21",
+        "levelId": "level-21",
         "title": "Lowest Common Ancestor in BST",
         "type": "coding",
         "difficulty": "easy",
@@ -517,7 +517,7 @@ export const pyLevel21Problems: Problem[] = [
     },
     {
         "id": "py-prob-21-09",
-        "levelId": "py-level-21",
+        "levelId": "level-21",
         "title": "Diameter of Binary Tree",
         "type": "coding",
         "difficulty": "easy",
@@ -587,7 +587,7 @@ export const pyLevel21Problems: Problem[] = [
     },
     {
         "id": "py-prob-21-10",
-        "levelId": "py-level-21",
+        "levelId": "level-21",
         "title": "Path Sum (Root to Leaf)",
         "type": "coding",
         "difficulty": "easy",

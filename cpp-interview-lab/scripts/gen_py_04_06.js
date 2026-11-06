@@ -12,7 +12,7 @@ function writeLevel(levelNum, problems) {
 // Level 4: Loops & Iteration
 const level4 = [
     {
-        id: "py-prob-04-01", levelId: "py-level-04", title: "Print 1 to N", type: "coding", difficulty: "beginner", order: 1,
+        id: "py-prob-04-01", levelId: "level-04", title: "Print 1 to N", type: "coding", difficulty: "beginner", order: 1,
         description: "Given a positive integer `N`, print all integers from `1` to `N` (inclusive) on a single line separated by spaces.\n\nUse Python's `range(1, N + 1)` in a `for` loop.",
         whyThisMatters: "The `range()` function is Python's primary generator for count-controlled loops.",
         concepts: ["for loops", "range", "iteration"], prerequisites: ["loops"], learningObjectives: ["Use range(start, stop) in for loops"], constraints: ["1 <= N <= 1000"],
@@ -29,7 +29,7 @@ const level4 = [
         commonMistakes: ["Using range(1, n) which stops at n-1"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["loops", "range"]
     },
     {
-        id: "py-prob-04-02", levelId: "py-level-04", title: "Sum from 1 to N", type: "coding", difficulty: "beginner", order: 2,
+        id: "py-prob-04-02", levelId: "level-04", title: "Sum from 1 to N", type: "coding", difficulty: "beginner", order: 2,
         description: "Given a positive integer `N`, calculate the sum of all integers from `1` to `N`:\n`1 + 2 + 3 + ... + N`.\nPrint the total sum.",
         whyThisMatters: "Accumulator loops (or `sum(range(1, N + 1))`) teach tracking state across iterations.",
         concepts: ["accumulator", "sum", "range"], prerequisites: ["for loops"], learningObjectives: ["Accumulate values in a loop or use sum()"], constraints: ["1 <= N <= 10^6"],
@@ -47,7 +47,7 @@ const level4 = [
         commonMistakes: ["Float division causing large numbers to become inaccurate"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "medium", tags: ["loops", "math"]
     },
     {
-        id: "py-prob-04-03", levelId: "py-level-04", title: "Multiplication Table", type: "coding", difficulty: "beginner", order: 3,
+        id: "py-prob-04-03", levelId: "level-04", title: "Multiplication Table", type: "coding", difficulty: "beginner", order: 3,
         description: "Given an integer `N`, print the first 5 rows of its multiplication table in the format:\n`N x i = <result>`\nfor `i` from 1 to 5.",
         whyThisMatters: "Practices formatted output in loop iterations.",
         concepts: ["for loops", "f-strings", "multiplication"], prerequisites: ["for loops", "f-strings"], learningObjectives: ["Format iterated expressions with f-strings"], constraints: ["1 <= N <= 100"],
@@ -64,7 +64,7 @@ const level4 = [
         commonMistakes: ["Stopping at range(1, 5) which misses i = 5"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["loops", "formatting"]
     },
     {
-        id: "py-prob-04-04", levelId: "py-level-04", title: "Factorial of N", type: "coding", difficulty: "easy", order: 4,
+        id: "py-prob-04-04", levelId: "level-04", title: "Factorial of N", type: "coding", difficulty: "easy", order: 4,
         description: "Given a non-negative integer `N`, compute its factorial `N!`:\n`N! = N * (N - 1) * ... * 1` (with `0! = 1`).\nPrint `N!`.",
         whyThisMatters: "Factorial is foundational in combinations, permutations, and recursion.",
         concepts: ["factorial", "product accumulator", "math"], prerequisites: ["for loops"], learningObjectives: ["Compute product sequence with loop"], constraints: ["0 <= N <= 20"],
@@ -82,7 +82,7 @@ const level4 = [
         commonMistakes: ["Handling 0! as 0 instead of 1"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "medium", tags: ["math", "loops"]
     },
     {
-        id: "py-prob-04-05", levelId: "py-level-04", title: "Reverse Countdown", type: "coding", difficulty: "beginner", order: 5,
+        id: "py-prob-04-05", levelId: "level-04", title: "Reverse Countdown", type: "coding", difficulty: "beginner", order: 5,
         description: "Given an integer `N`, print a countdown from `N` down to `1` separated by spaces.\n\nUse `range(N, 0, -1)` to decrement in steps of `-1`.",
         whyThisMatters: "Negative step values in `range(start, stop, step)` are common for backward traversals.",
         concepts: ["negative step", "countdown", "range step"], prerequisites: ["for loops"], learningObjectives: ["Use negative step in range()"], constraints: ["1 <= N <= 100"],
@@ -99,7 +99,7 @@ const level4 = [
         commonMistakes: ["Using step = 1 which results in an empty range"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["loops", "range"]
     },
     {
-        id: "py-prob-04-06", levelId: "py-level-04", title: "Count Digits", type: "coding", difficulty: "easy", order: 6,
+        id: "py-prob-04-06", levelId: "level-04", title: "Count Digits", type: "coding", difficulty: "easy", order: 6,
         description: "Given a non-negative integer `N`, count and print how many digits it contains.\n(e.g. `12345` has 5 digits, `0` has 1 digit).",
         whyThisMatters: "Digit manipulation via while loops or string length is standard in number theory problems.",
         concepts: ["while loop", "digits", "len"], prerequisites: ["loops"], learningObjectives: ["Count digits in an integer"], constraints: ["N >= 0"],
@@ -117,7 +117,7 @@ const level4 = [
         commonMistakes: ["Special case 0 returning 0 if using while n > 0 without handling 0"], timeComplexity: "O(D)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["digits"]
     },
     {
-        id: "py-prob-04-07", levelId: "py-level-04", title: "Sum of Digits", type: "coding", difficulty: "easy", order: 7,
+        id: "py-prob-04-07", levelId: "level-04", title: "Sum of Digits", type: "coding", difficulty: "easy", order: 7,
         description: "Given a non-negative integer `N`, compute and print the sum of its individual digits.\n(For example, for `1234`, sum is `1 + 2 + 3 + 4 = 10`).",
         whyThisMatters: "Digit sums appear frequently in hashing, checksums (Luhn algorithm), and digital root calculations.",
         concepts: ["sum", "digits", "list comprehension"], prerequisites: ["loops"], learningObjectives: ["Extract and sum digits of a number"], constraints: ["N >= 0"],
@@ -135,7 +135,7 @@ const level4 = [
         commonMistakes: ["Leaving digits as strings causing concatenation"], timeComplexity: "O(D)", spaceComplexity: "O(1)", interviewRelevance: "medium", tags: ["digits", "sum"]
     },
     {
-        id: "py-prob-04-08", levelId: "py-level-04", title: "Prime Number Test", type: "coding", difficulty: "medium", order: 8,
+        id: "py-prob-04-08", levelId: "level-04", title: "Prime Number Test", type: "coding", difficulty: "medium", order: 8,
         description: "An integer `N > 1` is prime if it is only divisible by 1 and itself.\n\n**Task:**\nGiven an integer `N`, print `Prime` if it is a prime number, otherwise print `Not Prime`.\n\n*Optimization:* Check divisibility up to `int(N**0.5)` for O(sqrt(N)) efficiency.",
         whyThisMatters: "Trial division up to sqrt(N) is the canonical prime testing algorithm required in technical screenings.",
         concepts: ["prime numbers", "trial division", "sqrt optimization"], prerequisites: ["while loop", "for loops"], learningObjectives: ["Implement O(sqrt(N)) prime checking"], constraints: ["N >= 1"],
@@ -154,7 +154,7 @@ const level4 = [
         commonMistakes: ["Considering 1 as prime", "Checking up to N instead of sqrt(N) causing Time Limit Exceeded"], timeComplexity: "O(sqrt(N))", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["math", "primes"]
     },
     {
-        id: "py-prob-04-09", levelId: "py-level-04", title: "N-th Fibonacci Number", type: "coding", difficulty: "easy", order: 9,
+        id: "py-prob-04-09", levelId: "level-04", title: "N-th Fibonacci Number", type: "coding", difficulty: "easy", order: 9,
         description: "The Fibonacci sequence starts `F(1) = 1, F(2) = 1`, and each subsequent term is the sum of the previous two:\n`F(n) = F(n-1) + F(n-2)`.\n\n**Task:**\nGiven a 1-based index `N`, print the N-th Fibonacci number.\n`F(1) = 1, F(2) = 1, F(3) = 2, F(4) = 3, F(5) = 5, F(6) = 8...`",
         whyThisMatters: "Iterative Fibonacci using two moving variables is the starting point for dynamic programming state compression.",
         concepts: ["fibonacci", "iterative dp", "state variables"], prerequisites: ["for loops"], learningObjectives: ["Compute Fibonacci in O(N) time and O(1) space"], constraints: ["1 <= N <= 50"],
@@ -172,7 +172,7 @@ const level4 = [
         commonMistakes: ["Using slow exponential O(2^N) recursion"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["fibonacci", "dp"]
     },
     {
-        id: "py-prob-04-10", levelId: "py-level-04", title: "Right-Angled Star Triangle", type: "coding", difficulty: "easy", order: 10,
+        id: "py-prob-04-10", levelId: "level-04", title: "Right-Angled Star Triangle", type: "coding", difficulty: "easy", order: 10,
         description: "Given an integer `N`, print a right-angled triangle of height `N` using asterisks `*`.\nLine 1 should have 1 asterisk, line 2 should have 2 asterisks, up to line N with N asterisks.",
         whyThisMatters: "Reinforces nested loop or loop string multiplication concepts.",
         concepts: ["nested loops", "patterns", "string multiplication"], prerequisites: ["loops", "strings"], learningObjectives: ["Generate growing row patterns in a loop"], constraints: ["1 <= N <= 20"],
@@ -193,7 +193,7 @@ const level4 = [
 // Level 5: Functions & Scope
 const level5 = [
     {
-        id: "py-prob-05-01", levelId: "py-level-05", title: "Square Function", type: "coding", difficulty: "beginner", order: 1,
+        id: "py-prob-05-01", levelId: "level-05", title: "Square Function", type: "coding", difficulty: "beginner", order: 1,
         description: "Define a function `square(x)` that returns the square of `x` (`x * x`).\nRead an integer from input, pass it to `square()`, and print the returned result.",
         whyThisMatters: "Functions encapsulate logic into testable, reusable units.",
         concepts: ["def", "return", "function definition"], prerequisites: ["functions"], learningObjectives: ["Define a function with def and return a value"], constraints: ["Integer input"],
@@ -210,7 +210,7 @@ const level5 = [
         commonMistakes: ["Printing inside the function instead of returning"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["functions"]
     },
     {
-        id: "py-prob-05-02", levelId: "py-level-05", title: "Greatest Common Divisor (Euclidean GCD)", type: "coding", difficulty: "easy", order: 2,
+        id: "py-prob-05-02", levelId: "level-05", title: "Greatest Common Divisor (Euclidean GCD)", type: "coding", difficulty: "easy", order: 2,
         description: "Implement the Euclidean algorithm to find the Greatest Common Divisor (GCD) of two integers `A` and `B`:\n```python\ndef gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a\n```\nRead two space-separated integers and print their GCD.",
         whyThisMatters: "Euclidean GCD is one of the most famous logarithmic O(log(min(A,B))) algorithms in computer science.",
         concepts: ["gcd", "euclidean algorithm", "functions"], prerequisites: ["functions", "while loop"], learningObjectives: ["Implement Euclidean GCD algorithm"], constraints: ["A, B > 0"],
@@ -227,7 +227,7 @@ const level5 = [
         commonMistakes: ["Forgetting to return a when b reaches 0"], timeComplexity: "O(log(min(A, B)))", spaceComplexity: "O(1)", interviewRelevance: "high", tags: ["math", "algorithms"]
     },
     {
-        id: "py-prob-05-03", levelId: "py-level-05", title: "Palindrome Number Predicate", type: "coding", difficulty: "easy", order: 3,
+        id: "py-prob-05-03", levelId: "level-05", title: "Palindrome Number Predicate", type: "coding", difficulty: "easy", order: 3,
         description: "Write a function `is_palindrome(n: int) -> bool` that returns `True` if an integer reads the same forwards and backwards, and `False` otherwise (negative numbers are not palindromes).\n\nRead an integer and print the result.",
         whyThisMatters: "Predicate functions (returning True/False) are the building blocks of filter operations.",
         concepts: ["predicates", "palindromes", "strings"], prerequisites: ["functions"], learningObjectives: ["Write clean boolean predicate functions"], constraints: ["Integer input"],
@@ -245,7 +245,7 @@ const level5 = [
         commonMistakes: ["Failing negative numbers like -121"], timeComplexity: "O(D)", spaceComplexity: "O(D)", interviewRelevance: "high", tags: ["palindromes", "functions"]
     },
     {
-        id: "py-prob-05-04", levelId: "py-level-05", title: "Custom Power Function", type: "coding", difficulty: "easy", order: 4,
+        id: "py-prob-05-04", levelId: "level-05", title: "Custom Power Function", type: "coding", difficulty: "easy", order: 4,
         description: "Write a function `power(base: int, exp: int) -> int` that computes `base ** exp` for non-negative `exp` using a loop.\nRead two space-separated integers and print the result.",
         whyThisMatters: "Building operations from scratch reinforces understanding of loop invariants and complexity.",
         concepts: ["exponentiation", "loops", "functions"], prerequisites: ["functions"], learningObjectives: ["Implement exponential accumulator"], constraints: ["base >= 0, exp >= 0"],
@@ -262,7 +262,7 @@ const level5 = [
         commonMistakes: ["Forgetting 0th power equals 1"], timeComplexity: "O(exp)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["functions", "math"]
     },
     {
-        id: "py-prob-05-05", levelId: "py-level-05", title: "Multiple Return Values (Min & Max)", type: "coding", difficulty: "easy", order: 5,
+        id: "py-prob-05-05", levelId: "level-05", title: "Multiple Return Values (Min & Max)", type: "coding", difficulty: "easy", order: 5,
         description: "In Python, a function can return multiple values separated by commas: `return min_val, max_val`.\nPython packs them into a tuple, which the caller can unpack!\n\n**Task:**\nWrite `find_min_max(arr)` returning `(min_val, max_val)`.\nRead a list of integers from input, call the function, and print `Min: <min_val>, Max: <max_val>`.",
         whyThisMatters: "Returning tuples eliminates the need for output parameters (`&` references) or pointer arguments common in C++.",
         concepts: ["multiple returns", "tuple packing", "unpacking"], prerequisites: ["functions"], learningObjectives: ["Return and unpack multiple values from a function"], constraints: ["Non-empty list"],
@@ -279,7 +279,7 @@ const level5 = [
         commonMistakes: ["Creating a single list instead of returning a tuple"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "medium", tags: ["functions", "tuples"]
     },
     {
-        id: "py-prob-05-06", levelId: "py-level-05", title: "Variable Arguments (*args)", type: "coding", difficulty: "easy", order: 6,
+        id: "py-prob-05-06", levelId: "level-05", title: "Variable Arguments (*args)", type: "coding", difficulty: "easy", order: 6,
         description: "Python allows functions to accept an arbitrary number of positional arguments using `*args`.\nInside the function, `args` is a tuple containing all passed arguments.\n\n**Task:**\nWrite `sum_all(*args) -> int` that returns the sum of all arguments passed to it.\nRead integers from input, pass them unpacked with `*nums`, and print the sum.",
         whyThisMatters: "`*args` and `**kwargs` are standard in Python library design and decorator patterns.",
         concepts: ["*args", "variable arguments", "tuple packing"], prerequisites: ["functions"], learningObjectives: ["Use *args for variable argument lists"], constraints: ["Arbitrary integers"],
@@ -296,7 +296,7 @@ const level5 = [
         commonMistakes: ["Iterating over *args instead of args inside function"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "medium", tags: ["functions", "*args"]
     },
     {
-        id: "py-prob-05-07", levelId: "py-level-05", title: "Default Parameter Values", type: "coding", difficulty: "beginner", order: 7,
+        id: "py-prob-05-07", levelId: "level-05", title: "Default Parameter Values", type: "coding", difficulty: "beginner", order: 7,
         description: "Functions can provide default argument values: `def greet(name, greeting='Hello'):`.\n\n**Task:**\nDefine `format_title(title, author='Anonymous')` returning `f'{title} by {author}'`.\nRead two words `Title` and `Author` from input. If only `Title` is provided, use the default author.",
         whyThisMatters: "Default parameters provide backwards-compatible function signatures and cleaner APIs.",
         concepts: ["default parameters", "optional arguments"], prerequisites: ["functions"], learningObjectives: ["Define and invoke functions with default arguments"], constraints: ["Non-empty strings"],
@@ -313,7 +313,7 @@ const level5 = [
         commonMistakes: ["Placing non-default arguments after default arguments (SyntaxError)"], timeComplexity: "O(1)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["functions"]
     },
     {
-        id: "py-prob-05-08", levelId: "py-level-05", title: "Count Vowels in String Function", type: "coding", difficulty: "easy", order: 8,
+        id: "py-prob-05-08", levelId: "level-05", title: "Count Vowels in String Function", type: "coding", difficulty: "easy", order: 8,
         description: "Write a function `count_vowels(s: str) -> int` that counts how many vowels (`a, e, i, o, u`, case-insensitive) appear in string `s`.\nRead a string and print the count.",
         whyThisMatters: "Combining string traversal and modular helper functions.",
         concepts: ["strings", "vowels", "helper functions"], prerequisites: ["functions", "strings"], learningObjectives: ["Write modular string processing function"], constraints: ["String input"],
@@ -330,7 +330,7 @@ const level5 = [
         commonMistakes: ["Missing uppercase vowels"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["functions", "strings"]
     },
     {
-        id: "py-prob-05-09", levelId: "py-level-05", title: "Perfect Number Checker", type: "coding", difficulty: "easy", order: 9,
+        id: "py-prob-05-09", levelId: "level-05", title: "Perfect Number Checker", type: "coding", difficulty: "easy", order: 9,
         description: "A positive integer `N` is perfect if it equals the sum of its proper divisors (divisors strictly less than `N`).\nFor example, `6` has proper divisors `1, 2, 3` and `1 + 2 + 3 = 6` (perfect).\n\n**Task:**\nWrite `is_perfect(n: int) -> bool` returning `True` or `False`. Print the result.",
         whyThisMatters: "Divisor extraction and validation are frequent in mathematical programming rounds.",
         concepts: ["divisors", "perfect numbers", "math"], prerequisites: ["functions"], learningObjectives: ["Extract proper divisors and verify sum equality"], constraints: ["N >= 1"],
@@ -348,7 +348,7 @@ const level5 = [
         commonMistakes: ["Including n in the divisor sum"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "medium", tags: ["math"]
     },
     {
-        id: "py-prob-05-10", levelId: "py-level-05", title: "Higher-Order Function Application", type: "coding", difficulty: "easy", order: 10,
+        id: "py-prob-05-10", levelId: "level-05", title: "Higher-Order Function Application", type: "coding", difficulty: "easy", order: 10,
         description: "In Python, functions are first-class citizens: they can be passed as arguments to other functions!\n\n**Task:**\nDefine `apply_fn(arr: list[int], fn) -> list[int]` that applies function `fn` to every element in `arr`.\nUse a function `double(x) -> x * 2`. Read integers from input, apply `double`, and print the resulting elements space-separated.",
         whyThisMatters: "First-class functions enable callbacks, decorators, and functional programming constructs like `map()`.",
         concepts: ["first-class functions", "higher-order functions", "callbacks"], prerequisites: ["functions"], learningObjectives: ["Pass a function as an argument to another function"], constraints: ["List of integers"],
@@ -369,7 +369,7 @@ const level5 = [
 // Level 6: Lists & List Operations
 const level6 = [
     {
-        id: "py-prob-06-01", levelId: "py-level-06", title: "List Sum and Average", type: "coding", difficulty: "beginner", order: 1,
+        id: "py-prob-06-01", levelId: "level-06", title: "List Sum and Average", type: "coding", difficulty: "beginner", order: 1,
         description: "Given a non-empty list of integers, compute and print:\n1. The sum of all elements (`sum(arr)`)\n2. The average of all elements rounded to 2 decimal places (`f'{avg:.2f}'`) on a new line.",
         whyThisMatters: "Basic statistics on arrays form the core of data aggregation tasks.",
         concepts: ["sum", "len", "average", "lists"], prerequisites: ["lists"], learningObjectives: ["Compute aggregate metrics on lists"], constraints: ["N >= 1"],
@@ -386,7 +386,7 @@ const level6 = [
         commonMistakes: ["Division by zero on empty lists"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["lists", "aggregates"]
     },
     {
-        id: "py-prob-06-02", levelId: "py-level-06", title: "Find Maximum and Minimum", type: "coding", difficulty: "beginner", order: 2,
+        id: "py-prob-06-02", levelId: "level-06", title: "Find Maximum and Minimum", type: "coding", difficulty: "beginner", order: 2,
         description: "Read a list of integers from input. Print the maximum value on the first line, and the minimum value on the second line.",
         whyThisMatters: "Python's built-in `max()` and `min()` run in linear O(N) time.",
         concepts: ["max", "min", "lists"], prerequisites: ["lists"], learningObjectives: ["Find extrema in lists"], constraints: ["N >= 1"],
@@ -403,7 +403,7 @@ const level6 = [
         commonMistakes: ["Initializing min with 0 instead of infinity or first element"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["lists"]
     },
     {
-        id: "py-prob-06-03", levelId: "py-level-06", title: "Reverse a List", type: "coding", difficulty: "beginner", order: 3,
+        id: "py-prob-06-03", levelId: "level-06", title: "Reverse a List", type: "coding", difficulty: "beginner", order: 3,
         description: "Given a list of integers, print the elements in reverse order separated by spaces.\n\nIn Python, you can reverse a list with `arr[::-1]` or `arr.reverse()`.",
         whyThisMatters: "Slicing `[::-1]` is standard Python shorthand for sequence reversal.",
         concepts: ["slicing", "reverse", "negative step"], prerequisites: ["lists"], learningObjectives: ["Reverse a list using slice notation"], constraints: ["N >= 1"],
@@ -420,7 +420,7 @@ const level6 = [
         commonMistakes: ["Modifying in-place with .reverse() and trying to print its return value (which is None)"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "low", tags: ["lists", "slicing"]
     },
     {
-        id: "py-prob-06-04", levelId: "py-level-06", title: "Count Occurrences", type: "coding", difficulty: "beginner", order: 4,
+        id: "py-prob-06-04", levelId: "level-06", title: "Count Occurrences", type: "coding", difficulty: "beginner", order: 4,
         description: "Given a target integer `T` on the first line, followed by `N` integers on the second line:\nCount and print how many times `T` appears in the list.\n\nUse Python's `arr.count(T)` method.",
         whyThisMatters: "List methods like `count()`, `index()`, and `remove()` provide concise utility operations.",
         concepts: ["list count", "occurrences"], prerequisites: ["lists"], learningObjectives: ["Use list.count() method"], constraints: ["N >= 0"],
@@ -437,7 +437,7 @@ const level6 = [
         commonMistakes: ["Reading input tokens in reverse order"], timeComplexity: "O(N)", spaceComplexity: "O(1)", interviewRelevance: "low", tags: ["lists"]
     },
     {
-        id: "py-prob-06-05", levelId: "py-level-06", title: "Remove All Occurrences", type: "coding", difficulty: "easy", order: 5,
+        id: "py-prob-06-05", levelId: "level-06", title: "Remove All Occurrences", type: "coding", difficulty: "easy", order: 5,
         description: "Given a target value `T` followed by a list of integers `arr`:\nCreate and print a new list with all occurrences of `T` removed, space-separated.\n(If no elements remain, print empty line).",
         whyThisMatters: "Filtering elements out of lists using comprehensions `[x for x in arr if x != T]` is the idiomatic Python way to filter.",
         concepts: ["list filtering", "comprehensions"], prerequisites: ["lists"], learningObjectives: ["Filter lists using list comprehension"], constraints: ["List of integers"],
@@ -454,7 +454,7 @@ const level6 = [
         commonMistakes: ["Modifying list with .remove() during iteration (skips elements)"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "medium", tags: ["filtering", "lists"]
     },
     {
-        id: "py-prob-06-06", levelId: "py-level-06", title: "Second Largest Element", type: "coding", difficulty: "medium", order: 6,
+        id: "py-prob-06-06", levelId: "level-06", title: "Second Largest Element", type: "coding", difficulty: "medium", order: 6,
         description: "Given an array of integers, find the second strictly largest unique value in the array.\nIf no distinct second largest element exists (e.g. all elements are equal or length < 2), print `-1`.",
         whyThisMatters: "A classic interview warmup testing unique deduplication and tracking two maxima simultaneously.",
         concepts: ["second largest", "sets", "extrema"], prerequisites: ["lists"], learningObjectives: ["Find second largest unique element in array"], constraints: ["N >= 1"],
@@ -472,7 +472,7 @@ const level6 = [
         commonMistakes: ["Failing when the largest number appears multiple times"], timeComplexity: "O(N log N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["lists", "sorting"]
     },
     {
-        id: "py-prob-06-07", levelId: "py-level-06", title: "Rotate List Right by K Steps", type: "coding", difficulty: "medium", order: 7,
+        id: "py-prob-06-07", levelId: "level-06", title: "Rotate List Right by K Steps", type: "coding", difficulty: "medium", order: 7,
         description: "Given an integer `K` followed by a list of `N` integers:\nRotate the array to the right by `K` steps.\nFor example, `[1, 2, 3, 4, 5]` rotated by `2` steps becomes `[4, 5, 1, 2, 3]`.\n\nPrint the rotated array space-separated.",
         whyThisMatters: "Array rotation using slice concatenation `arr[-k:] + arr[:-k]` is a classic Python interview demonstration.",
         concepts: ["array rotation", "slicing", "modulo"], prerequisites: ["lists", "slicing"], learningObjectives: ["Rotate array using modulo and slicing"], constraints: ["N >= 1, K >= 0"],
@@ -489,7 +489,7 @@ const level6 = [
         commonMistakes: ["Not taking k % n when k > n"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "high", tags: ["rotation", "arrays"]
     },
     {
-        id: "py-prob-06-08", levelId: "py-level-06", title: "Merge Two Sorted Lists", type: "coding", difficulty: "easy", order: 8,
+        id: "py-prob-06-08", levelId: "level-06", title: "Merge Two Sorted Lists", type: "coding", difficulty: "easy", order: 8,
         description: "Given two sorted integer lists `A` and `B` on separate lines:\nMerge them into a single sorted list and print the elements space-separated.",
         whyThisMatters: "Merge step is the heart of MergeSort and two-pointer merging.",
         concepts: ["merge sorted", "sorting", "lists"], prerequisites: ["lists"], learningObjectives: ["Merge two sorted arrays"], constraints: ["Lists are non-empty"],
@@ -506,7 +506,7 @@ const level6 = [
         commonMistakes: ["Concatenating without sorting"], timeComplexity: "O(N log N)", spaceComplexity: "O(N)", interviewRelevance: "medium", tags: ["sorting", "merge"]
     },
     {
-        id: "py-prob-06-09", levelId: "py-level-06", title: "Filter Evens with List Comprehension", type: "coding", difficulty: "beginner", order: 9,
+        id: "py-prob-06-09", levelId: "level-06", title: "Filter Evens with List Comprehension", type: "coding", difficulty: "beginner", order: 9,
         description: "Read a list of integers from input.\nUse a list comprehension `[x for x in nums if x % 2 == 0]` to filter all even numbers.\nPrint the even numbers space-separated.",
         whyThisMatters: "List comprehensions are the most celebrated feature of Python, replacing boilerplate for-loops.",
         concepts: ["list comprehension", "filtering", "parity"], prerequisites: ["lists"], learningObjectives: ["Write filtered list comprehensions"], constraints: ["Integer inputs"],
@@ -523,7 +523,7 @@ const level6 = [
         commonMistakes: ["Putting 'if' before 'for' (which is for ternary transformations, not filtering)"], timeComplexity: "O(N)", spaceComplexity: "O(N)", interviewRelevance: "medium", tags: ["comprehensions"]
     },
     {
-        id: "py-prob-06-10", levelId: "py-level-06", title: "Matrix Diagonal Sum", type: "coding", difficulty: "easy", order: 10,
+        id: "py-prob-06-10", levelId: "level-06", title: "Matrix Diagonal Sum", type: "coding", difficulty: "easy", order: 10,
         description: "Given dimension `N` followed by an `N x N` 2D matrix of integers:\nCalculate and print the sum of the primary diagonal elements (`matrix[i][i]` for `i` from `0` to `N - 1`).",
         whyThisMatters: "2D list navigation using row and column indexing is mandatory for grid problems and matrix algorithms.",
         concepts: ["2D lists", "matrices", "diagonals"], prerequisites: ["lists"], learningObjectives: ["Index and traverse 2D lists / matrices"], constraints: ["1 <= N <= 100"],

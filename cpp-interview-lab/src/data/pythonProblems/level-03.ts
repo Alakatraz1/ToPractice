@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel3Problems: Problem[] = [
     {
         "id": "py-prob-03-01",
-        "levelId": "py-level-03",
+        "levelId": "level-03",
         "title": "Even or Odd",
         "type": "coding",
         "difficulty": "beginner",
@@ -73,7 +73,7 @@ export const pyLevel3Problems: Problem[] = [
     },
     {
         "id": "py-prob-03-02",
-        "levelId": "py-level-03",
+        "levelId": "level-03",
         "title": "Maximum of Two Numbers",
         "type": "coding",
         "difficulty": "beginner",
@@ -138,7 +138,7 @@ export const pyLevel3Problems: Problem[] = [
     },
     {
         "id": "py-prob-03-03",
-        "levelId": "py-level-03",
+        "levelId": "level-03",
         "title": "Maximum of Three Numbers",
         "type": "coding",
         "difficulty": "beginner",
@@ -202,7 +202,7 @@ export const pyLevel3Problems: Problem[] = [
     },
     {
         "id": "py-prob-03-04",
-        "levelId": "py-level-03",
+        "levelId": "level-03",
         "title": "Leap Year Checker",
         "type": "coding",
         "difficulty": "easy",
@@ -278,7 +278,7 @@ export const pyLevel3Problems: Problem[] = [
     },
     {
         "id": "py-prob-03-05",
-        "levelId": "py-level-03",
+        "levelId": "level-03",
         "title": "Letter Grade Calculator",
         "type": "coding",
         "difficulty": "easy",
@@ -348,7 +348,7 @@ export const pyLevel3Problems: Problem[] = [
     },
     {
         "id": "py-prob-03-06",
-        "levelId": "py-level-03",
+        "levelId": "level-03",
         "title": "Triangle Inequality Theorem",
         "type": "coding",
         "difficulty": "easy",
@@ -417,7 +417,7 @@ export const pyLevel3Problems: Problem[] = [
     },
     {
         "id": "py-prob-03-07",
-        "levelId": "py-level-03",
+        "levelId": "level-03",
         "title": "Vowel or Consonant",
         "type": "coding",
         "difficulty": "beginner",
@@ -486,7 +486,7 @@ export const pyLevel3Problems: Problem[] = [
     },
     {
         "id": "py-prob-03-08",
-        "levelId": "py-level-03",
+        "levelId": "level-03",
         "title": "Sign of a Number",
         "type": "coding",
         "difficulty": "beginner",
@@ -560,7 +560,7 @@ export const pyLevel3Problems: Problem[] = [
     },
     {
         "id": "py-prob-03-09",
-        "levelId": "py-level-03",
+        "levelId": "level-03",
         "title": "Check Range Membership",
         "type": "coding",
         "difficulty": "beginner",
@@ -627,7 +627,7 @@ export const pyLevel3Problems: Problem[] = [
     },
     {
         "id": "py-prob-03-10",
-        "levelId": "py-level-03",
+        "levelId": "level-03",
         "title": "FizzBuzz Single Step",
         "type": "coding",
         "difficulty": "easy",

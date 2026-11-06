@@ -3,7 +3,7 @@ import { Problem } from '../types';
 export const pyLevel15Problems: Problem[] = [
     {
         "id": "py-prob-15-01",
-        "levelId": "py-level-15",
+        "levelId": "level-15",
         "title": "Valid Parentheses",
         "type": "coding",
         "difficulty": "easy",
@@ -88,7 +88,7 @@ export const pyLevel15Problems: Problem[] = [
     },
     {
         "id": "py-prob-15-02",
-        "levelId": "py-level-15",
+        "levelId": "level-15",
         "title": "Min Stack Design",
         "type": "coding",
         "difficulty": "medium",
@@ -147,7 +147,7 @@ export const pyLevel15Problems: Problem[] = [
     },
     {
         "id": "py-prob-15-03",
-        "levelId": "py-level-15",
+        "levelId": "level-15",
         "title": "Evaluate Reverse Polish Notation",
         "type": "coding",
         "difficulty": "medium",
@@ -216,7 +216,7 @@ export const pyLevel15Problems: Problem[] = [
     },
     {
         "id": "py-prob-15-04",
-        "levelId": "py-level-15",
+        "levelId": "level-15",
         "title": "Daily Temperatures (Monotonic Stack)",
         "type": "coding",
         "difficulty": "medium",
@@ -281,7 +281,7 @@ export const pyLevel15Problems: Problem[] = [
     },
     {
         "id": "py-prob-15-05",
-        "levelId": "py-level-15",
+        "levelId": "level-15",
         "title": "Next Greater Element I",
         "type": "coding",
         "difficulty": "medium",
@@ -348,7 +348,7 @@ export const pyLevel15Problems: Problem[] = [
     },
     {
         "id": "py-prob-15-06",
-        "levelId": "py-level-15",
+        "levelId": "level-15",
         "title": "FIFO Queue with collections.deque",
         "type": "coding",
         "difficulty": "easy",
@@ -408,7 +408,7 @@ export const pyLevel15Problems: Problem[] = [
     },
     {
         "id": "py-prob-15-07",
-        "levelId": "py-level-15",
+        "levelId": "level-15",
         "title": "Implement Queue using Two Stacks",
         "type": "coding",
         "difficulty": "medium",
@@ -468,7 +468,7 @@ export const pyLevel15Problems: Problem[] = [
     },
     {
         "id": "py-prob-15-08",
-        "levelId": "py-level-15",
+        "levelId": "level-15",
         "title": "Remove All Adjacent Duplicates in String",
         "type": "coding",
         "difficulty": "easy",
@@ -536,7 +536,7 @@ export const pyLevel15Problems: Problem[] = [
     },
     {
         "id": "py-prob-15-09",
-        "levelId": "py-level-15",
+        "levelId": "level-15",
         "title": "Asteroid Collision",
         "type": "coding",
         "difficulty": "medium",
@@ -615,7 +615,7 @@ export const pyLevel15Problems: Problem[] = [
     },
     {
         "id": "py-prob-15-10",
-        "levelId": "py-level-15",
+        "levelId": "level-15",
         "title": "Simplify Unix Path",
         "type": "coding",
         "difficulty": "medium",
