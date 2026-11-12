@@ -7,7 +7,9 @@ import * as os from 'os';
 import {
     getAmazonPrepLevels,
     getAmazonPrepProblems,
-    amazonPatternPrimers
+    amazonPatternPrimers,
+    amazonBasicsSpecs,
+    amazonChallengesSpecs
 } from '../src/data/interviewPrep';
 import {
     getProblem,
@@ -25,7 +27,7 @@ function normalizeOutput(output: string): string {
 }
 
 describe('Amazon SDE 1 Intern Interview Preparation Track Tests', () => {
-    it('has 2 phases (Basics & Challenging OA) with 8 Basics and 12 Challenges in both C++ and Python', () => {
+    it('has 2 phases (Basics & Challenging OA) with 56 Zero-to-Hero Basics and 12 Challenges in both C++ and Python', () => {
         const cppLevels = getAmazonPrepLevels('cpp');
         const pyLevels = getAmazonPrepLevels('python');
         assert.strictEqual(cppLevels.length, 2);
@@ -36,17 +38,55 @@ describe('Amazon SDE 1 Intern Interview Preparation Track Tests', () => {
         const pyBasics = getAmazonPrepProblems('python', 'basics');
         const pyChallenges = getAmazonPrepProblems('python', 'challenges');
 
-        assert.strictEqual(cppBasics.length, 8);
+        assert.strictEqual(cppBasics.length, 56);
         assert.strictEqual(cppChallenges.length, 12);
-        assert.strictEqual(pyBasics.length, 8);
+        assert.strictEqual(pyBasics.length, 56);
         assert.strictEqual(pyChallenges.length, 12);
         assert.strictEqual(amazonPatternPrimers.length, 4);
     });
 
-    it('resolves all Amazon Prep problems via getProblem, getLevelForProblem, and getNavigationInfo', () => {
+    it('contains zero raw $ LaTeX math delimiters or LaTeX commands in any problem description or teaching text', () => {
+        const allSpecs = [...amazonBasicsSpecs, ...amazonChallengesSpecs];
+        assert.strictEqual(allSpecs.length, 68);
+
+        for (const spec of allSpecs) {
+            const textFields = [
+                spec.description,
+                spec.whyThisMatters,
+                spec.explanation,
+                spec.approach,
+                ...spec.hints,
+                ...spec.howToThink,
+                ...spec.commonMistakes
+            ];
+            for (const text of textFields) {
+                assert(
+                    !text.includes('$'),
+                    `Found raw $ delimiter in ${spec.baseId}: ${text}`
+                );
+                assert(
+                    !/\\(le|ge|times|sqrt|lceil|rceil|text|sum|max|min|log)/.test(text),
+                    `Found raw LaTeX command in ${spec.baseId}: ${text}`
+                );
+            }
+        }
+
+        for (const basic of amazonBasicsSpecs) {
+            assert(
+                basic.description.includes('### Mini-Lesson:'),
+                `Basic problem ${basic.baseId} is missing a Mini-Lesson header`
+            );
+            assert(
+                basic.description.includes('**C++17 Idiom:**') && basic.description.includes('**Python 3 Idiom:**'),
+                `Basic problem ${basic.baseId} is missing C++17 / Python 3 Idiom blocks`
+            );
+        }
+    });
+
+    it('resolves all 68 Amazon Prep problems per language via getProblem, getLevelForProblem, and getNavigationInfo', () => {
         for (const lang of ['cpp', 'python'] as const) {
             const problems = getAmazonPrepProblems(lang);
-            assert.strictEqual(problems.length, 20);
+            assert.strictEqual(problems.length, 68);
 
             for (let i = 0; i < problems.length; i++) {
                 const p = problems[i];
@@ -67,7 +107,7 @@ describe('Amazon SDE 1 Intern Interview Preparation Track Tests', () => {
         }
     });
 
-    it('all 20 Python 3 Amazon Prep solutions (8 Basics + 12 OA Challenges) pass all test cases', { timeout: 60000 }, () => {
+    it('all 68 Python 3 Amazon Prep solutions (56 Basics + 12 OA Challenges) pass all test cases', { timeout: 120000 }, () => {
         const pyProblems = getAmazonPrepProblems('python');
         for (const prob of pyProblems) {
             for (const tc of prob.testCases) {
@@ -86,7 +126,7 @@ describe('Amazon SDE 1 Intern Interview Preparation Track Tests', () => {
         }
     });
 
-    it('all 20 C++17 Amazon Prep solutions (8 Basics + 12 OA Challenges) compile and pass all test cases', { timeout: 120000 }, () => {
+    it('all 68 C++17 Amazon Prep solutions (56 Basics + 12 OA Challenges) compile and pass all test cases', { timeout: 240000 }, () => {
         const cppProblems = getAmazonPrepProblems('cpp');
         const tmpDir = os.tmpdir();
 

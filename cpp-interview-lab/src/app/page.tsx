@@ -163,7 +163,7 @@ export default function Home() {
                                 Amazon SDE 1 Intern Virtual Assessment Prep
                             </h2>
                             <p className="text-sm text-gray-300 max-w-3xl">
-                                A structured 2-phase track tailored for the Amazon SDE 1 Intern Online Assessment: first master the <strong>8 Core Basics & Pattern Builders</strong>, then tackle <strong>12 Challenging Real Amazon OA Problems</strong> in both C++ and Python.
+                                A structured Zero-to-Hero track tailored for the Amazon SDE 1 Intern Online Assessment: first master the <strong>56 Step-by-Step Basics (7 Progressive Stages with Mini-Lessons)</strong>, then tackle <strong>12 Challenging Real Amazon OA Problems</strong> in both C++ and Python.
                             </p>
                         </div>
 
@@ -183,17 +183,17 @@ export default function Home() {
                             <div>
                                 <div className="flex items-center justify-between mb-2">
                                     <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
-                                        <Layers className="w-4 h-4" /> Part 1 • Practice the Basics
+                                        <Layers className="w-4 h-4" /> Part 1 • 56 Zero-to-Hero Basics
                                     </span>
                                     <span className="text-xs font-mono text-emerald-300 bg-emerald-950/80 px-2.5 py-0.5 rounded border border-emerald-800/60">
                                         {amzBasicsDone} / {amzBasics.length} Solved ({language === 'python' ? 'Python' : 'C++'})
                                     </span>
                                 </div>
                                 <h3 className="text-lg font-bold text-white mb-1">
-                                    Core Fundamentals & Pattern Warmup
+                                    7 Progressive Stages with Built-In Mini-Lessons
                                 </h3>
                                 <p className="text-xs text-gray-400 leading-relaxed">
-                                    Step-by-step practice on Prefix Sums, Frequency Hash Maps, Fixed & Variable Sliding Windows, Two Pointers Greedy, Interval Merging, Min-Heaps, and Grid BFS so you understand the building blocks before the hard questions.
+                                    56 step-by-step teaching problems across 7 stages: Arrays & Prefix Sums, Strings & Parsing, Hash Maps & Custom Sorting, Two Pointers & Sliding Window, Intervals & Binary Search, Monotonic Stacks & Heaps, and Grid BFS & Dynamic Programming.
                                 </p>
                             </div>
                             <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-gray-800/80">
@@ -207,7 +207,7 @@ export default function Home() {
                                     onClick={() => router.push('/interview-prep')}
                                     className="text-xs text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1"
                                 >
-                                    View all 8 Basics & Primers <ArrowRight className="w-3.5 h-3.5" />
+                                    View all 56 Basics (7 Stages) <ArrowRight className="w-3.5 h-3.5" />
                                 </button>
                             </div>
                         </div>

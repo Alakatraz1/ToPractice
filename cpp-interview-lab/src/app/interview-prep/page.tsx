@@ -12,6 +12,7 @@ import {
     getAmazonPrepProblems,
     amazonPatternPrimers,
     amazonBasicsSpecs,
+    amazonBasicsStages,
     amazonChallengesSpecs
 } from '@/data/interviewPrep';
 import { UserProgress } from '@/data/types';
@@ -43,6 +44,7 @@ export default function InterviewPreparationPage() {
     const [progress, setProgress] = useState<UserProgress | null>(null);
     const [isClient, setIsClient] = useState(false);
     const [activeSection, setActiveSection] = useState<ActiveSection>('all');
+    const [activeStageFilter, setActiveStageFilter] = useState<number | 'all'>('all');
 
     useEffect(() => {
         setIsClient(true);
@@ -175,7 +177,7 @@ export default function InterviewPreparationPage() {
                         <div>
                             <div className="flex items-center justify-between mb-3">
                                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-800/50">
-                                    Step 1 • Foundation Warmup
+                                    Step 1 • 7 Progressive Stages
                                 </span>
                                 <span className="text-xs font-mono text-gray-400">
                                     {completedBasics}/{basicsProblems.length} Done
@@ -183,10 +185,10 @@ export default function InterviewPreparationPage() {
                             </div>
                             <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
                                 <Layers className="w-5 h-5 text-emerald-400" />
-                                Practice the Basics
+                                56 Zero-to-Hero Basics
                             </h2>
                             <p className="text-xs text-gray-400 leading-relaxed mb-4">
-                                Understand the 8 core building blocks (Prefix Sums, Hash Maps, Sliding Window, Two Pointers, Intervals, Min-Heap, Grid BFS) before jumping into hard OA problems.
+                                Step-by-step progressive curriculum (7 stages × 8 problems) with built-in C++17 & Python 3 Mini-Lessons where every question teaches a skill that carries into the next.
                             </p>
                         </div>
                         <div className="space-y-3">
@@ -201,7 +203,7 @@ export default function InterviewPreparationPage() {
                                 className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-[0_0_15px_rgba(16,185,129,0.25)]"
                             >
                                 <Play className="w-3.5 h-3.5 fill-current" />
-                                {completedBasics === 0 ? 'Start Basics Track' : completedBasics === basicsProblems.length ? 'Review Basics' : `Continue: ${nextBasic.title.split('—')[0]}`}
+                                {completedBasics === 0 ? 'Start Step 1 (Zero-to-Hero)' : completedBasics === basicsProblems.length ? 'Review 56 Basics' : `Continue: ${nextBasic.title.split(':')[0]}`}
                             </button>
                         </div>
                     </div>
@@ -399,21 +401,21 @@ export default function InterviewPreparationPage() {
                     </section>
                 )}
 
-                {/* SECTION B: Phase 1 - Practice the Basics (8 Warmup Problems) */}
+                {/* SECTION B: Phase 1 - Practice the Basics (56 Progressive Zero-to-Hero Problems across 7 Stages) */}
                 {(activeSection === 'all' || activeSection === 'basics') && (
                     <section className="space-y-6">
-                        <div className="bg-emerald-950/20 border border-emerald-900/50 rounded-2xl p-6 md:p-8">
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-emerald-900/40">
+                        <div className="bg-emerald-950/20 border border-emerald-900/50 rounded-2xl p-6 md:p-8 space-y-6">
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-emerald-900/40">
                                 <div>
                                     <div className="text-xs font-extrabold uppercase tracking-widest text-emerald-400 mb-1">
-                                        Phase 1 • Build Your Foundation ({language === 'python' ? 'Python 3' : 'C++'})
+                                        Phase 1 • Zero-to-Hero Progressive Curriculum ({language === 'python' ? 'Python 3' : 'C++17'})
                                     </div>
                                     <h2 className="text-2xl font-bold text-white flex items-center gap-2">
                                         <Layers className="w-6 h-6 text-emerald-400" />
-                                        Practicing the Basics (8 Core Pattern Builders)
+                                        56 Step-by-Step Foundation Builders (7 Stages)
                                     </h2>
                                     <p className="text-sm text-gray-400 mt-1">
-                                        Every challenging Amazon OA question is a variation of these 8 foundational patterns. Solve these first so the mechanics in {language === 'python' ? 'Python 3' : 'C++'} become second nature.
+                                        Designed so you never feel stuck: every question includes a <strong className="text-emerald-300">Mini-Lesson</strong> with side-by-side C++17 & Python 3 syntax idioms and builds directly on the previous step.
                                     </p>
                                 </div>
                                 <div className="flex items-center gap-3 shrink-0">
@@ -423,75 +425,146 @@ export default function InterviewPreparationPage() {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {basicsProblems.map((prob, index) => {
-                                    const spec = amazonBasicsSpecs[index];
-                                    const isSolved = progress.completedProblems.includes(prob.id);
-
+                            {/* Stage Filter Pills */}
+                            <div className="flex flex-wrap gap-2">
+                                <button
+                                    onClick={() => setActiveStageFilter('all')}
+                                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                                        activeStageFilter === 'all'
+                                            ? 'bg-emerald-600 text-white shadow-[0_0_10px_rgba(16,185,129,0.3)]'
+                                            : 'bg-gray-900/90 text-gray-400 hover:text-white border border-gray-800'
+                                    }`}
+                                >
+                                    All 7 Stages (56 Steps)
+                                </button>
+                                {amazonBasicsStages.map((stage) => {
+                                    const stageProbs = basicsProblems.filter((_, idx) => amazonBasicsSpecs[idx]?.stageNum === stage.stageNum);
+                                    const stageSolved = stageProbs.filter(p => progress.completedProblems.includes(p.id)).length;
                                     return (
-                                        <div
-                                            key={prob.id}
-                                            className={`p-5 rounded-xl border transition-all flex flex-col justify-between gap-4 ${
-                                                isSolved
-                                                    ? 'bg-emerald-950/25 border-emerald-700/50'
-                                                    : 'bg-gray-900/80 border-gray-800 hover:border-emerald-700/50'
+                                        <button
+                                            key={stage.stageNum}
+                                            onClick={() => setActiveStageFilter(stage.stageNum)}
+                                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                                                activeStageFilter === stage.stageNum
+                                                    ? 'bg-emerald-600 text-white shadow-[0_0_10px_rgba(16,185,129,0.3)]'
+                                                    : 'bg-gray-900/90 text-gray-400 hover:text-white border border-gray-800'
                                             }`}
                                         >
-                                            <div>
-                                                <div className="flex items-center justify-between gap-2 mb-2">
-                                                    <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                                                        {spec?.pattern || 'Core Pattern'}
-                                                    </span>
-                                                    <div className="flex items-center gap-2">
-                                                        <span className="text-[11px] font-mono text-gray-400">
-                                                            {prob.timeComplexity}
+                                            <span>Stage {stage.stageNum}</span>
+                                            <span className="text-[10px] font-mono opacity-80">
+                                                ({stageSolved}/{stage.count})
+                                            </span>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+
+                            {/* Render Stages */}
+                            <div className="space-y-8">
+                                {amazonBasicsStages
+                                    .filter(stage => activeStageFilter === 'all' || activeStageFilter === stage.stageNum)
+                                    .map((stage) => {
+                                        const stageItems = basicsProblems
+                                            .map((prob, index) => ({ prob, spec: amazonBasicsSpecs[index] }))
+                                            .filter(item => item.spec?.stageNum === stage.stageNum);
+                                        const stageSolvedCount = stageItems.filter(item => progress.completedProblems.includes(item.prob.id)).length;
+
+                                        return (
+                                            <div key={stage.stageNum} className="space-y-4">
+                                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-gray-900/90 border border-gray-800 px-4 py-3 rounded-xl">
+                                                    <div>
+                                                        <div className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-400">
+                                                            {stage.range} • Progressive Building Blocks
+                                                        </div>
+                                                        <h3 className="text-lg font-bold text-white">
+                                                            {stage.title}
+                                                        </h3>
+                                                    </div>
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="w-28 bg-gray-800 h-2 rounded-full overflow-hidden">
+                                                            <div
+                                                                className="bg-emerald-500 h-2 rounded-full transition-all"
+                                                                style={{ width: `${(stageSolvedCount / Math.max(stage.count, 1)) * 100}%` }}
+                                                            />
+                                                        </div>
+                                                        <span className="text-xs font-mono text-emerald-300">
+                                                            {stageSolvedCount}/{stage.count} Solved
                                                         </span>
-                                                        {isSolved && (
-                                                            <span className="flex items-center gap-1 text-xs font-bold text-emerald-400">
-                                                                <CheckCircle2 className="w-4 h-4" /> Solved
-                                                            </span>
-                                                        )}
                                                     </div>
                                                 </div>
 
-                                                <h3 className="text-base font-bold text-white mb-1">
-                                                    {prob.title}
-                                                </h3>
-                                                <p className="text-xs text-gray-400 mb-3">
-                                                    {spec?.amazonContext}
-                                                </p>
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                    {stageItems.map(({ prob, spec }) => {
+                                                        const isSolved = progress.completedProblems.includes(prob.id);
 
-                                                <div className="flex flex-wrap gap-1.5">
-                                                    {prob.concepts.map((c) => (
-                                                        <span
-                                                            key={c}
-                                                            className="text-[11px] bg-gray-950 text-gray-400 px-2 py-0.5 rounded border border-gray-800"
-                                                        >
-                                                            {c}
-                                                        </span>
-                                                    ))}
+                                                        return (
+                                                            <div
+                                                                key={prob.id}
+                                                                className={`p-5 rounded-xl border transition-all flex flex-col justify-between gap-4 ${
+                                                                    isSolved
+                                                                        ? 'bg-emerald-950/25 border-emerald-700/50'
+                                                                        : 'bg-gray-900/80 border-gray-800 hover:border-emerald-700/50'
+                                                                }`}
+                                                            >
+                                                                <div>
+                                                                    <div className="flex items-center justify-between gap-2 mb-2">
+                                                                        <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                                                            {spec?.pattern || 'Core Pattern'}
+                                                                        </span>
+                                                                        <div className="flex items-center gap-2">
+                                                                            <span className="text-[11px] font-mono text-gray-400">
+                                                                                {prob.timeComplexity}
+                                                                            </span>
+                                                                            {isSolved && (
+                                                                                <span className="flex items-center gap-1 text-xs font-bold text-emerald-400">
+                                                                                    <CheckCircle2 className="w-4 h-4" /> Solved
+                                                                                </span>
+                                                                            )}
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <h4 className="text-base font-bold text-white mb-1">
+                                                                        {prob.title}
+                                                                    </h4>
+                                                                    <p className="text-xs text-gray-400 mb-3">
+                                                                        {spec?.amazonContext}
+                                                                    </p>
+
+                                                                    <div className="flex flex-wrap gap-1.5">
+                                                                        {prob.concepts.map((c) => (
+                                                                            <span
+                                                                                key={c}
+                                                                                className="text-[11px] bg-gray-950 text-gray-400 px-2 py-0.5 rounded border border-gray-800"
+                                                                            >
+                                                                                {c}
+                                                                            </span>
+                                                                        ))}
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className="flex items-center justify-between pt-3 border-t border-gray-800/80">
+                                                                    <span className="text-[11px] text-emerald-400/80 font-mono">
+                                                                        Includes Mini-Lesson (C++ & Python)
+                                                                    </span>
+                                                                    <button
+                                                                        onClick={() => router.push(`/problems/${prob.id}`)}
+                                                                        className={`px-4 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+                                                                            isSolved
+                                                                                ? 'bg-gray-800 hover:bg-gray-700 text-emerald-400'
+                                                                                : 'bg-emerald-600 hover:bg-emerald-500 text-white'
+                                                                        }`}
+                                                                    >
+                                                                        {isSolved ? 'Review Step' : `Learn & Solve (${language === 'python' ? 'Python' : 'C++'})`}
+                                                                        <ArrowRight className="w-3.5 h-3.5" />
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        );
+                                                    })}
                                                 </div>
                                             </div>
-
-                                            <div className="flex items-center justify-between pt-3 border-t border-gray-800/80">
-                                                <span className="text-[11px] text-gray-500 font-mono">
-                                                    C++ & Python Ready
-                                                </span>
-                                                <button
-                                                    onClick={() => router.push(`/problems/${prob.id}`)}
-                                                    className={`px-4 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
-                                                        isSolved
-                                                            ? 'bg-gray-800 hover:bg-gray-700 text-emerald-400'
-                                                            : 'bg-emerald-600 hover:bg-emerald-500 text-white'
-                                                    }`}
-                                                >
-                                                    {isSolved ? 'Review Basic' : `Practice in ${language === 'python' ? 'Python' : 'C++'}`}
-                                                    <ArrowRight className="w-3.5 h-3.5" />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
+                                        );
+                                    })}
                             </div>
                         </div>
                     </section>
@@ -631,7 +704,7 @@ export default function InterviewPreparationPage() {
                                     Question 1 is typically a Medium greedy/hash-map/sliding-window problem (aim for 20–25 mins). Question 2 is a Medium-Hard subarray, monotonic stack/deque, or BFS/heap optimization problem (40–45 mins).
                                 </p>
                                 <ul className="text-xs text-gray-300 space-y-1.5 list-disc pl-4">
-                                    <li>Hidden test cases test $N = 10^5$ ($O(N)$ or $O(N \log N)$ required).</li>
+                                    <li>Hidden test cases test <code className="text-amber-300">N = 10^5</code> (<code className="text-amber-300">O(N)</code> or <code className="text-amber-300">O(N log N)</code> required).</li>
                                     <li>In C++, always use <code className="text-amber-300">long long</code> for sums/costs to prevent 32-bit overflow.</li>
                                     <li>In Python, use <code className="text-emerald-300">collections.deque</code>, <code className="text-emerald-300">Counter</code>, and <code className="text-emerald-300">heapq</code>.</li>
                                 </ul>

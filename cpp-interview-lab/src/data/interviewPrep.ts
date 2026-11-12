@@ -1,9 +1,9 @@
 import { Level, Problem } from './types';
-import { amazonBasicsSpecs, buildDualTrackProblems, DualLanguageProblemSpec } from './interviewPrepBasics';
+import { amazonBasicsSpecs, amazonBasicsStages, AmazonStageMeta, buildDualTrackProblems, DualLanguageProblemSpec } from './interviewPrepBasics';
 import { amazonChallengesSpecs } from './interviewPrepChallenges';
 
-export { amazonBasicsSpecs, amazonChallengesSpecs };
-export type { DualLanguageProblemSpec };
+export { amazonBasicsSpecs, amazonBasicsStages, amazonChallengesSpecs };
+export type { DualLanguageProblemSpec, AmazonStageMeta };
 
 const basicsBuilt = buildDualTrackProblems(amazonBasicsSpecs);
 const challengesBuilt = buildDualTrackProblems(amazonChallengesSpecs);
@@ -33,17 +33,16 @@ export const amazonCppLevels: Level[] = [
     {
         id: 'amz-basics',
         number: 101,
-        title: 'Phase 1: Core Basics & Pattern Builders (Amazon OA Warmup)',
-        description: 'Step-by-step foundational problems in C++ & Python covering the exact building blocks (Prefix Sums, Frequency Maps, Sliding Window, Two Pointers, Intervals, Min-Heap, and Grid BFS) required to understand and solve hard Amazon OA questions.',
+        title: 'Phase 1: 56-Step Zero-to-Hero Basics Curriculum (7 Progressive Stages)',
+        description: 'A step-by-step 56-question progressive teaching curriculum in C++ & Python. Every single problem includes a Mini-Lesson with side-by-side C++17 & Python 3 idioms that carries directly into the next problem.',
         whatYouWillLearn: [
-            '1-Indexed Prefix Sums for O(1) subarray sum queries',
-            'Hash Map Frequency Counting & Custom Tie-Breaker Sorting',
-            'Fixed & Variable Sliding Window Templates',
-            'Two Pointers Greedy Pairing & Interval Merging',
-            'Min-Heap (Top-K) & Grid BFS Shortest Path'
+            'Stage 1–2 (Steps 1–16): Arrays, 64-Bit Prefix Sums, Difference Arrays, ASCII Frequency & String Parsing',
+            'Stage 3–4 (Steps 17–32): Hash Sets/Maps, Custom Tie-Breaker Sorting, Two Pointers & Fixed/Variable Sliding Windows',
+            'Stage 5–6 (Steps 33–48): Interval Merging, Greedy Math, Binary Search on Answer, Monotonic Stack/Deque & Min/Max Heaps',
+            'Stage 7 (Steps 49–56): 2D Grid Flood Fill, Shortest Path BFS, Multi-Source BFS, Graph Clusters & 1D Dynamic Programming'
         ],
-        whyThisMatters: 'Every challenging Amazon SDE 1 Intern OA question is built by combining 1 or 2 of these 8 core patterns. Mastering these basics first makes the hard problems feel intuitive.',
-        concepts: ['prefix sums', 'hash maps', 'sliding window', 'two pointers', 'intervals', 'heap', 'bfs'],
+        whyThisMatters: 'Instead of jumping straight into hard problems and getting stuck, these 56 step-by-step problems teach you every single pattern from 0 to Hero so you can crush the Amazon OA.',
+        concepts: ['arrays', 'prefix sums', 'strings', 'hash maps', 'sorting', 'two pointers', 'sliding window', 'intervals', 'binary search', 'monotonic stack', 'heap', 'bfs', 'dynamic programming'],
         prerequisites: [],
         problems: amazonBasicsCppProblems.map(p => p.id)
     },
@@ -145,7 +144,7 @@ for right in range(n):
         left += 1
     best = max(best, right - left + 1)`,
         keyTakeaway: 'In C++, always use `long long` for subarray sums so values up to 10^14 never overflow 32-bit `int`.',
-        relatedBasicId: 'amz-basic-01',
+        relatedBasicId: 'amz-basic-04',
         relatedChallengeIds: ['amz-oa-01', 'amz-oa-04']
     },
     {
@@ -179,7 +178,7 @@ if freq[old_val] == 0:
 # Custom Sort: Frequency DESC (-x[1]), then ID ASC (x[0])
 sorted_items = sorted(freq.items(), key=lambda x: (-x[1], x[0]))`,
         keyTakeaway: 'When tracking distinct elements in a sliding window, always delete keys whose count reaches 0 so `freq.size()` / `len(freq)` equals the exact number of unique keys.',
-        relatedBasicId: 'amz-basic-02',
+        relatedBasicId: 'amz-basic-19',
         relatedChallengeIds: ['amz-oa-03', 'amz-oa-04', 'amz-oa-08']
     },
     {
@@ -213,7 +212,7 @@ for start, end in iv:
     heapq.heappush(min_heap, end)
 docks_needed = len(min_heap)`,
         keyTakeaway: 'Remember: C++ `priority_queue<int>` is a MAX-heap by default (pass `greater<int>` for min-heap), whereas Python `heapq` is a MIN-heap by default (negate values `-x` for max-heap).',
-        relatedBasicId: 'amz-basic-06',
+        relatedBasicId: 'amz-basic-47',
         relatedChallengeIds: ['amz-oa-05', 'amz-oa-09']
     },
     {
@@ -250,7 +249,7 @@ dq.append(right)
 if dq[0] < left:
     dq.popleft()`,
         keyTakeaway: 'Never use `list.pop(0)` for BFS in Python—it is O(N) per pop and will TLE on Amazon hidden tests. Always use `collections.deque` with `popleft()`.',
-        relatedBasicId: 'amz-basic-08',
+        relatedBasicId: 'amz-basic-45',
         relatedChallengeIds: ['amz-oa-01', 'amz-oa-06', 'amz-oa-12']
     }
 ];
