@@ -501,9 +501,17 @@ export const cppProblems: Problem[] = [
     ...level27Problems,
 ];
 
+import {
+    allAmazonPrepProblems,
+    amazonCppLevels,
+    amazonPythonLevels,
+    isAmazonPrepProblem
+} from './interviewPrep';
+
 export const allProblems: Problem[] = [
     ...cppProblems,
     ...pythonProblems,
+    ...allAmazonPrepProblems,
 ];
 
 export function getLevels(language?: 'cpp' | 'python'): Level[] {
@@ -519,14 +527,24 @@ export function getProblem(id: string): Problem | undefined {
 }
 
 export function getLevel(id: string, language?: 'cpp' | 'python'): Level | undefined {
-    const primaryLevels = language === 'python' ? pythonLevels : cppLevels;
+    const primaryLevels = language === 'python'
+        ? [...pythonLevels, ...amazonPythonLevels]
+        : [...cppLevels, ...amazonCppLevels];
     const found = primaryLevels.find(l => l.id === id);
     if (found) return found;
-    return (language === 'python' ? cppLevels : pythonLevels).find(l => l.id === id);
+    const secondaryLevels = language === 'python'
+        ? [...cppLevels, ...amazonCppLevels]
+        : [...pythonLevels, ...amazonPythonLevels];
+    return secondaryLevels.find(l => l.id === id);
 }
 
 export function getLevelForProblem(problemId: string): Level | null {
     const isPy = problemId.startsWith('py-');
+    if (isAmazonPrepProblem(problemId)) {
+        const amzLevels = isPy ? amazonPythonLevels : amazonCppLevels;
+        const foundAmz = amzLevels.find(l => l.problems.includes(problemId));
+        if (foundAmz) return foundAmz;
+    }
     const targetLevels = isPy ? pythonLevels : cppLevels;
     const found = targetLevels.find(l => l.problems.includes(problemId));
     if (found) return found;
@@ -549,12 +567,17 @@ export interface NavigationInfo {
 
 export function getNavigationInfo(problemId: string, currentLanguage?: 'cpp' | 'python'): NavigationInfo {
     const isPy = problemId.startsWith('py-') || currentLanguage === 'python';
-    const activeLevels = isPy ? pythonLevels : cppLevels;
+    const isAmz = isAmazonPrepProblem(problemId);
+    const activeLevels = isAmz
+        ? (problemId.startsWith('py-') ? amazonPythonLevels : amazonCppLevels)
+        : (isPy ? pythonLevels : cppLevels);
     
     let currentLevelIndex = activeLevels.findIndex(l => l.problems.includes(problemId));
     if (currentLevelIndex === -1) {
         // Try fallback
-        const fallbackLevels = isPy ? cppLevels : pythonLevels;
+        const fallbackLevels = isAmz
+            ? (problemId.startsWith('py-') ? amazonCppLevels : amazonPythonLevels)
+            : (isPy ? cppLevels : pythonLevels);
         currentLevelIndex = fallbackLevels.findIndex(l => l.problems.includes(problemId));
         if (currentLevelIndex === -1) {
             return {

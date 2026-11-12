@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getProgress, getWeakConcepts, isLevelUnlocked, getGlobalLanguage, setGlobalLanguage, resetProgress, restoreProgressFromServer } from '@/lib/progress';
 import { getLevels, getAllProblems, getProblem } from '@/data/levels';
+import { getAmazonPrepProblems } from '@/data/interviewPrep';
 import { UserProgress } from '@/data/types';
-import { Code2, Trophy, Brain, Target, Lock, Play, ArrowRight, Activity, BookOpen, AlertCircle, CheckCircle2, ShieldAlert, Zap, Terminal } from 'lucide-react';
+import { Code2, Trophy, Brain, Target, Lock, Play, ArrowRight, Activity, BookOpen, AlertCircle, CheckCircle2, ShieldAlert, Zap, Terminal, Award, Layers, Flame } from 'lucide-react';
 import { ActivityHeatmap } from '@/components/ActivityHeatmap';
 
 export default function Home() {
@@ -80,6 +81,14 @@ export default function Home() {
     const weakConcepts = getWeakConcepts(language).slice(0, 3);
     const allMasteredConcepts = Object.entries(progress.mastery).sort((a, b) => b[1] - a[1]);
 
+    // Amazon SDE 1 Intern Interview Preparation stats
+    const amzBasics = getAmazonPrepProblems(language, 'basics');
+    const amzChallenges = getAmazonPrepProblems(language, 'challenges');
+    const amzBasicsDone = amzBasics.filter(p => progress.completedProblems.includes(p.id)).length;
+    const amzChallengesDone = amzChallenges.filter(p => progress.completedProblems.includes(p.id)).length;
+    const nextAmzBasic = amzBasics.find(p => !progress.completedProblems.includes(p.id)) || amzBasics[0];
+    const nextAmzChallenge = amzChallenges.find(p => !progress.completedProblems.includes(p.id)) || amzChallenges[0];
+
     return (
         <div className="min-h-screen bg-gray-950 text-gray-200 p-8 font-sans">
             <div className="max-w-6xl mx-auto space-y-12">
@@ -132,6 +141,112 @@ export default function Home() {
 
                 {/* GitHub-style Green Dot Activity Heatmap */}
                 <ActivityHeatmap currentLanguage={language} />
+
+                {/* Dedicated Section: Interview Preparation — Amazon SDE 1 Intern (Virtual Assessment) */}
+                <section className="bg-gradient-to-br from-amber-950/35 via-gray-900/90 to-emerald-950/30 border border-amber-700/50 rounded-2xl p-6 md:p-8 shadow-[0_0_40px_rgba(245,158,11,0.12)] relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-gray-800/80 pb-6 mb-6">
+                        <div className="space-y-2">
+                            <div className="flex flex-wrap items-center gap-2">
+                                <span className="text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1.5">
+                                    <Award className="w-3.5 h-3.5" /> Interview Preparation
+                                </span>
+                                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                                    Amazon SDE 1 Intern • Virtual Assessment (OA)
+                                </span>
+                                <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-gray-800 text-gray-300 border border-gray-700">
+                                    C++17 & Python 3
+                                </span>
+                            </div>
+                            <h2 className="text-2xl md:text-3xl font-extrabold text-white">
+                                Amazon SDE 1 Intern Virtual Assessment Prep
+                            </h2>
+                            <p className="text-sm text-gray-300 max-w-3xl">
+                                A structured 2-phase track tailored for the Amazon SDE 1 Intern Online Assessment: first master the <strong>8 Core Basics & Pattern Builders</strong>, then tackle <strong>12 Challenging Real Amazon OA Problems</strong> in both C++ and Python.
+                            </p>
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-3 shrink-0">
+                            <button
+                                onClick={() => router.push('/interview-prep')}
+                                className="px-6 py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-gray-950 font-extrabold rounded-xl transition-all shadow-[0_0_25px_rgba(245,158,11,0.35)] flex items-center gap-2 text-sm"
+                            >
+                                Open Interview Preparation Hub <ArrowRight className="w-4 h-4" />
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Sub-card 1: Practice the Basics */}
+                        <div className="bg-gray-950/70 border border-emerald-800/50 rounded-xl p-5 flex flex-col justify-between gap-4">
+                            <div>
+                                <div className="flex items-center justify-between mb-2">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                                        <Layers className="w-4 h-4" /> Part 1 • Practice the Basics
+                                    </span>
+                                    <span className="text-xs font-mono text-emerald-300 bg-emerald-950/80 px-2.5 py-0.5 rounded border border-emerald-800/60">
+                                        {amzBasicsDone} / {amzBasics.length} Solved ({language === 'python' ? 'Python' : 'C++'})
+                                    </span>
+                                </div>
+                                <h3 className="text-lg font-bold text-white mb-1">
+                                    Core Fundamentals & Pattern Warmup
+                                </h3>
+                                <p className="text-xs text-gray-400 leading-relaxed">
+                                    Step-by-step practice on Prefix Sums, Frequency Hash Maps, Fixed & Variable Sliding Windows, Two Pointers Greedy, Interval Merging, Min-Heaps, and Grid BFS so you understand the building blocks before the hard questions.
+                                </p>
+                            </div>
+                            <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-gray-800/80">
+                                <button
+                                    onClick={() => nextAmzBasic && router.push(`/problems/${nextAmzBasic.id}`)}
+                                    className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors"
+                                >
+                                    <Play className="w-3.5 h-3.5 fill-current" /> Practice Basics ({language === 'python' ? 'Python' : 'C++'})
+                                </button>
+                                <button
+                                    onClick={() => router.push('/interview-prep')}
+                                    className="text-xs text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1"
+                                >
+                                    View all 8 Basics & Primers <ArrowRight className="w-3.5 h-3.5" />
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Sub-card 2: Challenging Amazon OA Questions */}
+                        <div className="bg-gray-950/70 border border-amber-800/50 rounded-xl p-5 flex flex-col justify-between gap-4">
+                            <div>
+                                <div className="flex items-center justify-between mb-2">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                                        <Flame className="w-4 h-4" /> Part 2 • Challenging Amazon OA
+                                    </span>
+                                    <span className="text-xs font-mono text-amber-300 bg-amber-950/80 px-2.5 py-0.5 rounded border border-amber-800/60">
+                                        {amzChallengesDone} / {amzChallenges.length} Solved ({language === 'python' ? 'Python' : 'C++'})
+                                    </span>
+                                </div>
+                                <h3 className="text-lg font-bold text-white mb-1">
+                                    Real Amazon Virtual Assessment Challenges
+                                </h3>
+                                <p className="text-xs text-gray-400 leading-relaxed">
+                                    12 Medium & Hard Amazon SDE 1 Intern OA questions: AWS Server Cluster (Monotonic Deque), Subarray Increment Cost, Warehouse Box Rounds, K-Distinct Stock Sum, Loading Docks, Rotting Oranges, Log Reordering & more.
+                                </p>
+                            </div>
+                            <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-gray-800/80">
+                                <button
+                                    onClick={() => nextAmzChallenge && router.push(`/problems/${nextAmzChallenge.id}`)}
+                                    className="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors"
+                                >
+                                    <Zap className="w-3.5 h-3.5" /> Solve Amazon OA ({language === 'python' ? 'Python' : 'C++'})
+                                </button>
+                                <button
+                                    onClick={() => router.push('/interview-prep')}
+                                    className="text-xs text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1"
+                                >
+                                    View all 12 OA Challenges <ArrowRight className="w-3.5 h-3.5" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     

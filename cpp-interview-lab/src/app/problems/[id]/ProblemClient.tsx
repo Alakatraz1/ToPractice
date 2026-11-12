@@ -59,13 +59,13 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
         setGlobalLanguage(newLang);
         
         // If there's an equivalent problem in the other language, navigate to it
-        if (newLang === 'python' && problemId.startsWith('prob-')) {
+        if (newLang === 'python' && (problemId.startsWith('prob-') || problemId.startsWith('amz-'))) {
             const pyId = 'py-' + problemId;
             if (getProblem(pyId)) {
                 router.push(`/problems/${pyId}`);
                 return;
             }
-        } else if (newLang === 'cpp' && problemId.startsWith('py-prob-')) {
+        } else if (newLang === 'cpp' && (problemId.startsWith('py-prob-') || problemId.startsWith('py-amz-'))) {
             const cppId = problemId.replace('py-', '');
             if (getProblem(cppId)) {
                 router.push(`/problems/${cppId}`);
@@ -162,11 +162,11 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
             <header className="h-14 border-b border-gray-800 bg-gray-900 flex items-center justify-between px-4 shrink-0">
                 <div className="flex items-center gap-3">
                     <button 
-                        onClick={() => router.push('/')} 
+                        onClick={() => router.push((problemId.startsWith('amz-') || problemId.startsWith('py-amz-')) ? '/interview-prep' : '/')} 
                         className="text-gray-400 hover:text-white flex items-center gap-1 text-sm font-medium transition-colors"
-                        title="Back to Dashboard"
+                        title={(problemId.startsWith('amz-') || problemId.startsWith('py-amz-')) ? "Back to Interview Preparation" : "Back to Dashboard"}
                     >
-                        <ChevronLeft className="w-4 h-4" /> Dashboard
+                        <ChevronLeft className="w-4 h-4" /> {(problemId.startsWith('amz-') || problemId.startsWith('py-amz-')) ? 'Interview Prep' : 'Dashboard'}
                     </button>
                     
                     <div className="h-4 w-px bg-gray-700"></div>
@@ -565,10 +565,10 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
                                         {/* Seamless Next Question & Next Section Action Buttons */}
                                         <div className="mt-5 pt-4 border-t border-emerald-900/50 flex flex-wrap items-center justify-between gap-3">
                                             <button 
-                                                onClick={() => router.push('/')}
+                                                onClick={() => router.push((problemId.startsWith('amz-') || problemId.startsWith('py-amz-')) ? '/interview-prep' : '/')}
                                                 className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold rounded-lg text-sm transition-colors flex items-center gap-1.5"
                                             >
-                                                <ChevronLeft className="w-4 h-4" /> Dashboard
+                                                <ChevronLeft className="w-4 h-4" /> {(problemId.startsWith('amz-') || problemId.startsWith('py-amz-')) ? 'Interview Prep' : 'Dashboard'}
                                             </button>
 
                                             <div className="flex items-center gap-3">
