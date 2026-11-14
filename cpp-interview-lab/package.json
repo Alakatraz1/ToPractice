@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/backup-manager.js auto-sync",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

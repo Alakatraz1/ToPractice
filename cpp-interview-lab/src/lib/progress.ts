@@ -1,6 +1,8 @@
 import { UserProgress } from '@/data/types';
 import { getProblem } from '@/data/levels';
 
+export type { UserProgress };
+
 const BASE_STORAGE_KEY = 'cpp_interview_lab_progress_v2';
 
 export function getGlobalLanguage(): 'cpp' | 'python' {
@@ -132,9 +134,120 @@ export function getDefaultProgress(lang?: 'cpp' | 'python'): UserProgress {
     };
 }
 
-function getStorageKey(lang?: 'cpp' | 'python'): string {
+export function getStorageKey(lang?: 'cpp' | 'python'): string {
     const language = lang || getGlobalLanguage();
     return `${BASE_STORAGE_KEY}_${language}`;
+}
+
+export function mergeUserProgress(
+    local?: Partial<UserProgress> | null,
+    remote?: Partial<UserProgress> | null,
+    defaultLang?: 'cpp' | 'python'
+): UserProgress {
+    const base = getDefaultProgress(defaultLang);
+    const a = local || {};
+    const b = remote || {};
+
+    // 1. Completed problems: Set union (order preserved: a first, then b)
+    const completedSet = new Set<string>();
+    for (const p of a.completedProblems || []) {
+        if (p) completedSet.add(p);
+    }
+    for (const p of b.completedProblems || []) {
+        if (p) completedSet.add(p);
+    }
+    const completedProblems = Array.from(completedSet);
+
+    // 2. Solutions viewed: Set union
+    const solutionsSet = new Set<string>();
+    for (const s of a.solutionsViewed || []) {
+        if (s) solutionsSet.add(s);
+    }
+    for (const s of b.solutionsViewed || []) {
+        if (s) solutionsSet.add(s);
+    }
+    const solutionsViewed = Array.from(solutionsSet);
+
+    // 3. Attempts: Max per problem
+    const attempts: Record<string, number> = { ...(a.attempts || {}) };
+    for (const [id, count] of Object.entries(b.attempts || {})) {
+        attempts[id] = Math.max(attempts[id] || 0, count || 0);
+    }
+
+    // 4. Hints used: Max per problem
+    const hintsUsed: Record<string, number> = { ...(a.hintsUsed || {}) };
+    for (const [id, count] of Object.entries(b.hintsUsed || {})) {
+        hintsUsed[id] = Math.max(hintsUsed[id] || 0, count || 0);
+    }
+
+    // 5. Saved code: Merge; non-empty code takes precedence over empty
+    const savedCode: Record<string, string> = { ...(a.savedCode || {}) };
+    for (const [id, code] of Object.entries(b.savedCode || {})) {
+        if (typeof code === 'string' && code.trim().length > 0) {
+            const currentCode = savedCode[id];
+            if (!currentCode || currentCode.trim().length === 0) {
+                savedCode[id] = code;
+            } else if (code.trim().length > currentCode.trim().length) {
+                // If remote code is noticeably more complete, keep it
+                savedCode[id] = code;
+            }
+        }
+    }
+
+    // 6. Solve quality: Independent > Hint-assisted > Solution-assisted
+    const qualityRank: Record<string, number> = { independent: 3, hint_assisted: 2, solution_assisted: 1 };
+    const solveQuality: Record<string, 'independent' | 'hint_assisted' | 'solution_assisted'> = {
+        ...(a.solveQuality || {})
+    };
+    for (const [id, q] of Object.entries(b.solveQuality || {})) {
+        if (!solveQuality[id] || (qualityRank[q] || 0) > (qualityRank[solveQuality[id]] || 0)) {
+            solveQuality[id] = q as 'independent' | 'hint_assisted' | 'solution_assisted';
+        }
+    }
+
+    // 7. Mastery: Max score per concept
+    const mastery: Record<string, number> = { ...(a.mastery || {}) };
+    for (const [concept, score] of Object.entries(b.mastery || {})) {
+        mastery[concept] = Math.max(mastery[concept] || 0, score || 0);
+    }
+
+    // 8. Daily activity: Max count per day
+    const dailyActivity: Record<string, number> = { ...(a.dailyActivity || {}) };
+    for (const [date, count] of Object.entries(b.dailyActivity || {})) {
+        dailyActivity[date] = Math.max(dailyActivity[date] || 0, count || 0);
+    }
+
+    // Auto-seed today's activity if completedProblems has items but dailyActivity is empty
+    if (completedProblems.length > 0 && Object.keys(dailyActivity).length === 0) {
+        dailyActivity[getLocalDateString()] = completedProblems.length;
+    }
+
+    // 9. Streak: recalculate based on merged activity
+    const streak = calculateStreak(dailyActivity);
+
+    // 10. Last opened at: the more recent timestamp
+    const timeA = a.lastOpenedAt ? new Date(a.lastOpenedAt).getTime() : 0;
+    const timeB = b.lastOpenedAt ? new Date(b.lastOpenedAt).getTime() : 0;
+    const lastOpenedAt = timeA >= timeB && a.lastOpenedAt ? a.lastOpenedAt : (b.lastOpenedAt || base.lastOpenedAt);
+
+    // 11. Current Problem and Level
+    const currentProblem = (timeA >= timeB ? a.currentProblem : b.currentProblem) || a.currentProblem || b.currentProblem || base.currentProblem;
+    const currentLevel = (timeA >= timeB ? a.currentLevel : b.currentLevel) || a.currentLevel || b.currentLevel || base.currentLevel;
+
+    return {
+        currentLevel,
+        currentProblem,
+        completedProblems,
+        attempts,
+        hintsUsed,
+        solutionsViewed,
+        savedCode,
+        mastery,
+        solveQuality,
+        dailyActivity,
+        streak,
+        lastOpenedAt
+    };
 }
 
 export function getProgress(lang?: 'cpp' | 'python'): UserProgress {
@@ -187,11 +300,27 @@ export function triggerServerBackup(): void {
             const cpp = getProgress('cpp');
             const python = getProgress('python');
             const language = getGlobalLanguage();
-            await fetch('/api/progress-sync', {
+            const res = await fetch('/api/progress-sync', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ cpp, python, language })
             });
+            if (res.ok) {
+                const json = await res.json();
+                if (json.success && json.data) {
+                    const serverCpp = json.data.cpp;
+                    const serverPython = json.data.python;
+                    if (serverCpp) {
+                        const mergedCpp = mergeUserProgress(cpp, serverCpp, 'cpp');
+                        localStorage.setItem(getStorageKey('cpp'), JSON.stringify(mergedCpp));
+                    }
+                    if (serverPython) {
+                        const mergedPython = mergeUserProgress(python, serverPython, 'python');
+                        localStorage.setItem(getStorageKey('python'), JSON.stringify(mergedPython));
+                    }
+                    window.dispatchEvent(new Event('progressUpdated'));
+                }
+            }
         } catch {}
     }, 1000);
 }
@@ -203,22 +332,102 @@ export async function restoreProgressFromServer(): Promise<boolean> {
         if (!res.ok) return false;
         const json = await res.json();
         if (json.success && json.data) {
-            const { cpp, python, language } = json.data;
-            if (cpp) {
-                localStorage.setItem(getStorageKey('cpp'), JSON.stringify(cpp));
-            }
-            if (python) {
-                localStorage.setItem(getStorageKey('python'), JSON.stringify(python));
-            }
-            if (language) {
+            const { cpp: serverCpp, python: serverPython, language } = json.data;
+            
+            const localCpp = getProgress('cpp');
+            const localPython = getProgress('python');
+
+            const mergedCpp = mergeUserProgress(localCpp, serverCpp, 'cpp');
+            const mergedPython = mergeUserProgress(localPython, serverPython, 'python');
+
+            localStorage.setItem(getStorageKey('cpp'), JSON.stringify(mergedCpp));
+            localStorage.setItem(getStorageKey('python'), JSON.stringify(mergedPython));
+            
+            if (language && !localStorage.getItem('cpp_interview_language')) {
                 localStorage.setItem('cpp_interview_language', language);
             }
+
+            // If local had more items than server had, push the merged state back to server
+            const cppHasMore = (localCpp.completedProblems?.length || 0) > (serverCpp?.completedProblems?.length || 0);
+            const pyHasMore = (localPython.completedProblems?.length || 0) > (serverPython?.completedProblems?.length || 0);
+            if (cppHasMore || pyHasMore) {
+                triggerServerBackup();
+            }
+
             window.dispatchEvent(new Event('progressUpdated'));
             window.dispatchEvent(new Event('languageChange'));
             return true;
         }
-    } catch {}
+    } catch (e) {
+        console.error('Failed to restore progress from server', e);
+    }
     return false;
+}
+
+export function exportProgressPayload(): {
+    version: string;
+    exportedAt: string;
+    language: string;
+    cpp: UserProgress;
+    python: UserProgress;
+} {
+    return {
+        version: '2.0',
+        exportedAt: new Date().toISOString(),
+        language: getGlobalLanguage(),
+        cpp: getProgress('cpp'),
+        python: getProgress('python')
+    };
+}
+
+export function exportProgressAsJSON(): string {
+    const payload = exportProgressPayload();
+    return JSON.stringify(payload, null, 2);
+}
+
+export function importProgressFromJSON(jsonString: string): {
+    success: boolean;
+    message: string;
+    restoredCpp: number;
+    restoredPy: number;
+} {
+    try {
+        const parsed = JSON.parse(jsonString);
+        const incomingCpp = parsed.cpp || (parsed.completedProblems ? parsed : null);
+        const incomingPython = parsed.python || null;
+
+        const currentCpp = getProgress('cpp');
+        const currentPython = getProgress('python');
+
+        const mergedCpp = mergeUserProgress(currentCpp, incomingCpp, 'cpp');
+        const mergedPython = mergeUserProgress(currentPython, incomingPython, 'python');
+
+        if (typeof window !== 'undefined') {
+            localStorage.setItem(getStorageKey('cpp'), JSON.stringify(mergedCpp));
+            localStorage.setItem(getStorageKey('python'), JSON.stringify(mergedPython));
+            if (parsed.language) {
+                localStorage.setItem('cpp_interview_language', parsed.language);
+            }
+
+            triggerServerBackup();
+            window.dispatchEvent(new Event('progressUpdated'));
+            window.dispatchEvent(new Event('languageChange'));
+        }
+
+        return {
+            success: true,
+            message: 'Progress imported and merged successfully!',
+            restoredCpp: mergedCpp.completedProblems.length,
+            restoredPy: mergedPython.completedProblems.length
+        };
+    } catch (e: any) {
+        return {
+            success: false,
+            message: `Failed to import progress: ${e.message}`,
+            restoredCpp: 0,
+            restoredPy: 0
+        };
+    }
 }
 
 export function saveProgress(progress: UserProgress, lang?: 'cpp' | 'python'): void {

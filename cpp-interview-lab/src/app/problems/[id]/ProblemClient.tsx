@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getProblem, getLevelForProblem, getNavigationInfo } from '@/data/levels';
 import { CodeEditor } from '@/components/CodeEditor';
-import { getProgress, saveCode, markProblemComplete, updateProgress, recordAttempt, recordSolutionView, recordHint, setGlobalLanguage, getGlobalLanguage } from '@/lib/progress';
+import { getProgress, saveCode, markProblemComplete, updateProgress, recordAttempt, recordSolutionView, recordHint, setGlobalLanguage, getGlobalLanguage, restoreProgressFromServer } from '@/lib/progress';
 import { Play, Check, ChevronLeft, ChevronRight, Lightbulb, CheckCircle2, XCircle, AlertCircle, RotateCcw, BrainCircuit, ArrowRight, Sparkles } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { CompileAndRunResult } from '@/lib/compiler';
@@ -32,18 +32,19 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
         setLanguage(initialLang);
         setGlobalLanguage(initialLang);
 
-        if (problem) {
-            const progress = getProgress(initialLang);
+        const syncAndLoad = (lang: 'cpp' | 'python') => {
+            if (!problem) return;
+            const progress = getProgress(lang);
             
             // Check if saved code exists for this problem
             const stored = progress.savedCode[problem.id];
             if (stored) {
                 setCode(stored);
             } else {
-                setCode(initialLang === 'python' ? (problem.pythonStarterCode || problem.starterCode) : problem.starterCode);
+                setCode(lang === 'python' ? (problem.pythonStarterCode || problem.starterCode) : problem.starterCode);
             }
             
-            updateProgress({ currentProblem: problem.id }, initialLang);
+            updateProgress({ currentProblem: problem.id }, lang);
             
             if (progress.solutionsViewed.includes(problem.id)) {
                 setSolutionUnlocked(true);
@@ -51,7 +52,37 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
             if (progress.hintsUsed[problem.id] !== undefined) {
                 setHintIndex(progress.hintsUsed[problem.id] - 1);
             }
-        }
+        };
+
+        syncAndLoad(initialLang);
+
+        // Ensure disk/remote backup is merged and code populated if localStorage was empty
+        restoreProgressFromServer().then((restored) => {
+            if (restored && problem) {
+                const refreshedProg = getProgress(initialLang);
+                const refreshedCode = refreshedProg.savedCode[problem.id];
+                if (refreshedCode) {
+                    setCode(refreshedCode);
+                }
+                if (refreshedProg.solutionsViewed.includes(problem.id)) {
+                    setSolutionUnlocked(true);
+                }
+                if (refreshedProg.hintsUsed[problem.id] !== undefined) {
+                    setHintIndex(refreshedProg.hintsUsed[problem.id] - 1);
+                }
+            }
+        });
+
+        const handleProgressUpdated = () => {
+            if (problem) {
+                const updatedProg = getProgress(initialLang);
+                if (updatedProg.solutionsViewed.includes(problem.id)) {
+                    setSolutionUnlocked(true);
+                }
+            }
+        };
+        window.addEventListener('progressUpdated', handleProgressUpdated);
+        return () => window.removeEventListener('progressUpdated', handleProgressUpdated);
     }, [problemId, isPyProblem]);
 
     const handleLanguageChange = (newLang: 'cpp' | 'python') => {

@@ -98,6 +98,11 @@ if "%PROGRESS_BACKED_UP%"=="true" (
     )
 )
 
+:: Multi-location auto-sync and git hook installation
+if exist "cpp-interview-lab\scripts\backup-manager.js" (
+    node "cpp-interview-lab\scripts\backup-manager.js" auto-sync 2>nul
+)
+
 :: Pop stash if we stashed
 if "%STASHED%"=="true" (
     echo   Re-applying your local uncommitted work...

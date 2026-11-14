@@ -99,6 +99,11 @@ else
     fi
 fi
 
+# Multi-location auto-sync and git hook installation
+if [ -f "cpp-interview-lab/scripts/backup-manager.js" ]; then
+    node "cpp-interview-lab/scripts/backup-manager.js" auto-sync 2>/dev/null || true
+fi
+
 # Restore git stash if we created one
 if [ "$STASHED" = true ]; then
     echo "   Re-applying your local uncommitted work..."

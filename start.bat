@@ -22,6 +22,9 @@ if %ERRORLEVEL% NEQ 0 (
     exit /b 1
 )
 
+:: Safeguard student progress before server starts
+node scripts/backup-manager.js auto-sync
+
 echo Checking dependencies...
 :: Install dependencies if node_modules doesn't exist
 if not exist "node_modules\" (

@@ -16,6 +16,7 @@ import {
     amazonChallengesSpecs
 } from '@/data/interviewPrep';
 import { UserProgress } from '@/data/types';
+import { ProgressSafeguardModal } from '@/components/ProgressSafeguardModal';
 import {
     ArrowLeft,
     ArrowRight,
@@ -167,6 +168,8 @@ export default function InterviewPreparationPage() {
                             <Trophy className="w-4 h-4 text-amber-400" />
                             {totalCompleted} / {totalProblems} Solved ({completionPct}%)
                         </div>
+
+                        <ProgressSafeguardModal />
                     </div>
                 </header>
 

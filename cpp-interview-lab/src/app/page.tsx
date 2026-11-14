@@ -8,6 +8,7 @@ import { getAmazonPrepProblems } from '@/data/interviewPrep';
 import { UserProgress } from '@/data/types';
 import { Code2, Trophy, Brain, Target, Lock, Play, ArrowRight, Activity, BookOpen, AlertCircle, CheckCircle2, ShieldAlert, Zap, Terminal, Award, Layers, Flame } from 'lucide-react';
 import { ActivityHeatmap } from '@/components/ActivityHeatmap';
+import { ProgressSafeguardModal } from '@/components/ProgressSafeguardModal';
 
 export default function Home() {
     const router = useRouter();
@@ -126,6 +127,7 @@ export default function Home() {
                             <Activity className="w-4 h-4" />
                             <span className="font-semibold text-sm">{completedCount} of {totalProblems} solved</span>
                         </div>
+                        <ProgressSafeguardModal />
                         <button 
                             onClick={() => {
                                 if (confirm(`This will permanently reset your ${language === 'cpp' ? 'C++' : 'Python'} progress.\n\nAre you sure you want to proceed?`)) {

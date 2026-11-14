@@ -16,6 +16,9 @@ fi
 # Navigate to the project directory
 cd cpp-interview-lab || { echo "Directory 'cpp-interview-lab' not found!"; exit 1; }
 
+# Safeguard and sync student progress before server starts
+node scripts/backup-manager.js auto-sync || true
+
 echo "Checking dependencies..."
 # Install dependencies if node_modules doesn't exist to save time on subsequent runs
 if [ ! -d "node_modules" ]; then
