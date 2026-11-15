@@ -227,6 +227,8 @@ function Workspace() {
                 {/* Right Panel: Editor */}
                 <div className="w-1/2 relative">
                     <CodeEditor 
+                        key={`workspace-${problem.id}-${problem.id.startsWith('py-') ? 'python' : 'cpp'}`}
+                        problemId={problem.id}
                         code={code}
                         language={problem.id.startsWith('py-') ? 'python' : 'cpp'}
                         onChange={setCode}

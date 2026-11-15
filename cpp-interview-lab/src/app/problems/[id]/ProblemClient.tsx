@@ -684,6 +684,8 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
                 {/* Right Panel - Code Editor */}
                 <div className="w-1/2 flex flex-col bg-gray-950 relative min-w-[300px]">
                     <CodeEditor 
+                        key={`editor-${problemId}-${language}`}
+                        problemId={problemId}
                         code={code} 
                         language={language}
                         onChange={handleCodeChange} 
