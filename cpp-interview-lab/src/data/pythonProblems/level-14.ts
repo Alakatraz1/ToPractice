@@ -48,7 +48,7 @@ export const pyLevel14Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\nfrom collections import Counter\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        s, t = lines[0].strip(), lines[1].strip()\n        print(Counter(s) == Counter(t))\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\nfrom collections import Counter\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        s, t = lines[0].strip(), lines[1].strip()\n        # TODO: Return True if t is an anagram of s, False otherwise\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "Counter(s) == Counter(t)"
         ],

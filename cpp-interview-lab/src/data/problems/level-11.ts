@@ -45,7 +45,7 @@ export const level11Problems: Problem[] = [
         testCases: [
             { id: 'tc1', input: '5\n9 1 4 7 2', expectedOutput: '9 7 4 2 1', hidden: false }
         ],
-        starterCode: `#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for(int i=0; i<n; i++) cin >> arr[i];\n    \n    // Sort descending\n    sort(arr.begin(), arr.end(), greater<int>());\n    \n    for(int x : arr) cout << x << " ";\n    return 0;\n}`,
+        starterCode: `#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for(int i=0; i<n; i++) cin >> arr[i];\n    \n    // TODO: Sort the array in descending order\n    \n    for(int x : arr) cout << x << " ";\n    return 0;\n}`,
         hints: ['Use `sort(arr.begin(), arr.end(), greater<int>());`'],
         howToThink: ['`greater<int>()` tells the sorting algorithm to put larger items first.'],
         approach: 'Call sort with greater comparator.',

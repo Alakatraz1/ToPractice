@@ -238,7 +238,7 @@ export const pyLevel8Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        a = set(map(int, lines[0].split()))\n        b = set(map(int, lines[1].split()))\n        print(*sorted(a | b))\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        a = set(map(int, lines[0].split()))\n        b = set(map(int, lines[1].split()))\n        # TODO: Find set union (a | b) and print sorted elements space-separated\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "sorted(a | b)"
         ],
@@ -303,7 +303,7 @@ export const pyLevel8Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        a = set(map(int, lines[0].split()))\n        b = set(map(int, lines[1].split()))\n        print(*sorted(a - b))\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        a = set(map(int, lines[0].split()))\n        b = set(map(int, lines[1].split()))\n        # TODO: Find set difference (a - b) and print sorted elements space-separated\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "sorted(a - b)"
         ],
@@ -371,7 +371,7 @@ export const pyLevel8Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        a = set(map(int, lines[0].split()))\n        b = set(map(int, lines[1].split()))\n        print(a.issubset(b))\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        a = set(map(int, lines[0].split()))\n        b = set(map(int, lines[1].split()))\n        # TODO: Check if a is a subset of b and print the boolean result\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "a.issubset(b) or a <= b"
         ],
@@ -435,7 +435,7 @@ export const pyLevel8Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        a = set(map(int, lines[0].split()))\n        b = set(map(int, lines[1].split()))\n        print(*sorted(a ^ b))\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        a = set(map(int, lines[0].split()))\n        b = set(map(int, lines[1].split()))\n        # TODO: Find symmetric difference (a ^ b) and print sorted elements space-separated\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "sorted(a ^ b)"
         ],
@@ -643,7 +643,7 @@ export const pyLevel8Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        a = set(map(int, lines[0].split()))\n        b = set(map(int, lines[1].split()))\n        print(a.isdisjoint(b))\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        a = set(map(int, lines[0].split()))\n        b = set(map(int, lines[1].split()))\n        # TODO: Check if sets a and b are disjoint and print the boolean result\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "a.isdisjoint(b)"
         ],

@@ -399,7 +399,7 @@ export const pyLevel10Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\nfrom bisect import bisect_left\n\ndef solve():\n    tokens = list(map(int, sys.stdin.read().split()))\n    if tokens:\n        target = tokens[0]\n        arr = tokens[1:]\n        print(bisect_left(arr, target))\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\nfrom bisect import bisect_left\n\ndef solve():\n    tokens = list(map(int, sys.stdin.read().split()))\n    if tokens:\n        target = tokens[0]\n        arr = tokens[1:]\n        # TODO: Find and print the index of target or insertion index in O(log N)\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "bisect_left(arr, target)"
         ],

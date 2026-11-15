@@ -639,7 +639,7 @@ export const pyLevel20Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        target = int(lines[0].strip())\n        nums = list(map(int, lines[1].split()))\n        print(target in nums)\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        target = int(lines[0].strip())\n        nums = list(map(int, lines[1].split()))\n        # TODO: Determine if target exists in rotated sorted array with duplicates and print True or False\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "target in nums"
         ],

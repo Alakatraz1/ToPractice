@@ -572,7 +572,7 @@ export const pyLevel9Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    n = int(sys.stdin.read().strip())\n    # Use dict comprehension\n    squares = {x: x**2 for x in range(1, n + 1)}\n    for k, v in squares.items():\n        print(f'{k}: {v}')\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    raw = sys.stdin.read().strip()\n    if not raw:\n        return\n    n = int(raw)\n    # TODO: Build a dictionary mapping each x in 1..n to x**2 using a dict comprehension\n    # TODO: Print each mapping as '<x>: <x**2>' line-by-line\n    pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "{x: x**2 for x in range(1, n + 1)}"
         ],

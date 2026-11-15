@@ -237,7 +237,7 @@ export const pyLevel2Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    nums = list(map(int, sys.stdin.read().split()))\n    if len(nums) >= 2:\n        print(nums[0] % nums[1])\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    nums = list(map(int, sys.stdin.read().split()))\n    # TODO: Calculate and print A % B\n    pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "Calculate nums[0] % nums[1]."
         ],
@@ -302,7 +302,7 @@ export const pyLevel2Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    words = sys.stdin.read().split()\n    if len(words) >= 2:\n        a, b = words[0], words[1]\n        # Swap pythonically\n        a, b = b, a\n        print(a, b)\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    words = sys.stdin.read().split()\n    if len(words) >= 2:\n        a, b = words[0], words[1]\n        # TODO: Swap a and b pythonically and print them\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "Assign a, b = b, a then print(a, b)."
         ],

@@ -506,7 +506,7 @@ export const pyLevel16Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        target = int(lines[0].strip())\n        nums = list(map(int, lines[1].split()))\n        nums = [x for x in nums if x != target]\n        print(' -> '.join(map(str, nums)))\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        target = int(lines[0].strip())\n        nums = list(map(int, lines[1].split()))\n        # TODO: Delete the target node value from the list and print the resulting chain separated by ' -> '\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "Filter target out."
         ],
@@ -563,7 +563,7 @@ export const pyLevel16Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if lines:\n        common = lines[0].split()\n        if common:\n            print(common[0])\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if lines:\n        common = lines[0].split()\n        # TODO: Find and print the value of the intersection node, or None if no intersection\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "Common tail starts with common[0]."
         ],

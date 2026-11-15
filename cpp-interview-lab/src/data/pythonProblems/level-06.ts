@@ -572,7 +572,7 @@ export const pyLevel6Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    nums = list(map(int, sys.stdin.read().split()))\n    # Use list comprehension\n    evens = [x for x in nums if x % 2 == 0]\n    print(*evens)\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    nums = list(map(int, sys.stdin.read().split()))\n    # TODO: Use a list comprehension to filter all even numbers and print them space-separated\n    pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "evens = [x for x in nums if x % 2 == 0]"
         ],

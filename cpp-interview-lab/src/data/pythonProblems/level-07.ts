@@ -375,7 +375,7 @@ export const pyLevel7Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    tokens = sys.stdin.read().split()\n    if len(tokens) >= 2:\n        ch, s = tokens[0], tokens[1]\n        print(s.count(ch))\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    tokens = sys.stdin.read().split()\n    if len(tokens) >= 2:\n        ch, s = tokens[0], tokens[1]\n        # TODO: Count occurrences of ch in s and print the result\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "s.count(ch)"
         ],
@@ -569,7 +569,7 @@ export const pyLevel7Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    tokens = sys.stdin.read().split()\n    if len(tokens) >= 3:\n        start, end, s = int(tokens[0]), int(tokens[1]), tokens[2]\n        print(s[start:end])\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    tokens = sys.stdin.read().split()\n    if len(tokens) >= 3:\n        start, end, s = int(tokens[0]), int(tokens[1]), tokens[2]\n        # TODO: Extract and print the substring from start to end (s[start:end])\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "s[start:end]"
         ],

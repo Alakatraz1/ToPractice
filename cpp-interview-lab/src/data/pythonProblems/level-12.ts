@@ -44,7 +44,7 @@ export const pyLevel12Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        allowed = set(map(int, lines[0].split()))\n        queries = list(map(int, lines[1].split()))\n        print(sum(1 for q in queries if q in allowed))\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\n\ndef solve():\n    lines = sys.stdin.read().strip().split('\\n')\n    if len(lines) >= 2:\n        allowed = list(map(int, lines[0].split()))\n        queries = list(map(int, lines[1].split()))\n        # TODO: Convert allowed to a set for O(1) lookups\n        # TODO: Count how many elements in queries are in allowed, and print the count\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "allowed_set = set(allowed), then sum(1 for q in queries if q in allowed_set)."
         ],

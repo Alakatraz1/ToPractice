@@ -112,7 +112,7 @@ export const pyLevel17Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "from functools import lru_cache\nimport sys\n\n@lru_cache(maxsize=None)\ndef fib(n: int) -> int:\n    if n <= 2: return 1\n    return fib(n - 1) + fib(n - 2)\n\ndef solve():\n    raw = sys.stdin.read().strip()\n    if raw:\n        print(fib(int(raw)))\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "from functools import lru_cache\nimport sys\n\n@lru_cache(maxsize=None)\ndef fib(n: int) -> int:\n    # TODO: Implement memoized recursive fibonacci (base cases: fib(1) = 1, fib(2) = 1)\n    pass\n\ndef solve():\n    raw = sys.stdin.read().strip()\n    if raw:\n        print(fib(int(raw)))\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "fib(1) = 1, fib(2) = 1, fib(n) = fib(n - 1) + fib(n - 2)."
         ],
@@ -363,7 +363,7 @@ export const pyLevel17Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\nfrom itertools import permutations\n\ndef solve():\n    nums = sorted(map(int, sys.stdin.read().split()))\n    for p in permutations(nums):\n        print(*p)\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\nfrom itertools import permutations\n\ndef solve():\n    raw = sys.stdin.read().split()\n    if raw:\n        nums = sorted(map(int, raw))\n        # TODO: Generate and print all permutations of nums space-separated, one per line\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "itertools.permutations(sorted(nums))"
         ],
@@ -422,7 +422,7 @@ export const pyLevel17Problems: Problem[] = [
                 "hidden": false
             }
         ],
-        "starterCode": "import sys\nfrom itertools import combinations\n\ndef solve():\n    tokens = list(map(int, sys.stdin.read().split()))\n    if len(tokens) >= 2:\n        n, k = tokens[0], tokens[1]\n        for c in combinations(range(1, n + 1), k):\n            print(*c)\n\nif __name__ == '__main__':\n    solve()\n",
+        "starterCode": "import sys\nfrom itertools import combinations\n\ndef solve():\n    tokens = list(map(int, sys.stdin.read().split()))\n    if len(tokens) >= 2:\n        n, k = tokens[0], tokens[1]\n        # TODO: Generate all combinations of k numbers from 1..n and print each on a separate line\n        pass\n\nif __name__ == '__main__':\n    solve()\n",
         "hints": [
             "itertools.combinations(range(1, n + 1), k)"
         ],

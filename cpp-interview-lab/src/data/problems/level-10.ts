@@ -18,7 +18,7 @@ export const level10Problems: Problem[] = [
         testCases: [
             { id: 'tc1', input: '3\n10 20 30\n20', expectedOutput: '1', hidden: false }
         ],
-        starterCode: `#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for(int i=0; i<n; i++) cin >> arr[i];\n    int target; cin >> target;\n    \n    for(int i=0; i<n; i++) {\n        if(arr[i] == target) { cout << i; return 0; }\n    }\n    cout << -1;\n    return 0;\n}`,
+        starterCode: `#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for(int i=0; i<n; i++) cin >> arr[i];\n    int target; cin >> target;\n    \n    // TODO: Search for target in arr and print its index, or -1 if not found\n    \n    return 0;\n}`,
         hints: [],
         howToThink: ['Check box 0. Check box 1. Check box 2.'],
         approach: 'Loop and return early on match.',

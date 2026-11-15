@@ -18,7 +18,7 @@ export const level25Problems: Problem[] = [
         testCases: [
             { id: 'tc1', input: '4\n2 7 11 15\n9', expectedOutput: '0 1', hidden: false }
         ],
-        starterCode: `#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nint main() {\n    int n; if(!(cin >> n)) return 0;\n    vector<int> nums(n);\n    for(int i=0; i<n; i++) cin >> nums[i];\n    int target; cin >> target;\n    \n    unordered_map<int, int> seen;\n    for(int i=0; i<n; i++) {\n        int comp = target - nums[i];\n        if (seen.count(comp)) {\n            cout << seen[comp] << " " << i;\n            return 0;\n        }\n        seen[nums[i]] = i;\n    }\n    return 0;\n}`,
+        starterCode: `#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nint main() {\n    int n; if(!(cin >> n)) return 0;\n    vector<int> nums(n);\n    for(int i=0; i<n; i++) cin >> nums[i];\n    int target; cin >> target;\n    \n    // TODO: Find indices of two numbers that add up to target and print: smallerIndex largerIndex\n    \n    return 0;\n}`,
         hints: ['Use an unordered_map to store value -> index.'],
         howToThink: ['Complement lookup'],
         approach: 'Hash map caching',
