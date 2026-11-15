@@ -54,14 +54,11 @@ export default function InterviewPreparationPage() {
         const initialProg = getProgress(currentLang);
         setProgress(initialProg);
 
-        if (initialProg.completedProblems.length === 0) {
-            restoreProgressFromServer().then(restored => {
-                if (restored) {
-                    const updated = getProgress(getGlobalLanguage());
-                    setProgress(updated);
-                }
-            });
-        }
+        restoreProgressFromServer().then(() => {
+            const updatedLang = getGlobalLanguage();
+            setLanguage(updatedLang);
+            setProgress(getProgress(updatedLang));
+        });
 
         const handleUpdate = () => {
             const lang = getGlobalLanguage();
@@ -70,9 +67,13 @@ export default function InterviewPreparationPage() {
         };
         window.addEventListener('languageChange', handleUpdate);
         window.addEventListener('progressUpdated', handleUpdate);
+        window.addEventListener('storage', handleUpdate);
+        window.addEventListener('focus', handleUpdate);
         return () => {
             window.removeEventListener('languageChange', handleUpdate);
             window.removeEventListener('progressUpdated', handleUpdate);
+            window.removeEventListener('storage', handleUpdate);
+            window.removeEventListener('focus', handleUpdate);
         };
     }, []);
 

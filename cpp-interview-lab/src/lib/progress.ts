@@ -292,10 +292,14 @@ export function getProgress(lang?: 'cpp' | 'python'): UserProgress {
 
 let syncTimer: any = null;
 
-export function triggerServerBackup(): void {
+export function triggerServerBackup(immediate: boolean = false): void {
     if (typeof window === 'undefined') return;
-    if (syncTimer) clearTimeout(syncTimer);
-    syncTimer = setTimeout(async () => {
+    if (syncTimer) {
+        clearTimeout(syncTimer);
+        syncTimer = null;
+    }
+
+    const performSync = async () => {
         try {
             const cpp = getProgress('cpp');
             const python = getProgress('python');
@@ -322,7 +326,13 @@ export function triggerServerBackup(): void {
                 }
             }
         } catch {}
-    }, 1000);
+    };
+
+    if (immediate) {
+        performSync();
+    } else {
+        syncTimer = setTimeout(performSync, 1000);
+    }
 }
 
 export async function restoreProgressFromServer(): Promise<boolean> {
@@ -430,27 +440,27 @@ export function importProgressFromJSON(jsonString: string): {
     }
 }
 
-export function saveProgress(progress: UserProgress, lang?: 'cpp' | 'python'): void {
+export function saveProgress(progress: UserProgress, lang?: 'cpp' | 'python', immediate: boolean = false): void {
     if (typeof window === 'undefined') return;
     const language = lang || getGlobalLanguage();
     progress.lastOpenedAt = new Date().toISOString();
     localStorage.setItem(getStorageKey(language), JSON.stringify(progress));
-    triggerServerBackup();
+    triggerServerBackup(immediate);
 }
 
-export function updateProgress(updates: Partial<UserProgress>, lang?: 'cpp' | 'python'): UserProgress {
+export function updateProgress(updates: Partial<UserProgress>, lang?: 'cpp' | 'python', immediate: boolean = false): UserProgress {
     const language = lang || getGlobalLanguage();
     const current = getProgress(language);
     const updated = { ...current, ...updates };
-    saveProgress(updated, language);
+    saveProgress(updated, language, immediate);
     return updated;
 }
 
 export function saveCode(problemId: string, code: string, lang?: 'cpp' | 'python'): void {
-    const language = lang || (problemId.startsWith('py-') ? 'python' : getGlobalLanguage());
+    const language = lang || (problemId.startsWith('py-') ? 'python' : 'cpp');
     const current = getProgress(language);
     current.savedCode[problemId] = code;
-    saveProgress(current, language);
+    saveProgress(current, language, false);
 }
 
 export function updateMastery(progress: UserProgress, problemId: string, concepts: string[], quality: 'independent' | 'hint_assisted' | 'solution_assisted') {
@@ -474,7 +484,7 @@ export function updateMastery(progress: UserProgress, problemId: string, concept
 }
 
 export function markProblemComplete(problemId: string, lang?: 'cpp' | 'python'): void {
-    const language = lang || (problemId.startsWith('py-') ? 'python' : getGlobalLanguage());
+    const language = lang || (problemId.startsWith('py-') ? 'python' : 'cpp');
     const current = getProgress(language);
     const problem = getProblem(problemId);
     
@@ -501,14 +511,15 @@ export function markProblemComplete(problemId: string, lang?: 'cpp' | 'python'):
         current.streak = calculateStreak(current.dailyActivity);
     }
     
-    saveProgress(current, language);
+    // Save and immediately sync to server disk so progress is never lost on navigation
+    saveProgress(current, language, true);
     if (typeof window !== 'undefined') {
         window.dispatchEvent(new Event('progressUpdated'));
     }
 }
 
 export function recordAttempt(problemId: string, isFailure: boolean, lang?: 'cpp' | 'python'): void {
-    const language = lang || (problemId.startsWith('py-') ? 'python' : getGlobalLanguage());
+    const language = lang || (problemId.startsWith('py-') ? 'python' : 'cpp');
     const current = getProgress(language);
     current.attempts[problemId] = (current.attempts[problemId] || 0) + 1;
     
@@ -522,23 +533,23 @@ export function recordAttempt(problemId: string, isFailure: boolean, lang?: 'cpp
         }
     }
     
-    saveProgress(current, language);
+    saveProgress(current, language, false);
 }
 
 export function recordHint(problemId: string, hintIndex: number, lang?: 'cpp' | 'python'): void {
-    const language = lang || (problemId.startsWith('py-') ? 'python' : getGlobalLanguage());
+    const language = lang || (problemId.startsWith('py-') ? 'python' : 'cpp');
     const current = getProgress(language);
     current.hintsUsed[problemId] = Math.max(current.hintsUsed[problemId] || 0, hintIndex + 1);
-    saveProgress(current, language);
+    saveProgress(current, language, false);
 }
 
 export function recordSolutionView(problemId: string, lang?: 'cpp' | 'python'): void {
-    const language = lang || (problemId.startsWith('py-') ? 'python' : getGlobalLanguage());
+    const language = lang || (problemId.startsWith('py-') ? 'python' : 'cpp');
     const current = getProgress(language);
     if (!current.solutionsViewed.includes(problemId)) {
         current.solutionsViewed.push(problemId);
     }
-    saveProgress(current, language);
+    saveProgress(current, language, false);
 }
 
 export function getWeakConcepts(lang?: 'cpp' | 'python'): string[] {

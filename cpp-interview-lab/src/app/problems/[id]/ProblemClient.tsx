@@ -28,7 +28,7 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
 
     useEffect(() => {
         setIsClient(true);
-        const initialLang = isPyProblem ? 'python' : getGlobalLanguage();
+        const initialLang = isPyProblem ? 'python' : 'cpp';
         setLanguage(initialLang);
         setGlobalLanguage(initialLang);
 
@@ -130,7 +130,10 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
         setRunResult(null);
         
         try {
-            const testCasesToRun = isSubmit ? problem.testCases : problem.testCases.filter(tc => !tc.hidden);
+            // Always run the full problem test suite so solutions are comprehensively verified
+            // against edge cases, and student progress is recorded whether triggered via
+            // "Run Code", "Submit", or Monaco editor shortcut (Ctrl/Cmd + Enter).
+            const testCasesToRun = problem.testCases;
             
             const res = await fetch('/api/run', {
                 method: 'POST',
@@ -146,12 +149,10 @@ export default function ProblemClient({ problemId }: { problemId: string }) {
             const data: CompileAndRunResult = await res.json();
             setRunResult(data);
             
-            if (isSubmit) {
-                const allPassed = data.status === 'success' && data.results?.every(r => r.passed);
-                recordAttempt(problemId, !allPassed, language);
-                if (allPassed) {
-                    markProblemComplete(problemId, language);
-                }
+            const allPassed = data.status === 'success' && data.results?.every(r => r.passed);
+            recordAttempt(problemId, !allPassed, language);
+            if (allPassed) {
+                markProblemComplete(problemId, language);
             }
             
         } catch (e) {

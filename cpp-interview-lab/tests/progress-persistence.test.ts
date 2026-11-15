@@ -175,4 +175,27 @@ describe('Progress Persistence & Zero-Data-Loss Merge Tests', () => {
         assert(res.restoredCpp >= 2);
         assert(res.restoredPy >= 1);
     });
+
+    it('mergeUserProgress correctly combines Python and C++ progress independently without collision', () => {
+        const localCpp: Partial<UserProgress> = {
+            completedProblems: ['prob-01-01', 'prob-01-02', 'prob-01-03']
+        };
+        const incomingCpp: Partial<UserProgress> = {
+            completedProblems: ['prob-01-03', 'prob-01-04']
+        };
+        const localPy: Partial<UserProgress> = {
+            completedProblems: ['py-prob-01-01', 'py-prob-01-02']
+        };
+        const incomingPy: Partial<UserProgress> = {
+            completedProblems: ['py-prob-01-02', 'py-prob-01-03', 'py-prob-01-04']
+        };
+
+        const mergedCpp = mergeUserProgress(localCpp, incomingCpp, 'cpp');
+        const mergedPy = mergeUserProgress(localPy, incomingPy, 'python');
+
+        assert.strictEqual(mergedCpp.completedProblems.length, 4);
+        assert.strictEqual(mergedPy.completedProblems.length, 4);
+        assert(mergedCpp.completedProblems.every(p => !p.startsWith('py-')));
+        assert(mergedPy.completedProblems.every(p => p.startsWith('py-')));
+    });
 });
